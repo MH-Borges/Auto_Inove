@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 @session_start();
 @ob_start();
 require_once("configs/conexao.php");
@@ -16,7 +16,7 @@ if(@count($dados) == 0){
 if(@$_SESSION['id_user'] != null && @$_SESSION['nivel_user'] == 'adm'){
     echo "<script> window.location='./adm'</script>";
 }
-?>
+?> -->
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -50,12 +50,12 @@ if(@$_SESSION['id_user'] != null && @$_SESSION['nivel_user'] == 'adm'){
 
 <body class="Login">
 
-    <?php
+    <!-- <?php
         if (isset($_SESSION['msg_rec'])) {
             echo $_SESSION['msg_rec'];
             unset($_SESSION['msg_rec']);
         }
-    ?> 
+    ?>  -->
 
     <main>
         <img class="Back_Login" src="../assets/backgrounds/Login_Background.webp" alt="Background">
