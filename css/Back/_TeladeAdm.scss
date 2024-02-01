@@ -1,0 +1,1129 @@
+.TelaAdm{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    position: relative;
+    background: $AzulEscuro;
+    color: $Branco;
+    overflow: hidden;
+
+    .EstrelasBack{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    header{
+        padding: 1vw;
+        width: 100%;
+        height: 13vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .InfosImg{
+            width: 8vw;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5vh 0.5vw;
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+        button{
+            border: none;
+            background: none;
+            width: 4vw;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75vw;
+            margin: 0 0.5vw;
+            svg{
+                width: 100%;
+                height: 100%;
+                path{
+                    stroke-width: 3px;
+                }
+            }
+            &:nth-child(2){
+                margin-left: auto;
+                padding: 0.55vw;
+            }
+        }
+    }
+
+    main{
+        width: 100%;
+        height: 87vh;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin: 0;
+        padding: 0;
+        .nav{
+            margin: 0;
+            padding: 0;
+            width: 15%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            padding: 2vh 0;
+            &::before{
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -0.1vw;
+                background: $Branco;
+                height: 100%;
+                width: 0.25vw;
+            }
+            .nav-item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                width: 85%;
+                height: 7.5vh;
+                margin: 1vh 0;
+                color: $Branco;
+                font-size: 1.4vw;
+                font-weight: 800;
+                text-align: center;
+            }
+            .backup{
+                position: absolute;
+                bottom: 2vh;
+                color: $Branco;
+                font-size: 1vw;
+                font-weight: 800;
+                text-align: center;
+            }
+            .star_indicator {
+                position: absolute;
+                right: -1.25vw;
+                top: 0;
+                transition: .4s;
+                width: 2.5vw;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                svg{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    path{
+                        fill: $Branco;
+                        stroke: $Laranja;
+                        stroke-width: 0.35vw;
+                    }
+                }
+            }
+        }
+        .TabsAdm{
+            width: 85%;
+            height: 100%;
+            transition: 0.2s ease-in-out;
+            #links{
+                position: relative;
+                width: 100%;
+                height: 100%;
+                .ActionsList{
+                    top: -10vh;
+                    right: 12vw;
+                    position: absolute;
+                    width: 3.75vw;
+                    height: 7vh;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    //este before faz parte do button
+                    &::before{
+                        content: '';
+                        width: 75%;
+                        height: 0.75vh;
+                        border-radius: 2vw;                           
+                        border: 1px solid $Branco;
+                        position: absolute;
+                        top: 70%;
+                    }
+                    button{
+                        width: 100%;
+                        height: 100%;
+                        outline: none;
+                        border: none;
+                        background: none;
+                        position: relative;
+                        display: flex;
+                        justify-content: center;
+                        &::before{
+                            content: '';
+                            width: 75%;
+                            height: 0.75vh;
+                            border-radius: 2vw;                            border: 1px solid $Branco;
+                            border: 1px solid $Branco;
+                            position: absolute;
+                            top: 20%;
+                        }
+                        &::after{
+                            content: '';
+                            width: 75%;
+                            height: 0.75vh;
+                            border-radius: 2vw;
+                            border: 1px solid $Branco;
+                            position: absolute;
+                            top: 45%;
+                        }
+                    }
+                    .dropdown-menu{
+                        margin-top: 1vh;
+                        margin-left: -15.25vw;
+                        width: 19vw;
+                        border-radius: 1vw;
+                        a{
+                            text-align: right;
+                            width: 100%;
+                            color: $AzulEscuro;
+                            background: none;
+                            font-weight: 800;
+                            font-size: 1.15vw;
+                            padding-right: 0.75vw;
+                            margin: 1.5vh 0;
+                            &:nth-child(1){
+                                margin:0 0 1.5vh 0;
+                            }
+                            &:nth-child(4){
+                                margin:1.5vh 0 0 0;
+                            }
+                            &:hover{
+                                color: $Laranja;
+                            }
+                        }
+                    }
+                }
+                .linksBlock{
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    .linksAtivos, .LinkDesativados{
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        h2{
+                            color: $Branco;
+                            font-size: 2.5vw;
+                            font-weight: 700;
+                            height: 8%;
+                            width: 100%;
+                            margin: 0;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            text-align: center;
+                            padding: 1vh 0 0 0;
+                        }
+                        .links{
+                            height: 92%;
+                            width: 100%;
+                            display: flex;
+                            flex-wrap: wrap;
+                            justify-content: center;
+                            overflow-y: auto;
+                            padding-top: 4vh;
+                            .BannerLink{
+                                width: 40%;
+                                height: 35vh;
+                                display: flex;
+                                flex-direction: column;
+                                position: relative;
+                                margin: 0 3vw 4vh;
+                                h3{
+                                    width: 100%;
+                                    height: 10%;
+                                    font-size: 1.25vw;
+                                    font-weight: 600;
+                                    color: $Azul;
+                                    margin: 0;
+                                    color: $Branco;
+                                    text-align: center;
+                                }
+                                .banner{
+                                    width: 100%;
+                                    height: 75%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    position: relative;
+                                    z-index: 99;
+                                    padding: 1.25vh 3.5vw;
+                                    img{
+                                        height: 100%;
+                                        width: 100%;
+                                        object-fit: fill;
+                                        border-radius: 2vw;
+                                    }
+                                }
+                                .linkBtnAction{
+                                    width: 100%;
+                                    height: 15%;
+                                    display: flex;
+                                    justify-content: center;
+                                    transition: ease-in-out 0.75s;
+                                    transform: translateY(-9vh);
+                                    #EditLink, #DeletLink{
+                                        z-index: 10;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        width: 10vw;
+                                        height: 100%;
+                                        background: none;
+                                        border: solid $Branco 1px;
+                                        border-radius: 1.5vw;
+                                        color: $Branco;
+                                        font-size: 1.25vw;
+                                        font-weight: 800;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        padding: 0.75vh 0 0.25vh 0;
+                                        margin: 0 1.5vw;
+                                    }
+                                    #EditLink{
+                                        background: $Azul;
+                                        left: 8vw;
+                                    }
+                                    #DeletLink{
+                                        right: 8vw;
+                                        background: red;
+                                    }
+                                }
+                                &:hover{
+                                    .linkBtnAction{
+                                        transform: translateY(0);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    .modal{
+        padding: 0;
+        margin: 0;
+        .modal-dialog{
+            border: solid $Branco 2px;
+            border-radius: 2vw;
+            background-color: $Azul;
+            color: $Branco;
+            max-width: 100vw;
+            .modal-content{
+                width: 100%;
+                height: 100%;
+                background: none;
+                border-radius: 0;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .CloseBtn{
+                    width: 3vw;
+                    height: 3vw;
+                    position: absolute;
+                    right: -1.5vw;
+                    top: -1.5vw;
+                    border: none;
+                    background-color: $Laranja;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 50%;
+                    z-index: 10 !important;
+                    &::before{
+                        content: '';
+                        width: 75%;
+                        height: 0.75vh;
+                        border-radius: 2vw;
+                        background: $Branco;
+                        position: absolute;
+                        left: 0.40vw;
+                        transform: rotate(45deg);
+                    }
+                    &::after{
+                        content: '';
+                        width: 75%;
+                        height: 0.75vh;
+                        border-radius: 2vw;
+                        background: $Branco;
+                        position: absolute;
+                        left: 0.40vw;
+                        transform: rotate(-45deg);
+                    }
+                }
+                .msgErro{
+                    width: 100%;
+                    height: 15vh;
+                    text-align: center;
+                    position: absolute;
+                    bottom: -16vh;
+                    font-size: 1.5vw;
+                    font-weight: 900;
+                    overflow-y: auto;
+                }
+            }
+        }
+    }
+
+    #ModalLogout{
+        .modal-dialog {
+            width: 35vw;
+            height: 30vh;
+            margin: 15vh auto;
+            .modal-content {
+                .modal-body {
+                    width: 100%;
+                    height: 75%;
+                    padding: 0;
+                    margin: 0;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    h5 {
+                        font-size: 2vw;
+                        font-weight: 800;
+                    }
+                    h6 {
+                        font-size: 1.25vw;
+                        font-weight: 500;
+                        margin-top: 1vw;
+                    }
+                }
+                .modal-footer {
+                    border: none;
+                    width: 100%;
+                    height: 25%;
+                    padding: 0;
+                    margin: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    a, button {
+                        border: solid 1px $Branco;
+                        padding: 0.75vh 2vw 0.25vh;
+                        border-radius: 2vw;
+                        margin: 0 0.5vw;
+                        background: none;
+                        color: $Branco;
+                        font-size: 1.25vw;
+                        font-weight: 500;
+                        z-index: 10;
+                    }
+                    .CancelaBtnModal {
+                        background: $Azul;
+                    }
+                    .LogoutBtnModal {
+                        background: red;
+                        border: none;
+                    }
+                }
+            }
+        }
+    }
+
+    #ModalEditPerfil{
+        .modal-dialog {
+            width: 50vw;
+            height: 75vh;
+            margin: 7vh auto;
+            .modal-content {
+                .modal-body {
+                    width: 100%;
+                    height: 100%;
+                    padding: 0;
+                    margin: 0;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    .MenuAdm{
+                        width: 85%;
+                        height: 10%;
+                        display: flex;
+                        align-items: end;
+                        justify-content: center;
+                        border-bottom: 1px solid $Branco;
+                        position: relative;
+                        a{
+                            height: 90%;
+                            margin: 1vh 0.5vw 1.5vh;
+                            padding: 0 0.5vw;
+                            display: flex;
+                            align-items: end;
+                            justify-content: center;
+                            color: $Branco;
+                            font-weight: 700;
+                            font-size: 1.25vw;
+                            &:hover{
+                                color: $Cinza;
+                            }
+                        }
+                        ::before{
+                            content: '';
+                            position: absolute;
+                            background: $Branco;
+                            height: 75%;
+                            width: 0.15vw;
+                            bottom: 0;
+                            left: 37.5%;
+                        }
+                        ::after{
+                            content: '';
+                            position: absolute;
+                            background: $Branco;
+                            height: 75%;
+                            width: 0.15vw;
+                            bottom: 0;
+                            right: 36.5%;
+                        }
+                    }
+                    .TabsAdm{
+                        width: 100%;
+                        height: 90%;
+                        #ContaDados, #EmailTroca, #SenhaTroca{
+                            width: 100%;
+                            height: 100%;
+                            padding: 1vw;
+                            .editDados, .emailEdit, .senhaEdit{
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                position: relative;
+                                width: 100%;
+                                height: 100%;
+                                h4 {
+                                    text-align: center;
+                                    width: 100%;
+                                    font-size: 2.5vw;
+                                    font-weight: 700;
+                                    margin: 4vh 0;
+                                }
+                                .BlockBox {
+                                    border: solid $Branco 1px;
+                                    width: 75%;
+                                    height: 7vh;
+                                    display: flex;
+                                    position: relative;
+                                    border-radius: 2vw;
+                                    margin: 1vh 0 3vh;
+                                    input {
+                                        width: 100%;
+                                        border: none;
+                                        font-size: 1.5vw;
+                                        font-weight: 200;
+                                        color: $Branco;
+                                        background: none;
+                                        outline: none;
+                                        padding: 1.75vh 2vw 1vh;
+                                    }
+                                    span {
+                                        position: absolute;
+                                        left: 1.5vw;
+                                        top: 1.5vh;
+                                        font-size: 1.5vw;
+                                        color: $Branco;
+                                        font-weight: 400;
+                                        transition: 0.5s;
+                                        pointer-events: none;
+                                    }
+                                    .lengthInput{
+                                        position: absolute;
+                                        top: 0;
+                                        right: 100%;
+                                        width: 5vw;
+                                        height: 100%;
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        color: $Branco;
+                                        font-size: 1.25vw;
+                                        font-weight: 800;
+                                        margin: 0;
+                                        padding: 0;
+                                    }
+                                    .senhaIcon{
+                                        opacity: 0;
+                                        font-size: 1.75vw;
+                                        margin-top: 1.5vh;
+                                        margin-right: 0;
+                                        transition: ease-in-out 0.5s;
+                                        color: $Branco;
+                                    }
+                                }
+                                .BlockBox input:focus~span,
+                                input:valid~span{
+                                    transform: translate(0, -2.75vh);
+                                    font-size: 1.1vw;
+                                    color: $Branco;
+                                    background-color: $Azul;
+                                }
+                                .senhaInput{
+                                    &:hover{
+                                        .senhaIcon{
+                                            opacity: 1;
+                                            font-size: 1.75vw;
+                                            margin-right: 1vw;
+                                            transition: ease-in-out 0.5s;
+                                        }
+                                    }
+                                }
+                                .SalvarBtnModal {
+                                    position: absolute;
+                                    bottom: 2vh;
+                                    padding: 0.75vh 2vw 0.25vh;
+                                    border-radius: 2vw;
+                                    margin: 0 0.5vw;
+                                    color: $Branco;
+                                    font-size: 1.5vw;
+                                    font-weight: 500;
+                                    background: $Laranja;
+                                    border: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+    
+        }
+    }
+
+    /* LINKS */
+    #ModalLinks{
+        .modal-dialog{
+            width: 85vw;
+            height: 85vh;
+            margin: 4vh auto;
+            .modal-content {
+                width: 100%;
+                height: 100%;
+                .modal-body {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                    height: 100%;
+                    padding: 0;
+                    margin: 0;
+                    #formLinks{
+                        width: 100%;
+                        height: 100%;
+                        position: relative;
+                        display: flex;
+                        flex-wrap: wrap;
+                        padding: 3vh 2vw;
+                        h4 {
+                            text-align: center;
+                            width: 100%;
+                            height: 10%;
+                            font-size: 2.5vw;
+                            font-weight: 800;
+                            margin: 0;
+                            padding: 1vh 0;
+                        }
+                        span{
+                            position: absolute;
+                            top: 0.5vh;
+                            left: 1vw;
+                            background: $Azul;
+                        }
+                        .Img_Web_Block{
+                            width: 50%;
+                            height: 60%;
+                            display: flex;
+                            position: relative;
+                            align-items: center;
+                            justify-content: center;
+                            input{
+                                opacity: 0;
+                                position: absolute;
+                            }
+                            .Banner_Img_Web{
+                                width: 100%;
+                                height: 100%;
+                                padding: 4vh 2vw;
+                                border-radius: 4vw;
+                                object-fit: contain;
+                            }
+                            .imgSelected{
+                                object-fit: cover;
+                                border-radius: 4vw;
+                            }
+                            .editPen{
+                                height: 8vh;
+                                width: 4vw;
+                                padding: 0.75vw;
+                                border-radius: 50%;
+                                position: absolute;
+                                border: solid $Branco 1px;
+                                background: $AzulEscuro;
+                                bottom: 0;
+                                path{
+                                    fill: $Branco;
+                                }
+                            }
+                            
+                        }
+                        .Img_Mobile_Block{
+                            width: 50%;
+                            height: 60%;
+                            display: flex;
+                            position: relative;
+                            align-items: center;
+                            justify-content: center;
+                            input{
+                                opacity: 0;
+                                position: absolute;
+                            }
+                            .Banner_Img_Mobile{
+                                width: 100%;
+                                height: 100%;
+                                padding: 11vh 5vw;
+                                border-radius: 4vw;
+                                object-fit: contain;
+                            }
+                            .imgSelected{
+                                object-fit: cover;
+                                border-radius: 4vw;
+                            }
+                            .editPen{
+                                height: 7vh;
+                                width: 3.75vw;
+                                padding: 0.75vw;
+                                border-radius: 50%;
+                                position: absolute;
+                                border: solid $Branco 1px;
+                                background: $AzulEscuro;
+                                bottom: 10vh;
+                                path{
+                                    fill: $Branco;
+                                }
+                            }
+                        }
+
+                        .BlockBox {
+                            width: 32%;
+                            height: 30%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            position: relative;
+                            input {
+                                width: 90%;
+                                height: 30%;
+                                font-size: 1vw;
+                                font-weight: 200;
+                                color: $Branco;
+                                background: none;
+                                outline: none;
+                                padding: 1vh 1.5vw;
+                                border: solid $Branco 1px;
+                                border-radius: 2vw;
+                            }
+                            span {
+                                position: absolute;
+                                left: 2.5vw;
+                                top: 10vh;
+                                font-size: 1.25vw;
+                                color: $Branco;
+                                font-weight: 800;
+                                transition: 0.5s;
+                                pointer-events: none;
+                            }
+                            .lengthInput{
+                                position: absolute;
+                                top: 0;
+                                right: 103%;
+                                width: 3.25vw;
+                                height: 100%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                color: $Branco;
+                                font-size: 1vw;
+                                font-weight: 800;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        }
+                        .BlockBox input:focus~span,
+                        input:valid~span{
+                            transform: translate(0, -4vh);
+                            font-size: 1.1vw;
+                            color: $Branco;
+                            background-color: $Azul;
+                        }
+                        .categoriasSelect{
+                            span{
+                                left: 1vw;
+                                top: 3.5vh;
+                            }
+                            select{
+                                width: 90%;
+                                height: 30%;
+                                font-size: 1.25vw;
+                                font-weight: 800;
+                                color: $Laranja;
+                                background: none;
+                                outline: none;
+                                padding: 1vh 1.5vw;
+                                border: solid $Branco 1px;
+                                border-radius: 2vw;
+                            }
+                        }
+    
+                        .checkBoxLinkAtivo{
+                            position: absolute;
+                            font-size: 1.5vw;
+                            bottom: 0;
+                            left: 1.5vw;
+                        }
+    
+                        .SalvarBtnModal {
+                            position: absolute;
+                            bottom: 1.5vh;
+                            right: 0.5vw;
+                            padding: 0.75vh 2vw 0.25vh;
+                            border-radius: 2vw;
+                            margin: 0 0.5vw;
+                            color: $Branco;
+                            font-size: 1.5vw;
+                            font-weight: 500;
+                            background: $Laranja;
+                            border: none;
+                        }
+                    }
+                }
+                #msgErro_Links{
+                    bottom: -11vh;
+                    height: 10vh;
+                }
+            }
+        }
+    }
+
+    #ModalDeletLink{
+        .modal-dialog {
+            width: 40vw;
+            height: 40vh;
+            margin: 15vh auto;
+            .modal-content {
+                .modal-body {
+                    width: 100%;
+                    height: 75%;
+                    padding: 0;
+                    margin: 0;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    #formDeletLink{
+                        h4 {
+                            margin-top: 6vh;
+                            text-align: center;
+                            font-size: 2vw;
+                            font-weight: 800;
+                        }
+                        h5 {
+                            text-align: center;
+                            font-size: 1.35vw;
+                            font-weight: 500;
+                            margin-top: 5vh;
+                        }
+                        button{
+                            border: solid 1px $Branco;
+                            background: none;
+                            position: absolute;
+                            border-radius: 2vw;
+                            color: $Branco;
+                            font-size: 1.25vw;
+                            font-weight: 700;
+                        }
+                        .DeletBtnModal{
+                            bottom: 1.5vh;
+                            right: 8vw;
+                            background: red;
+                            padding: 0.75vh 2vw 0.25vh;
+                        }
+                    }
+                    .CancelarBtnModal{
+                        border: solid 1px $Branco;
+                        background: none;
+                        position: absolute;
+                        border-radius: 2vw;
+                        color: $Branco;
+                        font-size: 1.25vw;
+                        font-weight: 700;
+                        bottom: 1.5vh;
+                        left: 8vw;
+                        background: $Azul;
+                        padding: 0.75vh 2vw 0.25vh;
+                    }
+                }
+            }
+        }
+    }
+
+    /* CATEGORIAS */
+    #ModalListagemCategorias{
+        .modal-dialog {
+            width: 50vw;
+            height: 60vh;
+            margin: 15vh auto;
+            .modal-content {
+                .modal-body {
+                    width: 100%;
+                    height: 100%;
+                    padding: 1vw;
+                    margin: 0;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    overflow-y: auto;
+                    .Listagem_categoria_Links{
+                        border: 1px solid $Cinza;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        padding: 1.5vh 1vw;
+                        margin: 0.5vh 0;
+                        p{
+                            margin: 0;
+                            padding: 0;
+                            height: 100%;
+                            width: 70%;
+                            font-size: 1.25vw;
+                            font-weight: 600;
+                        }
+                        a{
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            outline: 1px solid $Branco;
+                            width: 11%;
+                            height: 100%;
+                            color: $Branco;
+                            font-weight: 800;
+                            border-radius: 0.5vw;
+                            padding: 0.5vh 0 0;
+                            &:nth-child(2){
+                                margin-left: auto;
+                            }
+                            &:nth-child(3){
+                                margin-left: 0.5vw;
+                                background: red;
+                            }
+                            
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+
+    #ModalCategoria{
+        .modal-dialog {
+            width: 40vw;
+            height: 50vh;
+            margin: 7vh auto;
+            .modal-content {
+                .modal-body {
+                    width: 100%;
+                    height: 100%;
+                    padding: 0;
+                    margin: 0;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    #formCategorias{
+                        width: 100%;
+                        height: 100%;
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        padding: 5vh 2vw;
+                        h4 {
+                            text-align: center;
+                            width: 100%;
+                            font-size: 2.5vw;
+                            font-weight: 800;
+                            margin: 0;
+                            padding: 1vh 0;
+                        }
+                        .BlockBox {
+                            border: solid $Branco 1px;
+                            width: 85%;
+                            height: 7.5vh;
+                            display: flex;
+                            position: relative;
+                            border-radius: 2vw;
+                            margin: 4vh 0;
+                            input {
+                                width: 100%;
+                                border: none;
+                                font-size: 1.5vw;
+                                font-weight: 200;
+                                color: $Branco;
+                                background: none;
+                                outline: none;
+                                padding: 1vh 1.5vw;
+                            }
+                            span {
+                                position: absolute;
+                                left: 1.5vw;
+                                top: 1.75vh;
+                                font-size: 1.5vw;
+                                color: $Branco;
+                                font-weight: 800;
+                                transition: 0.5s;
+                                pointer-events: none;
+                            }
+                            .lengthInput{
+                                position: absolute;
+                                top: 0;
+                                left: 101%;
+                                width: 4.25vw;
+                                height: 100%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                color: $Branco;
+                                font-size: 1vw;
+                                font-weight: 800;
+                                margin: 0;
+                                padding: 0;
+                            }
+                        }
+                        .BlockBox input:focus~span,
+                        input:valid~span{
+                            transform: translate(0, -3.75vh);
+                            font-size: 1.2vw;
+                            color: $Branco;
+                            background-color: $Azul;
+                        }
+                        .SalvarBtnModal {
+                            position: absolute;
+                            bottom: 2vh;
+                            padding: 0.75vh 2vw 0.25vh;
+                            border-radius: 2vw;
+                            margin: 0 0.5vw;
+                            color: $Branco;
+                            font-size: 1.5vw;
+                            font-weight: 500;
+                            background: $Laranja;
+                            border: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #ModalDeletCategoria{
+        .modal-dialog {
+            width: 40vw;
+            height: 40vh;
+            margin: 15vh auto;
+            .modal-content {
+                .modal-body {
+                    width: 100%;
+                    height: 75%;
+                    padding: 0;
+                    margin: 0;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    #formDeletCategoria{
+                        h4 {
+                            margin-top: 6vh;
+                            text-align: center;
+                            font-size: 2vw;
+                            font-weight: 800;
+                        }
+                        h5 {
+                            text-align: center;
+                            font-size: 1.35vw;
+                            font-weight: 500;
+                            margin-top: 5vh;
+                        }
+                        button{
+                            border: solid 1px $Branco;
+                            background: none;
+                            position: absolute;
+                            border-radius: 2vw;
+                            color: $Branco;
+                            font-size: 1.25vw;
+                            font-weight: 700;
+                        }
+                        .DeletBtnModal{
+                            bottom: 1.5vh;
+                            right: 8vw;
+                            background: red;
+                            padding: 0.75vh 2vw 0.25vh;
+                        }
+                    }
+                    .CancelaBtnModal{
+                        border: solid 1px $Branco;
+                        background: none;
+                        position: absolute;
+                        border-radius: 2vw;
+                        color: $Branco;
+                        font-size: 1.25vw;
+                        font-weight: 700;
+                        bottom: 1.5vh;
+                        left: 8vw;
+                        background: $Azul;
+                        padding: 0.75vh 2vw 0.25vh;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+/*--------------------------------- Responsive Media Quaries -----------------------------*/
+/* MOBILE */
+@media only screen and (max-width: 479px){
+}
+/* Landscape */ 
+@media only screen and (min-width: 480px) and (max-width: 767px){	
+}
+
+/* TABLET */
+@media only screen and (min-width: 768px) and (max-width: 833px) {
+}
+/* Landscape */ 
+@media only screen and (min-width: 834px) and (max-width: 1024px) {
+}

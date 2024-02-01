@@ -1,0 +1,17 @@
+@import '../colors_fonts';
+@import '../base';
+
+body {
+    display: flex;
+    flex-wrap: wrap;
+    font-family: $Main-font;
+    color: $Branco;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+
+}
+
+@import 'Login';
+// @import 'recuperarSenha';
+// @import 'TeladeAdm';

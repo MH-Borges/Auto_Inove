@@ -1,0 +1,218 @@
+.recuperaSenha{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 100vh;
+    width: 100%;
+    main{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background-color: $AzulEscuro;
+        .Back_Login{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.65;
+            mix-blend-mode: lighten;
+        }
+        .HomeLink{
+            position: absolute;
+            top: 3vh;
+            left: 1.5vw;
+            width: 5vw;
+            height: 10vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img{
+                width: auto;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+        .recuperaSenhaBlock{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            width: 35vw;
+            height: 70vh;
+            border-radius: 3vw;
+            position: relative;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(4px);
+            box-shadow: 10px 15px 30px 0px rgba(3,22,58,0.6);
+            .RecupSenhaBox{
+                position: relative;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 5vh 2vw;
+                h2{
+                    color: $Branco;
+                    width: 100%;
+                    text-align: center;
+                    font-size: 2.5vw;
+                    font-weight: 900;
+                    margin: 2vh 0 3vh;
+                }
+                .BlockBox{
+                    width: 90%;
+                    height: 7.5vh;
+                    display: flex;
+                    position: relative;
+                    border: solid 1px $Branco;
+                    border-radius: 2.5vw;
+                    margin: 3vh 5%;
+                    input{
+                        width: 100%;
+                        border: none;
+                        font-size: 1.25vw;
+                        font-weight: 200;
+                        color: $Branco;
+                        background: none;
+                        outline: none;
+                        padding: 1vh 1.5vw;
+                        z-index: 10 !important;
+                    }
+                    span{
+                        position: absolute;
+                        left: 1.25vw;
+                        top: 1.65vh;
+                        font-size: 1.35vw;
+                        color: $Branco;
+                        font-weight: 500;
+                        transition: 0.5s;
+                        pointer-events: none;
+                    }
+                    .lengthInput{
+                        position: absolute;
+                        top: 0;
+                        left: 100%;
+                        width: 3.75vw;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: $Branco;
+                        font-size: 1vw;
+                        font-weight: 800;
+                        margin: 0;
+                        padding: 0;
+                    }
+                    .senhaIcon, .senhaIconAgain{
+                        opacity: 0;
+                        font-size: 2vw;
+                        margin-top: 1.75vh;
+                        margin-right: 0;
+                        transition: ease-in-out 0.5s;
+                    }
+                }
+                .BlockBox input:focus ~ span, input:valid ~ span{
+                    transform:translate(0, -5vh);
+                    font-size: 1.2vw;
+                    font-weight: 800;
+                    color: $Laranja;
+                }
+                .senhaInput, .senhaInputNew{
+                    &:hover{
+                        .senhaIcon, .senhaIconAgain{
+                            opacity: 1;
+                            font-size: 2vw;
+                            margin-top: 1.75vh;
+                            margin-right: 1vw;
+                            transition: ease-in-out 0.5s;
+                        }
+                    }
+                }
+                #ResetSenhaBtn{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+                    width: 65%;
+                    font-size: 1.35vw;
+                    background: $Laranja;
+                    color: $Branco;
+                    padding: 1vh 1.5vw 0.75vh;
+                    border-radius: 2vw;
+                    border: none;
+                    font-weight: 900;
+                    margin-top: 5vh;
+                    z-index: 99;
+                    transition: ease-in-out 0.5s;
+                }
+                p{
+                    color: $Branco;
+                    padding: 0 2vw;
+                    font-size: 1.1vw;
+                    font-weight: 500;
+                    position: absolute;
+                    width: 100%;
+                    height: 4vh;
+                    bottom: 1vh;
+                    left: 0;
+                    z-index: 10;
+                    margin: 0;
+                    display: flex;
+                    align-items: center;
+                    a{
+                        background: none;
+                        border: none;
+                        font-weight: 900;
+                        color: $Branco;
+                        margin: 0 0.25vw;
+                        &:hover{
+                            color: $Laranja;
+                        }
+                    }
+                }
+            }
+            .msgErro{
+                z-index: 999;
+                font-size: 1.25vw;
+                font-weight: 800;
+                position: absolute;
+                width: 25vw;
+                height: auto;
+                min-height: 8vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 0.75vw;
+                bottom: -12vh;
+                border-radius: 1.5vw;
+                transition: ease-in-out 1s;
+                outline: solid $Branco 1px;
+                color: $Branco;
+                background: $Laranja;
+            }
+        }
+    }
+}
+
+/*--------------------------------- Responsive Media Quaries -----------------------------*/
+/* MOBILE */
+@media only screen and (max-width: 479px){
+}
+/* Landscape */ 
+@media only screen and (min-width: 480px) and (max-width: 767px){	
+}
+
+/* TABLET */
+@media only screen and (min-width: 768px) and (max-width: 833px) {
+}
+/* Landscape */ 
+@media only screen and (min-width: 834px) and (max-width: 1024px) {
+}

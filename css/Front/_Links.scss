@@ -1,0 +1,406 @@
+.linksPage{
+    position: relative;
+    overflow-x: hidden;
+    height: auto;
+    min-height: 100vh;
+    width: 100vw;
+    position: relative;
+    background-color: $AzulEscuro;
+    .BackgroundLinks{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        width: 100%;
+        height: 150vh;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        img{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+        }
+        .BackMetade{
+            width: 100%;
+            height: 50vh;
+        }
+    }
+    main{
+        z-index: 2;
+        width: 100%;
+        height: 150vh;
+        align-items: center;
+        .LogoLinks{
+            width: 7vw;
+            margin: 6vh 0 3vh 0;
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
+        h1{
+            width: 90%;
+            font-size: 2vw;
+            text-align: center;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        h2{
+            width: 90%;
+            text-align: center;
+            font-size: 1.1vw;
+            font-weight: 800;
+            color: $Cinza;
+        }
+        .icons_Links{
+            width: 90%;
+            margin: 5vh 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            a{
+                width: 4vw;
+                height: 4.5vh;
+                margin: 1vh 1.25vw;
+                svg{
+                    width: 100%;
+                    height: 100%;
+                    transition: ease-in-out 1s;
+                    fill: none;
+                    path{
+                        stroke-width: 4px;
+                    }
+                }
+                &:hover{
+                    svg{
+                        transform: rotateY(360deg);
+                        path{
+                            fill: $Branco;
+                        }
+                        .playYoutube{
+                            fill: $Azul;
+                        }
+                        .emailIcon{
+                            stroke: $Azul;
+                            stroke-width: 10px;
+                        }
+                    }
+                }
+            }
+        }
+        h4{
+            font-size: 1.5vw;
+            font-weight: 500;
+            text-align: center;
+            width: 90%;
+            padding: 0 20vw;
+        }
+        .swiper {
+            margin: 6vh 0;
+            width: 100vw;
+            height: 75vh;
+            overflow: visible;
+            user-select: none;
+            .swiper-wrapper{
+                position: relative;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+                display: flex;
+                .swiper-slide {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: transform 0.4s;
+                    border-radius: 4vw;
+                    overflow: hidden;
+                    a{
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        img{
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+                }
+                .swiper-slide-active{
+                    width: 75vw !important;
+                    height: 75vh !important;
+                    transform: translateZ(0) translateX(16.5%) !important;
+                    z-index: 1;
+                }
+                .swiper-slide-prev{
+                    transform: translateZ(0) translateX(29%) scale(0.75) !important;
+                    z-index: 0;
+                }
+                .swiper-slide-next{
+                    transform: translateZ(0) translateX(-4%) scale(0.75) !important;
+                    z-index: 0;
+                }
+            }
+            .swiper-button-prev, .swiper-button-next{
+                width: 3.25vw;
+                height: 11vh;
+                z-index: 3;
+                background-color: $Cinza;
+                border-radius: 1vw;
+                &::after{
+                    color: $Azul;
+                    font-size: 2.25vw;
+                }
+            }
+            .swiper-button-prev{
+                left:12.7%;
+            }
+            .swiper-button-next{
+                right: 13%;
+            }
+            .swiper-pagination{
+                width: 75%;
+                height: 1vh;
+                top: 103% !important;
+                left: 12.5%;
+                border-radius: 1vw;
+                background-color: rgba(0, 0, 0, 0.1);
+                .swiper-pagination-progressbar-fill{
+                    background-color: $Laranja;
+                    border-radius: 2vw;
+                }
+            }
+        }
+    }
+    footer{
+        z-index: 3;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        height: 7.5vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        a, p{
+            font-size: 0.9vw;
+            font-weight: 600;
+            margin: 0 5vw;
+            color: $Branco;
+        }
+        a{
+            &:hover{
+                color: $Laranja;
+            }
+        }
+        &::before{
+            content: '';
+            width:75%;
+            height: 0.3vh;
+            background-color: $Laranja;
+            position: absolute;
+            top: 0;
+        }
+    }
+}
+
+/*--------------------------------- Responsive Media Quaries -----------------------------*/
+/* MOBILE */
+    @media only screen and (max-width: 479px){
+        .linksPage{
+            position: relative;
+            overflow-x: hidden;
+            height: auto;
+            min-height: 100vh; 
+            min-height: 100dvh;
+            width: 100vw;
+            position: relative;
+            background-color: $AzulEscuro;
+            main{
+                z-index: 2;
+                width: 100%;
+                min-height: 100vh; 
+                min-height: 100dvh;
+                height: auto;
+                align-items: center;
+                position: relative;
+                
+                .galaxiaBack{
+                    z-index: 2;
+                    width: 100%;
+                    opacity: 0.25;
+                    position: absolute;
+                    mix-blend-mode: screen;
+                }
+                .farolBack{
+                    z-index: 3;
+                    width: 100%;
+                    opacity: 0.4;
+                    position: absolute;
+                }
+                .LogoLinks{
+                    width: 28vw;
+                    margin: 4vh 0 3vh;
+                    z-index: 5;
+                }
+                h1{
+                    order: 1;
+                    z-index: 5;
+                    width: 90%;
+                    font-size: 7vw;
+                    text-align: center;
+                    font-weight: 900;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                h2{
+                    order: 2;
+                    z-index: 5;
+                    width: 90%;
+                    text-align: center;
+                    font-size: 5vw;
+                    font-weight: 800;
+                    color: $Cinza;
+                }
+                .icons_Links{
+                    order: 4;
+                    z-index: 5;
+                    width: 100%;
+                    height: 6dvh;
+                    margin: 3vh 0;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    a{
+                        width: 15vw;
+                        height: 100%;
+                        margin: 0 2.5vw;
+                        svg{
+                            width: 100%;
+                            height: 100%;
+                            transition: ease-in-out 1s;
+                            fill: none;
+                            path{
+                                stroke-width: 4px;
+                            }
+                        }
+                        &:hover{
+                            svg{
+                                transform: rotateY(360deg);
+                                path{
+                                    fill: $Branco;
+                                }
+                                .playYoutube{
+                                    fill: $Azul;
+                                }
+                                .emailIcon{
+                                    stroke: $Azul;
+                                    stroke-width: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+                h4{
+                    order: 3;
+                    z-index: 5;
+                    font-size: 3.75vw;
+                    font-weight: 500;
+                    text-align: center;
+                    width: 100%;
+                    padding: 2vh 5vw;
+                }
+                .mobileBanner{
+                    order: 5;
+                    z-index: 5;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    height: auto;
+                    margin-bottom: 10vh;
+                    .block_Categoria{
+                        width: 100%;
+                        height: auto;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        margin-bottom: 3vh;
+                        h3{
+                            width: 100%;
+                            text-align: center;
+                            color: $Branco;
+                            font-size: 6.5vw;
+                            padding: 1vh 0;
+                            font-weight: 900;
+                        }
+                        a{
+                            margin: 2vh 0;
+                            width: 90%;
+                            img{
+                                width: 100%;
+                                height: auto;
+                                max-height: 25vh;
+                            }
+                        }
+                    }
+                }
+               
+            }
+            footer{
+                z-index: 5;
+                bottom: 0;
+                left: 0;
+                position: absolute;
+                width: 100%;
+                height: 7.5vh;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                padding:0;
+                margin: 0;
+                a, p{
+                    width: 100%;
+                    font-size: 3.5vw;
+                    font-weight: 600;
+                    margin:0;
+                    color: $Branco;
+                    text-align: center;
+                }
+                a{
+                    &:hover{
+                        color: $Laranja;
+                    }
+                }
+                &::before{
+                    content: '';
+                    width: 25%;
+                    height: 0.6vh;
+                    background-color: $Laranja;
+                    position: absolute;
+                    top: 45%;
+                    border-radius: 2vw;
+                }
+            }
+        }
+    }
+    /* Landscape */ 
+    @media only screen and (min-width: 480px) and (max-width: 767px){	
+    }
+
+/* TABLET */
+    @media only screen and (min-width: 768px) and (max-width: 833px) {
+    }
+    /* Landscape */ 
+    @media only screen and (min-width: 834px) and (max-width: 1024px) {
+    }
