@@ -118,23 +118,37 @@ else {
                 <img src="../../assets/logo_Horizontal.svg" onload="SVGInject(this)">
             </a>
 
-            <a class="itens" href="index.php?pag=home">Inicio</a>
-            <div class="itensProduto">
-                <button type="button" data-toggle="collapse" data-target="#ProdutosListMenu" aria-expanded="false">
-                    Produtos
-                </button>
-                <div class="collapse" id="ProdutosListMenu">
-                    <a href="index.php?pag=homeProduto">Resumo</a>
-                    <a href="index.php?pag=categoriasProduto">Categorias & Sub-Categorias</a>
-                    <a href="index.php?pag=listagemProduto">Produtos & Códigos</a>
-                </div>
+            <a class="itens" href="index.php?pag=home">
+                <img src="../../assets/icons/home.svg" onload="SVGInject(this)">  
+                <p>Inicio</p>
+            </a>
+            <button class="itens btnProdutos" type="button" data-toggle="collapse" data-target="#ProdutosListMenu" aria-expanded="false">
+                <img src="../../assets/icons/boxes.svg" onload="SVGInject(this)">  
+                <p>Produtos</p>
+                <img class="seta" src="../../assets/icons/seta.svg" onload="SVGInject(this)">  
+            </button>
+            <div class="collapse" id="ProdutosListMenu">
+                <a href="index.php?pag=homeProduto">Resumo</a>
+                <a href="index.php?pag=categoriasProduto">Categorias & Sub-Categorias</a>
+                <a href="index.php?pag=listagemProduto">Produtos & Códigos</a>
             </div>
-            <a class="itens" href="index.php?pag=relatorios">Relatórios</a>
+            <a class="itens" href="index.php?pag=relatorios">
+                <img src="../../assets/icons/relatorio.svg" onload="SVGInject(this)">  
+                <p>Relatórios</p>
+            </a>
 
             <form id="themeSwitch" method="POST">
                 <input type="hidden" id="idTheme" name="idTheme" value="<?php echo @$_SESSION['id_user'] ?>" required>
                 <input type="hidden" id="theme" name="theme" value="<?php echo $temaAdm ?>" required>
                 <button class="switch" type="button"></button>
+                <div class="sun">
+                    <img src="../../assets/icons/sun.svg" onload="SVGInject(this)">
+                    <p>Claro</p>
+                </div>
+                <div class="mon">
+                    <img src="../../assets/icons/moon.svg" onload="SVGInject(this)">
+                    <p>Escuro</p>
+                </div>
             </form>
 
             <a class="backup" href="./Main_menus/backup.php">Backup</a>

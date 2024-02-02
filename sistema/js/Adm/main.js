@@ -182,7 +182,7 @@ $(document).ready(function () {
                 if (msg.trim() === "Sucesso!!") {
                     $('#msgErro_themeSwitch').addClass('text-success');
                     $('#msgErro_themeSwitch').text(msg);
-                    setTimeout(() => { location.reload(); }, 100);
+                    setTimeout(() => { location.reload(); }, 10);
 
                 }
                 else{
