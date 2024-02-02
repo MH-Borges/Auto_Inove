@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
 @session_start();
 @ob_start();
 require_once("configs/conexao.php");
@@ -16,7 +16,7 @@ if(@count($dados) == 0){
 if(@$_SESSION['id_user'] != null && @$_SESSION['nivel_user'] == 'adm'){
     echo "<script> window.location='./adm'</script>";
 }
-?> -->
+?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -28,53 +28,53 @@ if(@$_SESSION['id_user'] != null && @$_SESSION['nivel_user'] == 'adm'){
     <title>Auto Inove | Login</title>
     <link rel="icon" href="../assets/icon.svg" />
 
-
+    <!-- jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    
     <!-- Mask -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script> -->
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
     <!-- Main files -->
     <link rel="stylesheet" href="../css/Back/style.css">
 
-    <script defer src="js/script.js"></script>
+    <script defer src="js/Login/script.js"></script>
     <script src="../js/svg-inject.min.js"></script>
 </head>
 
 <body class="Login">
 
-    <!-- <?php
+    <?php
         if (isset($_SESSION['msg_rec'])) {
             echo $_SESSION['msg_rec'];
             unset($_SESSION['msg_rec']);
         }
-    ?>  -->
+    ?> 
 
     <main>
         <img class="Back_Login" src="../assets/backgrounds/Login_Background.webp" alt="Background">
         <a class="logo_Vertical" href="https://www.autoinove.com.br">
             <img src="../assets/logo_Vertical.svg" onload="SVGInject(this)" alt="Logo Auto inove vertical">
         </a>
-            
         
         <section class="login_sreen">
             <form class="LoginBox" action="configs/autenticar.php" method="post" name="login">
                 <h2>Seja bem vindo!</h2>
 
                 <div class="BlockBox">
-                    <input type="text" name="emailLogin" id="emailLogin" required>
+                    <input type="text" name="emailLogin" id="emailLogin">
                     <span>E-mail:</span>
                 </div>
 
                 <div class="BlockBox senhaInput">
-                    <input type="password" name="senhaLogin" id="senhaLogin" required>
+                    <input type="password" name="senhaLogin" id="senhaLogin">
                     <span>Senha:</span>
                     <i id="password_toggle" onclick="setupPasswordToggle('senhaLogin', 'password_toggle')" class="senhaIcon fa-regular fa-eye"></i>
                 </div>
@@ -103,7 +103,7 @@ if(@$_SESSION['id_user'] != null && @$_SESSION['nivel_user'] == 'adm'){
                     <h5>Por favor, insira o e-mail que foi cadastrado</h5>
                     <div class="BlockBox">
                         <input type="text" name="emailRecuperaSenha" id="emailRecuperaSenha" maxlength="50" required>
-                        <span>Email para recuperação de senha:</span>
+                        <span>E-mail para recuperação de senha:</span>
                         <p class="lengthInput EmailResetSenhaInput"></p>
                     </div>
                 </div>

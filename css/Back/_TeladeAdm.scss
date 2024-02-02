@@ -3,66 +3,162 @@
     height: 100vh;
     display: flex;
     position: relative;
-    background: $AzulEscuro;
+    background: $Preto;
     color: $Branco;
     overflow: hidden;
+    padding: 3vw;
 
-    .EstrelasBack{
+    .textura_adm{
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
+        opacity: 0.25;
     }
-
+    .alertas{
+        position: absolute;
+    }
     header{
-        padding: 1vw;
-        width: 100%;
-        height: 13vh;
-        position: relative;
+        position: absolute;
+        width: 74%;
+        height: 8%;
+        right: 3vw;
         display: flex;
         align-items: center;
-        justify-content: center;
-        .InfosImg{
-            width: 8vw;
+        background: $Grafite;
+        z-index: 999;
+        border-radius: 1vw;
+        .Notificacoes, .User_config{
             height: 100%;
+            width: 3vw;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0.5vh 0.5vw;
-            img{
+            margin-left: auto;
+            button{
+                border: none;
+                background: none;
                 width: 100%;
                 height: 100%;
-                object-fit: contain;
-            }
-        }
-        button{
-            border: none;
-            background: none;
-            width: 4vw;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.75vw;
-            margin: 0 0.5vw;
-            svg{
-                width: 100%;
-                height: 100%;
-                path{
-                    stroke-width: 3px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0 1.25vh;
+                svg{
+                    width: 100%;
+                    height: 100%;
                 }
             }
-            &:nth-child(2){
-                margin-left: auto;
-                padding: 0.55vw;
+        }
+        .Notificacoes{
+            .dropdown-menu{
+                background-color: $Verde;
+                margin-top: -0.5vh;
+                border-radius: 1vw;
+                width: 30vw;
+                height: auto;
+                padding: 0.75vw;
+                position: relative;
+                padding-bottom: 8vh;
+                h3{
+                    color: $Preto;
+                    font-family: $Second-font;
+                    font-weight: 800;
+                    font-size: 1.5vw;
+                    height: 5vh;
+                    display: flex;
+                    align-items: center;
+                    justify-content: right;
+                }
+                .block-dropdow{
+                    width: 100%;
+                    height: auto;
+                    .dropdown-item{
+                        width: 100%;
+                        height: 7vh;
+                        border-top: 0.1vh solid $Abobora;
+                        border-bottom: 0.1vh solid $Abobora;
+                    }
+                }
+                button{
+                    position: absolute;
+                    bottom: 1vh;
+                    left: 32%;
+                    width: 35%;
+                    height: 3.25vh;
+                    color: $Branco;
+                    font-family: $Second-font;
+                    font-size: 1vw;
+                    font-weight: 900;
+                    background: $Violeta;
+                    box-shadow: 2px 2px 0px 0px $Abobora;
+                }
+            }
+        }
+        .User_config{
+            margin: 0 2vw 0 1vw;
+            button{
+                padding: 0 0.8vh;
+            }
+            .dropdown-menu{
+                background-color: $Verde;
+                margin-top: -0.5vh;
+                border-radius: 1vw;
+                width: 13vw;
+                padding: 0.75vw;
+                position: relative;
+                
+                button{
+                    width: 100%;
+                    height: 5vh;
+                    margin: 0.5vh 0;
+                    padding: 0;
+                    position: relative;
+                    p{
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: right;
+                        margin: 0;
+                        padding: 0;
+                        padding-right: 3vw;
+                        color: $Preto;
+                        font-family: $Second-font;
+                        font-weight: 800;
+                        font-size: 1vw;
+                        position: relative;
+                    }
+                    svg{
+                        position: absolute;
+                        width: 20%;
+                        height: 100%;
+                        right: 0.25vw;
+                        padding: 0.5vw;
+                        path{
+                            fill:$Violeta;
+                        }
+                    }
+                    &:hover{
+                        background: rgba(243, 244, 249, 0.5);
+                    }
+                }
+                &::before{
+                    content: '';
+                    position: absolute;
+                    width: 87%;
+                    height: 0.15vh;
+                    background: $Preto;
+                    top: 49%;
+                }
             }
         }
     }
 
     main{
         width: 100%;
-        height: 87vh;
+        height: 100%;
         display: flex;
         flex-wrap: wrap;
         align-items: center;
@@ -70,26 +166,32 @@
         position: relative;
         margin: 0;
         padding: 0;
-        .nav{
+        .sideMenu{
             margin: 0;
             padding: 0;
-            width: 15%;
+            width: 20%;
             height: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
             position: relative;
-            padding: 2vh 0;
-            &::before{
-                content: '';
-                position: absolute;
-                top: 0;
-                right: -0.1vw;
-                background: $Branco;
-                height: 100%;
-                width: 0.25vw;
+            padding: 1vw;
+            background: $Grafite;
+            border-radius: 1vw;
+            .goHome{
+                width: 100%;
+                height: 10%;
+                display: flex;
+                align-items: center;
+                justify-content: left;
+                padding: 0.5vh 0.5vw;
+                margin-bottom: 7vh;
+                svg{
+                    width: auto;
+                    height: 100%;
+                }
             }
-            .nav-item {
+
+            .itens{
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -97,232 +199,68 @@
                 width: 85%;
                 height: 7.5vh;
                 margin: 1vh 0;
-                color: $Branco;
+                color: $Violeta;
                 font-size: 1.4vw;
                 font-weight: 800;
                 text-align: center;
+                z-index: 15;
             }
+            
+
+            #themeSwitch {
+                color: var(--text);
+                width: 70px;
+                height: 30px;
+                border-radius: 50px;
+                position: relative;
+              
+                .switch {
+                    background: white;
+                    width: 24px;
+                    height: 24px;
+                    background: var(--background);
+                    border-radius: 100%;
+                    position: absolute;
+                    top: 3px;
+                    left: 4px;
+                    transition: 0.5s all ease;
+                }
+            }
+
             .backup{
                 position: absolute;
-                bottom: 2vh;
+                bottom: -4vh;
+                left: -2.5vw;
+                width: 6vw;
+                height: 4vh;
                 color: $Branco;
-                font-size: 1vw;
+                font-family: $Second-font;
+                font-size: 0.75vw;
                 font-weight: 800;
-                text-align: center;
-            }
-            .star_indicator {
-                position: absolute;
-                right: -1.25vw;
-                top: 0;
-                transition: .4s;
-                width: 2.5vw;
+                padding-left: 0.5vw;
                 display: flex;
                 align-items: center;
-                justify-content: center;
-                svg{
-                    width: 100%;
-                    height: 100%;
-                    object-fit: contain;
-                    path{
-                        fill: $Branco;
-                        stroke: $Laranja;
-                        stroke-width: 0.35vw;
-                    }
+                justify-content: left;
+                &:hover{
+                    color: $Verde;
                 }
             }
+            
         }
-        .TabsAdm{
-            width: 85%;
-            height: 100%;
-            transition: 0.2s ease-in-out;
-            #links{
-                position: relative;
-                width: 100%;
-                height: 100%;
-                .ActionsList{
-                    top: -10vh;
-                    right: 12vw;
-                    position: absolute;
-                    width: 3.75vw;
-                    height: 7vh;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    //este before faz parte do button
-                    &::before{
-                        content: '';
-                        width: 75%;
-                        height: 0.75vh;
-                        border-radius: 2vw;                           
-                        border: 1px solid $Branco;
-                        position: absolute;
-                        top: 70%;
-                    }
-                    button{
-                        width: 100%;
-                        height: 100%;
-                        outline: none;
-                        border: none;
-                        background: none;
-                        position: relative;
-                        display: flex;
-                        justify-content: center;
-                        &::before{
-                            content: '';
-                            width: 75%;
-                            height: 0.75vh;
-                            border-radius: 2vw;                            border: 1px solid $Branco;
-                            border: 1px solid $Branco;
-                            position: absolute;
-                            top: 20%;
-                        }
-                        &::after{
-                            content: '';
-                            width: 75%;
-                            height: 0.75vh;
-                            border-radius: 2vw;
-                            border: 1px solid $Branco;
-                            position: absolute;
-                            top: 45%;
-                        }
-                    }
-                    .dropdown-menu{
-                        margin-top: 1vh;
-                        margin-left: -15.25vw;
-                        width: 19vw;
-                        border-radius: 1vw;
-                        a{
-                            text-align: right;
-                            width: 100%;
-                            color: $AzulEscuro;
-                            background: none;
-                            font-weight: 800;
-                            font-size: 1.15vw;
-                            padding-right: 0.75vw;
-                            margin: 1.5vh 0;
-                            &:nth-child(1){
-                                margin:0 0 1.5vh 0;
-                            }
-                            &:nth-child(4){
-                                margin:1.5vh 0 0 0;
-                            }
-                            &:hover{
-                                color: $Laranja;
-                            }
-                        }
-                    }
-                }
-                .linksBlock{
-                    width: 100%;
-                    height: 100%;
-                    display: flex;
-                    .linksAtivos, .LinkDesativados{
-                        width: 100%;
-                        height: 100%;
-                        display: flex;
-                        flex-direction: column;
-                        h2{
-                            color: $Branco;
-                            font-size: 2.5vw;
-                            font-weight: 700;
-                            height: 8%;
-                            width: 100%;
-                            margin: 0;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            text-align: center;
-                            padding: 1vh 0 0 0;
-                        }
-                        .links{
-                            height: 92%;
-                            width: 100%;
-                            display: flex;
-                            flex-wrap: wrap;
-                            justify-content: center;
-                            overflow-y: auto;
-                            padding-top: 4vh;
-                            .BannerLink{
-                                width: 40%;
-                                height: 35vh;
-                                display: flex;
-                                flex-direction: column;
-                                position: relative;
-                                margin: 0 3vw 4vh;
-                                h3{
-                                    width: 100%;
-                                    height: 10%;
-                                    font-size: 1.25vw;
-                                    font-weight: 600;
-                                    color: $Azul;
-                                    margin: 0;
-                                    color: $Branco;
-                                    text-align: center;
-                                }
-                                .banner{
-                                    width: 100%;
-                                    height: 75%;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    position: relative;
-                                    z-index: 99;
-                                    padding: 1.25vh 3.5vw;
-                                    img{
-                                        height: 100%;
-                                        width: 100%;
-                                        object-fit: fill;
-                                        border-radius: 2vw;
-                                    }
-                                }
-                                .linkBtnAction{
-                                    width: 100%;
-                                    height: 15%;
-                                    display: flex;
-                                    justify-content: center;
-                                    transition: ease-in-out 0.75s;
-                                    transform: translateY(-9vh);
-                                    #EditLink, #DeletLink{
-                                        z-index: 10;
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        width: 10vw;
-                                        height: 100%;
-                                        background: none;
-                                        border: solid $Branco 1px;
-                                        border-radius: 1.5vw;
-                                        color: $Branco;
-                                        font-size: 1.25vw;
-                                        font-weight: 800;
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        padding: 0.75vh 0 0.25vh 0;
-                                        margin: 0 1.5vw;
-                                    }
-                                    #EditLink{
-                                        background: $Azul;
-                                        left: 8vw;
-                                    }
-                                    #DeletLink{
-                                        right: 8vw;
-                                        background: red;
-                                    }
-                                }
-                                &:hover{
-                                    .linkBtnAction{
-                                        transform: translateY(0);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
 
+        .blockContent{
+            outline: 1px solid greenyellow;
+            width: 78.5%;
+            height: 88%;
+            margin-left: 1.5%;
+            margin-bottom: -6%;
+        }
+
+        @import 'HomeAdm';
+        // @import 'HomeAdm';
+        // @import 'HomeAdm';
+
+    }
 
 
     .modal{
@@ -331,7 +269,7 @@
         .modal-dialog{
             border: solid $Branco 2px;
             border-radius: 2vw;
-            background-color: $Azul;
+            background-color: $Preto;
             color: $Branco;
             max-width: 100vw;
             .modal-content{
@@ -350,7 +288,7 @@
                     right: -1.5vw;
                     top: -1.5vw;
                     border: none;
-                    background-color: $Laranja;
+                    background-color: $Abobora;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -437,7 +375,7 @@
                         z-index: 10;
                     }
                     .CancelaBtnModal {
-                        background: $Azul;
+                        background: $Preto;
                     }
                     .LogoutBtnModal {
                         background: red;
@@ -582,7 +520,7 @@
                                     transform: translate(0, -2.75vh);
                                     font-size: 1.1vw;
                                     color: $Branco;
-                                    background-color: $Azul;
+                                    background-color: $Preto;
                                 }
                                 .senhaInput{
                                     &:hover{
@@ -603,7 +541,7 @@
                                     color: $Branco;
                                     font-size: 1.5vw;
                                     font-weight: 500;
-                                    background: $Laranja;
+                                    background: $Abobora;
                                     border: none;
                                 }
                             }
@@ -611,7 +549,6 @@
                     }
                 }
             }
-    
         }
     }
 
@@ -653,7 +590,7 @@
                             position: absolute;
                             top: 0.5vh;
                             left: 1vw;
-                            background: $Azul;
+                            background: $Preto;
                         }
                         .Img_Web_Block{
                             width: 50%;
@@ -684,7 +621,7 @@
                                 border-radius: 50%;
                                 position: absolute;
                                 border: solid $Branco 1px;
-                                background: $AzulEscuro;
+                                background: $Preto;
                                 bottom: 0;
                                 path{
                                     fill: $Branco;
@@ -721,7 +658,7 @@
                                 border-radius: 50%;
                                 position: absolute;
                                 border: solid $Branco 1px;
-                                background: $AzulEscuro;
+                                background: $Preto;
                                 bottom: 10vh;
                                 path{
                                     fill: $Branco;
@@ -779,7 +716,7 @@
                             transform: translate(0, -4vh);
                             font-size: 1.1vw;
                             color: $Branco;
-                            background-color: $Azul;
+                            background-color: $Grafite;
                         }
                         .categoriasSelect{
                             span{
@@ -791,7 +728,7 @@
                                 height: 30%;
                                 font-size: 1.25vw;
                                 font-weight: 800;
-                                color: $Laranja;
+                                color: $Abobora;
                                 background: none;
                                 outline: none;
                                 padding: 1vh 1.5vw;
@@ -817,7 +754,7 @@
                             color: $Branco;
                             font-size: 1.5vw;
                             font-weight: 500;
-                            background: $Laranja;
+                            background: $Abobora;
                             border: none;
                         }
                     }
@@ -883,7 +820,7 @@
                         font-weight: 700;
                         bottom: 1.5vh;
                         left: 8vw;
-                        background: $Azul;
+                        background: $Grafite;
                         padding: 0.75vh 2vw 0.25vh;
                     }
                 }
@@ -1030,7 +967,7 @@
                             transform: translate(0, -3.75vh);
                             font-size: 1.2vw;
                             color: $Branco;
-                            background-color: $Azul;
+                            background-color: $Grafite;
                         }
                         .SalvarBtnModal {
                             position: absolute;
@@ -1041,7 +978,7 @@
                             color: $Branco;
                             font-size: 1.5vw;
                             font-weight: 500;
-                            background: $Laranja;
+                            background: $Abobora;
                             border: none;
                         }
                     }
@@ -1103,7 +1040,7 @@
                         font-weight: 700;
                         bottom: 1.5vh;
                         left: 8vw;
-                        background: $Azul;
+                        background: $Grafite;
                         padding: 0.75vh 2vw 0.25vh;
                     }
                 }
@@ -1112,6 +1049,22 @@
     }
 
 }
+
+.light-theme {
+    --background: #FFF;
+    --text: #000;
+    background: var(--background);
+
+    #theme-switch {
+        background: var(--text);
+
+        .switch {
+        transform: translateX(37px);
+        }
+    }
+   
+}
+  
 
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 /* MOBILE */

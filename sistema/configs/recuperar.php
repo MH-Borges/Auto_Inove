@@ -28,7 +28,7 @@ if(@count($dados) > 0){
     
    //ENVIAR O EMAIL COM A SENHA
     $destinatario = $email;
-    $assunto = 'Universo Farol - Recuperação de Senha';
+    $assunto = 'Auto Inove - Recuperação de Senha';
     $mensagem = utf8_decode('Prezado(a) ' . $dados[0]['nome_Completo'] . ".<br><br>Você solicitou alteração de senha para o usuario" . $dados[0]['email'] .  ".<br><br>Para continuar o processo de recuperação de sua senha, clique no link abaixo ou cole o endereço no seu navegador: <br><br><a href='" . $link . "'>" . $link . "</a><br><br>Se você não solicitou essa alteração, nenhuma ação é necessária. Sua senha permanecerá a mesma até que você ative este código.<br><br>");
     $cabecalhos = "From: ".$email;
     mail($destinatario, $assunto, $mensagem, $cabecalhos);

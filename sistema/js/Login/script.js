@@ -15,11 +15,11 @@ $(document).ready(function () {
     function handleResponse(msg) {
         $('.CloseBtn').click();
         if (msg === 'Link para a recuperação de senha enviado para o e-mail informado!') {
-            mostrarMensagem(msg, '#048319', 2000, window.location.reload);
+            mostrarMensagem(msg, '#8000FF', 2000, window.location.reload);
         } else if (msg === 'Preencha o campo de recuperação de e-mail!' || msg === 'Este e-mail não está cadastrado!') {
-            mostrarMensagem(msg, '#CC101D', 4000);
+            mostrarMensagem(msg, '#F83810', 4000);
         } else {
-            mostrarMensagem('Erro ao Enviar o Formulário! Possíveis falhas ao se conectar ao servidor de hospedagem.', '#CC101D', 6000);
+            mostrarMensagem('Erro ao Enviar o Formulário! Possíveis falhas ao se conectar ao servidor de hospedagem.', '#F83810', 6000);
         }
     }
 

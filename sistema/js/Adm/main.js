@@ -1,5 +1,5 @@
 function resetIndex() { window.location='./index.php'; }
-function VoltarPage() {  history.back(); }
+function VoltarPage() { history.back(); }
 
 //UPLOAD DE IMAGENS
 function carregarImagem(inputId, targetId, defaultImagePath, imgContainerClass) {
@@ -81,36 +81,6 @@ setInterval(
         verificaTamanhoInput('nomeCateg', 'categoriaInput', 75);
 }, 50);
 
-//VERIFICAÇÃO DE TAB ATIVA MENU LATERAL
-const indicator = document.querySelector('.star_indicator');
-const items = document.querySelectorAll('.nav-item');
-function handleIndicator(el) {
-  items.forEach(item => {
-    item.classList.remove('activeStar');
-  });
-
-  indicator.style.height = `${el.offsetHeight}px`;
-  indicator.style.top = `${el.offsetTop}px`;
-  el.classList.add('activeStar');
-}
-items.forEach((item, index) => {
-  item.addEventListener('click', e => {handleIndicator(e.target);});
-  item.classList.contains('activeStar') && handleIndicator(item);
-});
-
-//ALTERNAÇÃO DE LISTAGEM DE LINKS
-function ToggleListagemLinks(){ 
-    document.querySelector('.linksAtivos').classList.toggle("hide");
-    document.querySelector('.LinkDesativados').classList.toggle("hide");
-    var btnShowListagem = document.getElementById("ListagemLinksbtn");
-    if(btnShowListagem.innerHTML === "Ver links desativados"){
-        btnShowListagem.innerHTML = 'Ver links ativos';
-    }
-    else{
-        btnShowListagem.innerHTML = 'Ver links desativados';
-    }
-}
-
 
 // UPLOAD INFOS
 $(document).ready(function () {
@@ -119,7 +89,7 @@ $(document).ready(function () {
     $('#formEditUser').submit(function(e){
         e.preventDefault();
         $.ajax({
-            url:"Main_Configs/EditCadastro.php",
+            url:"../Adm/Main_menus/EditCadastro.php",
             method:"post",
             data: $('form').serialize(),
             dataType: "text",
@@ -146,7 +116,7 @@ $(document).ready(function () {
     $('#formEditEmailUser').submit(function(e){
         e.preventDefault();
         $.ajax({
-            url:"Main_Configs/EditEmail.php",
+            url:"../Adm/Main_menus/EditEmail.php",
             method:"post",
             data: $('form').serialize(),
             dataType: "text",
@@ -176,7 +146,7 @@ $(document).ready(function () {
     $('#formEditSenhaUser').submit(function(e){
         e.preventDefault();
         $.ajax({
-            url:"Main_Configs/EditSenha.php",
+            url:"../Adm/Main_menus/EditSenha.php",
             method:"post",
             data: $('form').serialize(),
             dataType: "text",
@@ -200,117 +170,29 @@ $(document).ready(function () {
         });
     });
     
-    // **LINKS** //
-    $("#formLinks").submit(function (e) {
-        e.preventDefault();
-        var formData = new FormData(this);
-        $.ajax({
-            url: "Links/insert.php",
-            type: 'POST',
-            data: formData,
-            success: function (msg) {
-                $('#msgErro_Links').removeClass('text-danger');
-                $('#msgErro_Links').addClass('text-warning');
-                $('#msgErro_Links').text('carregando...');
-                if (msg.trim() === "Link adicionado com Sucesso!!" || msg.trim() === "Link atualizado com Sucesso!!" ) {
-                    $('#msgErro_Links').removeClass('text-warning');
-                    $('#msgErro_Links').removeClass('text-danger');
-                    $('#msgErro_Links').addClass('text-success');
-                    $('#msgErro_Links').text(msg);
-                    setTimeout(() => { $('.CloseBtn').click(); }, 1500);
-                }
-                else {
-                    $('#msgErro_Links').removeClass('text-warning');
-                    $('#msgErro_Links').addClass('text-danger');
-                    $('#msgErro_Links').text(msg);
-                }
-            },
-            cache: false,
-            contentType: false,
-            processData: false,
-            xhr: function () {
-                var myXhr = $.ajaxSettings.xhr();
-                if (myXhr.upload){ myXhr.upload.addEventListener('progress', function() {}, false); }
-                return myXhr;
-            }
-        });
-    });
-
-    $('#formDeletLink').click(function (e) {
+    $('#themeSwitch').click(function (e) {
+        $("body").toggleClass("light-theme");
         e.preventDefault();
         $.ajax({
-            url: "Links/delet.php",
+            url: "../Adm/Main_menus/theme.php",
             method: "post",
             data: $('form').serialize(),
             dataType: "text",
             success: function (msg) {
-                if (msg.trim() === "Excluído com Sucesso!!") {
-                    $('#msgErro_DeletLink').removeClass('text-warning');
-                    $('#msgErro_DeletLink').removeClass('text-danger');
-                    $('#msgErro_DeletLink').addClass('text-success');
-                    $('#msgErro_DeletLink').text(msg);
-                    setTimeout(() => { $('.CloseBtn').click(); }, 1500);
+                if (msg.trim() === "Sucesso!!") {
+                    $('#msgErro_themeSwitch').addClass('text-success');
+                    $('#msgErro_themeSwitch').text(msg);
+                    setTimeout(() => { location.reload(); }, 100);
+
                 }
                 else{
-                    $('#msgErro_DeletLink').removeClass('text-success');
-                    $('#msgErro_DeletLink').removeClass('text-warning');
-                    $('#msgErro_DeletLink').addClass('text-danger');
-                    $('#msgErro_DeletLink').text(msg)
+                    $('#msgErro_themeSwitch').removeClass('text-success');
+                    $('#msgErro_themeSwitch').removeClass('text-warning');
+                    $('#msgErro_themeSwitch').addClass('text-danger');
+                    $('#msgErro_themeSwitch').text(msg)
                 }
             }
         })
     })
 
-    // **CATEGORIAS** //
-    $('#formCategorias').submit(function(e){
-        e.preventDefault();
-        $.ajax({
-            url:"Links/Categorias/insert.php",
-            method:"post",
-            data: $('form').serialize(),
-            dataType: "text",
-            success: function(msg){
-                $('#msgErro_Categoria').removeClass('text-danger');
-                $('#msgErro_Categoria').addClass('text-warning');
-                $('#msgErro_Categoria').text('carregando..');
-                if(msg.trim() === 'Nova categoria adicionada com Sucesso!!' || msg.trim() === 'Categoria atualizada com Sucesso!!'){
-                    $('#msgErro_Categoria').removeClass('text-danger');
-                    $('#msgErro_Categoria').removeClass('text-warning');
-                    $('#msgErro_Categoria').addClass('text-success');
-                    $('#msgErro_Categoria').text(msg);
-                    setTimeout(() => { $('.CloseBtn').click(); }, 2500);
-                }
-                else{
-                    $('#msgErro_Categoria').removeClass('text-warning');
-                    $('#msgErro_Categoria').addClass('text-danger');
-                    $('#msgErro_Categoria').text(msg);
-                }
-            }
-        })
-    });
-
-    $('#formDeletCategoria').click(function (e) {
-        e.preventDefault();
-        $.ajax({
-            url: "Links/Categorias/delet.php",
-            method: "post",
-            data: $('form').serialize(),
-            dataType: "text",
-            success: function (mensagem) {
-                if (mensagem.trim() === "Excluído com Sucesso!!") {
-                    $('#msgErro_DeletCateg').removeClass('text-warning');
-                    $('#msgErro_DeletCateg').removeClass('text-danger');
-                    $('#msgErro_DeletCateg').addClass('text-success');
-                    $('#msgErro_DeletCateg').text(mensagem);
-                    setTimeout(() => { $('.CloseBtn').click(); }, 2500);
-                }
-                else{
-                    $('#msgErro_DeletCateg').removeClass('text-success');
-                    $('#msgErro_DeletCateg').removeClass('text-warning');
-                    $('#msgErro_DeletCateg').addClass('text-danger');
-                    $('#msgErro_DeletCateg').text(mensagem)
-                }
-            }
-        })
-    })
 });

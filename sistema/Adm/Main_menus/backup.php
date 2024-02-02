@@ -68,7 +68,7 @@ if(!is_dir($diretorio)){
 
 //Nome do arquivo de backup
 $data = date('Y-m-d-h-i-s');
-$nome_arquivo = $diretorio . "BancoDados_Universo_Farol".$data;
+$nome_arquivo = $diretorio . "BancoDados_Auto_inove".$data;
 
 $handle = fopen($nome_arquivo . '.sql', 'w+');
 fwrite($handle, $result);
@@ -86,7 +86,8 @@ if(file_exists($download)){
     header("Content-Transfer-Encoding: binary");
     header("Content-Length: " . filesize($download));
     readfile($download);
-    $_SESSION['msg'] = "<span style='color: green;'>Exportado BD com sucesso</span>";
+
+    $_SESSION['Alertas'] = "<div class='alertas' style='color: green;'>Exportado BD com sucesso</div>";
     }
-    else{$_SESSION['msg'] = "<span style='color: red;'>Erro ao exportar o BD</span>";}
+    else{$_SESSION['Alertas'] = "<div class='alertas' style='color: red;'>Erro ao exportar o BD</div>";}
 ?>
