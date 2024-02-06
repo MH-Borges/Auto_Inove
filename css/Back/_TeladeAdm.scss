@@ -45,7 +45,7 @@
                 align-items: center;
                 justify-content: center;
                 padding: 0 1.25vh;
-                svg{
+                img, svg{
                     width: 100%;
                     height: 100%;
                 }
@@ -130,7 +130,7 @@
                         font-size: 1vw;
                         position: relative;
                     }
-                    svg{
+                    img, svg{
                         position: absolute;
                         width: 20%;
                         height: 100%;
@@ -185,7 +185,7 @@
                 justify-content: left;
                 padding: 0.5vh 0.5vw;
                 margin-bottom: 7vh;
-                svg{
+                img, svg{
                     width: auto;
                     height: 100%;
                 }
@@ -203,7 +203,7 @@
                 font-size: 1.25vw;
                 font-weight: 500;
                 text-align: center;
-                svg{
+                img, svg{
                     position: absolute;
                     height: 100%;
                     width: 3vw;
@@ -224,6 +224,18 @@
                     font-size: 1vw;
                     font-weight: 400;
                 }
+                &:hover{
+                    position: relative;
+                    &::before{
+                        content: '';
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 1vw;
+                        opacity: 0.1;
+                        background: $Cinza;
+                    }
+                }
             }
             .btnProdutos{
                 border: none;
@@ -233,6 +245,7 @@
                     width: 2.5vw;
                     transition: ease-in-out 0.2s;
                 }
+                
             }
             .btnProdutos[aria-expanded="true"]{
                 .seta{
@@ -240,12 +253,22 @@
                 }
             }
             #ProdutosListMenu{
-                outline: solid 1px red;
                 flex-wrap: wrap;
                 width: 100%;
                 padding: 0.5vh 0.25vw 0.5vh 3vw;
+                margin: -0.75vh 0 0.5vh 0;
+                position: relative;
+                &::before{
+                    content: '';
+                    position: absolute;
+                    width: 0.3vw;
+                    height: 92%;
+                    top: -2%;
+                    left: 1.15vw;
+                    background: $Verde;
+                }
                 a{
-                    outline: solid 1px blue;
+                    position: relative;
                     width: 100%;
                     height: 3.5vh;
                     margin: 0.75vh 0;
@@ -257,10 +280,50 @@
                     font-weight: 300;
                     font-size: 0.85vw;
                     color: $Branco;
+                    &::before{
+                        content: '';
+                        position: absolute;
+                        top: 40%;
+                        left: -1.6vw;
+                        width: 1.6vw;
+                        height: 0.45vh;
+                        background: $Verde;
+                    }
+                    &:hover{
+                        &::after{
+                            content: '';
+                            position: absolute;
+                            width: 100%;
+                            height: 100%;
+                            top: 0;
+                            right: 0;
+                            border-radius: 0.5vw;
+                            opacity: 0.1;
+                            background: $Cinza;
+                        }
+                    }
+                }
+                .active{
+                    font-weight: 600;
+                    &::before{ opacity: 1; border-radius: 0;}
+                    &::after{
+                        content: '';
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        right: 0;
+                        top: 0;
+                        background: $Cinza;
+                        opacity: 0.25;
+                        border-radius: 0.5vw;
+                    }
+                    &:hover{ &::after{ opacity: 0.25; } }
                 }
             }
             .active{
-                font-weight: 900;
+                p{
+                    font-weight: 900;
+                }
                 &::before{
                     content: '';
                     position: absolute;
@@ -270,27 +333,93 @@
                     top: 0;
                     background: $Cinza;
                     opacity: 0.25;
+                    border-radius: 1vw;
                 }
+                &:hover{ &::before{ opacity: 0.25; } }
             }
-            
 
             #themeSwitch {
-                outline: 1px solid red;
                 width: 90%;
                 height: 5vh;
                 border-radius: 10vw;
                 position: absolute;
                 bottom: 1.5vh;
                 left: 5%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0.25vw;
                 .switch {
-                    background: white;
-                    width: 24px;
-                    height: 24px;
-                    border-radius: 100%;
                     position: absolute;
-                    top: 3px;
-                    left: 4px;
+                    width: 49%;
+                    height: 80%;
+                    border-radius: 10vw;
+                    top: 10%;
+                    left: 49%;
                     transition: 0.5s all ease;
+                    background: none;
+                    border: none;
+                    &::before{
+                        content: '';
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        left: 0;
+                        top: 0;
+                        background-color: $Cinza;
+                        opacity: 0.5;
+                        z-index: 4;
+                        border-radius: 10vw;
+                        box-shadow: 0px 4px 3px -1px $Grafite;
+                    }
+                }
+                .sun,.moon{
+                    width: 50%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: row;
+                    z-index: 5;
+                    img, svg{
+                        width: 2.25vw;
+                        height: 100%;
+                        padding: 0.5vw;
+                        path{
+                            fill: $Preto;
+                        }
+                    }
+                    p{
+                        font-weight: 900;
+                        font-size: 0.85vw;
+                        color: $Preto;
+                        font-family: $Second-font;
+                    }
+                }
+                &::before{
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    left: 0;
+                    top: 0;
+                    background: $Cinza;
+                    opacity: 0.25;
+                    border-radius: 10vw;
+                    z-index: 0;
+                }
+                #msgErro_themeSwitch{
+                    position: absolute;
+                    width: 100%;
+                    height: 4vh;
+                    top: 135%;
+                    left: 0;
+                    font-family: $Second-font;
+                    font-weight: 700;
+                    font-size: 0.6vw;
+                    color: $Branco;
+                    text-align: center;
+                    overflow: auto;
                 }
             }
 
@@ -316,7 +445,6 @@
         }
 
         .blockContent{
-            outline: 1px solid greenyellow;
             width: 78.5%;
             height: 88%;
             margin-left: 1.5%;
@@ -324,6 +452,8 @@
         }
 
         @import 'HomeAdm';
+        // @import 'HomeAdm';
+        // @import 'HomeAdm';
         // @import 'HomeAdm';
         // @import 'HomeAdm';
 
@@ -1118,18 +1248,16 @@
 }
 
 .light-theme {
-    --background: #FFF;
-    --text: #000;
-    background: var(--background);
-
-    #theme-switch {
-        background: var(--text);
-
-        .switch {
-        transform: translateX(37px);
+    background: $Cinza;
+    main{
+        .sideMenu{
+            #themeSwitch {
+                .switch {
+                    left: 1.5%;
+                }
+            }
         }
     }
-   
 }
   
 

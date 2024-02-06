@@ -28,6 +28,11 @@
   border-radius: 5vw;
 }
 
+p {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   display: flex;
   flex-wrap: wrap;

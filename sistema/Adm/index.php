@@ -34,6 +34,7 @@ else {
     <title>Auto Inove | Administrativo</title>
     <link rel="icon" href="../../assets/icon.svg" />
 
+    <script src="../../js/svg-inject.min.js"></script>
     <!-- jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     
@@ -52,7 +53,6 @@ else {
     <link rel="stylesheet" href="../../css/Back/style.css">
 
     <script defer src="../js/Adm/main.js"></script>
-    <script src="../../js/svg-inject.min.js"></script>
 </head>
 
 <?php
@@ -71,7 +71,7 @@ else {
     <header>
         <div class="Notificacoes">
             <button type="button" data-toggle="dropdown" aria-expanded="false">
-                <img src="../../assets/icons/notf.svg" onload="SVGInject(this)">
+                <img src="../../assets/icons/notf.svg" >
             </button>
             <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
                 <h3>Notificações</h3>
@@ -95,17 +95,17 @@ else {
 
         <div class="User_config">
             <button type="button" data-toggle="dropdown" aria-expanded="false">
-                <img src="../../assets/icons/user.svg" onload="SVGInject(this)">
+                <img src="../../assets/icons/user.svg" >
             </button>
 
             <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
                 <button class="dropdown-item" type="button" data-toggle="modal" data-target="#ModalLogout">
                     <p>Sair</p>
-                    <img src="../../assets/icons/logout.svg" onload="SVGInject(this)">
+                    <img src="../../assets/icons/logout.svg" >
                 </button>
                 <button class="dropdown-item" type="button" data-toggle="modal" data-target="#ModalEditPerfil">
                     <p>Editar dados</p>
-                    <img src="../../assets/icons/user_config.svg" onload="SVGInject(this)">
+                    <img src="../../assets/icons/user_config.svg" >
                 </button>
             </div>
         </div>
@@ -113,52 +113,89 @@ else {
     </header>
 
     <main>
-        <div class="sideMenu">
+        <aside class="sideMenu">
             <a href="https://autoinove.com.br" class="goHome">
-                <img src="../../assets/logo_Horizontal.svg" onload="SVGInject(this)">
+                <img src="../../assets/logo_Horizontal.svg" >
             </a>
 
-            <a class="itens" href="index.php?pag=home">
-                <img src="../../assets/icons/home.svg" onload="SVGInject(this)">  
+
+            <?php
+                if (@$_GET["pag"] == null || @$_GET["pag"] == "home") {
+                    echo '<a class="itens active" href="index.php?pag=home">';
+                } else { echo '<a class="itens" href="index.php?pag=home">';}
+            ?>
+                <img src="../../assets/icons/home.svg" >  
                 <p>Inicio</p>
             </a>
-            <button class="itens btnProdutos" type="button" data-toggle="collapse" data-target="#ProdutosListMenu" aria-expanded="false">
-                <img src="../../assets/icons/boxes.svg" onload="SVGInject(this)">  
+
+
+            <?php
+                if (@$_GET["pag"] == "homeProduto" || @$_GET["pag"] == "categoriasProduto" || @$_GET["pag"] == "listagemProduto"){
+                    echo '<button class="itens btnProdutos active" type="button" data-toggle="collapse" data-target="#ProdutosListMenu" aria-expanded="true">';
+                } else { echo '<button class="itens btnProdutos" type="button" data-toggle="collapse" data-target="#ProdutosListMenu" aria-expanded="false">'; }
+            ?>
+                <img src="../../assets/icons/boxes.svg" >  
                 <p>Produtos</p>
                 <img class="seta" src="../../assets/icons/seta.svg" onload="SVGInject(this)">  
             </button>
-            <div class="collapse" id="ProdutosListMenu">
-                <a href="index.php?pag=homeProduto">Resumo</a>
-                <a href="index.php?pag=categoriasProduto">Categorias & Sub-Categorias</a>
-                <a href="index.php?pag=listagemProduto">Produtos & Códigos</a>
+
+
+            <?php
+                if (@$_GET["pag"] == "homeProduto" || @$_GET["pag"] == "categoriasProduto" || @$_GET["pag"] == "listagemProduto"){
+                    echo '<div class="collapse show" id="ProdutosListMenu">';
+                } else { echo '<div class="collapse" id="ProdutosListMenu">'; }
+            ?>
+                <?php
+                    if (@$_GET["pag"] == "homeProduto") { echo '<a class="active" href="index.php?pag=homeProduto">Resumo</a>'; }
+                    else { echo '<a href="index.php?pag=homeProduto">Resumo</a>'; }
+                ?>
+
+                <?php
+                    if (@$_GET["pag"] == "categoriasProduto") { echo '<a class="active" href="index.php?pag=categoriasProduto">Categorias & Sub-Categorias</a>'; }
+                    else { echo '<a href="index.php?pag=categoriasProduto">Categorias & Sub-Categorias</a>'; }
+                ?>
+
+                <?php
+                    if (@$_GET["pag"] == "listagemProduto") { echo '<a class="active" href="index.php?pag=listagemProduto">Produtos & Códigos</a>'; }
+                    else { echo '<a href="index.php?pag=listagemProduto">Produtos & Códigos</a>'; }
+                ?>
             </div>
-            <a class="itens" href="index.php?pag=relatorios">
-                <img src="../../assets/icons/relatorio.svg" onload="SVGInject(this)">  
+
+
+            <?php
+                if (@$_GET["pag"] == "relatorios") {
+                    echo '<a class="itens active" href="index.php?pag=relatorios">';
+                } else { echo '<a class="itens" href="index.php?pag=relatorios">';}
+            ?>
+                <img src="../../assets/icons/relatorio.svg" >  
                 <p>Relatórios</p>
             </a>
+
 
             <form id="themeSwitch" method="POST">
                 <input type="hidden" id="idTheme" name="idTheme" value="<?php echo @$_SESSION['id_user'] ?>" required>
                 <input type="hidden" id="theme" name="theme" value="<?php echo $temaAdm ?>" required>
                 <button class="switch" type="button"></button>
                 <div class="sun">
-                    <img src="../../assets/icons/sun.svg" onload="SVGInject(this)">
+                    <img src="../../assets/icons/sun.svg">
                     <p>Claro</p>
                 </div>
-                <div class="mon">
-                    <img src="../../assets/icons/moon.svg" onload="SVGInject(this)">
+                <div class="moon">
+                    <img src="../../assets/icons/moon.svg">
                     <p>Escuro</p>
                 </div>
+                <div class="msgErro" id="msgErro_themeSwitch"></div>
             </form>
 
+
             <a class="backup" href="./Main_menus/backup.php">Backup</a>
-        </div>
+        </aside>
         
         <?php 
             if (@$_GET["pag"] == null || @$_GET["pag"] == "home") { include_once("Home/home.php"); }
             else if (@$_GET["pag"] == "homeProduto") { include_once("Produtos/home.php"); }
-            else if (@$_GET["pag"] == "categoriasProduto") { include_once("Produtos/home.php"); }
-            else if (@$_GET["pag"] == "listagemProduto") { include_once("Produtos/home.php"); }
+            else if (@$_GET["pag"] == "categoriasProduto") { include_once("Produtos/categoriasProduto.php"); }
+            else if (@$_GET["pag"] == "listagemProduto") { include_once("Produtos/listagemProduto.php"); }
             else if (@$_GET["pag"] == "relatorios") { include_once("Relatorios/home.php"); }
             else { include_once("Home/home.php"); }
         ?>

@@ -181,9 +181,7 @@ $(document).ready(function () {
             success: function (msg) {
                 if (msg.trim() === "Sucesso!!") {
                     $('#msgErro_themeSwitch').addClass('text-success');
-                    $('#msgErro_themeSwitch').text(msg);
-                    setTimeout(() => { location.reload(); }, 10);
-
+                    setTimeout(() => { location.reload(); }, 500);
                 }
                 else{
                     $('#msgErro_themeSwitch').removeClass('text-success');

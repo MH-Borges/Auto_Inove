@@ -28,6 +28,11 @@
   border-radius: 5vw;
 }
 
+p {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   display: flex;
   flex-wrap: wrap;
@@ -636,7 +641,7 @@ body {
   justify-content: center;
   padding: 0 1.25vh;
 }
-.TelaAdm header .Notificacoes button svg, .TelaAdm header .User_config button svg {
+.TelaAdm header .Notificacoes button img, .TelaAdm header .Notificacoes button svg, .TelaAdm header .User_config button img, .TelaAdm header .User_config button svg {
   width: 100%;
   height: 100%;
 }
@@ -719,14 +724,14 @@ body {
   font-size: 1vw;
   position: relative;
 }
-.TelaAdm header .User_config .dropdown-menu button svg {
+.TelaAdm header .User_config .dropdown-menu button img, .TelaAdm header .User_config .dropdown-menu button svg {
   position: absolute;
   width: 20%;
   height: 100%;
   right: 0.25vw;
   padding: 0.5vw;
 }
-.TelaAdm header .User_config .dropdown-menu button svg path {
+.TelaAdm header .User_config .dropdown-menu button img path, .TelaAdm header .User_config .dropdown-menu button svg path {
   fill: #8000FF;
 }
 .TelaAdm header .User_config .dropdown-menu button:hover {
@@ -772,7 +777,7 @@ body {
   padding: 0.5vh 0.5vw;
   margin-bottom: 7vh;
 }
-.TelaAdm main .sideMenu .goHome svg {
+.TelaAdm main .sideMenu .goHome img, .TelaAdm main .sideMenu .goHome svg {
   width: auto;
   height: 100%;
 }
@@ -790,13 +795,13 @@ body {
   font-weight: 500;
   text-align: center;
 }
-.TelaAdm main .sideMenu .itens svg {
+.TelaAdm main .sideMenu .itens img, .TelaAdm main .sideMenu .itens svg {
   position: absolute;
   height: 100%;
   width: 3vw;
   padding: 0.75vw;
 }
-.TelaAdm main .sideMenu .itens svg path {
+.TelaAdm main .sideMenu .itens img path, .TelaAdm main .sideMenu .itens svg path {
   fill: #F83810;
 }
 .TelaAdm main .sideMenu .itens p {
@@ -811,6 +816,18 @@ body {
   font-size: 1vw;
   font-weight: 400;
 }
+.TelaAdm main .sideMenu .itens:hover {
+  position: relative;
+}
+.TelaAdm main .sideMenu .itens:hover::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 1vw;
+  opacity: 0.1;
+  background: #BBBBBB;
+}
 .TelaAdm main .sideMenu .btnProdutos {
   border: none;
   background: none;
@@ -824,13 +841,23 @@ body {
   transform: rotate(180deg);
 }
 .TelaAdm main .sideMenu #ProdutosListMenu {
-  outline: solid 1px red;
   flex-wrap: wrap;
   width: 100%;
   padding: 0.5vh 0.25vw 0.5vh 3vw;
+  margin: -0.75vh 0 0.5vh 0;
+  position: relative;
+}
+.TelaAdm main .sideMenu #ProdutosListMenu::before {
+  content: "";
+  position: absolute;
+  width: 0.3vw;
+  height: 92%;
+  top: -2%;
+  left: 1.15vw;
+  background: #BAF811;
 }
 .TelaAdm main .sideMenu #ProdutosListMenu a {
-  outline: solid 1px blue;
+  position: relative;
   width: 100%;
   height: 3.5vh;
   margin: 0.75vh 0;
@@ -843,7 +870,48 @@ body {
   font-size: 0.85vw;
   color: #F3F4F9;
 }
-.TelaAdm main .sideMenu .active {
+.TelaAdm main .sideMenu #ProdutosListMenu a::before {
+  content: "";
+  position: absolute;
+  top: 40%;
+  left: -1.6vw;
+  width: 1.6vw;
+  height: 0.45vh;
+  background: #BAF811;
+}
+.TelaAdm main .sideMenu #ProdutosListMenu a:hover::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  border-radius: 0.5vw;
+  opacity: 0.1;
+  background: #BBBBBB;
+}
+.TelaAdm main .sideMenu #ProdutosListMenu .active {
+  font-weight: 600;
+}
+.TelaAdm main .sideMenu #ProdutosListMenu .active::before {
+  opacity: 1;
+  border-radius: 0;
+}
+.TelaAdm main .sideMenu #ProdutosListMenu .active::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  background: #BBBBBB;
+  opacity: 0.25;
+  border-radius: 0.5vw;
+}
+.TelaAdm main .sideMenu #ProdutosListMenu .active:hover::after {
+  opacity: 0.25;
+}
+.TelaAdm main .sideMenu .active p {
   font-weight: 900;
 }
 .TelaAdm main .sideMenu .active::before {
@@ -855,25 +923,94 @@ body {
   top: 0;
   background: #BBBBBB;
   opacity: 0.25;
+  border-radius: 1vw;
+}
+.TelaAdm main .sideMenu .active:hover::before {
+  opacity: 0.25;
 }
 .TelaAdm main .sideMenu #themeSwitch {
-  outline: 1px solid red;
   width: 90%;
   height: 5vh;
   border-radius: 10vw;
   position: absolute;
   bottom: 1.5vh;
   left: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.25vw;
 }
 .TelaAdm main .sideMenu #themeSwitch .switch {
-  background: white;
-  width: 24px;
-  height: 24px;
-  border-radius: 100%;
   position: absolute;
-  top: 3px;
-  left: 4px;
+  width: 49%;
+  height: 80%;
+  border-radius: 10vw;
+  top: 10%;
+  left: 49%;
   transition: 0.5s all ease;
+  background: none;
+  border: none;
+}
+.TelaAdm main .sideMenu #themeSwitch .switch::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: #BBBBBB;
+  opacity: 0.5;
+  z-index: 4;
+  border-radius: 10vw;
+  box-shadow: 0px 4px 3px -1px #505050;
+}
+.TelaAdm main .sideMenu #themeSwitch .sun, .TelaAdm main .sideMenu #themeSwitch .moon {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  z-index: 5;
+}
+.TelaAdm main .sideMenu #themeSwitch .sun img, .TelaAdm main .sideMenu #themeSwitch .sun svg, .TelaAdm main .sideMenu #themeSwitch .moon img, .TelaAdm main .sideMenu #themeSwitch .moon svg {
+  width: 2.25vw;
+  height: 100%;
+  padding: 0.5vw;
+}
+.TelaAdm main .sideMenu #themeSwitch .sun img path, .TelaAdm main .sideMenu #themeSwitch .sun svg path, .TelaAdm main .sideMenu #themeSwitch .moon img path, .TelaAdm main .sideMenu #themeSwitch .moon svg path {
+  fill: #131313;
+}
+.TelaAdm main .sideMenu #themeSwitch .sun p, .TelaAdm main .sideMenu #themeSwitch .moon p {
+  font-weight: 900;
+  font-size: 0.85vw;
+  color: #131313;
+  font-family: "Be Vietnam Pro", sans-serif;
+}
+.TelaAdm main .sideMenu #themeSwitch::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: #BBBBBB;
+  opacity: 0.25;
+  border-radius: 10vw;
+  z-index: 0;
+}
+.TelaAdm main .sideMenu #themeSwitch #msgErro_themeSwitch {
+  position: absolute;
+  width: 100%;
+  height: 4vh;
+  top: 135%;
+  left: 0;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 700;
+  font-size: 0.6vw;
+  color: #F3F4F9;
+  text-align: center;
+  overflow: auto;
 }
 .TelaAdm main .sideMenu .backup {
   position: absolute;
@@ -894,14 +1031,380 @@ body {
   color: #BAF811;
 }
 .TelaAdm main .blockContent {
-  outline: 1px solid greenyellow;
   width: 78.5%;
   height: 88%;
   margin-left: 1.5%;
   margin-bottom: -6%;
 }
 .TelaAdm main .HomeAdm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: left;
+  position: relative;
+}
+.TelaAdm main .HomeAdm .Updates {
+  width: 74.5%;
+  height: 48.5%;
+  background: #505050;
+  border-radius: 1.25vw;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  justify-content: center;
+  padding: 1.25vw 1.25vw 2.75vw 1.25vw;
+}
+.TelaAdm main .HomeAdm .Updates h2 {
+  position: relative;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 1.25vw;
+  color: #F3F4F9;
+  letter-spacing: 0.1vw;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 10%;
+  margin: 0;
+  padding: 0 0 0 2vw;
+}
+.TelaAdm main .HomeAdm .Updates h2::before {
+  content: "";
+  position: absolute;
+  width: 1.25vw;
+  height: 5vh;
+  left: 0;
+  background-color: #F83810;
+  border-radius: 0.4vw;
+}
+.TelaAdm main .HomeAdm .Updates .update_Header {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.TelaAdm main .HomeAdm .Updates .update_Header h3, .TelaAdm main .HomeAdm .Updates .update_Header h4, .TelaAdm main .HomeAdm .Updates .update_Header h5 {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 33.3%;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  color: #131313;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 0.85vw;
+  padding-bottom: 0.25vh;
+}
+.TelaAdm main .HomeAdm .Updates .update_Header h3 {
+  justify-content: left;
+}
+.TelaAdm main .HomeAdm .Updates .update_Header h5 {
+  justify-content: right;
+}
+.TelaAdm main .HomeAdm .Updates .update_Itens {
+  width: 100%;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+}
+.TelaAdm main .HomeAdm .Updates .update_Itens .update_Item {
+  border-top: 0.05vh solid #BAF811;
+  border-bottom: 0.05vh solid #BAF811;
+  width: 100%;
+  height: 16.6%;
+  display: flex;
+  flex-direction: row;
+}
+.TelaAdm main .HomeAdm .Updates .update_Itens .update_Item .update_Acao {
+  width: 45%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  z-index: 5;
+}
+.TelaAdm main .HomeAdm .Updates .update_Itens .update_Item .update_Acao img, .TelaAdm main .HomeAdm .Updates .update_Itens .update_Item .update_Acao svg {
+  width: 3vw;
+  height: 100%;
+  padding: 0.65vh 0 0.65vh 0;
+}
+.TelaAdm main .HomeAdm .Updates .update_Itens .update_Item .update_Acao p {
+  color: #131313;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 700;
+  font-size: 0.7vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 0.25vw;
+}
+.TelaAdm main .HomeAdm .Updates .update_Itens .update_Item .update_Img {
+  width: 10%;
+  height: 100%;
+  z-index: 5;
+}
+.TelaAdm main .HomeAdm .Updates .update_Itens .update_Item .update_Img img, .TelaAdm main .HomeAdm .Updates .update_Itens .update_Item .update_Img svg {
+  width: 100%;
+  height: 100%;
+  padding: 0.4vh 0 0.4vh 0;
+}
+.TelaAdm main .HomeAdm .Updates .update_Itens .update_Item .update_Data {
+  width: 45%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  font-family: "Be Vietnam Pro", sans-serif;
+  color: #131313;
+  font-weight: 400;
+  font-size: 0.75vw;
+  padding-right: 0.5vw;
+  z-index: 5;
+}
+.TelaAdm main .HomeAdm .Updates .update_Itens .newItem {
+  position: relative;
+}
+.TelaAdm main .HomeAdm .Updates .update_Itens .newItem::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: #BBBBBB;
+  opacity: 0.25;
+  z-index: 1;
+}
+.TelaAdm main .HomeAdm .Updates .update_Itens .newItem::after {
+  content: "";
+  position: absolute;
+  width: 0.4vw;
+  height: 0.4vw;
+  left: -0.2vw;
+  top: 45%;
+  border-radius: 100%;
   background: #8000FF;
+  z-index: 2;
+}
+.TelaAdm main .HomeAdm .Updates a {
+  position: absolute;
+  bottom: 1.25vh;
+  width: 9vw;
+  height: 2.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #131313;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 800;
+  font-size: 0.75vw;
+  background-color: #BAF811;
+  box-shadow: 2px 2px 0 0 #8000FF;
+  transition: ease-in-out 0.2s;
+}
+.TelaAdm main .HomeAdm .Updates a:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 0 #8000FF;
+}
+.TelaAdm main .HomeAdm .lpUpdates {
+  width: 74.5%;
+  height: 48.5%;
+  background: #505050;
+  border-radius: 1.25vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.TelaAdm main .HomeAdm .lpUpdates h2 {
+  position: absolute;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 1.25vw;
+  color: #F3F4F9;
+  top: 3.5vh;
+  left: 3.75vw;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.15vw;
+}
+.TelaAdm main .HomeAdm .lpUpdates h2::before {
+  content: "";
+  position: absolute;
+  width: 1.25vw;
+  height: 5vh;
+  left: -2.25vw;
+  background-color: #F83810;
+  border-radius: 0.4vw;
+}
+.TelaAdm main .HomeAdm .lpUpdates h5 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 3.5vw;
+  color: #F3F4F9;
+}
+.TelaAdm main .HomeAdm .topSells {
+  background: #505050;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 24%;
+  height: 100%;
+  border-radius: 1.25vw;
+  padding: 1.5vh 0.5vw 1.5vh 0.5vw;
+}
+.TelaAdm main .HomeAdm .topSells h2 {
+  position: relative;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 1vw;
+  color: #F3F4F9;
+  letter-spacing: 0.1vw;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 6%;
+  margin: 0;
+  padding: 0 0 0 2.25vw;
+}
+.TelaAdm main .HomeAdm .topSells h2::before {
+  content: "";
+  position: absolute;
+  width: 1.25vw;
+  height: 5vh;
+  left: 0.25vw;
+  background-color: #BAF811;
+  border-radius: 0.4vw;
+}
+.TelaAdm main .HomeAdm .topSells .topSell_Header {
+  width: 100%;
+  height: 6%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.TelaAdm main .HomeAdm .topSells .topSell_Header h3, .TelaAdm main .HomeAdm .topSells .topSell_Header h4 {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  color: #131313;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 0.85vw;
+  padding: 0.25vw;
+}
+.TelaAdm main .HomeAdm .topSells .topSell_Header h3 {
+  justify-content: left;
+}
+.TelaAdm main .HomeAdm .topSells .topSell_Header h4 {
+  justify-content: right;
+}
+.TelaAdm main .HomeAdm .topSells .topSell_Header::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 0.1vh;
+  background: #131313;
+  bottom: 0;
+  left: 0;
+}
+.TelaAdm main .HomeAdm .topSells .topSell_Itens {
+  width: 100%;
+  height: 88%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.25vh;
+}
+.TelaAdm main .HomeAdm .topSells .topSell_Itens .topSell_Item {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25vh 0 0.25vh 0;
+}
+.TelaAdm main .HomeAdm .topSells .topSell_Itens .topSell_Item .topSell_Produto {
+  width: 65%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  z-index: 5;
+}
+.TelaAdm main .HomeAdm .topSells .topSell_Itens .topSell_Item .topSell_Produto img, .TelaAdm main .HomeAdm .topSells .topSell_Itens .topSell_Item .topSell_Produto svg {
+  width: 23%;
+  height: 100%;
+  padding: 0.25vh;
+}
+.TelaAdm main .HomeAdm .topSells .topSell_Itens .topSell_Item .topSell_Produto p {
+  color: #131313;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 800;
+  font-size: 0.9vw;
+  width: 77%;
+  height: 100%;
+  padding: 0.7vh 0.25vw;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.TelaAdm main .HomeAdm .topSells .topSell_Itens .topSell_Item .topSell_Valores {
+  width: 35%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.TelaAdm main .HomeAdm .topSells .topSell_Itens .topSell_Item .topSell_Valores p {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  width: 100%;
+  height: 65%;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 0.8vw;
+  color: #BAF811;
+}
+.TelaAdm main .HomeAdm .topSells .topSell_Itens .topSell_Item .topSell_Valores p span {
+  color: #F3F4F9;
+  font-size: 0.5vw;
+  margin-right: 0.25vw;
+}
+.TelaAdm main .HomeAdm .topSells .topSell_Itens .topSell_Item .topSell_Valores .status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 35%;
+  text-align: center;
+  border-radius: 0.25vw;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 0.75vw;
+  color: #131313;
+}
+.TelaAdm main .HomeAdm .topSells .topSell_Itens .topSell_Item .topSell_Valores .Ativo {
+  background: #BAF811;
+}
+.TelaAdm main .HomeAdm .topSells .topSell_Itens .topSell_Item .topSell_Valores .Inativo {
+  background: #F83810;
+}
+.TelaAdm main .HomeAdm .topSells .topSell_Itens .topSell_Item .topSell_Valores .semEstoque {
+  background: #BBBBBB;
 }
 .TelaAdm .modal {
   padding: 0;
@@ -1650,15 +2153,10 @@ body {
 }
 
 .light-theme {
-  --background: #FFF;
-  --text: #000;
-  background: var(--background);
+  background: #BBBBBB;
 }
-.light-theme #theme-switch {
-  background: var(--text);
-}
-.light-theme #theme-switch .switch {
-  transform: translateX(37px);
+.light-theme main .sideMenu #themeSwitch .switch {
+  left: 1.5%;
 }
 
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
