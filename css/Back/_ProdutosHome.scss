@@ -1,0 +1,190 @@
+.produtosHome{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: space-between;
+    justify-content: right;
+    position: relative;
+    .produtos_topSells{
+        background: $Grafite;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 24%;
+        height: 100%;
+        border-radius: 1.25vw;
+        padding: 1.5vh 0.5vw 1.5vh 0.5vw;
+        h2{
+            position: relative;
+            font-family: $Main-font;
+            font-weight: 800;
+            font-size: 1vw;
+            color: $Branco;
+            letter-spacing: 0.1vw;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 6%;
+            margin: 0;
+            padding: 0 0 0 2.25vw;
+            &::before{
+                content: '';
+                position: absolute;
+                width: 1.25vw;
+                height: 5vh;
+                left: 0.25vw;
+                background-color: $Verde;
+                border-radius: 0.4vw;
+            }
+        }
+        .topSell_Header{
+            width: 100%;
+            height: 6%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            h3, h4{
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                width: 50%;
+                display: flex;
+                align-items: end;
+                justify-content: center;
+                color: $Preto;
+                font-family: $Second-font;
+                font-weight: 900;
+                font-size: 0.85vw;
+                padding: 0.25vw;
+            }
+            h3{
+                justify-content: left;
+            }
+            h4{
+                justify-content: right;
+            }
+            &::before{
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 0.1vh;
+                background: $Preto;
+                bottom: 0;
+                left: 0;
+            }
+        }
+        .topSell_Itens{
+            width: 100%;
+            height: 88%;
+            display: flex;
+            flex-direction: column;
+            padding-top: 0.25vh;
+            .topSell_Item{
+                width: 100%;
+                height: 10%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                padding: 0.25vh 0 0.25vh 0;
+                .topSell_Produto{
+                    width: 65%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    z-index: 5;
+                    img, svg{
+                        width: 23%;
+                        height: 100%;
+                        padding: 0.25vh;
+                    }
+                    p{
+                        color: $Preto;
+                        font-family: $Second-font;
+                        font-weight: 800;
+                        font-size: 0.9vw;
+                        width: 77%;
+                        height: 100%;
+                        padding: 0.7vh 0.25vw;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+                .topSell_Valores{
+                    width: 35%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    p{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: right;
+                        width: 100%;
+                        height: 65%;
+                        font-family: $Second-font;
+                        font-weight: 900;
+                        font-size: 0.8vw;
+                        color: $Verde;
+                        span{
+                            color: $Branco;
+                            font-size: 0.5vw;
+                            margin-right: 0.25vw;
+                        }
+                    }
+                    .status{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 100%;
+                        height: 35%;
+                        text-align: center;
+                        border-radius: 0.25vw;
+                        font-family: $Second-font;
+                        font-weight: 900;
+                        font-size: 0.75vw;
+                        color: $Preto;
+                    }
+                    .Ativo{ background: $Verde; }
+                    .Inativo{ background: $Abobora; }
+                    .semEstoque{ background: $Cinza; }
+                }
+            }
+        }
+    }
+    .produtos_SemEstoque{
+        background: $Grafite;
+        border-radius: 1.5vw;
+        width: 36%;
+        height: 49%;
+        margin-bottom: 2.25vh;
+    }
+    .produtos_UltimosVendidos{
+        background: $Grafite;
+        border-radius: 1.5vw;
+        width: 36%;
+        height: 49%;
+        margin-left: 1.75vw;
+    }
+    .produtos_Grafico{
+        background: $Grafite;
+        border-radius: 1.5vw;
+        width: 74.5%;
+        height: 48.5%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        h5{
+            font-family: $Main-font;
+            font-weight: 800;
+            font-size: 2vw;
+            color: $Branco;
+        }
+    }
+}

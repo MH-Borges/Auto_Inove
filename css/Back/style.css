@@ -775,7 +775,7 @@ body {
   align-items: center;
   justify-content: left;
   padding: 0.5vh 0.5vw;
-  margin-bottom: 7vh;
+  margin-bottom: 4vh;
 }
 .TelaAdm main .sideMenu .goHome img, .TelaAdm main .sideMenu .goHome svg {
   width: auto;
@@ -1405,6 +1405,252 @@ body {
 }
 .TelaAdm main .HomeAdm .topSells .topSell_Itens .topSell_Item .topSell_Valores .semEstoque {
   background: #BBBBBB;
+}
+.TelaAdm main .produtosHome {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: space-between;
+  justify-content: right;
+  position: relative;
+}
+.TelaAdm main .produtosHome .produtos_topSells {
+  background: #505050;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24%;
+  height: 100%;
+  border-radius: 1.25vw;
+  padding: 1.5vh 0.5vw 1.5vh 0.5vw;
+}
+.TelaAdm main .produtosHome .produtos_topSells h2 {
+  position: relative;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 1vw;
+  color: #F3F4F9;
+  letter-spacing: 0.1vw;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 6%;
+  margin: 0;
+  padding: 0 0 0 2.25vw;
+}
+.TelaAdm main .produtosHome .produtos_topSells h2::before {
+  content: "";
+  position: absolute;
+  width: 1.25vw;
+  height: 5vh;
+  left: 0.25vw;
+  background-color: #BAF811;
+  border-radius: 0.4vw;
+}
+.TelaAdm main .produtosHome .produtos_topSells .topSell_Header {
+  width: 100%;
+  height: 6%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.TelaAdm main .produtosHome .produtos_topSells .topSell_Header h3, .TelaAdm main .produtosHome .produtos_topSells .topSell_Header h4 {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  color: #131313;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 0.85vw;
+  padding: 0.25vw;
+}
+.TelaAdm main .produtosHome .produtos_topSells .topSell_Header h3 {
+  justify-content: left;
+}
+.TelaAdm main .produtosHome .produtos_topSells .topSell_Header h4 {
+  justify-content: right;
+}
+.TelaAdm main .produtosHome .produtos_topSells .topSell_Header::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 0.1vh;
+  background: #131313;
+  bottom: 0;
+  left: 0;
+}
+.TelaAdm main .produtosHome .produtos_topSells .topSell_Itens {
+  width: 100%;
+  height: 88%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.25vh;
+}
+.TelaAdm main .produtosHome .produtos_topSells .topSell_Itens .topSell_Item {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25vh 0 0.25vh 0;
+}
+.TelaAdm main .produtosHome .produtos_topSells .topSell_Itens .topSell_Item .topSell_Produto {
+  width: 65%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  z-index: 5;
+}
+.TelaAdm main .produtosHome .produtos_topSells .topSell_Itens .topSell_Item .topSell_Produto img, .TelaAdm main .produtosHome .produtos_topSells .topSell_Itens .topSell_Item .topSell_Produto svg {
+  width: 23%;
+  height: 100%;
+  padding: 0.25vh;
+}
+.TelaAdm main .produtosHome .produtos_topSells .topSell_Itens .topSell_Item .topSell_Produto p {
+  color: #131313;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 800;
+  font-size: 0.9vw;
+  width: 77%;
+  height: 100%;
+  padding: 0.7vh 0.25vw;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.TelaAdm main .produtosHome .produtos_topSells .topSell_Itens .topSell_Item .topSell_Valores {
+  width: 35%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.TelaAdm main .produtosHome .produtos_topSells .topSell_Itens .topSell_Item .topSell_Valores p {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  width: 100%;
+  height: 65%;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 0.8vw;
+  color: #BAF811;
+}
+.TelaAdm main .produtosHome .produtos_topSells .topSell_Itens .topSell_Item .topSell_Valores p span {
+  color: #F3F4F9;
+  font-size: 0.5vw;
+  margin-right: 0.25vw;
+}
+.TelaAdm main .produtosHome .produtos_topSells .topSell_Itens .topSell_Item .topSell_Valores .status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 35%;
+  text-align: center;
+  border-radius: 0.25vw;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 0.75vw;
+  color: #131313;
+}
+.TelaAdm main .produtosHome .produtos_topSells .topSell_Itens .topSell_Item .topSell_Valores .Ativo {
+  background: #BAF811;
+}
+.TelaAdm main .produtosHome .produtos_topSells .topSell_Itens .topSell_Item .topSell_Valores .Inativo {
+  background: #F83810;
+}
+.TelaAdm main .produtosHome .produtos_topSells .topSell_Itens .topSell_Item .topSell_Valores .semEstoque {
+  background: #BBBBBB;
+}
+.TelaAdm main .produtosHome .produtos_SemEstoque {
+  background: #505050;
+  border-radius: 1.5vw;
+  width: 36%;
+  height: 49%;
+  margin-bottom: 2.25vh;
+}
+.TelaAdm main .produtosHome .produtos_UltimosVendidos {
+  background: #505050;
+  border-radius: 1.5vw;
+  width: 36%;
+  height: 49%;
+  margin-left: 1.75vw;
+}
+.TelaAdm main .produtosHome .produtos_Grafico {
+  background: #505050;
+  border-radius: 1.5vw;
+  width: 74.5%;
+  height: 48.5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.TelaAdm main .produtosHome .produtos_Grafico h5 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 2vw;
+  color: #F3F4F9;
+}
+.TelaAdm main .relatoriosHome {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow-y: auto;
+  min-height: 88%;
+}
+.TelaAdm main .relatoriosHome .relatorio_Links {
+  width: 32%;
+  height: 31.5%;
+  border-radius: 1.5vw;
+  margin: 1.05vh 0;
+  background: #505050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: ease-in-out 0.2s;
+}
+.TelaAdm main .relatoriosHome .relatorio_Links:nth-child(1), .TelaAdm main .relatoriosHome .relatorio_Links:nth-child(2), .TelaAdm main .relatoriosHome .relatorio_Links:nth-child(3) {
+  margin-top: 0;
+  margin-bottom: -22vh;
+}
+.TelaAdm main .relatoriosHome .relatorio_Links img, .TelaAdm main .relatoriosHome .relatorio_Links svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding: 2.5vw;
+  z-index: 1;
+}
+.TelaAdm main .relatoriosHome .relatorio_Links img path, .TelaAdm main .relatoriosHome .relatorio_Links svg path {
+  fill: #BBBBBB;
+  opacity: 0.5;
+}
+.TelaAdm main .relatoriosHome .relatorio_Links h3 {
+  padding: 0 1vw;
+  width: 100%;
+  z-index: 2;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 1.8vw;
+  color: #BAF811;
+  letter-spacing: 0.15vw;
+  text-align: center;
+}
+.TelaAdm main .relatoriosHome .relatorio_Links:hover {
+  transform: translateY(-5px);
 }
 .TelaAdm .modal {
   padding: 0;
