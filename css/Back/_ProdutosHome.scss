@@ -36,7 +36,7 @@
                 border-radius: 0.4vw;
             }
         }
-        .topSell_Header{
+        .produtos_TopSell_Header{
             width: 100%;
             height: 6%;
             display: flex;
@@ -74,7 +74,7 @@
                 left: 0;
             }
         }
-        .topSell_Itens{
+        .produtos_TopSell_Itens{
             width: 100%;
             height: 88%;
             display: flex;
@@ -160,10 +160,139 @@
     }
     .produtos_SemEstoque{
         background: $Grafite;
-        border-radius: 1.5vw;
+        border-radius: 1.25vw;
         width: 36%;
         height: 49%;
         margin-bottom: 2.25vh;
+        padding: 1.5vh 0.5vw 5vh 0.5vw;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h2{
+            position: relative;
+            font-family: $Main-font;
+            font-weight: 800;
+            font-size: 1vw;
+            color: $Branco;
+            letter-spacing: 0.1vw;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 15%;
+            margin: 0;
+            padding: 0 0 0 2.25vw;
+            &::before{
+                content: '';
+                position: absolute;
+                width: 1.25vw;
+                height: 5vh;
+                left: 0.25vw;
+                background-color: $Abobora;
+                border-radius: 0.4vw;
+            }
+        }
+        .Itens{
+            width: 100%;
+            height: 85%;
+            display: flex;
+            flex-direction: column;
+            padding-top: 3vh;
+            .Item{
+                width: 100%;
+                height: 25%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                padding: 0.25vh 0 0.25vh 0;
+                .Produto{
+                    width: 75%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    z-index: 5;
+                    img, svg{
+                        width: 20%;
+                        height: 100%;
+                        padding: 0.25vh;
+                    }
+                    p{
+                        color: $Preto;
+                        font-family: $Second-font;
+                        font-weight: 800;
+                        font-size: 0.9vw;
+                        width: 80%;
+                        height: 100%;
+                        padding: 0.7vh 0.5vw;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+                .Valores{
+                    width: 25%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    p{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: right;
+                        width: 100%;
+                        height: 65%;
+                        font-family: $Second-font;
+                        font-weight: 900;
+                        font-size: 0.8vw;
+                        color: $Verde;
+                        span{
+                            color: $Branco;
+                            font-size: 0.5vw;
+                            margin-right: 0.25vw;
+                        }
+                    }
+                    .status{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 100%;
+                        height: 35%;
+                        text-align: center;
+                        border-radius: 0.25vw;
+                        font-family: $Second-font;
+                        font-weight: 900;
+                        font-size: 0.75vw;
+                        color: $Preto;
+                    }
+                    .semEstoque{ background: $Cinza; }
+                }
+            }
+        }
+        a{
+            position: absolute;
+            bottom: 1.25vh;
+            width: 9vw;
+            height: 2.5vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $Preto;
+            font-family: $Second-font;
+            font-weight: 800;
+            font-size: 0.75vw;
+            background-color: $Verde;
+            box-shadow: 2px 2px 0 0 $Violeta;
+            transition: ease-in-out 0.2s;
+            &:hover{
+                transform: translateY(-2px);
+                box-shadow: 4px 4px 0 0 $Violeta;
+            }
+        }
     }
     .produtos_UltimosVendidos{
         background: $Grafite;
@@ -171,6 +300,121 @@
         width: 36%;
         height: 49%;
         margin-left: 1.75vw;
+        padding: 1.5vh 0.5vw 5vh 0.5vw;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h2{
+            position: relative;
+            font-family: $Main-font;
+            font-weight: 800;
+            font-size: 1vw;
+            color: $Branco;
+            letter-spacing: 0.1vw;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 15%;
+            margin: 0;
+            padding: 0 0 0 2.25vw;
+            &::before{
+                content: '';
+                position: absolute;
+                width: 1.25vw;
+                height: 5vh;
+                left: 0.25vw;
+                background-color: $Verde;
+                border-radius: 0.4vw;
+            }
+        }
+        .Itens{
+            width: 100%;
+            height: 85%;
+            display: flex;
+            flex-direction: column;
+            padding-top: 3vh;
+            .Item{
+                width: 100%;
+                height: 25%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                padding: 0.25vh 0 0.25vh 0;
+                .Produto{
+                    width: 75%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    z-index: 5;
+                    img, svg{
+                        width: 20%;
+                        height: 100%;
+                        padding: 0.25vh;
+                    }
+                    p{
+                        color: $Preto;
+                        font-family: $Second-font;
+                        font-weight: 800;
+                        font-size: 0.9vw;
+                        width: 80%;
+                        height: 100%;
+                        padding: 0.7vh 0.5vw;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+                .Valores{
+                    width: 25%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    p{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: right;
+                        width: 100%;
+                        height: 100%;
+                        font-family: $Second-font;
+                        font-weight: 900;
+                        font-size: 0.8vw;
+                        color: $Verde;
+                        span{
+                            color: $Branco;
+                            font-size: 0.5vw;
+                            margin-right: 0.25vw;
+                        }
+                    }
+                }
+            }
+        }
+        a{
+            position: absolute;
+            bottom: 1.25vh;
+            width: 9vw;
+            height: 2.5vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $Preto;
+            font-family: $Second-font;
+            font-weight: 800;
+            font-size: 0.75vw;
+            background-color: $Verde;
+            box-shadow: 2px 2px 0 0 $Violeta;
+            transition: ease-in-out 0.2s;
+            &:hover{
+                transform: translateY(-2px);
+                box-shadow: 4px 4px 0 0 $Violeta;
+            }
+        }
     }
     .produtos_Grafico{
         background: $Grafite;
@@ -183,8 +427,114 @@
         h5{
             font-family: $Main-font;
             font-weight: 800;
-            font-size: 2vw;
+            font-size: 2.5vw;
             color: $Branco;
+            margin: 0;
+            padding: 0;
+        }
+    }
+    .produtos_Btn_Criacao, .produtos_Btn_Listagens{
+        z-index: 999;
+        position: absolute;
+        top: -9vh;
+        left: 1vw;
+        height: 5vh;
+        width: 7vw;
+        border-radius: 0.75vw;
+        button{
+            width: 100%;
+            height: 100%;
+            border: none;
+            position: relative;
+            background: $Verde;
+            border-radius: 0.5vw;
+            p{
+                width: 60%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: left;
+                padding-left: 1vw;
+                font-family: $Second-font;
+                font-weight: 700;
+                font-size: 1.2vw;
+            }
+            img,svg{
+                position: absolute;
+                right: 0.25vw;
+                top: 0;
+                width: 40%;
+                height: 100%;
+                padding: 0 0.75vw;
+            }
+        }
+        .dropdown-menu{
+            width: 15vw;
+            padding: 1vh 1vw;
+            margin-top: 1vh;
+            background: $Verde;
+            border-radius: 0.5vw;
+            .dropdown-item{
+                border-radius: 0;
+                padding: 0;
+                border: none;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                position: relative;
+                border-top: 1px solid $Preto;
+                border-bottom: 1px solid $Preto;
+                p{
+                    z-index: 5;
+                    font-family: $Second-font;
+                    font-weight: 700;
+                    font-size: 0.9vw;
+                    padding: 1vh 0.5vw;
+                    color: $Preto;
+                }
+                &:first-child{
+                    border-top: none;
+                }
+                &:last-child{
+                    border-bottom: none;
+                }
+                &:hover{
+                    &::before{
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: $Cinza;
+                        opacity: 0.25;
+                    }
+                }
+            }
+        }
+    }
+    .produtos_Btn_Listagens{
+        left: 9vw;
+        width: 10.5vw;
+        button{
+            background: $Violeta;
+            p{
+                font-weight: 600;
+            }
+            img,svg{
+                right: 0.25vw;
+                width: 32%;
+            }
+        }
+        .dropdown-menu{
+            background: $Violeta;
+            .dropdown-item{
+                &:hover{
+                    &::before{
+                        opacity: 0.25;
+                    }
+                }
+            }
         }
     }
 }
