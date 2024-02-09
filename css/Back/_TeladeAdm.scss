@@ -108,7 +108,6 @@
                 width: 13vw;
                 padding: 0.75vw;
                 position: relative;
-                
                 button{
                     width: 100%;
                     height: 5vh;
@@ -453,8 +452,8 @@
 
         @import 'HomeAdm';
         @import 'ProdutosHome';
-        // @import 'HomeAdm';
-        // @import 'HomeAdm';
+        @import 'ProdutosCat_Subcat';
+        @import 'ProdutosListagem_Codigos';
         @import 'RelatoriosHome';
 
     }

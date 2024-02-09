@@ -1,0 +1,316 @@
+.produtosCategorias{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    background: $Grafite;
+    border-radius: 1.25vw;
+    
+    h2{
+        position: absolute;
+        font-family: $Main-font;
+        font-weight: 800;
+        font-size: 2vw;
+        color: $Branco;
+        display: flex;
+        align-items: center;
+        width: 48.5%;
+        height: 10%;
+        margin: 0;
+        padding: 0 0 0 2vw;
+        top: 1vh;
+        left: 1.5vw;
+        &::before{
+            content: '';
+            position: absolute;
+            width: 1.25vw;
+            height: 5vh;
+            left: 0; 
+            background-color: $Abobora;
+            border-radius: 0.4vw;
+        }
+    }
+
+    //classe pega apos inserção da tabela no html
+    .dataTables_wrapper {
+        width: 100%;
+        height: 100%;
+        padding: 1vh 1.5vw;
+        //esconder div's não necessarias
+        .row{
+            margin: 0;
+            padding: 0;
+            .col-sm-12{
+                margin: 0;
+                padding: 0;
+                .dataTables_length, .dataTables_info{
+                    display: none;
+                    opacity: 0;
+                }
+            }
+        }
+
+        //estilização de filtro
+        .dataTables_filter{
+            height: 7.9vh;
+            display: flex;
+            align-items: center;
+            justify-content: right;
+            position: relative;
+            
+            label{
+                margin: 0;
+                position: relative;
+            }
+            input{
+                position: relative;
+                border: none;
+                background: none;
+                width: 19vw;
+                height: 4.25vh;
+                font-family: $Second-font;
+                font-weight: 700;
+                font-size: 0.8vw;
+                color: $Cinza;
+                padding-left: 0.75vw;
+                &::placeholder {
+                    color: $Cinza;
+                    opacity: 1;
+                }
+            }
+            .searchIcon{
+                position: absolute;
+                width: 2.5vw;
+                height: 4.25vh;
+                top: 0;
+                right: 0;
+                padding: 0.6vw;
+            }
+            &::before{
+                content: '';
+                position: absolute;
+                right: 0;
+                width: 19vw;
+                height: 4.25vh;
+                background: $Cinza;
+                opacity: 0.25;
+                border-radius: 0.5vw;
+            }
+        }
+
+        //Tabela
+        #CategoriasTable{
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100%;
+            height: 62.5vh !important;
+            border-collapse: collapse !important;
+            thead{
+                height: 8%;
+                tr{
+                    height: 100%;
+                    th{
+                        height: 100%;
+                        pointer-events: none;
+                        font-family: $Second-font;
+                        font-weight: 900;
+                        font-size: 0.85vw;
+                        color: $Preto;
+                        padding: 1vh 0 0.1vh 0.25vw;
+                        &::before, &::after{
+                            content: '';
+                            display: none;
+                            opacity: 0;
+                        }
+                    }
+                }
+            }
+            
+            tbody{
+                height: 92%;
+                tr{
+                    border-top: 1px solid $Verde;
+                    border-bottom: 1px solid $Verde;
+                    z-index: 8 !important;
+                    td{
+                        position: relative;
+                        border: none;
+                        font-family: $Second-font;
+                        font-weight: 700;
+                        font-size: 0.7vw;
+                        color: $Preto;
+                        padding: 0 0 0 0.75vw;
+                        z-index: 10 !important;
+                    }
+                    .imgsCateg, .subCategsCateg, .statusCateg{
+                        &::before{
+                            content: '';
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-color: $Cinza;
+                            opacity: 0.25;
+                            z-index: -1 !important;
+                        }
+                    }
+                    .nomeCateg, .datasCateg, .acoesCateg{
+                        &::before{
+                            content: '';
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-color: $Cinza;
+                            opacity: 0.15;
+                            z-index: -1 !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        //estilização de paginação
+        .dataTables_paginate{
+            height: 4.5vh;
+            display: flex;
+            align-items: center;
+            justify-content: right;
+            margin-top: 1.25vh;
+            .pagination{
+                height: 100%;
+                .paginate_button {
+                    height: 100%;
+                    a{
+                        padding: 0;
+                        margin: 0 0.2vw;
+                        background: none;
+                        border: none;
+                        width: 2vw;
+                        height: 100%;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-family: $Second-font;
+                        font-weight: 900;
+                        font-size: 1.15vw;
+                        color: $Abobora;
+                        border-radius: 0.25vw;
+                        z-index: 9;
+                        img, svg{
+                            width: 100%;
+                            height: 100%;
+                            padding: 0.25vw;
+                            path{
+                                fill: $Abobora;
+                            }
+                        }
+                        .setaPagePrev{
+                            transform: rotate(90deg);
+                        }
+                        .setaPageNext{
+                            transform: rotate(-90deg);
+                        }
+                        &:hover{
+                            &::before{
+                                position: absolute;
+                                content: '';
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                border-radius: 0.25vw;
+                                background: $Cinza;
+                                opacity: 0.15;
+                                z-index: 3;
+                            }
+                        }
+                    }
+                }
+                .active{
+                    a{
+                        color: $Verde;
+                        &::before{
+                            position: absolute;
+                            content: '';
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 0.25vw;
+                            background: $Cinza;
+                            opacity: 0.25;
+                            z-index: 3;
+
+                        }
+                        &:hover{
+                            &::before{
+                                position: absolute;
+                                content: '';
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                border-radius: 0.25vw;
+                                background: $Cinza;
+                                opacity: 0.25;
+                                z-index: 3;
+                            }
+                        }
+                    }
+                }
+                .disabled{
+                    a{
+                        opacity: 0.4;
+                    }
+                }
+            }
+        }
+    }
+
+    .produtos_Btn_CriacaoCateg, .produtos_Btn_CriacaoSubcateg, .produtos_Btn_ListSubcateg{
+        z-index: 999;
+        position: absolute;
+        top: -8.5vh;
+        left: 1vw;
+        height: 4vh;
+        width: 9.5vw;
+        border: none;
+        background: $Verde;
+        border-radius: 0.4vw;
+        p{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            padding: 0 0.5vw;
+            font-family: $Second-font;
+            font-weight: 800;
+            font-size: 0.8vw;
+            text-wrap: nowrap;
+        }
+        img,svg{
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 2.5vw;
+            height: 100%;
+            padding: 0 0.65vw;
+        }
+    }
+    .produtos_Btn_CriacaoSubcateg{
+        left: 11.5vw;
+        width: 11.5vw;
+        background: $Violeta;
+    }
+    .produtos_Btn_ListSubcateg{
+        left: 24vw;
+        width: 15vw;
+        background: $Violeta;
+        
+    }
+}

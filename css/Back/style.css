@@ -1948,6 +1948,566 @@ body {
 .TelaAdm main .produtosHome .produtos_Btn_Listagens .dropdown-menu .dropdown-item:hover::before {
   opacity: 0.25;
 }
+.TelaAdm main .produtosCategorias {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  background: #505050;
+  border-radius: 1.25vw;
+}
+.TelaAdm main .produtosCategorias h2 {
+  position: absolute;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 2vw;
+  color: #F3F4F9;
+  display: flex;
+  align-items: center;
+  width: 48.5%;
+  height: 10%;
+  margin: 0;
+  padding: 0 0 0 2vw;
+  top: 1vh;
+  left: 1.5vw;
+}
+.TelaAdm main .produtosCategorias h2::before {
+  content: "";
+  position: absolute;
+  width: 1.25vw;
+  height: 5vh;
+  left: 0;
+  background-color: #F83810;
+  border-radius: 0.4vw;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 1vh 1.5vw;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .row {
+  margin: 0;
+  padding: 0;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .row .col-sm-12 {
+  margin: 0;
+  padding: 0;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .row .col-sm-12 .dataTables_length, .TelaAdm main .produtosCategorias .dataTables_wrapper .row .col-sm-12 .dataTables_info {
+  display: none;
+  opacity: 0;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_filter {
+  height: 7.9vh;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  position: relative;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_filter label {
+  margin: 0;
+  position: relative;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_filter input {
+  position: relative;
+  border: none;
+  background: none;
+  width: 19vw;
+  height: 4.25vh;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 700;
+  font-size: 0.8vw;
+  color: #BBBBBB;
+  padding-left: 0.75vw;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_filter input::-moz-placeholder {
+  color: #BBBBBB;
+  opacity: 1;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_filter input::placeholder {
+  color: #BBBBBB;
+  opacity: 1;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_filter .searchIcon {
+  position: absolute;
+  width: 2.5vw;
+  height: 4.25vh;
+  top: 0;
+  right: 0;
+  padding: 0.6vw;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_filter::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  width: 19vw;
+  height: 4.25vh;
+  background: #BBBBBB;
+  opacity: 0.25;
+  border-radius: 0.5vw;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper #CategoriasTable {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100%;
+  height: 62.5vh !important;
+  border-collapse: collapse !important;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper #CategoriasTable thead {
+  height: 8%;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper #CategoriasTable thead tr {
+  height: 100%;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper #CategoriasTable thead tr th {
+  height: 100%;
+  pointer-events: none;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 0.85vw;
+  color: #131313;
+  padding: 1vh 0 0.1vh 0.25vw;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper #CategoriasTable thead tr th::before, .TelaAdm main .produtosCategorias .dataTables_wrapper #CategoriasTable thead tr th::after {
+  content: "";
+  display: none;
+  opacity: 0;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper #CategoriasTable tbody {
+  height: 92%;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper #CategoriasTable tbody tr {
+  border-top: 1px solid #BAF811;
+  border-bottom: 1px solid #BAF811;
+  z-index: 8 !important;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper #CategoriasTable tbody tr td {
+  position: relative;
+  border: none;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 700;
+  font-size: 0.7vw;
+  color: #131313;
+  padding: 0 0 0 0.75vw;
+  z-index: 10 !important;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper #CategoriasTable tbody tr .imgsCateg::before, .TelaAdm main .produtosCategorias .dataTables_wrapper #CategoriasTable tbody tr .subCategsCateg::before, .TelaAdm main .produtosCategorias .dataTables_wrapper #CategoriasTable tbody tr .statusCateg::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #BBBBBB;
+  opacity: 0.25;
+  z-index: -1 !important;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper #CategoriasTable tbody tr .nomeCateg::before, .TelaAdm main .produtosCategorias .dataTables_wrapper #CategoriasTable tbody tr .datasCateg::before, .TelaAdm main .produtosCategorias .dataTables_wrapper #CategoriasTable tbody tr .acoesCateg::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #BBBBBB;
+  opacity: 0.15;
+  z-index: -1 !important;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_paginate {
+  height: 4.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  margin-top: 1.25vh;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_paginate .pagination {
+  height: 100%;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_paginate .pagination .paginate_button {
+  height: 100%;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_paginate .pagination .paginate_button a {
+  padding: 0;
+  margin: 0 0.2vw;
+  background: none;
+  border: none;
+  width: 2vw;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 1.15vw;
+  color: #F83810;
+  border-radius: 0.25vw;
+  z-index: 9;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_paginate .pagination .paginate_button a img, .TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_paginate .pagination .paginate_button a svg {
+  width: 100%;
+  height: 100%;
+  padding: 0.25vw;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_paginate .pagination .paginate_button a img path, .TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_paginate .pagination .paginate_button a svg path {
+  fill: #F83810;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_paginate .pagination .paginate_button a .setaPagePrev {
+  transform: rotate(90deg);
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_paginate .pagination .paginate_button a .setaPageNext {
+  transform: rotate(-90deg);
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_paginate .pagination .paginate_button a:hover::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.25vw;
+  background: #BBBBBB;
+  opacity: 0.15;
+  z-index: 3;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_paginate .pagination .active a {
+  color: #BAF811;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_paginate .pagination .active a::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.25vw;
+  background: #BBBBBB;
+  opacity: 0.25;
+  z-index: 3;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_paginate .pagination .active a:hover::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.25vw;
+  background: #BBBBBB;
+  opacity: 0.25;
+  z-index: 3;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper .dataTables_paginate .pagination .disabled a {
+  opacity: 0.4;
+}
+.TelaAdm main .produtosCategorias .produtos_Btn_CriacaoCateg, .TelaAdm main .produtosCategorias .produtos_Btn_CriacaoSubcateg, .TelaAdm main .produtosCategorias .produtos_Btn_ListSubcateg {
+  z-index: 999;
+  position: absolute;
+  top: -8.5vh;
+  left: 1vw;
+  height: 4vh;
+  width: 9.5vw;
+  border: none;
+  background: #BAF811;
+  border-radius: 0.4vw;
+}
+.TelaAdm main .produtosCategorias .produtos_Btn_CriacaoCateg p, .TelaAdm main .produtosCategorias .produtos_Btn_CriacaoSubcateg p, .TelaAdm main .produtosCategorias .produtos_Btn_ListSubcateg p {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 0 0.5vw;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 800;
+  font-size: 0.8vw;
+  text-wrap: nowrap;
+}
+.TelaAdm main .produtosCategorias .produtos_Btn_CriacaoCateg img, .TelaAdm main .produtosCategorias .produtos_Btn_CriacaoCateg svg, .TelaAdm main .produtosCategorias .produtos_Btn_CriacaoSubcateg img, .TelaAdm main .produtosCategorias .produtos_Btn_CriacaoSubcateg svg, .TelaAdm main .produtosCategorias .produtos_Btn_ListSubcateg img, .TelaAdm main .produtosCategorias .produtos_Btn_ListSubcateg svg {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 2.5vw;
+  height: 100%;
+  padding: 0 0.65vw;
+}
+.TelaAdm main .produtosCategorias .produtos_Btn_CriacaoSubcateg {
+  left: 11.5vw;
+  width: 11.5vw;
+  background: #8000FF;
+}
+.TelaAdm main .produtosCategorias .produtos_Btn_ListSubcateg {
+  left: 24vw;
+  width: 15vw;
+  background: #8000FF;
+}
+.TelaAdm main .produtosListagem {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+.TelaAdm main .produtosListagem h2 {
+  position: absolute;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 2vw;
+  color: #F3F4F9;
+  display: flex;
+  align-items: center;
+  width: 48.5%;
+  height: 10%;
+  margin: 0;
+  padding: 0 0 0 2vw;
+  top: 1vh;
+  left: 1.5vw;
+}
+.TelaAdm main .produtosListagem h2::before {
+  content: "";
+  position: absolute;
+  width: 1.25vw;
+  height: 5vh;
+  left: 0;
+  background-color: #F83810;
+  border-radius: 0.4vw;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 1vh 1.5vw;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .row {
+  margin: 0;
+  padding: 0;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .row .col-sm-12 {
+  margin: 0;
+  padding: 0;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .row .col-sm-12 .dataTables_length, .TelaAdm main .produtosListagem .dataTables_wrapper .row .col-sm-12 .dataTables_info {
+  display: none;
+  opacity: 0;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_filter {
+  height: 7.9vh;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  position: relative;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_filter label {
+  margin: 0;
+  position: relative;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_filter input {
+  position: relative;
+  border: none;
+  background: none;
+  width: 19vw;
+  height: 4.25vh;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 700;
+  font-size: 0.8vw;
+  color: #BBBBBB;
+  padding-left: 0.75vw;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_filter input::-moz-placeholder {
+  color: #BBBBBB;
+  opacity: 1;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_filter input::placeholder {
+  color: #BBBBBB;
+  opacity: 1;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_filter .searchIcon {
+  position: absolute;
+  width: 2.5vw;
+  height: 4.25vh;
+  top: 0;
+  right: 0;
+  padding: 0.6vw;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_filter::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  width: 19vw;
+  height: 4.25vh;
+  background: #BBBBBB;
+  opacity: 0.25;
+  border-radius: 0.5vw;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper #ProdutosTable {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100%;
+  height: 62.5vh !important;
+  border-collapse: collapse !important;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper #ProdutosTable thead {
+  display: none;
+  opacity: 0;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper #ProdutosTable tbody {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5vh;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper #ProdutosTable tbody tr {
+  margin: 0.5vh 0;
+  width: 24%;
+  height: 14.5vh;
+  background: #505050;
+  border-radius: 0.75vw;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper #ProdutosTable tbody tr td {
+  margin: 0.5vw;
+  position: relative;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 700;
+  font-size: 0.75vw;
+  color: #131313;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_paginate {
+  height: 4.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  margin-top: 1.5vh;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_paginate .pagination {
+  height: 100%;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_paginate .pagination .paginate_button {
+  height: 100%;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_paginate .pagination .paginate_button a {
+  padding: 0;
+  margin: 0 0.2vw;
+  background: none;
+  border: none;
+  width: 2vw;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 1.15vw;
+  color: #F83810;
+  border-radius: 0.25vw;
+  z-index: 9;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_paginate .pagination .paginate_button a img, .TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_paginate .pagination .paginate_button a svg {
+  width: 100%;
+  height: 100%;
+  padding: 0.25vw;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_paginate .pagination .paginate_button a img path, .TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_paginate .pagination .paginate_button a svg path {
+  fill: #F83810;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_paginate .pagination .paginate_button a .setaPagePrev {
+  transform: rotate(90deg);
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_paginate .pagination .paginate_button a .setaPageNext {
+  transform: rotate(-90deg);
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_paginate .pagination .paginate_button a:hover::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.25vw;
+  background: #BBBBBB;
+  opacity: 0.15;
+  z-index: 3;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_paginate .pagination .active a {
+  color: #BAF811;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_paginate .pagination .active a::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.25vw;
+  background: #BBBBBB;
+  opacity: 0.25;
+  z-index: 3;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_paginate .pagination .active a:hover::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.25vw;
+  background: #BBBBBB;
+  opacity: 0.25;
+  z-index: 3;
+}
+.TelaAdm main .produtosListagem .dataTables_wrapper .dataTables_paginate .pagination .disabled a {
+  opacity: 0.4;
+}
+.TelaAdm main .produtosListagem .produtos_Btn_CriacaoProd, .TelaAdm main .produtosListagem .produtos_Btn_CriacaoCodigo, .TelaAdm main .produtosListagem .produtos_Btn_ListCodigos {
+  z-index: 999;
+  position: absolute;
+  top: -8.5vh;
+  left: 1vw;
+  height: 4vh;
+  width: 8.75vw;
+  border: none;
+  background: #BAF811;
+  border-radius: 0.4vw;
+}
+.TelaAdm main .produtosListagem .produtos_Btn_CriacaoProd p, .TelaAdm main .produtosListagem .produtos_Btn_CriacaoCodigo p, .TelaAdm main .produtosListagem .produtos_Btn_ListCodigos p {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 0 0.5vw;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 800;
+  font-size: 0.8vw;
+  text-wrap: nowrap;
+}
+.TelaAdm main .produtosListagem .produtos_Btn_CriacaoProd img, .TelaAdm main .produtosListagem .produtos_Btn_CriacaoProd svg, .TelaAdm main .produtosListagem .produtos_Btn_CriacaoCodigo img, .TelaAdm main .produtosListagem .produtos_Btn_CriacaoCodigo svg, .TelaAdm main .produtosListagem .produtos_Btn_ListCodigos img, .TelaAdm main .produtosListagem .produtos_Btn_ListCodigos svg {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 2.5vw;
+  height: 100%;
+  padding: 0 0.65vw;
+}
+.TelaAdm main .produtosListagem .produtos_Btn_CriacaoCodigo {
+  left: 11vw;
+  width: 8.5vw;
+  background: #8000FF;
+}
+.TelaAdm main .produtosListagem .produtos_Btn_ListCodigos {
+  left: 20.75vw;
+  width: 11.75vw;
+  background: #8000FF;
+}
 .TelaAdm main .relatoriosHome {
   display: flex;
   flex-wrap: wrap;
