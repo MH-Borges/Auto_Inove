@@ -115,7 +115,6 @@ else {
                 </button>
             </div>
         </div>
-
     </header>
 
     <main>
@@ -209,16 +208,20 @@ else {
 
     <!-- Modal Logout-->
     <div class="modal fade" id="ModalLogout" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="resetIndex()"></button>
-                <div class="modal-body">
-                    <h5>Já vai embora?</h5>
-                    <h6>Tem certeza que gostaria de sair da sa conta?</h6>
-                </div>
-                <div class="modal-footer">
-                    <button class="CancelaBtnModal" type="button" data-dismiss="modal">Cancelar</button>
-                    <a href="../configs/logout.php" class="LogoutBtnModal" type="button">Sair</a>
+        <div class="modal-block">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close">
+                        <img src="../../assets/icons/close.svg">
+                    </button>
+                    <div class="modal-body">
+                        <h5>Já vai embora?</h5>
+                        <h6>Tem certeza que gostaria de sair da sa conta?</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="CancelaBtnModal" type="button" data-dismiss="modal">Cancelar</button>
+                        <a class="ExcluirBtnModal" href="../configs/logout.php" type="button">Sair</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -226,90 +229,92 @@ else {
 
     <!-- Modal Editar perfil-->
     <div class="modal fade" id="ModalEditPerfil" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="resetIndex()"></button>
-                <div class="modal-body">
-                    <div id="MenuAdm" class="nav nav-pills MenuAdm">
-                        <a class="active" data-toggle="pill" id="InicioTab" href="#ContaDados">Dados da conta</a>
-                        <a data-toggle="pill" id="GraficosTab" href="#EmailTroca">Troca de email</a>
-                        <a data-toggle="pill" id="AstronautasTab" href="#SenhaTroca">Troca de senha</a>
+        <div class="modal-block">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close">
+                        <img src="../../assets/icons/close.svg">
+                    </button>
+
+                    <div class="modal-body">
+                        <div id="MenuAdm" class="nav nav-pills MenuAdm">
+                            <a class="active" data-toggle="pill" id="InicioTab" href="#ContaDados">Dados da conta</a>
+                            <a data-toggle="pill" id="GraficosTab" href="#EmailTroca">Troca de email</a>
+                            <a data-toggle="pill" id="AstronautasTab" href="#SenhaTroca">Troca de senha</a>
+                        </div>
+                        <div id="TabsAdm" class="tab-content TabsAdm">
+                            <div class="tab-pane fade show active" id="ContaDados">
+                                <form id="formEditUser" class="editDados" method="POST">
+                                    <h4>Alterar informações de conta:</h4>
+                                    <div class="BlockBox">
+                                        <input type="text" name="nomeCompEdit" id="nomeCompEdit" maxlength="75" value="<?php echo $nomeAdm ?>">
+                                        <span>Nome completo:</span>
+                                        <p class="lengthInput NomeCompEditInput"></p>
+                                    </div>
+                                    <div class="BlockBox">
+                                        <input type="text" name="telefoneContatoEdit" id="telefoneContatoEdit" value="<?php echo $telefoneAdm ?>">
+                                        <span>Telefone de contato:</span>
+                                    </div>
+                                    <input value="<?php echo @$_SESSION['id_user'] ?>" class="hide" type="hidden" name="idUser" id="idUser">
+                                    <button class="SalvarBtnModal" type="submit">Salvar</button>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="EmailTroca">
+                                <form id="formEditEmailUser" class="emailEdit" method="POST">
+                                    <h4>Alterar Email:</h4>
+                                    <div class="BlockBox">
+                                        <input type="text" name="antigoEmail" id="antigoEmail" maxlength="50" required>
+                                        <span>E-mail Antigo:</span>
+                                        <p class="lengthInput emailAntigoEditInput"></p>
+                                    </div>
+                                    <div class="BlockBox">
+                                        <input type="text" name="novoEmail" id="novoEmail" maxlength="50" required>
+                                        <span>Novo e-mail:</span>
+                                        <p class="lengthInput novoEmailEditInput"></p>
+                                    </div>
+                                    <div class="BlockBox">
+                                        <input type="text" name="confirmaNovoEmail" id="confirmaNovoEmail" maxlength="50" required>
+                                        <span>Confirma novo e-mail:</span>
+                                        <p class="lengthInput ConfirmaNovoEmailEditInput"></p>
+                                    </div>
+            
+                                    <input value="<?php echo @$_SESSION['id_user'] ?>" class="hide" type="hidden" name="idUserEmail" id="idUserEmail">
+                                    <input value="<?php echo @$_SESSION['email_user'] ?>" class="hide" type="hidden" name="emailUserSemAlteracoes" id="emailUserSemAlteracoes">
+                                    <button class="SalvarBtnModal" type="submit">Salvar</button>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="SenhaTroca">
+                                <form id="formEditSenhaUser" class="senhaEdit" method="POST">
+                                    <h4>Alterar Senha:</h4>
+                                    <div class="BlockBox senhaInput">
+                                        <input type="password" name="antigaSenha" id="antigaSenha" maxlength="25" required>
+                                        <span>Senha antiga:</span>
+                                        <i id="password_toggle" onclick="setupPasswordToggle('antigaSenha', 'password_toggle')" class="senhaIcon fa-regular fa-eye-slash"></i>
+                                        <p class="lengthInput SenhaAntigaEditInput"></p>
+                                    </div>
+                                    <div class="BlockBox senhaInput">
+                                        <input type="password" name="novaSenha" id="novaSenha" maxlength="25" required>
+                                        <span>Nova senha:</span>
+                                        <i id="password_toggle_new" onclick="setupPasswordToggle('novaSenha', 'password_toggle_new')" class="senhaIcon fa-regular fa-eye-slash"></i>
+                                        <p class="lengthInput NovaSenhaEditInput"></p>
+                                    </div>
+                                    <div class="BlockBox senhaInput">
+                                        <input type="password" name="confirmaNovaSenha" id="confirmaNovaSenha" maxlength="25" required>
+                                        <span>Confirma nova senha:</span>
+                                        <i id="password_toggle_confirm" onclick="setupPasswordToggle('confirmaNovaSenha', 'password_toggle_confirm')" class="senhaIcon fa-regular fa-eye-slash"></i>
+                                        <p class="lengthInput ConfirmaNovaSenhaEditInput"></p>
+                                    </div>
+                                    <input value="<?php echo @$_SESSION['id_user'] ?>" class="hide" type="hidden" name="idUserSenha" id="idUserSenha">
+                                    <input value="<?php echo $senhaAdm ?>" class="hide" type="hidden" name="senhaUserSemAlteracoes" id="senhaUserSemAlteracoes">
+                                    <button class="SalvarBtnModal" type="submit">Salvar</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <div id="TabsAdm" class="tab-content TabsAdm">
-                        <div class="tab-pane fade show active" id="ContaDados">
-                            <form id="formEditUser" class="editDados" method="POST">
-                                <h4>Alterar informações de conta:</h4>
-                                <div class="BlockBox">
-                                    <input type="text" name="nomeCompEdit" id="nomeCompEdit" maxlength="75" value="<?php echo $nomeAdm ?>">
-                                    <span>Nome completo:</span>
-                                    <p class="lengthInput NomeCompEditInput"></p>
-                                </div>
-                                <div class="BlockBox">
-                                    <input type="text" name="telefoneContatoEdit" id="telefoneContatoEdit" value="<?php echo $telefoneAdm ?>">
-                                    <span>Telefone de contato:</span>
-                                </div>
-                                <input value="<?php echo @$_SESSION['id_user'] ?>" class="hide" type="hidden" name="idUser" id="idUser">
-                                <button class="SalvarBtnModal" id="SalvarEditUser" type="submit">Salvar</button>
-                            </form>
-                        </div>
-                        <div class="tab-pane fade" id="EmailTroca">
-                            <form id="formEditEmailUser" class="emailEdit" method="POST">
-                                <h4>Alterar Email:</h4>
 
-                                <div class="BlockBox">
-                                    <input type="text" name="antigoEmail" id="antigoEmail" maxlength="50" required>
-                                    <span>E-mail Antigo:</span>
-                                    <p class="lengthInput emailAntigoEditInput"></p>
-                                </div>
-                                <div class="BlockBox">
-                                    <input type="text" name="novoEmail" id="novoEmail" maxlength="50" required>
-                                    <span>Novo e-mail:</span>
-                                    <p class="lengthInput novoEmailEditInput"></p>
-                                </div>
-                                <div class="BlockBox">
-                                    <input type="text" name="confirmaNovoEmail" id="confirmaNovoEmail" maxlength="50" required>
-                                    <span>Confirma novo e-mail:</span>
-                                    <p class="lengthInput ConfirmaNovoEmailEditInput"></p>
-                                </div>
-                                
-                                <input value="<?php echo @$_SESSION['id_user'] ?>" class="hide" type="hidden" name="idUserEmail" id="idUserEmail">
-                                <input value="<?php echo @$_SESSION['email_user'] ?>" class="hide" type="hidden" name="emailUserSemAlteracoes" id="emailUserSemAlteracoes">
-
-                                <button class="SalvarBtnModal" id="SalvarEditEmailUser" type="submit">Salvar</button>
-                            </form>
-
-                        </div>
-                        <div class="tab-pane fade" id="SenhaTroca">
-                            <form id="formEditSenhaUser" class="senhaEdit" method="POST">
-                                <h4>Alterar Senha:</h4>
-                                <div class="BlockBox senhaInput">
-                                    <input type="password" name="antigaSenha" id="antigaSenha" maxlength="25" required>
-                                    <span>Senha antiga:</span>
-                                    <i id="password_toggle" onclick="setupPasswordToggle('antigaSenha', 'password_toggle')" class="senhaIcon fa fa-eye-slash"></i>
-                                    <p class="lengthInput SenhaAntigaEditInput"></p>
-                                </div>
-                                <div class="BlockBox senhaInput">
-                                    <input type="password" name="novaSenha" id="novaSenha" maxlength="25" required>
-                                    <span>Nova senha:</span>
-                                    <i id="password_toggle_new" onclick="setupPasswordToggle('novaSenha', 'password_toggle_new')" class="senhaIcon fa fa-eye-slash"></i>
-                                    <p class="lengthInput NovaSenhaEditInput"></p>
-                                </div>
-                                <div class="BlockBox senhaInput">
-                                    <input type="password" name="confirmaNovaSenha" id="confirmaNovaSenha" maxlength="25" required>
-                                    <span>Confirma nova senha:</span>
-                                    <i id="password_toggle_confirm" onclick="setupPasswordToggle('confirmaNovaSenha', 'password_toggle_confirm')" class="senhaIcon fa fa-eye-slash"></i>
-                                    <p class="lengthInput ConfirmaNovaSenhaEditInput"></p>
-                                </div>
-
-                                <input value="<?php echo @$_SESSION['id_user'] ?>" class="hide" type="hidden" name="idUserSenha" id="idUserSenha">
-                                <input value="<?php echo $senhaAdm ?>" class="hide" type="hidden" name="senhaUserSemAlteracoes" id="senhaUserSemAlteracoes">
-
-                                <button class="SalvarBtnModal" id="SalvarEditSenhaUser" type="submit">Salvar</button>
-                            </form>
-                        </div>
-                    </div>
+                    <div class="msgErro" id="msgErro_EditUser"></div>
                 </div>
-                <div class="msgErro" id="msgErro_EditUser"></div>
             </div>
         </div>
     </div>

@@ -1,6 +1,3 @@
-function resetIndex() { window.location='./index.php'; }
-function VoltarPage() { history.back(); }
-
 //UPLOAD DE IMAGENS
 function carregarImagem(inputId, targetId, defaultImagePath, imgContainerClass) {
     var target = document.getElementById(targetId);
@@ -18,10 +15,6 @@ function carregarImagem(inputId, targetId, defaultImagePath, imgContainerClass) 
         document.querySelector('.' + imgContainerClass).classList.remove('imgSelected');
     }
 }
-function Banner_Web(){ $('#Banner_Web').click(); }
-function Banner_Mobile(){ $('#Banner_Mobile').click();}
-function carregarImgWeb(){ carregarImagem('Banner_Web', 'target_imgWeb', "../../assets/Banner_Links/Default_Banner_Web.jpg", 'Banner_Img_Web'); }
-function carregarImgMobile(){ carregarImagem('Banner_Mobile', 'target_imgMobile', "../../assets/Banner_Links/Default_Banner_Mobile.jpg", 'Banner_Img_Mobile'); }
 
 //FUNÇÃO DE VISUALIZAR SENHA
 function setupPasswordToggle(inputId, toggleId) {
@@ -65,6 +58,7 @@ function verificaTamanhoInput(inputId, displayClass, maxLen) {
         }
     }
 }
+
 setInterval(
     function () {
         verificaTamanhoInput('nomeCompEdit', 'NomeCompEditInput', 75);
@@ -74,17 +68,35 @@ setInterval(
         verificaTamanhoInput('antigaSenha', 'SenhaAntigaEditInput', 25);
         verificaTamanhoInput('novaSenha', 'NovaSenhaEditInput', 25);
         verificaTamanhoInput('confirmaNovaSenha', 'ConfirmaNovaSenhaEditInput', 25);
-
-        verificaTamanhoInput('nomeLink', 'nomeLinkInput', 50);
-        verificaTamanhoInput('link', 'linkInput', 250);
-
-        verificaTamanhoInput('nomeCateg', 'categoriaInput', 75);
 }, 50);
 
 
 // UPLOAD INFOS
 $(document).ready(function () {
     $('#telefoneContatoEdit').mask('(00) 00000 - 0000');
+
+    $('#themeSwitch').click(function (e) {
+        $("body").toggleClass("light-theme");
+        e.preventDefault();
+        $.ajax({
+            url: "../Adm/Main_menus/theme.php",
+            method: "post",
+            data: $('form').serialize(),
+            dataType: "text",
+            success: function (msg) {
+                if (msg.trim() === "Sucesso!!") {
+                    $('#msgErro_themeSwitch').addClass('text-success');
+                    setTimeout(() => { location.reload(); }, 500);
+                }
+                else{
+                    $('#msgErro_themeSwitch').removeClass('text-success');
+                    $('#msgErro_themeSwitch').removeClass('text-warning');
+                    $('#msgErro_themeSwitch').addClass('text-danger');
+                    $('#msgErro_themeSwitch').text(msg)
+                }
+            }
+        })
+    })
     
     $('#formEditUser').submit(function(e){
         e.preventDefault();
@@ -169,28 +181,4 @@ $(document).ready(function () {
             }
         });
     });
-    
-    $('#themeSwitch').click(function (e) {
-        $("body").toggleClass("light-theme");
-        e.preventDefault();
-        $.ajax({
-            url: "../Adm/Main_menus/theme.php",
-            method: "post",
-            data: $('form').serialize(),
-            dataType: "text",
-            success: function (msg) {
-                if (msg.trim() === "Sucesso!!") {
-                    $('#msgErro_themeSwitch').addClass('text-success');
-                    setTimeout(() => { location.reload(); }, 500);
-                }
-                else{
-                    $('#msgErro_themeSwitch').removeClass('text-success');
-                    $('#msgErro_themeSwitch').removeClass('text-warning');
-                    $('#msgErro_themeSwitch').addClass('text-danger');
-                    $('#msgErro_themeSwitch').text(msg)
-                }
-            }
-        })
-    })
-
 });
