@@ -29,7 +29,7 @@
     }
 
     if($id_Subcateg_edit == ""){
-        $res = $pdo->query("SELECT * FROM categorias where nome = '$nome_Subcateg'"); 
+        $res = $pdo->query("SELECT * FROM sub_categorias where nome = '$nome_Subcateg'"); 
         $dados = $res->fetchAll(PDO::FETCH_ASSOC);
         if(@count($dados) != 0){
             echo 'Subcategoria já cadastrada no Banco de dados!';
