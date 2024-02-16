@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     background: $Grafite;
-    border-radius: 1.25vw;
+    border-radius: 0.75vw;
     
     h2{
         position: absolute;
@@ -197,6 +197,27 @@
                             display: -webkit-box;
                             -webkit-line-clamp: 2;
                             -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                    }
+                    .subCategsCateg{
+                        width: 19vw;
+                        height: 100%;
+                        display: flex;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        p{
+                            max-width: 4.25vw;
+                            margin: 0.25vh;
+                            border-radius: 0.25vw;
+                            background-color: $Violeta;
+                            padding: 0.25vh 0.25vw;
+                            font-family: $Second-font;
+                            font-size: 0.6vw;
+                            font-weight: 400;
+                            color: $Branco;
+                            white-space: nowrap;                  
                             overflow: hidden;
                             text-overflow: ellipsis;
                         }
@@ -616,8 +637,8 @@
 }
 
 //SUBCATEGORIAS
-
 #ModalSubcateg{
+    z-index: 99999;
     .modal-block{
         .modal-dialog {
             width: 35vw;
@@ -630,7 +651,7 @@
                     height: 100%;
                     .modal-body {
                         width: 100%;
-                        height: 80%;
+                        height: 75%;
                         padding: 1vw;
                         padding-bottom: 0.5vh;
                         margin: 0;
@@ -649,46 +670,9 @@
                             align-items: center;
                             justify-content: center;
                         }
-                        .Img_Categ{
-                            margin: 0;
-                            width: 40%;
-                            height: 70%;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            position: relative;
-                            input{
-                                opacity: 0;
-                                pointer-events: none;
-                                display: none;
-                            }
-                            .img_categ_modal{
-                                width: 80%;
-                                height: 85%;
-                                object-fit: contain;
-                            }
-                            .editPen{
-                                position: absolute;
-                                width: 2vw;
-                                height: 2vw;
-                                bottom: 0;
-                                padding: 0.5vw;
-                                path{
-                                    fill: $Preto;
-                                }
-                            }
-                            &::before{
-                                content: '';
-                                position: absolute;
-                                width: 2vw;
-                                height: 2vw;
-                                bottom: 0;
-                                background: $Verde;
-                                border-radius: 50%;
-                            }
-                        }
+                        
                         .BlockBox{
-                            width: 60%;
+                            width: 50%;
                             height: 5vh;
                             display: flex;
                             justify-content: center;
@@ -706,6 +690,7 @@
                                 border-bottom: 1px solid $Abobora;
                                 z-index: 10 !important;
                                 padding: 0 1vw;
+                                margin-top: -1vh;
                                 &:focus{
                                     outline: none;
                                 }
@@ -713,12 +698,13 @@
                             span{
                                 font-family: $Second-font;
                                 position: absolute;
-                                left: 3.25vw;
+                                left: 2.5vw;
                                 font-size: 1vw;
                                 color: $Preto;
                                 font-weight: 500;
                                 transition: 0.5s;
                                 pointer-events: none;
+                                margin-top: -1vh;
                             }
                             .lengthInput{
                                 position: absolute;
@@ -740,14 +726,149 @@
                             font-size: 0.9vw;
                             font-weight: 900;
                         }
+                        .categ_Atreladas_Select{
+                            width: 50%;
+                            height: 80%;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            position: relative;
+                            #category-select{
+                                position: relative;
+                                width: 85%;
+                                height: 4vh;
+                                #options-view-button {
+                                    all: unset;
+                                    position: absolute;
+                                    inset: 0;
+                                    cursor: pointer;
+                                    font-size: 1vw;
+                                    z-index:5;
+                                }
+                                #select-button {
+                                    width: 100%;
+                                    height: 100%;
+                                    background-color: $Verde;
+                                    display: flex;
+                                    align-items: center;
+                                    position: relative;
+                                    outline: none;
+                                    #selected-value {
+                                        font-family: $Second-font;
+                                        color: $Preto;
+                                        font-size: 0.8vw;
+                                        font-weight: 900;
+                                        width: 80%;
+                                        height: 100%;
+                                        display: flex;
+                                        align-items: center;
+                                        white-space: nowrap;                  
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        padding: 0 0.75vw;
+                                    }
+                                    img, svg{
+                                        z-index: 99;
+                                        position: absolute;
+                                        right: 0.35vw;
+                                        width: 2vw;
+                                        height: 100%;
+                                        padding: 0.5vh;
+                                        path{
+                                            fill: $Violeta;
+                                        }
+                                    }
+                                }
+                            }
+                            #options {
+                                z-index: 999;
+                                width: 85%;
+                                height: auto;
+                                max-height: 40vh;
+                                top: 13vh;
+                                overflow-x: hidden;
+                                overflow-y: scroll;
+                                background: $Verde;
+                                display: none;
+                                position: absolute;
+                                padding: 0.5vw;
+                                border-radius: 0.5vw;
+                                .option {
+                                    display: flex;
+                                    align-items: center;
+                                    position: relative;
+                                    width: 100%;
+                                    height: 5vh;
+                                    border-bottom: 1px solid $Preto;
+                                    span{
+                                        all: unset;
+                                        width: 100%;
+                                        height: 100%;
+                                        display: flex;
+                                        align-items: center;
+                                        white-space: nowrap;                  
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        padding-left: 0.75vw;
+                                        font-family: $Second-font;
+                                        font-size: 0.75vw;
+                                        font-weight: 800;
+                                        color: $Preto;
+                                        z-index: 5;
+                                    }
+                                    input[type="radio"]{
+                                        all: unset;
+                                        position: absolute;
+                                        inset: 0;
+                                        z-index: 10;
+                                    }
+                                    &:hover{
+                                        &::before{
+                                            content: '';
+                                            position: absolute;
+                                            inset: 0;
+                                            background: $Cinza;
+                                            opacity: 0.5;
+                                            z-index: -1;
+                                        }
+                                    }
+                                    &:last-child{
+                                        border: none;
+                                    }
+                                }
+                            }
+                            #options-view-button:checked + #select-button svg{
+                                transform: rotate(180deg);
+                            }
+                            #category-select:has(#options-view-button:checked) + #options {
+                                display: block;
+                            }
+                        }
+                    }
+                    .modal-footer{
+                        height: 25%;
                     }
                 }
             }
         }
     }
+    &::before{
+        all: unset;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: $Preto;
+        opacity: 0.5;
+        z-index: -1 !important;
+    }
 }
 
 #ModalListagemSubcateg{
+    z-index: 9999;
     .modal-block{
         .modal-dialog {
             width: 75vw;
@@ -765,16 +886,30 @@
                     flex-wrap: wrap;
                     align-items: center;
                     justify-content: center;
+                    position: relative;
                     h4{
-                        width: 100%;
-                        height: 20%;
-                        font-family: $Second-font;
-                        font-size: 1.5vw;
-                        font-weight: 700;
-                        margin: 0;
+                        position: absolute;
+                        font-family: $Main-font;
+                        font-weight: 800;
+                        font-size: 2vw;
+                        color: $Branco;
+                        letter-spacing: 0.1vw;
                         display: flex;
                         align-items: center;
-                        justify-content: center;
+                        width: 90%;
+                        height: 10%;
+                        top: 2.5vh;
+                        left: 2vw;
+                        padding-left: 2.5vw;
+                        &::before{
+                            content: '';
+                            position: absolute;
+                            width: 1.75vw;
+                            height: 6.5vh;
+                            left: 0;
+                            background-color: $Abobora;
+                            border-radius: 0.4vw;
+                        }
                     }
                     .dataTables_wrapper {
                         width: 100%;
@@ -887,7 +1022,7 @@
                                         padding: 0 0 0 0.75vw;
                                         z-index: 10 !important;
                                     }
-                                    .imgsCateg, .subCategsCateg, .statusCateg{
+                                    .nomeSubCateg, .datasSubcateg{
                                         &::before{
                                             content: '';
                                             position: absolute;
@@ -900,7 +1035,7 @@
                                             z-index: -1 !important;
                                         }
                                     }
-                                    .nomeCateg, .datasCateg, .acoesCateg{
+                                    .categ_atrelada, .acoesSubcateg{
                                         &::before{
                                             content: '';
                                             position: absolute;
@@ -913,23 +1048,7 @@
                                             z-index: -1 !important;
                                         }
                                     }
-                                    .imgsCateg{
-                                        width: 4vw;
-                                        position: relative;
-                                        img, svg{
-                                            position: absolute;
-                                            top: 0;
-                                            left: 0;
-                                            width: 100%;
-                                            height: 100%;
-                                            display: flex;
-                                            align-items: center;
-                                            justify-content: center;
-                                            padding: 0.5vh;
-                                            object-fit: contain;
-                                        }
-                                    }
-                                    .nomeCateg{
+                                    .nomeSubCateg{
                                         width: 15vw;
                                         position: relative;
                                         p{
@@ -943,36 +1062,33 @@
                                             -webkit-box-orient: vertical;
                                             overflow: hidden;
                                             text-overflow: ellipsis;
+                                            font-size: 0.9vw;
+                                            font-weight: 400;
                                         }
                                     }
-                                    .datasCateg{
+                                    .categ_atrelada{
+                                        width: 15vw;
+                                        p{
+                                            position: absolute;
+                                            width: 14.5vw;
+                                            height: 4.5vh;
+                                            top: 15%;
+                                            left: 3%;
+                                            display: -webkit-box;
+                                            -webkit-line-clamp: 2;
+                                            -webkit-box-orient: vertical;
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                            font-weight: 700;
+                                            font-size: 0.8vw;
+                                        }
+                                    }
+                                    .datasSubcateg{
                                         width: 15vw;
                                         font-weight: 400;
                                         font-size: 0.9vw;
                                     }
-                                    .statusCateg{
-                                        width: 10vw;
-                                        position: relative;
-                                        p{
-                                            position: absolute;
-                                            width: 7vw;
-                                            height: 2.5vh;
-                                            top: 28%;
-                                            border-radius: 0.25vw;
-                                            display: flex;
-                                            align-items: center;
-                                            justify-content: center;
-                                            font-size: 0.9vw;
-                                            font-weight: 800;
-                                        }
-                                        .ativo{
-                                            background-color: $Verde;
-                                        }
-                                        .desativado{
-                                            background-color: $Abobora;
-                                        }
-                                    }
-                                    .acoesCateg{
+                                    .acoesSubcateg{
                                         width: 8vw;
                                         position: relative;
                                         a{
@@ -1115,6 +1231,39 @@
                                     }
                                 }
                             }
+                        }
+                    }
+                    .produtos_Btn_CriacaoSubcateg{
+                        z-index: 999;
+                        position: absolute;
+                        bottom: 1vh;
+                        left: 1vw;
+                        height: 4vh;
+                        width: 11.5vw;
+                        border: none;
+                        background: $Violeta;
+                        border-radius: 0.4vw;
+                        color: $Preto;
+                        p{
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: left;
+                            padding: 0 0.5vw;
+                            font-family: $Second-font;
+                            font-weight: 800;
+                            font-size: 0.8vw;
+                            text-wrap: nowrap;
+                            color: $Preto;
+                        }
+                        img,svg{
+                            position: absolute;
+                            right: 0;
+                            top: 0;
+                            width: 2.5vw;
+                            height: 100%;
+                            padding: 0 0.65vw;
                         }
                     }
                 }

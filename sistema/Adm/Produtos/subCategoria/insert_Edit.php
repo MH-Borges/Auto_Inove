@@ -5,9 +5,13 @@
     $id_Subcateg_edit = $_POST['id_Subcateg_edit'];
     $date_criacao_Subcateg_edit = $_POST['date_criacao_Subcateg_edit'];
     $date_atual_Subcateg_edit = $_POST['date_atual_Subcateg_edit'];
+    $categ_atrelada_edit = $_POST['categ_atrelada_edit'];
+
 
     $nome_Subcateg = $_POST['nome_Subcateg'];
-    $categ_atrelada = $_POST['categ_Atreladas'];
+    $categ_atrelada = @$_POST['categ_Atreladas'];
+
+
 
     // ===== VERIFICAÇÃO DE INPUTS VAZIOS =====
     if($nome_Subcateg == ""){
@@ -28,7 +32,7 @@
         $data_atual = date('d/m/Y');
     }
 
-    if($id_Subcateg_edit == ""){
+    if($id_Subcateg_edit == "" || $nome_Subcateg != ""){
         $res = $pdo->query("SELECT * FROM sub_categorias where nome = '$nome_Subcateg'"); 
         $dados = $res->fetchAll(PDO::FETCH_ASSOC);
         if(@count($dados) != 0){
@@ -37,9 +41,14 @@
         }
     }
 
-    if($categ_atrelada == "" || $categ_atrelada == NULL || $categ_atrelada == "categ_Atrelada_null"){
-        echo 'Selecione uma categoria';
-        exit();
+    if($categ_atrelada == ""){
+        if($categ_atrelada_edit == ""){
+            echo 'Selecione uma categoria';
+            exit();
+        }
+        else{
+            $categ_atrelada = $categ_atrelada_edit;
+        }
     }
 
 

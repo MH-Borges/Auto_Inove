@@ -27,7 +27,7 @@
         $data_atual = date('d/m/Y');
     }
 
-    if($id_categ_edit == ""){
+    if($id_categ_edit == "" || $nome_categ != ""){
         $res = $pdo->query("SELECT * FROM categorias where nome = '$nome_categ'"); 
         $dados = $res->fetchAll(PDO::FETCH_ASSOC);
         if(@count($dados) != 0){

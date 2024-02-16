@@ -53,8 +53,6 @@
                         $datas = $data_criacao_categoria. " - " .$data_atual_categoria;
                     }
 
-                    
-
                     echo "
                         <tr>
                             <td class='imgsCateg'>
@@ -67,11 +65,20 @@
                                 ";
                                 $query2 = $pdo->query("SELECT * FROM sub_categorias where categ_Atrelada = '$nome_categoria' ORDER BY id ASC");
                                 $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-                                for ($j=0; $j < count($dados2); $j++) {
-                                    $nome_subcateg = $dados2[$j]['nome'];
+                                $results = count($dados2);
 
+                                $mais = '';
+                                if($results > 7){
+                                    $mais = '<p>Outras...</p>';
+                                    $results = 7;
+                                }
+
+                                for ($j=0; $j < $results; $j++) {
+                                    $nome_subcateg = $dados2[$j]['nome'];
                                     echo "<p>".$nome_subcateg."</p>";
                                 }
+
+                                echo $mais;
                     echo "
                             </td>
                             <td class='datasCateg'>
@@ -100,7 +107,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back()">
+                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back();">
                     <img src="../../assets/icons/close.svg">
                 </button>
 
@@ -153,7 +160,7 @@
                         <input type="hidden" id="date_atual_categ_edit" name="date_atual_categ_edit" value="<?php echo @$date_atual_categ_edit ?>" required>
                         <input type="hidden" id="status_categ_edit" name="status_categ_edit" value="<?php echo @$status_categ_edit ?>" required>
 
-                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back()">Cancelar</button>
+                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back();">Cancelar</button>
                         <button class="SalvarBtnModal" type="submit"><?php echo $btn_categ ?></button>
                     </div>
                 </form>
@@ -170,7 +177,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back()">
+                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back();">
                     <img src="../../assets/icons/close.svg">
                 </button>
 
@@ -181,7 +188,7 @@
                     <div class="modal-footer">
                         <input type="hidden" id="id_categ_delete" name="id_categ_delete" value="<?php echo @$_GET['id'] ?>" required>
 
-                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back()">Cancelar</button>
+                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back();">Cancelar</button>
                         <button class="ExcluirBtnModal" type="submit">Excluir</button>
                     </div>
                 </form>
@@ -198,7 +205,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back()">
+                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back();">
                     <img src="../../assets/icons/close.svg">
                 </button>
 
@@ -236,7 +243,7 @@
                         <input type="hidden" id="date_atual_categ_stats" name="date_atual_categ_stats" value="<?php echo @$date_atual_categ_stats ?>" required>
                         <input type="hidden" id="status_categ_stats" name="status_categ_stats" value="<?php echo @$status_categ_stats ?>" required>
 
-                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back()">Cancelar</button>
+                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back();">Cancelar</button>
                         <?php echo $btnFinal ?>
                     </div>
                 </form>
@@ -255,12 +262,27 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back()">
-                    <img src="../../assets/icons/close.svg">
-                </button>
-
                 <?php 
+                    if(@$_GET['funcao'] == '' || @$_GET['funcao'] == null || @$_GET['funcao'] == 'novaSubcateg'){
+                        if(@$_GET['funcao'] == 'novaSubcateg'){ $closeReload = 'onclick="history.back();"';} else { $closeReload = ''; }
+                        
+                        echo '
+                            <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" '.$closeReload.'>
+                                <img src="../../assets/icons/close.svg">
+                            </button>
+                        ';
+
+                        $titulo_Subcateg = "Nova sub-categoria!"; 
+                        $btn_Subcateg = "Adicionar";
+                        $selectBox = "<div id='selected-value'> Selecione a categoria </div>";
+                        $selectedItem = ''; 
+                    }
                     if (@$_GET['funcao'] == 'editSubcateg') {
+                        echo '
+                            <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back();">
+                                <img src="../../assets/icons/close.svg">
+                            </button>
+                        ';
                         $titulo_Subcateg = "Edição de sub-categoria!";
                         $btn_Subcateg = "Salvar edição";
 
@@ -268,7 +290,6 @@
 
                         $query = $pdo->query("SELECT * FROM sub_categorias WHERE id = '$id_Subcateg_edit' LIMIT 1");
                         $dados = $query->fetchAll(PDO::FETCH_ASSOC);
-
                         if(@count($dados) > 0){
                             $nome_Subcateg_edit = $dados[0]['nome'];
                             $date_criacao_Subcateg_edit = $dados[0]['data_criacao'];
@@ -276,7 +297,14 @@
                             $categ_Atrelada = $dados[0]['categ_Atrelada'];
                         }
 
-                    } else { $titulo_Subcateg = "Nova sub-categoria!"; $btn_Subcateg = "Adicionar";}
+                        $selectBox = "<div id='selected-value'> $categ_Atrelada </div>";
+                        $selectedItem = "<li class='option'>
+                                            <input type='radio' name='categ_Atreladas' value='$categ_Atrelada' data-label='$categ_Atrelada'>
+                                            <span class='label'>$categ_Atrelada</span>
+                                        </li>";
+
+                    }
+                    
                 ?>
 
                 <form id="form_Subcategorias" method="POST">
@@ -288,27 +316,35 @@
                             <span>Nome:</span>
                             <p class="lengthInput nome_Subcateg_Input"></p>
                         </div>
+                        
+                        <!-- categ_Atreladas_Select -->
+                        <div class="categ_Atreladas_Select">
+                            <div id="category-select">
+                                <input type="checkbox" id="options-view-button">
 
-                        <div class="BlockBox categ_Atreladas_Select">
-                            <span>Selecione uma categoria:</span>
-                            <select name="categ_Atreladas" id="categ_Atreladas" required>
+                                <div id="select-button">
+                                    <?php echo $selectBox ?>
+                                    <img src="../../assets/icons/seta.svg" onload="SVGInject(this)">
+                                </div>
+                            </div>
+                            
+                            <ul id="options">
                                 <?php 
-                                    if (@$_GET['funcao'] == 'editSubcateg') {
-                                        echo "
-                                            <option value='$categ_Atrelada'> $categ_Atrelada </option>
-                                            <option value='categ_Atrelada_null'>Categorias:</option>
-                                        ";
-                                    }
-                                    else{ echo '<option value="categ_Atrelada_null">Categorias:</option>'; }
-
-                                    $query2 = $pdo->query("SELECT * FROM categorias ORDER BY id ASC");
+                                    echo $selectedItem;
+                                
+                                    $query2 = $pdo->query("SELECT * FROM categorias ORDER BY id DESC");
                                     $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
                                     for ($j=0; $j < count($dados2); $j++) {
                                         $nome_categ_atrelada = $dados2[$j]['nome'];
-                                        echo "<option value='$nome_categ_atrelada'> $nome_categ_atrelada </option>";
+                                        echo "
+                                        <li class='option'>
+                                            <input type='radio' name='categ_Atreladas' value='$nome_categ_atrelada' data-label='$nome_categ_atrelada'>
+                                            <span class='label'>$nome_categ_atrelada</span>
+                                        </li>
+                                        ";
                                     }
                                 ?>
-                            </select>
+                            </ul>
                         </div>
 
                     </div>
@@ -316,8 +352,9 @@
                         <input type="hidden" id="id_Subcateg_edit" name="id_Subcateg_edit" value="<?php echo @$id_Subcateg_edit ?>" required>
                         <input type="hidden" id="date_criacao_Subcateg_edit" name="date_criacao_Subcateg_edit" value="<?php echo @$date_criacao_Subcateg_edit ?>" required>
                         <input type="hidden" id="date_atual_Subcateg_edit" name="date_atual_Subcateg_edit" value="<?php echo @$date_atual_Subcateg_edit ?>" required>
+                        <input type="hidden" id="categ_atrelada_edit" name="categ_atrelada_edit" value="<?php echo @$categ_Atrelada ?>" required>
 
-                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back()">Cancelar</button>
+                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back();">Cancelar</button>
                         <button class="SalvarBtnModal" type="submit"><?php echo $btn_Subcateg ?></button>
                     </div>
                 </form>
@@ -334,12 +371,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back()">
+                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close">
                     <img src="../../assets/icons/close.svg">
                 </button>
 
                 <div class="modal-body">
+                
                     <h4>Tabela de sub-categorias</h4>
+
                     <table id="SubcategoriasTable">
                         <thead>
                             <tr>
@@ -370,16 +409,16 @@
 
                                     echo "
                                         <tr>
-                                            <td class='nomeCateg'>
+                                            <td class='nomeSubCateg'>
                                                 <p>".$nome_Subcategoria."</p>
                                             </td>
-                                            <td class='subCategsCateg'>
-                                                ".$categ_Atrelada."
+                                            <td class='categ_atrelada'>
+                                                <p>".$categ_Atrelada."</p>
                                             </td>
-                                            <td class='datasCateg'>
+                                            <td class='datasSubcateg'>
                                                 ".$datas."
                                             </td>
-                                            <td class='acoesCateg'>
+                                            <td class='acoesSubcateg'>
                                                 <a href='index.php?pag=categoriasProduto&funcao=deleteSubcateg&id=".$id_Subcategoria."'><img src='../../assets/icons/delet.svg'></a>
                                                 <a href='index.php?pag=categoriasProduto&funcao=editSubcateg&id=".$id_Subcategoria."'><img src='../../assets/icons/edit.svg'></a>
                                             </td>
@@ -389,6 +428,11 @@
                             ?>
                         </tbody>
                     </table>
+
+                    <button class="produtos_Btn_CriacaoSubcateg" type="button" data-toggle="modal" data-target="#ModalSubcateg">
+                        <p>Nova Sub-categoria</p>
+                        <img src="../../assets/icons/add.svg" >
+                    </button>
                 </div>
             </div>
         </div>
@@ -401,7 +445,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back()">
+                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back();">
                     <img src="../../assets/icons/close.svg">
                 </button>
 
@@ -412,7 +456,7 @@
                     <div class="modal-footer">
                         <input type="hidden" id="id_Subcateg_delete" name="id_Subcateg_delete" value="<?php echo @$_GET['id'] ?>" required>
 
-                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back()">Cancelar</button>
+                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back();">Cancelar</button>
                         <button class="ExcluirBtnModal" type="submit">Excluir</button>
                     </div>
                 </form>
@@ -444,8 +488,25 @@
 ?>
 
 <script>
+
+    //SELECT CUSTOM
+    let select = document.querySelector('.categ_Atreladas_Select'),
+    selectedValue = document.getElementById('selected-value'),
+    optionsViewButton = document.getElementById('options-view-button'),
+    inputsOptions = document.querySelectorAll('.option input');
+        
+    inputsOptions.forEach(input => { 
+        input.addEventListener('click', event => {
+            selectedValue.textContent = input.dataset.label;
+            const isMouseOrTouch = event.pointerType == "mouse" || event.pointerType == "touch";
+            isMouseOrTouch && optionsViewButton.click();
+        });
+    });
+
+    //CHAMADA DE FUNÇÃO PARA UPLOAD DE IMG BANCO DE DADOS
     function carregarImgWeb(){ carregarImagem('img_categ_Input', 'target_imgCateg', "../../assets/icons/placeholder.svg", 'img_categ_modal'); }
 
+    //UPLOAD DAS INFOS NO BANCO DE DADOS
     $("#form_categorias").submit(function (e) {
         e.preventDefault();
         var formData = new FormData(this);
@@ -581,6 +642,7 @@
         })
     });
 
+    //VERIFICACAO DE TAMANHOS DE INPUT
     setInterval(
         function () {
             verificaTamanhoInput('nome_categ', 'nome_categ_Input', 150);

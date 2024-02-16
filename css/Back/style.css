@@ -619,7 +619,7 @@ body {
   align-items: center;
   background: #505050;
   z-index: 99;
-  border-radius: 1vw;
+  border-radius: 0.75vw;
 }
 .TelaAdm header .Notificacoes, .TelaAdm header .User_config {
   height: 100%;
@@ -764,7 +764,7 @@ body {
   position: relative;
   padding: 1vw;
   background: #505050;
-  border-radius: 1vw;
+  border-radius: 0.75vw;
 }
 .TelaAdm main .sideMenu .goHome {
   width: 100%;
@@ -812,7 +812,7 @@ body {
   padding-left: 3.5vw;
   font-family: "Be Vietnam Pro", sans-serif;
   font-size: 1vw;
-  font-weight: 400;
+  font-weight: 200;
 }
 .TelaAdm main .sideMenu .itens:hover {
   position: relative;
@@ -864,7 +864,7 @@ body {
   border-radius: 0.5vw;
   padding-left: 0.5vw;
   font-family: "Be Vietnam Pro", sans-serif;
-  font-weight: 300;
+  font-weight: 200;
   font-size: 0.85vw;
   color: #F3F4F9;
 }
@@ -889,42 +889,14 @@ body {
   background: #BBBBBB;
 }
 .TelaAdm main .sideMenu #ProdutosListMenu .active {
-  font-weight: 600;
+  font-weight: 700;
 }
 .TelaAdm main .sideMenu #ProdutosListMenu .active::before {
   opacity: 1;
   border-radius: 0;
 }
-.TelaAdm main .sideMenu #ProdutosListMenu .active::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  right: 0;
-  top: 0;
-  background: #BBBBBB;
-  opacity: 0.25;
-  border-radius: 0.5vw;
-}
-.TelaAdm main .sideMenu #ProdutosListMenu .active:hover::after {
-  opacity: 0.25;
-}
 .TelaAdm main .sideMenu .active p {
   font-weight: 900;
-}
-.TelaAdm main .sideMenu .active::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  background: #BBBBBB;
-  opacity: 0.25;
-  border-radius: 1vw;
-}
-.TelaAdm main .sideMenu .active:hover::before {
-  opacity: 0.25;
 }
 .TelaAdm main .sideMenu #themeSwitch {
   width: 90%;
@@ -1045,7 +1017,7 @@ body {
   width: 74.5%;
   height: 48.5%;
   background: #505050;
-  border-radius: 1.25vw;
+  border-radius: 0.75vw;
   display: flex;
   flex-wrap: wrap;
   position: relative;
@@ -1211,7 +1183,7 @@ body {
   width: 74.5%;
   height: 48.5%;
   background: #505050;
-  border-radius: 1.25vw;
+  border-radius: 0.75vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1251,7 +1223,7 @@ body {
   top: 0;
   width: 24%;
   height: 100%;
-  border-radius: 1.25vw;
+  border-radius: 0.75vw;
   padding: 1.5vh 0.5vw 1.5vh 0.5vw;
 }
 .TelaAdm main .HomeAdm .topSells h2 {
@@ -1418,7 +1390,7 @@ body {
   top: 0;
   width: 24%;
   height: 100%;
-  border-radius: 1.25vw;
+  border-radius: 0.75vw;
   padding: 1.5vh 0.5vw 1.5vh 0.5vw;
 }
 .TelaAdm main .produtosHome .produtos_topSells h2 {
@@ -1573,7 +1545,7 @@ body {
 }
 .TelaAdm main .produtosHome .produtos_SemEstoque {
   background: #505050;
-  border-radius: 1.25vw;
+  border-radius: 0.75vw;
   width: 36%;
   height: 49%;
   margin-bottom: 2.25vh;
@@ -1711,7 +1683,7 @@ body {
 }
 .TelaAdm main .produtosHome .produtos_UltimosVendidos {
   background: #505050;
-  border-radius: 1.5vw;
+  border-radius: 0.75vw;
   width: 36%;
   height: 49%;
   margin-left: 1.75vw;
@@ -1833,7 +1805,7 @@ body {
 }
 .TelaAdm main .produtosHome .produtos_Grafico {
   background: #505050;
-  border-radius: 1.5vw;
+  border-radius: 0.75vw;
   width: 74.5%;
   height: 48.5%;
   display: flex;
@@ -1952,7 +1924,7 @@ body {
   align-items: center;
   justify-content: center;
   background: #505050;
-  border-radius: 1.25vw;
+  border-radius: 0.75vw;
 }
 .TelaAdm main .produtosCategorias h2 {
   position: absolute;
@@ -2142,6 +2114,27 @@ body {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper #CategoriasTable tbody tr .subCategsCateg {
+  width: 19vw;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.TelaAdm main .produtosCategorias .dataTables_wrapper #CategoriasTable tbody tr .subCategsCateg p {
+  max-width: 4.25vw;
+  margin: 0.25vh;
+  border-radius: 0.25vw;
+  background-color: #8000FF;
+  padding: 0.25vh 0.25vw;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 0.6vw;
+  font-weight: 400;
+  color: #F3F4F9;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -2526,6 +2519,9 @@ body {
 .TelaAdm main #ModalStatuscateg .modal-block .modal-dialog .modal-content #form_status_categorias .modal-footer {
   height: 25%;
 }
+.TelaAdm main #ModalSubcateg {
+  z-index: 99999;
+}
 .TelaAdm main #ModalSubcateg .modal-block .modal-dialog {
   width: 35vw;
   height: 38vh;
@@ -2540,7 +2536,7 @@ body {
 }
 .TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body {
   width: 100%;
-  height: 80%;
+  height: 75%;
   padding: 1vw;
   padding-bottom: 0.5vh;
   margin: 0;
@@ -2560,47 +2556,8 @@ body {
   align-items: center;
   justify-content: center;
 }
-.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .Img_Categ {
-  margin: 0;
-  width: 40%;
-  height: 70%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .Img_Categ input {
-  opacity: 0;
-  pointer-events: none;
-  display: none;
-}
-.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .Img_Categ .img_categ_modal {
-  width: 80%;
-  height: 85%;
-  -o-object-fit: contain;
-     object-fit: contain;
-}
-.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .Img_Categ .editPen {
-  position: absolute;
-  width: 2vw;
-  height: 2vw;
-  bottom: 0;
-  padding: 0.5vw;
-}
-.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .Img_Categ .editPen path {
-  fill: #131313;
-}
-.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .Img_Categ::before {
-  content: "";
-  position: absolute;
-  width: 2vw;
-  height: 2vw;
-  bottom: 0;
-  background: #BAF811;
-  border-radius: 50%;
-}
 .TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .BlockBox {
-  width: 60%;
+  width: 50%;
   height: 5vh;
   display: flex;
   justify-content: center;
@@ -2619,6 +2576,7 @@ body {
   border-bottom: 1px solid #F83810;
   z-index: 10 !important;
   padding: 0 1vw;
+  margin-top: -1vh;
 }
 .TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .BlockBox input:focus {
   outline: none;
@@ -2626,12 +2584,13 @@ body {
 .TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .BlockBox span {
   font-family: "Be Vietnam Pro", sans-serif;
   position: absolute;
-  left: 3.25vw;
+  left: 2.5vw;
   font-size: 1vw;
   color: #131313;
   font-weight: 500;
   transition: 0.5s;
   pointer-events: none;
+  margin-top: -1vh;
 }
 .TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .BlockBox .lengthInput {
   position: absolute;
@@ -2652,6 +2611,141 @@ body {
   font-size: 0.9vw;
   font-weight: 900;
 }
+.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .categ_Atreladas_Select {
+  width: 50%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .categ_Atreladas_Select #category-select {
+  position: relative;
+  width: 85%;
+  height: 4vh;
+}
+.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .categ_Atreladas_Select #category-select #options-view-button {
+  all: unset;
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  font-size: 1vw;
+  z-index: 5;
+}
+.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .categ_Atreladas_Select #category-select #select-button {
+  width: 100%;
+  height: 100%;
+  background-color: #BAF811;
+  display: flex;
+  align-items: center;
+  position: relative;
+  outline: none;
+}
+.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .categ_Atreladas_Select #category-select #select-button #selected-value {
+  font-family: "Be Vietnam Pro", sans-serif;
+  color: #131313;
+  font-size: 0.8vw;
+  font-weight: 900;
+  width: 80%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 0.75vw;
+}
+.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .categ_Atreladas_Select #category-select #select-button img, .TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .categ_Atreladas_Select #category-select #select-button svg {
+  z-index: 99;
+  position: absolute;
+  right: 0.35vw;
+  width: 2vw;
+  height: 100%;
+  padding: 0.5vh;
+}
+.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .categ_Atreladas_Select #category-select #select-button img path, .TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .categ_Atreladas_Select #category-select #select-button svg path {
+  fill: #8000FF;
+}
+.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .categ_Atreladas_Select #options {
+  z-index: 999;
+  width: 85%;
+  height: auto;
+  max-height: 40vh;
+  top: 13vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background: #BAF811;
+  display: none;
+  position: absolute;
+  padding: 0.5vw;
+  border-radius: 0.5vw;
+}
+.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .categ_Atreladas_Select #options .option {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 5vh;
+  border-bottom: 1px solid #131313;
+}
+.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .categ_Atreladas_Select #options .option span {
+  all: unset;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 0.75vw;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 0.75vw;
+  font-weight: 800;
+  color: #131313;
+  z-index: 5;
+}
+.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .categ_Atreladas_Select #options .option input[type=radio] {
+  all: unset;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .categ_Atreladas_Select #options .option:hover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #BBBBBB;
+  opacity: 0.5;
+  z-index: -1;
+}
+.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .categ_Atreladas_Select #options .option:last-child {
+  border: none;
+}
+.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .categ_Atreladas_Select #options-view-button:checked + #select-button svg {
+  transform: rotate(180deg);
+}
+.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-body .categ_Atreladas_Select #category-select:has(#options-view-button:checked) + #options {
+  display: block;
+}
+.TelaAdm main #ModalSubcateg .modal-block .modal-dialog .modal-content #form_Subcategorias .modal-footer {
+  height: 25%;
+}
+.TelaAdm main #ModalSubcateg::before {
+  all: unset;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #131313;
+  opacity: 0.5;
+  z-index: -1 !important;
+}
+.TelaAdm main #ModalListagemSubcateg {
+  z-index: 9999;
+}
 .TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog {
   width: 75vw;
   height: 80vh;
@@ -2670,17 +2764,31 @@ body {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 .TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body h4 {
-  width: 100%;
-  height: 20%;
-  font-family: "Be Vietnam Pro", sans-serif;
-  font-size: 1.5vw;
-  font-weight: 700;
-  margin: 0;
+  position: absolute;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 2vw;
+  color: #F3F4F9;
+  letter-spacing: 0.1vw;
   display: flex;
   align-items: center;
-  justify-content: center;
+  width: 90%;
+  height: 10%;
+  top: 2.5vh;
+  left: 2vw;
+  padding-left: 2.5vw;
+}
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body h4::before {
+  content: "";
+  position: absolute;
+  width: 1.75vw;
+  height: 6.5vh;
+  left: 0;
+  background-color: #F83810;
+  border-radius: 0.4vw;
 }
 .TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper {
   width: 100%;
@@ -2794,7 +2902,7 @@ body {
   padding: 0 0 0 0.75vw;
   z-index: 10 !important;
 }
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .imgsCateg::before, .TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .subCategsCateg::before, .TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .statusCateg::before {
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .nomeSubCateg::before, .TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .datasSubcateg::before {
   content: "";
   position: absolute;
   bottom: 0;
@@ -2805,7 +2913,7 @@ body {
   opacity: 0.25;
   z-index: -1 !important;
 }
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .nomeCateg::before, .TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .datasCateg::before, .TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesCateg::before {
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .categ_atrelada::before, .TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesSubcateg::before {
   content: "";
   position: absolute;
   bottom: 0;
@@ -2816,28 +2924,11 @@ body {
   opacity: 0.15;
   z-index: -1 !important;
 }
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .imgsCateg {
-  width: 4vw;
-  position: relative;
-}
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .imgsCateg img, .TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .imgsCateg svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5vh;
-  -o-object-fit: contain;
-     object-fit: contain;
-}
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .nomeCateg {
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .nomeSubCateg {
   width: 15vw;
   position: relative;
 }
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .nomeCateg p {
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .nomeSubCateg p {
   position: absolute;
   width: 14.5vw;
   height: 4vh;
@@ -2848,73 +2939,70 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 0.9vw;
+  font-weight: 400;
 }
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .datasCateg {
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .categ_atrelada {
+  width: 15vw;
+}
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .categ_atrelada p {
+  position: absolute;
+  width: 14.5vw;
+  height: 4.5vh;
+  top: 15%;
+  left: 3%;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 700;
+  font-size: 0.8vw;
+}
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .datasSubcateg {
   width: 15vw;
   font-weight: 400;
   font-size: 0.9vw;
 }
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .statusCateg {
-  width: 10vw;
-  position: relative;
-}
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .statusCateg p {
-  position: absolute;
-  width: 7vw;
-  height: 2.5vh;
-  top: 28%;
-  border-radius: 0.25vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.9vw;
-  font-weight: 800;
-}
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .statusCateg .ativo {
-  background-color: #BAF811;
-}
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .statusCateg .desativado {
-  background-color: #F83810;
-}
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesCateg {
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesSubcateg {
   width: 8vw;
   position: relative;
 }
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesCateg a {
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesSubcateg a {
   position: absolute;
   width: 18%;
   height: 3vh;
   top: 24%;
   border-radius: 0.25vw;
 }
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesCateg a img, .TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesCateg a svg {
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesSubcateg a img, .TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesSubcateg a svg {
   width: 100%;
   height: 100%;
   padding: 0.6vh;
   -o-object-fit: contain;
      object-fit: contain;
 }
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesCateg a:nth-child(1) {
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesSubcateg a:nth-child(1) {
   left: 10%;
   background: #F83810;
 }
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesCateg a:nth-child(2) {
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesSubcateg a:nth-child(2) {
   left: 36%;
   background: #8000FF;
 }
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesCateg a:nth-child(3) {
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesSubcateg a:nth-child(3) {
   left: 62%;
 }
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesCateg .ativo {
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesSubcateg .ativo {
   background-color: #F83810;
 }
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesCateg .ativo path {
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesSubcateg .ativo path {
   fill: #F3F4F9;
 }
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesCateg .desativado {
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesSubcateg .desativado {
   background-color: #BAF811;
 }
-.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesCateg .desativado path {
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper #SubcategoriasTable tbody tr .acoesSubcateg .desativado path {
   fill: #131313;
 }
 .TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper .dataTables_paginate {
@@ -3006,6 +3094,39 @@ body {
 }
 .TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .dataTables_wrapper .dataTables_paginate .pagination .disabled a {
   opacity: 0.4;
+}
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .produtos_Btn_CriacaoSubcateg {
+  z-index: 999;
+  position: absolute;
+  bottom: 1vh;
+  left: 1vw;
+  height: 4vh;
+  width: 11.5vw;
+  border: none;
+  background: #8000FF;
+  border-radius: 0.4vw;
+  color: #131313;
+}
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .produtos_Btn_CriacaoSubcateg p {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 0 0.5vw;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 800;
+  font-size: 0.8vw;
+  text-wrap: nowrap;
+  color: #131313;
+}
+.TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .produtos_Btn_CriacaoSubcateg img, .TelaAdm main #ModalListagemSubcateg .modal-block .modal-dialog .modal-content .modal-body .produtos_Btn_CriacaoSubcateg svg {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 2.5vw;
+  height: 100%;
+  padding: 0 0.65vw;
 }
 .TelaAdm main #ModalDeletSubcateg .modal-block .modal-dialog {
   width: 30vw;
@@ -3313,7 +3434,7 @@ body {
 .TelaAdm main .relatoriosHome .relatorio_Links {
   width: 32%;
   height: 31.5%;
-  border-radius: 1.5vw;
+  border-radius: 0.75vw;
   margin: 1.05vh 0;
   background: #505050;
   display: flex;

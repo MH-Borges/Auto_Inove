@@ -11,7 +11,7 @@
         top: 0;
         width: 24%;
         height: 100%;
-        border-radius: 1.25vw;
+        border-radius: 0.75vw;
         padding: 1.5vh 0.5vw 1.5vh 0.5vw;
         h2{
             position: relative;
@@ -160,7 +160,7 @@
     }
     .produtos_SemEstoque{
         background: $Grafite;
-        border-radius: 1.25vw;
+        border-radius: 0.75vw;
         width: 36%;
         height: 49%;
         margin-bottom: 2.25vh;
@@ -296,7 +296,7 @@
     }
     .produtos_UltimosVendidos{
         background: $Grafite;
-        border-radius: 1.5vw;
+        border-radius: 0.75vw;
         width: 36%;
         height: 49%;
         margin-left: 1.75vw;
@@ -418,7 +418,7 @@
     }
     .produtos_Grafico{
         background: $Grafite;
-        border-radius: 1.5vw;
+        border-radius: 0.75vw;
         width: 74.5%;
         height: 48.5%;
         display: flex;
