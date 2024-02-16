@@ -156,6 +156,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" id="id_categ_edit" name="id_categ_edit" value="<?php echo @$id_categ_edit ?>" required>
+                        <input type="hidden" id="nome_categ_edit" name="nome_categ_edit" value="<?php echo @$nome_categ_edit ?>" required>
                         <input type="hidden" id="date_criacao_categ_edit" name="date_criacao_categ_edit" value="<?php echo @$date_criacao_categ_edit ?>" required>
                         <input type="hidden" id="date_atual_categ_edit" name="date_atual_categ_edit" value="<?php echo @$date_atual_categ_edit ?>" required>
                         <input type="hidden" id="status_categ_edit" name="status_categ_edit" value="<?php echo @$status_categ_edit ?>" required>
@@ -225,10 +226,12 @@
                     if($status_categ_stats == "" || $status_categ_stats == "ativo" || $status_categ_stats == null){
                         $btnFinal = "<button class='ExcluirBtnModal' type='submit'>Desativar</button>";
                         $titulo = "desativar";
+                        $aviso = "<span>*ATENÇÃO: Todas Subcategorias atreladas a essa categoria serão tambem desativadas!</span>";
                     }
                     else{
                         $btnFinal = "<button class='SalvarBtnModal' type='submit'>Ativar</button>";
                         $titulo = "ativar";
+                        $aviso = '';
                     }
 
                 ?>
@@ -236,6 +239,7 @@
                 <form id="form_status_categorias" method="POST">
                     <div class="modal-body">
                         <h4>Gostaria mesmo de <?php echo $titulo ?> está categoria?</h4>
+                        <?php echo $aviso ?>
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" id="id_categ_stats" name="id_categ_stats" value="<?php echo @$id_categ_stats ?>" required>
@@ -354,6 +358,7 @@
                         <input type="hidden" id="date_atual_Subcateg_edit" name="date_atual_Subcateg_edit" value="<?php echo @$date_atual_Subcateg_edit ?>" required>
                         <input type="hidden" id="categ_atrelada_edit" name="categ_atrelada_edit" value="<?php echo @$categ_Atrelada ?>" required>
 
+
                         <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back();">Cancelar</button>
                         <button class="SalvarBtnModal" type="submit"><?php echo $btn_Subcateg ?></button>
                     </div>
@@ -382,7 +387,7 @@
                     <table id="SubcategoriasTable">
                         <thead>
                             <tr>
-                                <th>Nome da categoria</th>
+                                <th>Nome da Subcategoria</th>
                                 <th>Categorias atrelada</th>
                                 <th>Data criação / Ultima alteração</th>
                                 <th>Ações</th>
@@ -439,7 +444,7 @@
     </div>
 </div>
 
-<!-- Modal Delete categoria-->
+<!-- Modal Delete sub-categoria-->
 <div class="modal fade" id="ModalDeletSubcateg" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-block">
         <div class="modal-dialog">
