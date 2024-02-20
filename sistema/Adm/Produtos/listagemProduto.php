@@ -1,6 +1,6 @@
 <div class="blockContent produtosListagem">
 
-    <a class="produtos_Btn_CriacaoProd" href="index.php?pag=listagemProduto&funcao=novaCateg">
+    <a class="produtos_Btn_CriacaoProd" href="index.php?pag=listagemProduto&funcao=novoProd">
         <p>Novo Produto</p>
         <img src="../../assets/icons/add.svg" >
     </a>
@@ -67,6 +67,261 @@
 
 </div>
 
+
+<!-- ***********PRODUTOS************ --> 
+<!-- Modal Cria / Editar Produtos -->
+<div class="modal fade" id="ModalProduto" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-block">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="window.location='./index.php?pag=listagemProduto';">
+                    <img src="../../assets/icons/close.svg">
+                </button>
+
+                <?php 
+                    if (@$_GET['funcao'] == 'editProd') {
+                        $titulo_Produto = "Edição de Produto!";
+                        $btn_Produto = "Salvar edições de produto";
+
+                        $id_Produto_edit = $_GET['id'];
+
+                        $query = $pdo->query("SELECT * FROM produtos WHERE id = '$id_Produto_edit' LIMIT 1");
+                        $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                        if(@count($dados) > 0){
+                            
+                        }
+
+                    } else { $titulo_Produto = "Cadastro de produto!"; $btn_Produto = "Cadastrar produto";}
+                ?>
+
+                <form id="form_Produtos" method="POST">
+                    <div class="modal-body">
+                        <div class="nav nav-pills Menu_produtos">
+                            <a id="DadosProduto_btn" class="active" data-toggle="pill" href="#DadosProduto"><?php echo $titulo_Produto ?></a>
+                            <a id="ItensRelac_btn" data-toggle="pill" href="#ItensRelac">Itens relacionados</a>
+                        </div>
+                        <div class="tab-content Tabs_produtos">
+                            <div class="tab-pane fade show active" id="DadosProduto">
+
+
+                                <button type="button" onclick="clickTab('ItensRelac_btn');">Ir para itens relacionados</button>
+                            </div>
+                            <div class="tab-pane fade" id="ItensRelac">
+                                <!-- categ_Atreladas_Select -->
+                                <div class="Select_Produtos">
+                                    <div id="category-select">
+                                        <input type="checkbox" id="options_btn_ItemAtr01" onchange="OptionSelection('selected_val_ItemAtr01', 'options_btn_ItemAtr01', 'option_ItemAtr01');">
+
+                                        <div id="select-button">
+                                        <div id='selected_val_ItemAtr01'> Selecione a categoria </div>
+                                            <img src="../../assets/icons/seta.svg" onload="SVGInject(this)">
+                                        </div>
+                                    </div>
+                                    
+                                    <ul id="options" >
+                                        <?php 
+                                            $query2 = $pdo->query("SELECT * FROM categorias ORDER BY id DESC");
+                                            $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                                            for ($j=0; $j < count($dados2); $j++) {
+                                                $nome_categ_atrelada = $dados2[$j]['nome'];
+                                                echo "
+                                                <li class='option_ItemAtr01'>
+                                                    <input type='radio' name='categ_Atreladas' value='$nome_categ_atrelada' data-label='$nome_categ_atrelada'>
+                                                    <span class='label'>$nome_categ_atrelada</span>
+                                                </li>
+                                                ";
+                                            }
+                                        ?>
+                                    </ul>
+                                </div>
+
+                                <div class="Select_Produtos">
+                                    <div id="category-select">
+                                        <input type="checkbox" id="options_btn_ItemAtr02" onchange="OptionSelection('selected_val_ItemAtr02', 'options_btn_ItemAtr02', 'option_ItemAtr02');">
+
+                                        <div id="select-button">
+                                        <div id='selected_val_ItemAtr02'> Selecione a categoria </div>
+                                            <img src="../../assets/icons/seta.svg" onload="SVGInject(this)">
+                                        </div>
+                                    </div>
+                                    
+                                    <ul id="options">
+                                        <?php 
+                                            $query2 = $pdo->query("SELECT * FROM categorias ORDER BY id DESC");
+                                            $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                                            for ($j=0; $j < count($dados2); $j++) {
+                                                $nome_categ_atrelada = $dados2[$j]['nome'];
+                                                echo "
+                                                <li class='option_ItemAtr02'>
+                                                    <input type='radio' name='categ_Atreladas' value='$nome_categ_atrelada' data-label='$nome_categ_atrelada'>
+                                                    <span class='label'>$nome_categ_atrelada</span>
+                                                </li>
+                                                ";
+                                            }
+                                        ?>
+                                    </ul>
+                                </div>
+
+                                <div class="Select_Produtos">
+                                    <div id="category-select">
+                                        <input type="checkbox" id="options_btn_ItemAtr03" onchange="OptionSelection('selected_val_ItemAtr03', 'options_btn_ItemAtr03', 'option_ItemAtr03');">
+
+                                        <div id="select-button">
+                                        <div id='selected_val_ItemAtr03'> Selecione a categoria </div>
+                                            <img src="../../assets/icons/seta.svg" onload="SVGInject(this)">
+                                        </div>
+                                    </div>
+                                    
+                                    <ul id="options">
+                                        <?php 
+                                            $query2 = $pdo->query("SELECT * FROM categorias ORDER BY id DESC");
+                                            $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                                            for ($j=0; $j < count($dados2); $j++) {
+                                                $nome_categ_atrelada = $dados2[$j]['nome'];
+                                                echo "
+                                                <li class='option_ItemAtr03'>
+                                                    <input type='radio' name='categ_Atreladas' value='$nome_categ_atrelada' data-label='$nome_categ_atrelada'>
+                                                    <span class='label'>$nome_categ_atrelada</span>
+                                                </li>
+                                                ";
+                                            }
+                                        ?>
+                                    </ul>
+                                </div>
+
+                                <div class="Select_Produtos">
+                                    <div id="category-select">
+                                        <input type="checkbox" id="options_btn_ItemAtr04" onchange="OptionSelection('selected_val_ItemAtr04', 'options_btn_ItemAtr04', 'option_ItemAtr04');">
+
+                                        <div id="select-button">
+                                        <div id='selected_val_ItemAtr04'> Selecione a categoria </div>
+                                            <img src="../../assets/icons/seta.svg" onload="SVGInject(this)">
+                                        </div>
+                                    </div>
+                                    
+                                    <ul id="options">
+                                        <?php 
+                                            $query2 = $pdo->query("SELECT * FROM categorias ORDER BY id DESC");
+                                            $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                                            for ($j=0; $j < count($dados2); $j++) {
+                                                $nome_categ_atrelada = $dados2[$j]['nome'];
+                                                echo "
+                                                <li class='option_ItemAtr04'>
+                                                    <input type='radio' name='categ_Atreladas' value='$nome_categ_atrelada' data-label='$nome_categ_atrelada'>
+                                                    <span class='label'>$nome_categ_atrelada</span>
+                                                </li>
+                                                ";
+                                            }
+                                        ?>
+                                    </ul>
+                                </div>
+
+                                <div class="aviso">
+                                    <img src="../../assets/icons/!.svg">
+                                    <span>Deixando essa aba vazia os 'itens relacionados' desse produto serão organizados por códigos similares cadastrados recentemente!</span>
+                                </div>
+                                <button type="button" onclick="clickTab('DadosProduto_btn');">Voltar</button>
+                                <button class="SalvarBtnModal" type="submit"><?php echo $btn_Produto ?></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="msgErro" id="msgErro_InsertEdit_Produto"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Delete Produtos-->
+<div class="modal fade" id="ModalDeletProduto" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-block">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back();">
+                    <img src="../../assets/icons/close.svg">
+                </button>
+
+                <form id="form_delete_categorias" method="POST">
+                    <div class="modal-body">
+                        <h4>Gostaria mesmo de excluir esta categoria?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" id="id_categ_delete" name="id_categ_delete" value="<?php echo @$_GET['id'] ?>" required>
+
+                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back();">Cancelar</button>
+                        <button class="ExcluirBtnModal" type="submit">Excluir</button>
+                    </div>
+                </form>
+
+                <div class="msgErro" id="msgErro_delete_Categ"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Status Produtos-->
+<div class="modal fade" id="ModalStatusProduto" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-block">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back();">
+                    <img src="../../assets/icons/close.svg">
+                </button>
+
+                <?php 
+                    $id_categ_stats = $_GET['id'];
+
+                    $query = $pdo->query("SELECT * FROM categorias WHERE id = '$id_categ_stats' LIMIT 1");
+                    $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                    if(@count($dados) > 0){
+                        $date_criacao_categ_stats = $dados[0]['data_criacao'];
+                        $date_atual_categ_stats = $dados[0]['data_atual'];
+                        $status_categ_stats = $dados[0]['status_categ'];
+                    }
+
+
+                    if($status_categ_stats == "" || $status_categ_stats == "ativo" || $status_categ_stats == null){
+                        $btnFinal = "<button class='ExcluirBtnModal' type='submit'>Desativar</button>";
+                        $titulo = "desativar";
+                        $aviso = "<span>*ATENÇÃO: Todas Subcategorias atreladas a essa categoria serão tambem desativadas!</span>";
+                    }
+                    else{
+                        $btnFinal = "<button class='SalvarBtnModal' type='submit'>Ativar</button>";
+                        $titulo = "ativar";
+                        $aviso = '';
+                    }
+
+                ?>
+
+                <form id="form_status_categorias" method="POST">
+                    <div class="modal-body">
+                        <h4>Gostaria mesmo de <?php echo $titulo ?> está categoria?</h4>
+                        <?php echo $aviso ?>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" id="id_categ_stats" name="id_categ_stats" value="<?php echo @$id_categ_stats ?>" required>
+                        <input type="hidden" id="date_criacao_categ_stats" name="date_criacao_categ_stats" value="<?php echo @$date_criacao_categ_stats ?>" required>
+                        <input type="hidden" id="date_atual_categ_stats" name="date_atual_categ_stats" value="<?php echo @$date_atual_categ_stats ?>" required>
+                        <input type="hidden" id="status_categ_stats" name="status_categ_stats" value="<?php echo @$status_categ_stats ?>" required>
+
+                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back();">Cancelar</button>
+                        <?php echo $btnFinal ?>
+                    </div>
+                </form>
+
+                <div class="msgErro" id="msgErro_status_Categ"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- ***********CODIGOS************ --> 
 <!-- Modal Cria / Editar Codigos -->
 <div class="modal fade" id="ModalCodigos" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -113,7 +368,7 @@
                         <h4><?php echo $titulo_Codigo ?></h4>
                         
                         <div class="BlockBox">
-                            <input type="text" value="<?php echo @$nome_Codigo_edit ?>" name="nome_Codigo" id="nome_Codigo" maxlength="75" required>
+                            <input type="text" value="<?php echo @$nome_Codigo_edit ?>" name="nome_Codigo" id="nome_Codigo" maxlength="10" required>
                             <span>Código:</span>
                             <p class="lengthInput nome_Codigo_Input"></p>
                         </div>
@@ -238,7 +493,17 @@
 </div>
 
 
-<?php 
+<?php
+    if (@$_GET["funcao"] == "novoProd" || @$_GET["funcao"] == "editProd") {
+        echo "<script language='javascript'> $('#ModalProduto').modal('show');</script>";
+    }
+    else if(@$_GET["funcao"] == "deleteProd"){
+        echo "<script language='javascript'> $('#ModalDeletProduto').modal('show');</script>";
+    }
+    else if(@$_GET["funcao"] == "statusProd"){
+        echo "<script language='javascript'> $('#ModalStatusProduto').modal('show');</script>";
+    }
+
     if (@$_GET["funcao"] == "novoCodigo" || @$_GET["funcao"] == "editCodigo") {
         echo "<script language='javascript'> $('#ModalCodigos').modal('show');</script>";
     }
@@ -248,21 +513,6 @@
 ?>
 
 <script>
-
-    //SELECT CUSTOM
-    // let select = document.querySelector('.categ_Atreladas_Select'),
-    // selectedValue = document.getElementById('selected-value'),
-    // optionsViewButton = document.getElementById('options-view-button'),
-    // inputsOptions = document.querySelectorAll('.option input');
-        
-    // inputsOptions.forEach(input => { 
-    //     input.addEventListener('click', event => {
-    //         selectedValue.textContent = input.dataset.label;
-    //         const isMouseOrTouch = event.pointerType == "mouse" || event.pointerType == "touch";
-    //         isMouseOrTouch && optionsViewButton.click();
-    //     });
-    // });
-
     //CHAMADA DE FUNÇÃO PARA UPLOAD DE IMG BANCO DE DADOS
     // function carregarImgWeb(){ carregarImagem('img_categ_Input', 'target_imgCateg', "../../assets/icons/placeholder.svg", 'img_categ_modal'); }
 
@@ -405,6 +655,10 @@
     //VERIFICACAO DE TAMANHOS DE INPUT
     setInterval(
         function () {
-            verificaTamanhoInput('nome_Codigo', 'nome_Codigo_Input', 75);
+            verificaTamanhoInput('nome_Codigo', 'nome_Codigo_Input', 10);
     }, 50);
+
+    function clickTab(buttonId) {
+        document.getElementById(buttonId).click();
+    }
 </script>

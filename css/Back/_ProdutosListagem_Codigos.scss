@@ -285,6 +285,161 @@
     }
 }
 
+
+#ModalProduto{
+    .modal-block{
+        .modal-dialog {
+            width: 80vw;
+            height: 80vh;
+            .modal-content {
+                width: 100%;
+                height: 100%;
+                #form_Produtos{
+                    width: 100%;
+                    height: 100%;
+                    .modal-body {
+                        width: 100%;
+                        height: 100%;
+                        padding: 1vw;
+                        padding-bottom: 0.5vh;
+                        margin: 0;
+                        display: flex;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        justify-content: center;
+
+                        .Tabs_produtos{
+                            #ItensRelac{
+                                .Select_Produtos{
+                                    width: 50%;
+                                    height: 80%;
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: center;
+                                    justify-content: center;
+                                    position: relative;
+                                    #category-select{
+                                        position: relative;
+                                        width: 85%;
+                                        height: 4vh;
+                                        #options_btn_ItemAtr01, #options_btn_ItemAtr02, #options_btn_ItemAtr03, #options_btn_ItemAtr04{
+                                            all: unset;
+                                            position: absolute;
+                                            inset: 0;
+                                            cursor: pointer;
+                                            font-size: 1vw;
+                                            z-index:5;
+                                        }
+                                        #select-button {
+                                            width: 100%;
+                                            height: 100%;
+                                            background-color: $Verde;
+                                            display: flex;
+                                            align-items: center;
+                                            position: relative;
+                                            outline: none;
+                                            #selected_val_ItemAtr01, #selected_val_ItemAtr02, #selected_val_ItemAtr03, #selected_val_ItemAtr04{
+                                                font-family: $Second-font;
+                                                color: $Preto;
+                                                font-size: 0.8vw;
+                                                font-weight: 900;
+                                                width: 80%;
+                                                height: 100%;
+                                                display: flex;
+                                                align-items: center;
+                                                white-space: nowrap;                  
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;
+                                                padding: 0 0.75vw;
+                                                padding-top: 0.25vh;
+                                            }
+                                            img, svg{
+                                                z-index: 99;
+                                                position: absolute;
+                                                right: 0.35vw;
+                                                width: 2vw;
+                                                height: 100%;
+                                                padding: 0.5vh;
+                                                path{
+                                                    fill: $Violeta;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    #options {
+                                        z-index: 999;
+                                        width: 85%;
+                                        height: auto;
+                                        max-height: 40vh;
+                                        top: 13vh;
+                                        overflow-x: hidden;
+                                        overflow-y: scroll;
+                                        background: $Verde;
+                                        display: none;
+                                        position: absolute;
+                                        padding: 0.5vw;
+                                        border-radius: 0.5vw;
+                                        .option_ItemAtr01, .option_ItemAtr02, .option_ItemAtr03, .option_ItemAtr04 {
+                                            display: flex;
+                                            align-items: center;
+                                            position: relative;
+                                            width: 100%;
+                                            height: 5vh;
+                                            border-bottom: 1px solid $Preto;
+                                            span{
+                                                all: unset;
+                                                width: 100%;
+                                                height: 100%;
+                                                display: flex;
+                                                align-items: center;
+                                                white-space: nowrap;                  
+                                                overflow: hidden;
+                                                text-overflow: ellipsis;
+                                                padding-left: 0.75vw;
+                                                font-family: $Second-font;
+                                                font-size: 0.75vw;
+                                                font-weight: 800;
+                                                color: $Preto;
+                                                z-index: 5;
+                                            }
+                                            input[type="radio"]{
+                                                all: unset;
+                                                position: absolute;
+                                                inset: 0;
+                                                z-index: 10;
+                                            }
+                                            &:hover{
+                                                &::before{
+                                                    content: '';
+                                                    position: absolute;
+                                                    inset: 0;
+                                                    background: $Cinza;
+                                                    opacity: 0.5;
+                                                    z-index: -1;
+                                                }
+                                            }
+                                            &:last-child{
+                                                border: none;
+                                            }
+                                        }
+                                    }
+                                    #options_btn_ItemAtr01:checked + #select-button svg, #options_btn_ItemAtr02:checked + #select-button svg, #options_btn_ItemAtr03:checked + #select-button svg, #options_btn_ItemAtr04:checked + #select-button svg{
+                                        transform: rotate(180deg);
+                                    }
+                                    #category-select:has(#options_btn_ItemAtr01:checked) + #options, #category-select:has(#options_btn_ItemAtr02:checked) + #options, #category-select:has(#options_btn_ItemAtr03:checked) + #options, #category-select:has(#options_btn_ItemAtr04:checked) + #options{
+                                        display: block;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 //CODIGOS
 #ModalCodigos{
     z-index: 99999;

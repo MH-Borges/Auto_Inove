@@ -278,7 +278,7 @@
 
                         $titulo_Subcateg = "Nova sub-categoria!"; 
                         $btn_Subcateg = "Adicionar";
-                        $selectBox = "<div id='selected-value'> Selecione a categoria </div>";
+                        $selectBox = "<div id='selected_val_Subcat'> Selecione a categoria </div>";
                         $selectedItem = ''; 
                     }
                     if (@$_GET['funcao'] == 'editSubcateg') {
@@ -301,8 +301,8 @@
                             $categ_Atrelada = $dados[0]['categ_Atrelada'];
                         }
 
-                        $selectBox = "<div id='selected-value'> $categ_Atrelada </div>";
-                        $selectedItem = "<li class='option'>
+                        $selectBox = "<div id='selected_val_Subcat'> $categ_Atrelada </div>";
+                        $selectedItem = "<li class='option_Subcat'>
                                             <input type='radio' name='categ_Atreladas' value='$categ_Atrelada' data-label='$categ_Atrelada'>
                                             <span class='label'>$categ_Atrelada</span>
                                         </li>";
@@ -324,7 +324,7 @@
                         <!-- categ_Atreladas_Select -->
                         <div class="categ_Atreladas_Select">
                             <div id="category-select">
-                                <input type="checkbox" id="options-view-button">
+                                <input type="checkbox" id="options_btn_Subcat" onchange="OptionSelection('selected_val_Subcat', 'options_btn_Subcat', 'option_Subcat');">
 
                                 <div id="select-button">
                                     <?php echo $selectBox ?>
@@ -341,7 +341,7 @@
                                     for ($j=0; $j < count($dados2); $j++) {
                                         $nome_categ_atrelada = $dados2[$j]['nome'];
                                         echo "
-                                        <li class='option'>
+                                        <li class='option_Subcat'>
                                             <input type='radio' name='categ_Atreladas' value='$nome_categ_atrelada' data-label='$nome_categ_atrelada'>
                                             <span class='label'>$nome_categ_atrelada</span>
                                         </li>
@@ -493,21 +493,6 @@
 ?>
 
 <script>
-
-    //SELECT CUSTOM
-    let select = document.querySelector('.categ_Atreladas_Select'),
-    selectedValue = document.getElementById('selected-value'),
-    optionsViewButton = document.getElementById('options-view-button'),
-    inputsOptions = document.querySelectorAll('.option input');
-        
-    inputsOptions.forEach(input => { 
-        input.addEventListener('click', event => {
-            selectedValue.textContent = input.dataset.label;
-            const isMouseOrTouch = event.pointerType == "mouse" || event.pointerType == "touch";
-            isMouseOrTouch && optionsViewButton.click();
-        });
-    });
-
     //CHAMADA DE FUNÇÃO PARA UPLOAD DE IMG BANCO DE DADOS
     function carregarImgWeb(){ carregarImagem('img_categ_Input', 'target_imgCateg', "../../assets/icons/placeholder.svg", 'img_categ_modal'); }
 

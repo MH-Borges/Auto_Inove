@@ -239,9 +239,9 @@ else {
 
                     <div class="modal-body">
                         <div id="MenuAdm" class="nav nav-pills MenuAdm">
-                            <a class="active" data-toggle="pill" id="InicioTab" href="#ContaDados">Dados da conta</a>
-                            <a data-toggle="pill" id="GraficosTab" href="#EmailTroca">Troca de email</a>
-                            <a data-toggle="pill" id="AstronautasTab" href="#SenhaTroca">Troca de senha</a>
+                            <a class="active" data-toggle="pill" href="#ContaDados">Dados da conta</a>
+                            <a data-toggle="pill" href="#EmailTroca">Troca de email</a>
+                            <a data-toggle="pill" href="#SenhaTroca">Troca de senha</a>
                         </div>
                         <div id="TabsAdm" class="tab-content TabsAdm">
                             <div class="tab-pane fade show active" id="ContaDados">

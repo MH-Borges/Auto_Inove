@@ -70,6 +70,19 @@ setInterval(
         verificaTamanhoInput('confirmaNovaSenha', 'ConfirmaNovaSenhaEditInput', 25);
 }, 50);
 
+//FUNÇÃO DE SELETORES CUSTOMIZADOS
+function OptionSelection(selectedValueId, optionsButtonId, optionInputsClass) {
+    let selectedValue = document.getElementById(selectedValueId),
+        optionsViewButton = document.getElementById(optionsButtonId),
+        inputsOptions = document.querySelectorAll('.' + optionInputsClass + ' input');
+
+    inputsOptions.forEach(input => { 
+        input.addEventListener('click', event => {
+            selectedValue.textContent = input.dataset.label;
+            optionsViewButton.click();
+        });
+    });
+}
 
 // UPLOAD INFOS
 $(document).ready(function () {

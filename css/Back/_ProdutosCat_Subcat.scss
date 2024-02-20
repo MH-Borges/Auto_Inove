@@ -746,7 +746,7 @@
                                 position: relative;
                                 width: 85%;
                                 height: 4vh;
-                                #options-view-button {
+                                #options_btn_Subcat {
                                     all: unset;
                                     position: absolute;
                                     inset: 0;
@@ -762,7 +762,7 @@
                                     align-items: center;
                                     position: relative;
                                     outline: none;
-                                    #selected-value {
+                                    #selected_val_Subcat{
                                         font-family: $Second-font;
                                         color: $Preto;
                                         font-size: 0.8vw;
@@ -775,6 +775,7 @@
                                         overflow: hidden;
                                         text-overflow: ellipsis;
                                         padding: 0 0.75vw;
+                                        padding-top: 0.25vh;
                                     }
                                     img, svg{
                                         z-index: 99;
@@ -802,7 +803,7 @@
                                 position: absolute;
                                 padding: 0.5vw;
                                 border-radius: 0.5vw;
-                                .option {
+                                .option_Subcat {
                                     display: flex;
                                     align-items: center;
                                     position: relative;
@@ -846,10 +847,10 @@
                                     }
                                 }
                             }
-                            #options-view-button:checked + #select-button svg{
+                            #options_btn_Subcat:checked + #select-button svg{
                                 transform: rotate(180deg);
                             }
-                            #category-select:has(#options-view-button:checked) + #options {
+                            #category-select:has(#options_btn_Subcat:checked) + #options {
                                 display: block;
                             }
                         }
