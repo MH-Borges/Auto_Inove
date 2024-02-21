@@ -278,8 +278,7 @@
 
                         $titulo_Subcateg = "Nova sub-categoria!"; 
                         $btn_Subcateg = "Adicionar";
-                        $selectBox = "<div id='selected_val_Subcat'> Selecione a categoria </div>";
-                        $selectedItem = ''; 
+                        $selectBox = "Selecione a categoria";
                     }
                     if (@$_GET['funcao'] == 'editSubcateg') {
                         echo '
@@ -301,14 +300,8 @@
                             $categ_Atrelada = $dados[0]['categ_Atrelada'];
                         }
 
-                        $selectBox = "<div id='selected_val_Subcat'> $categ_Atrelada </div>";
-                        $selectedItem = "<li class='option_Subcat'>
-                                            <input type='radio' name='categ_Atreladas' value='$categ_Atrelada' data-label='$categ_Atrelada'>
-                                            <span class='label'>$categ_Atrelada</span>
-                                        </li>";
-
+                        $selectBox = "$categ_Atrelada";
                     }
-                    
                 ?>
 
                 <form id="form_Subcategorias" method="POST">
@@ -327,15 +320,13 @@
                                 <input type="checkbox" id="options_btn_Subcat" onchange="OptionSelection('selected_val_Subcat', 'options_btn_Subcat', 'option_Subcat');">
 
                                 <div id="select-button">
-                                    <?php echo $selectBox ?>
+                                    <div id='selected_val_Subcat'> <?php echo $selectBox ?> </div>
                                     <img src="../../assets/icons/seta.svg" onload="SVGInject(this)">
                                 </div>
                             </div>
                             
                             <ul id="options">
                                 <?php 
-                                    echo $selectedItem;
-                                
                                     $query2 = $pdo->query("SELECT * FROM categorias ORDER BY id DESC");
                                     $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
                                     for ($j=0; $j < count($dados2); $j++) {

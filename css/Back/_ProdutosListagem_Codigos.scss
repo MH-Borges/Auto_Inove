@@ -301,133 +301,529 @@
                         width: 100%;
                         height: 100%;
                         padding: 1vw;
-                        padding-bottom: 0.5vh;
                         margin: 0;
                         display: flex;
-                        flex-wrap: wrap;
+                        flex-direction: column;
                         align-items: center;
                         justify-content: center;
-
+                        outline: 1px solid blue;
+                        .Menu_produtos{
+                            width: 100%;
+                            height: 7%;
+                            border-bottom: 1px solid $Verde;
+                            z-index: 10;
+                            a{
+                                font-family: $Second-font;
+                                font-weight: 800;
+                                font-size: 1.25vw;
+                                color: $Branco;
+                                padding: 0 0.75vw;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border: 1px solid $Abobora;
+                                border-bottom: none;
+                                position: relative;
+                                &:hover{
+                                    &::before{
+                                        all: unset;
+                                        content: '';
+                                        position: absolute;
+                                        inset: 0;
+                                        background: $Violeta;
+                                        opacity: 0.05;
+                                        z-index: -1 !important;
+                                    }
+                                }
+                            }
+                            .active{
+                                position: relative;
+                                &:hover{
+                                    &::before{
+                                        opacity: 0.25;
+                                    }
+                                }
+                                &::before{
+                                    all: unset;
+                                    content: '';
+                                    position: absolute;
+                                    inset: 0;
+                                    background: $Violeta;
+                                    opacity: 0.25;
+                                    z-index: -1 !important;
+                                }
+                            }
+                        }
                         .Tabs_produtos{
-                            #ItensRelac{
-                                .Select_Produtos{
-                                    width: 50%;
-                                    height: 80%;
+                            width: 100%;
+                            height: 93%;
+                            padding: 0.5vw;
+                            #DadosProduto{
+                                width: 100%;
+                                height: 100%;
+                                .tabBox{
+                                    outline: 1px solid red;
+                                    width: 100%;
+                                    height: 100%;
                                     display: flex;
-                                    flex-direction: column;
-                                    align-items: center;
+                                    flex-direction: row;
                                     justify-content: center;
+                                    align-items: center;
                                     position: relative;
-                                    #category-select{
+                                    .Base_checkbox{
+                                        width: 25%;
+                                        height: 100%;
                                         position: relative;
-                                        width: 85%;
-                                        height: 4vh;
-                                        #options_btn_ItemAtr01, #options_btn_ItemAtr02, #options_btn_ItemAtr03, #options_btn_ItemAtr04{
-                                            all: unset;
-                                            position: absolute;
-                                            inset: 0;
-                                            cursor: pointer;
-                                            font-size: 1vw;
-                                            z-index:5;
-                                        }
-                                        #select-button {
+                                        padding-top: 3vh;
+                                        .Img_Produto{
+                                            margin: 0;
                                             width: 100%;
-                                            height: 100%;
-                                            background-color: $Verde;
+                                            height: 40%;
                                             display: flex;
                                             align-items: center;
+                                            justify-content: center;
                                             position: relative;
-                                            outline: none;
-                                            #selected_val_ItemAtr01, #selected_val_ItemAtr02, #selected_val_ItemAtr03, #selected_val_ItemAtr04{
-                                                font-family: $Second-font;
-                                                color: $Preto;
-                                                font-size: 0.8vw;
-                                                font-weight: 900;
+                                            input{
+                                                opacity: 0;
+                                                pointer-events: none;
+                                                display: none;
+                                            }
+                                            .img_produto_modal{
+                                                width: 80%;
+                                                height: 85%;
+                                                object-fit: contain;
+                                            }
+                                            .editPen{
+                                                position: absolute;
+                                                width: 2vw;
+                                                height: 2vw;
+                                                bottom: 0;
+                                                padding: 0.5vw;
+                                                path{
+                                                    fill: $Preto;
+                                                }
+                                            }
+                                            &::before{
+                                                content: '';
+                                                position: absolute;
+                                                width: 2vw;
+                                                height: 2vw;
+                                                bottom: 0;
+                                                background: $Verde;
+                                                border-radius: 50%;
+                                            }
+                                        }
+                                        .BlockBox{
+                                            width: 100%;
+                                            height: 5vh;
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            position: relative;
+                                            margin: 3.5vh 0;
+                                            input{
                                                 width: 80%;
                                                 height: 100%;
+                                                border: none;
+                                                font-family: $Second-font;
+                                                font-size: 0.85vw;
+                                                font-weight: 700;
+                                                color: $Branco;
+                                                background: none;
+                                                border-bottom: 1px solid $Abobora;
+                                                z-index: 10 !important;
+                                                padding: 0 1vw;
+                                                &:focus{
+                                                    outline: none;
+                                                }
+                                            }
+                                            span{
+                                                font-family: $Second-font;
+                                                position: absolute;
+                                                left: 3.25vw;
+                                                font-size: 1vw;
+                                                color: $Preto;
+                                                font-weight: 500;
+                                                transition: 0.5s;
+                                                pointer-events: none;
+                                            }
+                                            .lengthInput{
+                                                position: absolute;
+                                                bottom: -4vh;
+                                                right: 12.5%;
+                                                width: 3.5vw;
+                                                height: 75%;
                                                 display: flex;
                                                 align-items: center;
-                                                white-space: nowrap;                  
-                                                overflow: hidden;
-                                                text-overflow: ellipsis;
-                                                padding: 0 0.75vw;
-                                                padding-top: 0.25vh;
+                                                justify-content: center;
+                                                font-family: $Second-font;
+                                                color: $Branco;
+                                                font-size: 0.75vw;
+                                                font-weight: 800;
                                             }
-                                            img, svg{
-                                                z-index: 99;
-                                                position: absolute;
-                                                right: 0.35vw;
-                                                width: 2vw;
+                                        }
+                                        .BlockBox input:focus ~ span, input:valid ~ span{
+                                            transform:translate(-0.75vw, -3.75vh);
+                                            font-size: 0.9vw;
+                                            font-weight: 900;
+                                        }
+                                        .litros_checkBox, .mercadoLivre_checkBox{
+                                            position: absolute;
+                                            width: 90%;
+                                            height: 3vh;
+                                            bottom: 1vh;
+                                            left: 0.5vw;
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: left;
+                                            input{
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
                                                 height: 100%;
-                                                padding: 0.5vh;
-                                                path{
-                                                    fill: $Violeta;
+                                                width: 1vw;
+                                                padding: 0.5vw;
+                                                margin-left: 0.5vw;
+                                            }
+                                            label{
+                                                all: unset;
+                                                font-family: $Second-font;
+                                                font-weight: 700;
+                                                font-size: 0.75vw;
+                                                color: $Preto;
+                                                margin-left: 0.5vw;
+                                            }
+                                        }
+                                        .litros_checkBox{
+                                            bottom: 5vh;
+                                        }
+                                    }
+                                    .Infos{
+                                        width: 75%;
+                                        height: 100%;
+                                        outline: 1px solid purple;
+                                        display: flex;
+                                        flex-wrap: wrap;
+                                        .BlockBox{
+                                            width: 100%;
+                                            height: 5vh;
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            position: relative;
+                                            margin: 3.5vh 0;
+                                            input, textarea{
+                                                width: 80%;
+                                                height: 100%;
+                                                border: none;
+                                                font-family: $Second-font;
+                                                font-size: 0.85vw;
+                                                font-weight: 700;
+                                                color: $Branco;
+                                                background: none;
+                                                border-bottom: 1px solid $Abobora;
+                                                z-index: 10 !important;
+                                                padding: 0 1vw;
+                                                resize: none;
+                                                &:focus{
+                                                    outline: none;
                                                 }
+                                            }
+                                            span{
+                                                font-family: $Second-font;
+                                                position: absolute;
+                                                left: 3.25vw;
+                                                font-size: 1vw;
+                                                color: $Preto;
+                                                font-weight: 500;
+                                                transition: 0.5s;
+                                                pointer-events: none;
+                                            }
+                                            .lengthInput{
+                                                position: absolute;
+                                                bottom: -4vh;
+                                                right: 12.5%;
+                                                width: 3.5vw;
+                                                height: 75%;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                                font-family: $Second-font;
+                                                color: $Branco;
+                                                font-size: 0.75vw;
+                                                font-weight: 800;
+                                            }
+                                        }
+                                        .BlockBox input:focus ~ span, input:valid ~ span, .BlockBox textarea:focus ~ span, textarea:valid ~ span{
+                                            transform:translate(-0.75vw, -3.75vh);
+                                            font-size: 0.9vw;
+                                            font-weight: 900;
+                                        }
+                                        .Select_Produtos{
+                                            outline: 1px solid red;
+                                            width: 33.3%;
+                                            height: 10vh;
+                                            display: flex;
+                                            flex-direction: column;
+                                            align-items: center;
+                                            justify-content: center;
+                                            position: relative;
+                                            #category-select{
+                                                position: relative;
+                                                width: 85%;
+                                                height: 4vh;
+                                                #options_btn_Categorias, #options_btn_SubCategorias, #options_btn_Codigos{
+                                                    all: unset;
+                                                    position: absolute;
+                                                    inset: 0;
+                                                    cursor: pointer;
+                                                    font-size: 1vw;
+                                                    z-index:5;
+                                                }
+                                                #select-button {
+                                                    width: 100%;
+                                                    height: 100%;
+                                                    background-color: $Verde;
+                                                    display: flex;
+                                                    align-items: center;
+                                                    position: relative;
+                                                    outline: none;
+                                                    #selected_val_Categorias, #selected_val_SubCategorias, #selected_val_Codigos{
+                                                        font-family: $Second-font;
+                                                        color: $Preto;
+                                                        font-size: 0.8vw;
+                                                        font-weight: 900;
+                                                        width: 80%;
+                                                        height: 100%;
+                                                        display: flex;
+                                                        align-items: center;
+                                                        white-space: nowrap;                  
+                                                        overflow: hidden;
+                                                        text-overflow: ellipsis;
+                                                        padding: 0 0.75vw;
+                                                        padding-top: 0.25vh;
+                                                    }
+                                                    img, svg{
+                                                        z-index: 99;
+                                                        position: absolute;
+                                                        right: 0.35vw;
+                                                        width: 2vw;
+                                                        height: 100%;
+                                                        padding: 0.5vh;
+                                                        path{
+                                                            fill: $Violeta;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            #options {
+                                                z-index: 999;
+                                                width: 85%;
+                                                height: auto;
+                                                max-height: 40vh;
+                                                top: 13vh;
+                                                overflow-x: hidden;
+                                                overflow-y: scroll;
+                                                background: $Verde;
+                                                display: none;
+                                                position: absolute;
+                                                padding: 0.5vw;
+                                                border-radius: 0.5vw;
+                                                .option_Categorias, .option_SubCategorias, .option_Codigos {
+                                                    display: flex;
+                                                    align-items: center;
+                                                    position: relative;
+                                                    width: 100%;
+                                                    height: 5vh;
+                                                    border-bottom: 1px solid $Preto;
+                                                    span{
+                                                        all: unset;
+                                                        width: 100%;
+                                                        height: 100%;
+                                                        display: flex;
+                                                        align-items: center;
+                                                        white-space: nowrap;                  
+                                                        overflow: hidden;
+                                                        text-overflow: ellipsis;
+                                                        padding-left: 0.75vw;
+                                                        font-family: $Second-font;
+                                                        font-size: 0.75vw;
+                                                        font-weight: 800;
+                                                        color: $Preto;
+                                                        z-index: 5;
+                                                    }
+                                                    input[type="radio"]{
+                                                        all: unset;
+                                                        position: absolute;
+                                                        inset: 0;
+                                                        z-index: 10;
+                                                    }
+                                                    &:hover{
+                                                        &::before{
+                                                            content: '';
+                                                            position: absolute;
+                                                            inset: 0;
+                                                            background: $Cinza;
+                                                            opacity: 0.5;
+                                                            z-index: -1;
+                                                        }
+                                                    }
+                                                    &:last-child{
+                                                        border: none;
+                                                    }
+                                                }
+                                            }
+                                            #options_btn_Categorias:checked + #select-button svg, #options_btn_SubCategorias:checked + #select-button svg, #options_btn_Codigos:checked + #select-button svg{
+                                                transform: rotate(180deg);
+                                            }
+                                            #category-select:has(#options_btn_Categorias:checked) + #options, #category-select:has(#options_btn_SubCategorias:checked) + #options, #category-select:has(#options_btn_Codigos:checked) + #options{
+                                                display: block;
                                             }
                                         }
                                     }
-                                    #options {
-                                        z-index: 999;
-                                        width: 85%;
-                                        height: auto;
-                                        max-height: 40vh;
-                                        top: 13vh;
-                                        overflow-x: hidden;
-                                        overflow-y: scroll;
-                                        background: $Verde;
-                                        display: none;
+                                    span, button{
                                         position: absolute;
-                                        padding: 0.5vw;
-                                        border-radius: 0.5vw;
-                                        .option_ItemAtr01, .option_ItemAtr02, .option_ItemAtr03, .option_ItemAtr04 {
-                                            display: flex;
-                                            align-items: center;
+                                        bottom: 1vh;
+                                        right: 1vw;
+                                    }
+                                }
+                            }
+                            #ItensRelac{
+                                width: 100%;
+                                height: 100%;
+                                .tabBox{
+                                    outline: 1px solid greenyellow;
+                                    width: 100%;
+                                    height: 100%;
+                                    display: flex;
+                                    flex-direction: row;
+                                    justify-content: center;
+                                    align-items: center;
+                                    position: relative;
+                                    .Select_Produtos{
+                                        width: 25%;
+                                        height: 100%;
+                                        display: flex;
+                                        flex-direction: column;
+                                        align-items: center;
+                                        justify-content: center;
+                                        position: relative;
+                                        #category-select{
                                             position: relative;
-                                            width: 100%;
-                                            height: 5vh;
-                                            border-bottom: 1px solid $Preto;
-                                            span{
-                                                all: unset;
-                                                width: 100%;
-                                                height: 100%;
-                                                display: flex;
-                                                align-items: center;
-                                                white-space: nowrap;                  
-                                                overflow: hidden;
-                                                text-overflow: ellipsis;
-                                                padding-left: 0.75vw;
-                                                font-family: $Second-font;
-                                                font-size: 0.75vw;
-                                                font-weight: 800;
-                                                color: $Preto;
-                                                z-index: 5;
-                                            }
-                                            input[type="radio"]{
+                                            width: 85%;
+                                            height: 4vh;
+                                            #options_btn_ItemAtr01, #options_btn_ItemAtr02, #options_btn_ItemAtr03, #options_btn_ItemAtr04{
                                                 all: unset;
                                                 position: absolute;
                                                 inset: 0;
-                                                z-index: 10;
+                                                cursor: pointer;
+                                                font-size: 1vw;
+                                                z-index:5;
                                             }
-                                            &:hover{
-                                                &::before{
-                                                    content: '';
+                                            #select-button {
+                                                width: 100%;
+                                                height: 100%;
+                                                background-color: $Verde;
+                                                display: flex;
+                                                align-items: center;
+                                                position: relative;
+                                                outline: none;
+                                                #selected_val_ItemAtr01, #selected_val_ItemAtr02, #selected_val_ItemAtr03, #selected_val_ItemAtr04{
+                                                    font-family: $Second-font;
+                                                    color: $Preto;
+                                                    font-size: 0.8vw;
+                                                    font-weight: 900;
+                                                    width: 80%;
+                                                    height: 100%;
+                                                    display: flex;
+                                                    align-items: center;
+                                                    white-space: nowrap;                  
+                                                    overflow: hidden;
+                                                    text-overflow: ellipsis;
+                                                    padding: 0 0.75vw;
+                                                    padding-top: 0.25vh;
+                                                }
+                                                img, svg{
+                                                    z-index: 99;
                                                     position: absolute;
-                                                    inset: 0;
-                                                    background: $Cinza;
-                                                    opacity: 0.5;
-                                                    z-index: -1;
+                                                    right: 0.35vw;
+                                                    width: 2vw;
+                                                    height: 100%;
+                                                    padding: 0.5vh;
+                                                    path{
+                                                        fill: $Violeta;
+                                                    }
                                                 }
                                             }
-                                            &:last-child{
-                                                border: none;
+                                        }
+                                        #options {
+                                            z-index: 999;
+                                            width: 85%;
+                                            height: auto;
+                                            max-height: 40vh;
+                                            top: 13vh;
+                                            overflow-x: hidden;
+                                            overflow-y: scroll;
+                                            background: $Verde;
+                                            display: none;
+                                            position: absolute;
+                                            padding: 0.5vw;
+                                            border-radius: 0.5vw;
+                                            .option_ItemAtr01, .option_ItemAtr02, .option_ItemAtr03, .option_ItemAtr04 {
+                                                display: flex;
+                                                align-items: center;
+                                                position: relative;
+                                                width: 100%;
+                                                height: 5vh;
+                                                border-bottom: 1px solid $Preto;
+                                                span{
+                                                    all: unset;
+                                                    width: 100%;
+                                                    height: 100%;
+                                                    display: flex;
+                                                    align-items: center;
+                                                    white-space: nowrap;                  
+                                                    overflow: hidden;
+                                                    text-overflow: ellipsis;
+                                                    padding-left: 0.75vw;
+                                                    font-family: $Second-font;
+                                                    font-size: 0.75vw;
+                                                    font-weight: 800;
+                                                    color: $Preto;
+                                                    z-index: 5;
+                                                }
+                                                input[type="radio"]{
+                                                    all: unset;
+                                                    position: absolute;
+                                                    inset: 0;
+                                                    z-index: 10;
+                                                }
+                                                &:hover{
+                                                    &::before{
+                                                        content: '';
+                                                        position: absolute;
+                                                        inset: 0;
+                                                        background: $Cinza;
+                                                        opacity: 0.5;
+                                                        z-index: -1;
+                                                    }
+                                                }
+                                                &:last-child{
+                                                    border: none;
+                                                }
                                             }
                                         }
+                                        #options_btn_ItemAtr01:checked + #select-button svg, #options_btn_ItemAtr02:checked + #select-button svg, #options_btn_ItemAtr03:checked + #select-button svg, #options_btn_ItemAtr04:checked + #select-button svg{
+                                            transform: rotate(180deg);
+                                        }
+                                        #category-select:has(#options_btn_ItemAtr01:checked) + #options, #category-select:has(#options_btn_ItemAtr02:checked) + #options, #category-select:has(#options_btn_ItemAtr03:checked) + #options, #category-select:has(#options_btn_ItemAtr04:checked) + #options{
+                                            display: block;
+                                        }
                                     }
-                                    #options_btn_ItemAtr01:checked + #select-button svg, #options_btn_ItemAtr02:checked + #select-button svg, #options_btn_ItemAtr03:checked + #select-button svg, #options_btn_ItemAtr04:checked + #select-button svg{
-                                        transform: rotate(180deg);
-                                    }
-                                    #category-select:has(#options_btn_ItemAtr01:checked) + #options, #category-select:has(#options_btn_ItemAtr02:checked) + #options, #category-select:has(#options_btn_ItemAtr03:checked) + #options, #category-select:has(#options_btn_ItemAtr04:checked) + #options{
-                                        display: block;
+                                    .aviso, span, button{
+                                        position: absolute;
+                                        bottom: 1vh;
+                                        right: 1vw;
                                     }
                                 }
                             }
@@ -438,7 +834,6 @@
         }
     }
 }
-
 
 //CODIGOS
 #ModalCodigos{

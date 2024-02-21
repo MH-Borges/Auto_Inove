@@ -109,7 +109,7 @@ $(document).ready(function () {
                 }
             }
         })
-    })
+    });
     
     $('#formEditUser').submit(function(e){
         e.preventDefault();
