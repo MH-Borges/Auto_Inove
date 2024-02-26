@@ -2,15 +2,15 @@
 
     <a class="produtos_Btn_CriacaoProd" href="index.php?pag=listagemProduto&funcao=novoProd">
         <p>Novo Produto</p>
-        <img src="../../assets/icons/add.svg" >
+        <img src="../../assets/icons/add.svg">
     </a>
     <a class="produtos_Btn_CriacaoCodigo" href="index.php?pag=listagemProduto&funcao=novoCodigo">
         <p>Novo Código</p>
-        <img src="../../assets/icons/add.svg" >
+        <img src="../../assets/icons/add.svg">
     </a>
     <button class="produtos_Btn_ListCodigos" type="button" data-toggle="modal" data-target="#ModalListagemCodigos">
         <p>Listagem de Códigos</p>
-        <img src="../../assets/icons/list.svg" >
+        <img src="../../assets/icons/list.svg">
     </button>
 
     <h2>Listagem de produtos</h2>
@@ -64,7 +64,6 @@
             ?>
         </tbody>
     </table>
-
 </div>
 
 
@@ -125,11 +124,11 @@
                 <form id="form_Produtos" method="POST">
                     <div class="modal-body">
                         <div class="nav nav-pills Menu_produtos">
-                            <a id="DadosProduto_btn" class="active" data-toggle="pill" href="#DadosProduto"><?php echo $titulo_Produto ?></a>
-                            <a id="ItensRelac_btn" data-toggle="pill" href="#ItensRelac">Itens relacionados</a>
+                            <a id="DadosProduto_btn" data-toggle="pill" href="#DadosProduto"><?php echo $titulo_Produto ?></a>
+                            <a id="ItensRelac_btn" class="active" data-toggle="pill" href="#ItensRelac">Itens relacionados</a>
                         </div>
                         <div class="tab-content Tabs_produtos">
-                            <div class="tab-pane fade show active" id="DadosProduto">
+                            <div class="tab-pane fade" id="DadosProduto">
                                 <div class="tabBox">
                                     <div class="Base_checkbox">
                                         <div class="Img_Produto">
@@ -155,30 +154,30 @@
                                             <span>Valor:</span>
                                         </div>
                                         
-                                        <div class="litros_checkBox" onclick="litrosCheck()">
+                                        <div class="litros_checkBox">
                                             <?php
                                                 if($litros_Produto == "" || $litros_Produto == null){
-                                                    echo "<input type='checkbox' id='litros_checkBox' name='litros_checkBox'>";
-                                                }else { echo "<input type='checkbox' id='litros_checkBox' name='litros_checkBox' checked>"; }
+                                                    echo "<input type='checkbox' id='litros_checkBox' name='litros_checkBox' onclick='litrosCheck()'>";
+                                                }else { echo "<input type='checkbox' id='litros_checkBox' name='litros_checkBox' onclick='litrosCheck()' checked>"; }
                                             ?>
                                             <label for="litros_checkBox">É medido por litros?</label>
                                         </div>
     
-                                        <div class="mercadoLivre_checkBox" onclick="mercadoLivreCheck()">
+                                        <div class="mercadoLivre_checkBox" >
                                             <?php
                                                 if($mercadoLivre_Produto == "" || $mercadoLivre_Produto == null){
-                                                    echo "<input type='checkbox' id='mercadoLivre_checkBox' name='mercadoLivre_checkBox'>";
-                                                }else { echo "<input type='checkbox' id='mercadoLivre_checkBox' name='mercadoLivre_checkBox' checked>"; }
+                                                    echo "<input type='checkbox' id='mercadoLivre_checkBox' name='mercadoLivre_checkBox' onclick='mercadoLivreCheck()'>";
+                                                }else { echo "<input type='checkbox' id='mercadoLivre_checkBox' name='mercadoLivre_checkBox' onclick='mercadoLivreCheck()' checked>"; }
                                             ?>
                                             <label for="mercadoLivre_checkBox">Link para o mercado livre?</label>
                                         </div>
                                     </div>
     
                                     <div class="Infos">
-                                        <div class="BlockBox">
+                                        <div class="BlockBox descricaoBox">
                                             <textarea type="text" name="descri_Produto" id="descri_Produto" maxlength="500" required><?php echo str_replace('<br />', PHP_EOL, @$descricao_Produto); ?></textarea>
                                             <span>Descrição:</span>
-                                            <p class="lengthInput descri_produto_Input"></p>
+                                            <p class="lengthInput descri_produto_Input"> 150 / 25</p>
                                         </div>
         
                                         <div class="Select_Produtos">
@@ -217,6 +216,13 @@
                                                     <img src="../../assets/icons/seta.svg" onload="SVGInject(this)">
                                                 </div>
                                             </div>
+
+                                            <ul id='options' class='listagem_subcat'>
+                                                <li class='option_SubCategorias'>
+                                                    <input type='radio' name='SubCategoria_Produto' style="pointer-events: none;" value='null' data-label='null'>
+                                                    <span class='label'>Selecione uma categoria antes</span>
+                                                </li>
+                                            </ul> 
                                         </div>
         
                                         <div class="Select_Produtos">
@@ -277,13 +283,12 @@
                                         </div>
                                     </div>
     
-                                    <span>Passo 1 de 2</span>
-                                    <button type="button" onclick="clickTab('ItensRelac_btn');">Ir para itens relacionados</button>
+                                    <p>Passo 1 de 2</p>
+                                    <button type="button" onclick="document.getElementById('ItensRelac_btn').click();">Ir para itens relacionados</button>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="ItensRelac">
+                            <div class="tab-pane fade show active" id="ItensRelac">
                                 <div class="tabBox">
-                                    <!-- categ_Atreladas_Select -->
                                     <div class="Select_Produtos">
                                         <div id="category-select">
                                             <input type="checkbox" id="options_btn_ItemAtr01" onchange="OptionSelection('selected_val_ItemAtr01', 'options_btn_ItemAtr01', 'option_ItemAtr01');">
@@ -294,7 +299,7 @@
                                             </div>
                                         </div>
                                         
-                                        <ul id="options" >
+                                        <ul id="options">
                                             <?php 
                                                 $query2 = $pdo->query("SELECT * FROM produtos ORDER BY id DESC");
                                                 $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
@@ -395,11 +400,11 @@
     
                                     <div class="aviso">
                                         <img src="../../assets/icons/!.svg">
-                                        <span>Deixando essa aba vazia os 'itens relacionados' desse produto serão organizados por códigos similares cadastrados recentemente!</span>
+                                        <p>Deixando essa aba vazia os 'itens relacionados' desse produto serão organizados por códigos similares cadastrados recentemente!</p>
                                     </div>
     
                                     <span>Passo 2 de 2</span>
-                                    <button type="button" onclick="clickTab('DadosProduto_btn');">Voltar</button>
+                                    <button type="button" onclick="document.getElementById('DadosProduto_btn').click();">Voltar</button>
                                     <button class="SalvarBtnModal" type="submit"><?php echo $btn_Produto ?></button>
                                 </div>
                             </div>
@@ -669,10 +674,15 @@
     </div>
 </div>
 
+
+<!-- LISTAGENS DINAMICAS -->
+<!-- subcategorias -->
 <form id="form_listagem_subCateg" class="hide" method="POST">
     <input type="hidden" id="categoria_lista_subCateg" name="categoria_lista_subCateg" value="">
 </form>
 
+
+<!-- FUNÇÕES PHP NA CHAMADA DE MODAL -->
 <?php
     if (@$_GET["funcao"] == "novoProd" || @$_GET["funcao"] == "editProd") {
         echo "<script language='javascript'> $('#ModalProduto').modal('show');</script>";
@@ -693,41 +703,91 @@
 ?>
 
 <script>
+    //VERIFICACAO GERAL DE TAMANHOS DE INPUT
+    setInterval(
+        function () {
+            verificaTamanhoInput('nome_Produto', 'nome_produto_Input', 200);
+            verificaTamanhoInput('descri_Produto', 'descri_produto_Input', 500);
+            verificaTamanhoInput('marca_Produto', 'marca_produto_Input', 150);
+            verificaTamanhoInput('mercadoLivre_Produto', 'mercadoLivre_produto_Input', 500);
+    }, 50);
+
+    //CHAMADA DE FUNÇÃO PARA UPLOAD DE IMG BANCO DE DADOS
+    function carregarImgProduto(){ carregarImagem('img_Produto_Input', 'target_imgProduto', "../../assets/icons/placeholder.svg", 'img_produto_modal'); }
+    
+    //MASCARA PARA INSERÇÃO DE VALOR
+    $('#valor_Produto').mask('000.000.000.000.000,00', {reverse: true});
+   
+    //LISTAGENS DINAMICAS 
+    //// Subcategorias
+    document.querySelectorAll('.option_Categorias input').forEach(input => { 
+        input.addEventListener('click', event => {
+            $("#categoria_lista_subCateg").val(input.dataset.label);
+            if($("#selected_val_SubCategorias").text() !== "Selecione a subcategoria"){
+                $("#selected_val_SubCategorias").html("Selecione a subcategoria");
+            }
+            $("#form_listagem_subCateg").click();
+        });
+    });
+
+    //CHECKBOX'S
+    function litrosCheck() {
+        if($(".litros_input").hasClass("hide")){
+            $(".litros_input").removeClass("hide");
+            $(".estoque_input").addClass("metade");
+        }else{
+            $(".litros_input").addClass("hide");
+            $(".estoque_input").removeClass("metade");
+        }
+    }
+    function mercadoLivreCheck() {
+        if($(".mercadoLivre_input").hasClass("hide")){
+            $(".Infos .BlockBox").height('16.6%');
+            $(".descricaoBox").height('35%');
+            $(".mercadoLivre_input").removeClass("hide");
+
+        }else{
+            $(".Infos .BlockBox").height('22.5%');
+            $(".descricaoBox").height('40%');
+            $(".mercadoLivre_input").addClass("hide");
+        }
+    }
+
     //UPLOAD DAS INFOS NO BANCO DE DADOS
-    // $("#form_categorias").submit(function (e) {
-    //     e.preventDefault();
-    //     var formData = new FormData(this);
-    //     $.ajax({
-    //         url: "Produtos/categoria/insert_Edit.php",
-    //         type: 'POST',
-    //         data: formData,
-    //         success: function (msg) {
-    //             $('#msgErro_InsertEdit_Categ').removeClass('text-danger');
-    //             $('#msgErro_InsertEdit_Categ').addClass('text-warning');
-    //             $('#msgErro_InsertEdit_Categ').text('carregando...');
-    //             if (msg.trim() === "Categoria adicionada com Sucesso!!" || msg.trim() === "Categoria Atualizada com Sucesso!!" ) {
-    //                 $('#msgErro_InsertEdit_Categ').removeClass('text-warning');
-    //                 $('#msgErro_InsertEdit_Categ').removeClass('text-danger');
-    //                 $('#msgErro_InsertEdit_Categ').addClass('text-success');
-    //                 $('#msgErro_InsertEdit_Categ').text(msg);
-    //                 setTimeout(() => { window.location='./index.php?pag=categoriasProduto'; }, 1500);
-    //             }
-    //             else {
-    //                 $('#msgErro_InsertEdit_Categ').removeClass('text-warning');
-    //                 $('#msgErro_InsertEdit_Categ').addClass('text-danger');
-    //                 $('#msgErro_InsertEdit_Categ').text(msg);
-    //             }
-    //         },
-    //         cache: false,
-    //         contentType: false,
-    //         processData: false,
-    //         xhr: function () {
-    //             var myXhr = $.ajaxSettings.xhr();
-    //             if (myXhr.upload){ myXhr.upload.addEventListener('progress', function() {}, false); }
-    //             return myXhr;
-    //         }
-    //     });
-    // });
+    $("#form_Produtos").submit(function (e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        $.ajax({
+            url: "Produtos/produto/insert_Edit.php",
+            type: 'POST',
+            data: formData,
+            success: function (msg) {
+                $('#msgErro_InsertEdit_Produto').removeClass('text-danger');
+                $('#msgErro_InsertEdit_Produto').addClass('text-warning');
+                $('#msgErro_InsertEdit_Produto').text('carregando...');
+                if (msg.trim() === "Produto adicionado com Sucesso!!" || msg.trim() === "Produto Atualizado com Sucesso!!" ) {
+                    $('#msgErro_InsertEdit_Produto').removeClass('text-warning');
+                    $('#msgErro_InsertEdit_Produto').removeClass('text-danger');
+                    $('#msgErro_InsertEdit_Produto').addClass('text-success');
+                    $('#msgErro_InsertEdit_Produto').text(msg);
+                    setTimeout(() => { window.location='./index.php?pag=listagemProduto'; }, 1500);
+                }
+                else {
+                    $('#msgErro_InsertEdit_Produto').removeClass('text-warning');
+                    $('#msgErro_InsertEdit_Produto').addClass('text-danger');
+                    $('#msgErro_InsertEdit_Produto').text(msg);
+                }
+            },
+            cache: false,
+            contentType: false,
+            processData: false,
+            xhr: function () {
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload){ myXhr.upload.addEventListener('progress', function() {}, false); }
+                return myXhr;
+            }
+        });
+    });
 
     // $('#form_delete_categorias').submit(function (e) {
     //     e.preventDefault();
@@ -842,53 +902,4 @@
             }
         })
     });
-
-    //VERIFICACAO GERAL DE TAMANHOS DE INPUT
-    setInterval(
-        function () {
-            verificaTamanhoInput('nome_Produto', 'nome_produto_Input', 200);
-            verificaTamanhoInput('descri_Produto', 'descri_produto_Input', 500);
-            verificaTamanhoInput('marca_Produto', 'marca_produto_Input', 150);
-            verificaTamanhoInput('mercadoLivre_Produto', 'mercadoLivre_produto_Input', 500);
-    }, 50);
-
-    //transições de tab's Modal produtos
-    function clickTab(buttonId) {
-        document.getElementById(buttonId).click();
-    }
-
-    //CHAMADA DE FUNÇÃO PARA UPLOAD DE IMG BANCO DE DADOS
-    function carregarImgProduto(){ carregarImagem('img_Produto_Input', 'target_imgProduto', "../../assets/icons/placeholder.svg", 'img_produto_modal'); }
-    
-    //MASCARA PARA INSERÇÃO DE VALOR
-    $('#valor_Produto').mask('000.000.000.000.000,00', {reverse: true});
-   
-    //LISTAGEM DE SUBCATEGORIAS
-    document.querySelectorAll('.option_Categorias input').forEach(input => { 
-        input.addEventListener('click', event => {
-            $("#categoria_lista_subCateg").val(input.dataset.label);
-            if($("#selected_val_SubCategorias").text() !== "Selecione a subcategoria"){
-                $("#selected_val_SubCategorias").html("Selecione a subcategoria");
-            }
-            $("#form_listagem_subCateg").click();
-        });
-    });
-
-    //CHECKBOX'S
-    function litrosCheck() {
-        if($(".litros_input").hasClass("hide")){
-            $(".litros_input").removeClass("hide");
-            $(".estoque_input").addClass("metade");
-        }else{
-            $(".litros_input").addClass("hide");
-            $(".estoque_input").removeClass("metade");
-        }
-    }
-    function mercadoLivreCheck() {
-        if($(".mercadoLivre_input").hasClass("hide")){
-            $(".mercadoLivre_input").removeClass("hide");
-        }else{
-            $(".mercadoLivre_input").addClass("hide");
-        }
-    }
 </script>

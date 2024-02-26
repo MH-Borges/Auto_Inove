@@ -3447,7 +3447,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  outline: 1px solid blue;
 }
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Menu_produtos {
   width: 100%;
@@ -3502,7 +3501,6 @@ body {
   height: 100%;
 }
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox {
-  outline: 1px solid red;
   width: 100%;
   height: 100%;
   display: flex;
@@ -3576,7 +3574,7 @@ body {
   background: none;
   border-bottom: 1px solid #F83810;
   z-index: 10 !important;
-  padding: 0 1vw;
+  padding: 0 0.75vw;
 }
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Base_checkbox .BlockBox input:focus {
   outline: none;
@@ -3584,7 +3582,7 @@ body {
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Base_checkbox .BlockBox span {
   font-family: "Be Vietnam Pro", sans-serif;
   position: absolute;
-  left: 3.25vw;
+  left: 2.75vw;
   font-size: 1vw;
   color: #131313;
   font-weight: 500;
@@ -3606,7 +3604,7 @@ body {
   font-weight: 800;
 }
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Base_checkbox .BlockBox input:focus ~ span, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Base_checkbox input:valid ~ span {
-  transform: translate(-0.75vw, -3.75vh);
+  transform: translate(-0.65vw, -3.75vh);
   font-size: 0.9vw;
   font-weight: 900;
 }
@@ -3643,22 +3641,21 @@ body {
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos {
   width: 75%;
   height: 100%;
-  outline: 1px solid purple;
   display: flex;
   flex-wrap: wrap;
+  padding-bottom: 7vh;
 }
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .BlockBox {
   width: 100%;
-  height: 5vh;
+  height: 22.5%;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  margin: 3.5vh 0;
 }
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .BlockBox input, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .BlockBox textarea {
-  width: 80%;
-  height: 100%;
+  width: 90%;
+  height: 40%;
   border: none;
   font-family: "Be Vietnam Pro", sans-serif;
   font-size: 0.85vw;
@@ -3676,6 +3673,9 @@ body {
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .BlockBox span {
   font-family: "Be Vietnam Pro", sans-serif;
   position: absolute;
+  width: 10vw;
+  height: 3vh;
+  top: calc(50% - 1.5vh);
   left: 3.25vw;
   font-size: 1vw;
   color: #131313;
@@ -3685,10 +3685,10 @@ body {
 }
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .BlockBox .lengthInput {
   position: absolute;
-  bottom: -4vh;
-  right: 12.5%;
-  width: 3.5vw;
-  height: 75%;
+  bottom: 0;
+  right: 5%;
+  width: 4vw;
+  height: 3.5vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3697,15 +3697,26 @@ body {
   font-size: 0.75vw;
   font-weight: 800;
 }
+.TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .descricaoBox {
+  height: 40%;
+}
+.TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .descricaoBox textarea {
+  height: 70%;
+}
+.TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .descricaoBox span {
+  top: calc(25% - 1.5vh);
+}
+.TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .metade, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .litros_input {
+  width: 50%;
+}
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .BlockBox input:focus ~ span, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos input:valid ~ span, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .BlockBox textarea:focus ~ span, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos textarea:valid ~ span {
-  transform: translate(-0.75vw, -3.75vh);
+  transform: translate(-0.5vw, -3.5vh);
   font-size: 0.9vw;
   font-weight: 900;
 }
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .Select_Produtos {
-  outline: 1px solid red;
   width: 33.3%;
-  height: 10vh;
+  height: 15%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3714,7 +3725,7 @@ body {
 }
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .Select_Produtos #category-select {
   position: relative;
-  width: 85%;
+  width: 90%;
   height: 4vh;
 }
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .Select_Produtos #category-select #options_btn_Categorias, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .Select_Produtos #category-select #options_btn_SubCategorias, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .Select_Produtos #category-select #options_btn_Codigos {
@@ -3762,17 +3773,16 @@ body {
 }
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .Select_Produtos #options {
   z-index: 999;
-  width: 85%;
+  width: 90%;
   height: auto;
-  max-height: 40vh;
-  top: 13vh;
+  max-height: 35vh;
+  top: 6vh;
   overflow-x: hidden;
   overflow-y: scroll;
   background: #BAF811;
   display: none;
   position: absolute;
   padding: 0.5vw;
-  border-radius: 0.5vw;
 }
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .Select_Produtos #options .option_Categorias, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .Select_Produtos #options .option_SubCategorias, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .Select_Produtos #options .option_Codigos {
   display: flex;
@@ -3821,10 +3831,31 @@ body {
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .Select_Produtos #category-select:has(#options_btn_Categorias:checked) + #options, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .Select_Produtos #category-select:has(#options_btn_SubCategorias:checked) + #options, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox .Infos .Select_Produtos #category-select:has(#options_btn_Codigos:checked) + #options {
   display: block;
 }
-.TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox span, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox button {
+.TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox button {
+  all: unset;
   position: absolute;
   bottom: 1vh;
   right: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 13vw;
+  height: 3.5vh;
+  font-family: "Be Vietnam Pro", sans-serif;
+  color: #131313;
+  font-size: 0.9vw;
+  font-weight: 800;
+  z-index: 10;
+  background: #BAF811;
+}
+.TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #DadosProduto .tabBox p {
+  all: unset;
+  position: absolute;
+  right: 1vw;
+  bottom: 5vh;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 0.65vw;
+  font-weight: 900;
 }
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac {
   width: 100%;
@@ -3958,10 +3989,74 @@ body {
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox .Select_Produtos #category-select:has(#options_btn_ItemAtr01:checked) + #options, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox .Select_Produtos #category-select:has(#options_btn_ItemAtr02:checked) + #options, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox .Select_Produtos #category-select:has(#options_btn_ItemAtr03:checked) + #options, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox .Select_Produtos #category-select:has(#options_btn_ItemAtr04:checked) + #options {
   display: block;
 }
-.TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox .aviso, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox span, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox button {
+.TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox .aviso {
+  all: unset;
   position: absolute;
   bottom: 1vh;
-  right: 1vw;
+  left: 1vw;
+  width: 80%;
+  height: 4vh;
+  display: flex;
+  flex-wrap: wrap;
+}
+.TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox .aviso img {
+  width: 3%;
+  height: 100%;
+}
+.TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox .aviso p {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding-left: 0.5vw;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 0.75vw;
+  font-weight: 800;
+  color: #F3F4F9;
+}
+.TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox button {
+  all: unset;
+  position: absolute;
+  bottom: 0;
+  right: 11vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10vw;
+  height: 3.5vh;
+  font-family: "Be Vietnam Pro", sans-serif;
+  color: #131313;
+  font-size: 0.9vw;
+  font-weight: 800;
+  z-index: 10;
+}
+.TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #BBBBBB;
+  opacity: 0.75;
+  z-index: -1;
+}
+.TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox .SalvarBtnModal {
+  background: #BAF811;
+  right: 0;
+}
+.TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox .SalvarBtnModal::before {
+  content: none;
+}
+.TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox span {
+  all: unset;
+  position: absolute;
+  right: 0;
+  bottom: 4vh;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 0.65vw;
+  font-weight: 900;
 }
 .TelaAdm main #ModalCodigos {
   z-index: 99999;
