@@ -1,8 +1,8 @@
 <?php
 
-require_once("../../../configs/conexao.php"); 
+require_once("../../../../configs/conexao.php"); 
 
-$item04 = $_POST['item_atr04$item04'];
+$item04 = $_POST['item_atr04'];
 
 $query = $pdo->query("SELECT * FROM produtos Where nome = '$item04' LIMIT 1");
 $dados = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -20,10 +20,10 @@ if(@count($dados) > 0){
     }
 
     echo "
-        <div id='select-button' class='select_ItemAtr04$item04'>
+        <div id='select-button' class='select_ItemAtr04'>
             <p>$codigo_prod</p>
             $img_URL
-            <p>$nome_prod</p>
+            <p id='selected_val_ItemAtr04' >$nome_prod</p>
             <p>$valor_prod</p>
         </div>
     ";
