@@ -585,48 +585,21 @@
     <input type="hidden" id="codigo_lista_prodRelac" name="codigo_lista_prodRelac" value="">
 </form>
 
-<!-- Item01 -->
-<form id="form_itemAtr01_Infos" class="hide" method="POST">
-    <input type="hidden" id="item_atr01" name="item_atr01" value="">
+<form id="form_itemAtr_Listagem" class="hide" method="POST">
+    <input type="hidden" id="codigo_Select" name="codigo_Select" value="">
+    <input type="hidden" id="numItem_list" name="numItem_list" value="">
+    <input type="hidden" id="item_atr01_list" name="item_atr01_list" value="">
+    <input type="hidden" id="item_atr02_list" name="item_atr02_list" value="">
+    <input type="hidden" id="item_atr03_list" name="item_atr03_list" value="">
 </form>
 
-<!-- Item02 -->
-<!-- Listagem -->
-<form id="form_itemAtr02_Listagem" class="hide" method="POST">
-    <input type="hidden" id="codigo_lista_item_atr02" name="codigo_lista_item_atr02" value="">
-    <input type="hidden" id="item_atr01_List_Item02" name="item_atr01_List_Item02" value="">
+<form id="form_itemAtr_Infos" class="hide" method="POST">
+    <input type="hidden" id="numItem_info" name="numItem_info" value="">
+    <input type="hidden" id="item_atr01_info" name="item_atr01_info" value="">
+    <input type="hidden" id="item_atr02_info" name="item_atr02_info" value="">
+    <input type="hidden" id="item_atr03_info" name="item_atr03_info" value="">
+    <input type="hidden" id="item_atr04_info" name="item_atr04_info" value="">
 </form>
-<!-- infos -->
-<form id="form_itemAtr02_Infos" class="hide" method="POST">
-    <input type="hidden" id="item_atr02" name="item_atr02" value="">
-</form>
-
-<!-- Item03 -->
-<!-- Listagem -->
-<form id="form_itemAtr03_Listagem" class="hide" method="POST">
-    <input type="hidden" id="codigo_lista_item_atr03" name="codigo_lista_item_atr03" value="">
-    <input type="hidden" id="item_atr01_List_Item03" name="item_atr01_List_Item03" value="">
-    <input type="hidden" id="item_atr02_List_Item03" name="item_atr02_List_Item03" value="">
-</form>
-<!-- infos -->
-<form id="form_itemAtr03_Infos" class="hide" method="POST">
-    <input type="hidden" id="item_atr03" name="item_atr03" value="">
-</form>
-
-<!-- Item04 -->
-<!-- Listagem -->
-<form id="form_itemAtr04_Listagem" class="hide" method="POST">
-    <input type="hidden" id="codigo_lista_item_atr04" name="codigo_lista_item_atr04" value="">
-    <input type="hidden" id="item_atr01_List_Item04" name="item_atr01_List_Item04" value="">
-    <input type="hidden" id="item_atr02_List_Item04" name="item_atr02_List_Item04" value="">
-    <input type="hidden" id="item_atr03_List_Item04" name="item_atr03_List_Item04" value="">
-</form>
-<!-- infos -->
-<form id="form_itemAtr04_Infos" class="hide" method="POST">
-    <input type="hidden" id="item_atr04" name="item_atr04" value="">
-</form>
-
-
 
 <!-- FUNÇÕES PHP NA CHAMADA DE MODAL -->
 <?php
@@ -680,59 +653,129 @@
     document.querySelectorAll('.option_Codigos input').forEach(input => { 
         input.addEventListener('click', event => {
             $("#codigo_lista_prodRelac").val(input.dataset.label);
-            $("#codigo_lista_item_atr02").val(input.dataset.label);
-            $("#codigo_lista_item_atr03").val(input.dataset.label);
-            $("#codigo_lista_item_atr04").val(input.dataset.label);
+            $("#codigo_Select").val(input.dataset.label);
+
             $("#form_listagem_prodRelac").click();
         });
     });
 
+    console.log($('[name=ItemAtr02_Produto]').val());
     ////Itens atrelados + listagem dinamica
     function RunCodeItens(item){ 
         ////Item atrelado 01
-        if(item == 01){
-            if($("#select_item02").hasClass('Disabled')){
-                $("#item_atr01_List_Item02").val($('[name=ItemAtr01_Produto]').val());
-                $("#form_itemAtr02_Listagem").click();
-                $("#select_item02").removeClass("Disabled");
+        if (item == 01) {
+            let valor_item02 = $('[name=ItemAtr02_Produto]').val();
+            let valor_item03 = $('[name=ItemAtr03_Produto]').val();
+            let valor_item04 = $('[name=ItemAtr04_Produto]').val();
+
+            let Valor_item01 = $('[name=ItemAtr01_Produto]').val();
+            let produtosSelecionados = [valor_item02, valor_item03, valor_item04];
+
+            if (produtosSelecionados.every(valor => valor === undefined)) {
+                if ($("#select_item02").hasClass('Disabled')) {
+                    $("#numItem_list").val('02');
+                    $("#item_atr01_list").val(Valor_item01);
+                    $("#form_itemAtr_Listagem").click();
+                    $("#select_item02").removeClass("Disabled");
+                }
+                $("#numItem_info").val('01');
+                $("#item_atr01_info").val(Valor_item01);
+                $("#form_itemAtr_Infos").click();
+                $("#options_btn_ItemAtr01").click();
+            } else {
+                let produtoSelecionadoOutroCampo = produtosSelecionados.find(valor => valor === Valor_item01);
+                if (produtoSelecionadoOutroCampo !== undefined) {
+                    $('#msgErro_InsertEdit_Produto').addClass('text-danger');
+                    $('#msgErro_InsertEdit_Produto').text('Produto selecionado em outro campo!');
+                } else {
+                    if ($("#select_item02").hasClass('Disabled')) {
+                        $("#numItem_list").val('02');
+                        $("#item_atr01_list").val(Valor_item01);
+                        $("#form_itemAtr_Listagem").click();
+                        $("#select_item02").removeClass("Disabled");
+                    }
+                    $("#numItem_info").val('01');
+                    $("#item_atr01_info").val(Valor_item01);
+                    $("#form_itemAtr_Infos").click();
+                    $("#options_btn_ItemAtr01").click();
+                }
             }
-            $("#item_atr01").val($('[name=ItemAtr01_Produto]').val());
-            $("#form_itemAtr01_Infos").click();
-            $("#options_btn_ItemAtr01").click();
         }
 
         ////Item atrelado 02
-        if(item == 02){
-            if($("#select_item03").hasClass('Disabled')){
-                $("#item_atr01_List_Item03").val($('[name=ItemAtr01_Produto]').val());
-                $("#item_atr02_List_Item03").val($('[name=ItemAtr02_Produto]').val());
-                $("#form_itemAtr03_Listagem").click();
-                $("#select_item03").removeClass("Disabled");
+        // if(item == 02){
+        //     if($("#select_item03").hasClass('Disabled')){
+        //         $("#numItem_list").val('03');
+        //         $("#item_atr01_list").val($('[name=ItemAtr01_Produto]').val());
+        //         $("#item_atr02_list").val($('[name=ItemAtr02_Produto]').val());
+        //         $("#form_itemAtr_Listagem").click();
+        //         $("#select_item03").removeClass("Disabled");
+        //     }
+        //     $("#numItem_info").val('02');
+        //     $("#item_atr02_info").val($('[name=ItemAtr02_Produto]').val());
+        //     $("#form_itemAtr_Infos").click();
+        //     $("#options_btn_ItemAtr02").click();
+        // }
+
+        if (item == 02) {
+            let valor_item03 = $('[name=ItemAtr03_Produto]').val();
+            let valor_item04 = $('[name=ItemAtr04_Produto]').val();
+
+            let Valor_item02 = $('[name=ItemAtr02_Produto]').val();
+            let produtosSelecionados = [valor_item03, valor_item04];
+
+            if (produtosSelecionados.every(valor => valor === undefined)) {
+                if ($("#select_item03").hasClass('Disabled')) {
+                    $("#numItem_list").val('03');
+                    $("#item_atr01_list").val(Valor_item02);
+                    $("#form_itemAtr_Listagem").click();
+                    $("#select_item03").removeClass("Disabled");
+                }
+                $("#numItem_info").val('02');
+                $("#item_atr02_info").val(Valor_item02);
+                $("#form_itemAtr_Infos").click();
+                $("#options_btn_ItemAtr02").click();
+            } else {
+                let produtoSelecionadoOutroCampo = produtosSelecionados.find(valor => valor === Valor_item02);
+                if (produtoSelecionadoOutroCampo !== undefined) {
+                    $('#msgErro_InsertEdit_Produto').addClass('text-danger');
+                    $('#msgErro_InsertEdit_Produto').text('Produto selecionado em outro campo!');
+                } else {
+                    if ($("#select_item03").hasClass('Disabled')) {
+                        $("#numItem_list").val('03');
+                        $("#item_atr01_list").val(Valor_item02);
+                        $("#form_itemAtr_Listagem").click();
+                        $("#select_item03").removeClass("Disabled");
+                    }
+                    $("#numItem_info").val('02');
+                    $("#item_atr02_info").val(Valor_item02);
+                    $("#form_itemAtr_Infos").click();
+                    $("#options_btn_ItemAtr02").click();
+                }
             }
-            $("#item_atr02").val($('[name=ItemAtr02_Produto]').val());
-            $("#form_itemAtr02_Infos").click();
-            $("#options_btn_ItemAtr02").click();
         }
 
         ////Item atrelado 03
         if(item == 03){
             if($("#select_item04").hasClass('Disabled')){
-                $("#item_atr01_List_Item04").val($('[name=ItemAtr01_Produto]').val());
-                $("#item_atr02_List_Item04").val($('[name=ItemAtr02_Produto]').val());
-                $("#item_atr03_List_Item04").val($('[name=ItemAtr03_Produto]').val());
-                $("#form_itemAtr04_Listagem").click();
+                $("#numItem_list").val('04');
+                $("#item_atr01_list").val($('[name=ItemAtr01_Produto]').val());
+                $("#item_atr02_list").val($('[name=ItemAtr02_Produto]').val());
+                $("#item_atr03_list").val($('[name=ItemAtr03_Produto]').val());
+                $("#form_itemAtr_Listagem").click();
                 $("#select_item04").removeClass("Disabled");
             }
-
-            $("#item_atr03").val($('[name=ItemAtr03_Produto]').val());
-            $("#form_itemAtr03_Infos").click();
+            $("#numItem_info").val('03');
+            $("#item_atr03_info").val($('[name=ItemAtr03_Produto]').val());
+            $("#form_itemAtr_Infos").click();
             $("#options_btn_ItemAtr03").click();
         }
 
         ////Item atrelado 04
         if(item == 04){
-            $("#item_atr04").val($('[name=ItemAtr04_Produto]').val());
-            $("#form_itemAtr04_Infos").click();
+            $("#numItem_info").val('04');
+            $("#item_atr04_info").val($('[name=ItemAtr04_Produto]').val());
+            $("#form_itemAtr_Infos").click();
             $("#options_btn_ItemAtr04").click();
         }
     }
@@ -927,99 +970,55 @@
         })
     });
 
-    $('#form_itemAtr01_Infos').click(function (e) {
-        $(".select_ItemAtr01").remove();
+    $('#form_itemAtr_Listagem').click(function (e) {
         e.preventDefault();
         $.ajax({
-            url: "Produtos/produto/relacionados/ItemAtr01.php",
+            url: "Produtos/produto/relacionados/List_ItemAtr.php",
             method: "post",
             data: $('form').serialize(),
             dataType: "text",
             success: function (msg) {
-                $('.ItemAtr01_head').append(msg);
+                if($("#numItem_list").val() == '02'){
+                    $('#select_item02').append(msg);
+                }
+                if($("#numItem_list").val() == '03'){
+                    $('#select_item03').append(msg);
+                }
+                if($("#numItem_list").val() == '04'){
+                    $('#select_item04').append(msg);
+                }
+            }
+        });
+    });
+
+    $('#form_itemAtr_Infos').click(function (e) {
+        if($("#numItem_info").val() == '01'){ $(".select_ItemAtr01").remove(); }
+        if($("#numItem_info").val() == '02'){ $(".select_ItemAtr02").remove(); }
+        if($("#numItem_info").val() == '03'){ $(".select_ItemAtr03").remove(); }
+        if($("#numItem_info").val() == '04'){ $(".select_ItemAtr04").remove(); }
+
+        e.preventDefault();
+        $.ajax({
+            url: "Produtos/produto/relacionados/Infos_ItemAtr.php",
+            method: "post",
+            data: $('form').serialize(),
+            dataType: "text",
+            success: function (msg) {
+                if($("#numItem_info").val() == '01'){ 
+                    $('.ItemAtr01_head').append(msg);
+                }
+                if($("#numItem_info").val() == '02'){ 
+                    $('.ItemAtr02_head').append(msg);
+                }
+                if($("#numItem_info").val() == '03'){ 
+                    $('.ItemAtr03_head').append(msg);
+                }
+                if($("#numItem_info").val() == '04'){ 
+                    $('.ItemAtr04_head').append(msg);
+                }
+
             }
         })
     });
 
-    $('#form_itemAtr02_Listagem').click(function (e) {
-        e.preventDefault();
-        $.ajax({
-            url: "Produtos/produto/relacionados/List_ItemAtr02.php",
-            method: "post",
-            data: $('form').serialize(),
-            dataType: "text",
-            success: function (msg) {
-                $('#select_item02').append(msg);
-            }
-        })
-    });
-
-    $('#form_itemAtr02_Infos').click(function (e) {
-        $(".select_ItemAtr02").remove();
-        e.preventDefault();
-        $.ajax({
-            url: "Produtos/produto/relacionados/ItemAtr02.php",
-            method: "post",
-            data: $('form').serialize(),
-            dataType: "text",
-            success: function (msg) {
-                $('.ItemAtr02_head').append(msg);
-            }
-        })
-    });
-
-    $('#form_itemAtr03_Listagem').click(function (e) {
-        e.preventDefault();
-        $.ajax({
-            url: "Produtos/produto/relacionados/List_ItemAtr03.php",
-            method: "post",
-            data: $('form').serialize(),
-            dataType: "text",
-            success: function (msg) {
-                $('#select_item03').append(msg);
-            }
-        })
-    });
-
-    $('#form_itemAtr03_Infos').click(function (e) {
-        $(".select_ItemAtr03").remove();
-        e.preventDefault();
-        $.ajax({
-            url: "Produtos/produto/relacionados/ItemAtr03.php",
-            method: "post",
-            data: $('form').serialize(),
-            dataType: "text",
-            success: function (msg) {
-                $('.ItemAtr03_head').append(msg);
-            }
-        })
-    });
-
-    $('#form_itemAtr04_Listagem').click(function (e) {
-        e.preventDefault();
-        $.ajax({
-            url: "Produtos/produto/relacionados/List_ItemAtr04.php",
-            method: "post",
-            data: $('form').serialize(),
-            dataType: "text",
-            success: function (msg) {
-                $('#select_item04').append(msg);
-            }
-        })
-    });
-
-    $('#form_itemAtr04_Infos').click(function (e) {
-        $(".select_ItemAtr04").remove();
-        e.preventDefault();
-        $.ajax({
-            url: "Produtos/produto/relacionados/ItemAtr04.php",
-            method: "post",
-            data: $('form').serialize(),
-            dataType: "text",
-            success: function (msg) {
-                $('.ItemAtr04_head').append(msg);
-            }
-        })
-    });
-    
 </script>
