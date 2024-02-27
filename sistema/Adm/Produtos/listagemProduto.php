@@ -218,8 +218,8 @@
                                             </div>
 
                                             <ul id='options' class='listagem_subcat'>
-                                                <li class='option_SubCategorias'>
-                                                    <input type='radio' name='SubCategoria_Produto' style="pointer-events: none;" value='null' data-label='null'>
+                                                <li class='option_SubCategorias' style="pointer-events: none;">
+                                                    <input type='radio' name='SubCategoria_Produto' value='null' data-label='null'>
                                                     <span class='label'>Selecione uma categoria antes</span>
                                                 </li>
                                             </ul> 
@@ -289,118 +289,16 @@
                             </div>
                             <div class="tab-pane fade show active" id="ItensRelac">
                                 <div class="tabBox">
-                                    <div class="Select_Produtos">
-                                        <div id="category-select">
-                                            <input type="checkbox" id="options_btn_ItemAtr01" onchange="OptionSelection('selected_val_ItemAtr01', 'options_btn_ItemAtr01', 'option_ItemAtr01');">
-    
-                                            <div id="select-button">
-                                                <div id='selected_val_ItemAtr01'> Selecione a categoria </div>
-                                                <img src="../../assets/icons/seta.svg" onload="SVGInject(this)">
-                                            </div>
+
+                                    <div class="BoxSelect_Dinamico">
+                                        <div class="SeletoresProds">
+                                            Selecione um código para o produto!
                                         </div>
-                                        
-                                        <ul id="options">
-                                            <?php 
-                                                $query2 = $pdo->query("SELECT * FROM produtos ORDER BY id DESC");
-                                                $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-                                                for ($j=0; $j < count($dados2); $j++) {
-                                                    $nome_categ_atrelada = $dados2[$j]['nome'];
-                                                    echo "
-                                                    <li class='option_ItemAtr01'>
-                                                        <input type='radio' name='categ_Atreladas' value='$nome_categ_atrelada' data-label='$nome_categ_atrelada'>
-    
-                                                        <span class='label'>$nome_categ_atrelada</span>
-                                                    </li>
-                                                    ";
-                                                }
-                                            ?>
-                                        </ul>
-                                    </div>
-    
-                                    <div class="Select_Produtos">
-                                        <div id="category-select">
-                                            <input type="checkbox" id="options_btn_ItemAtr02" onchange="OptionSelection('selected_val_ItemAtr02', 'options_btn_ItemAtr02', 'option_ItemAtr02');">
-    
-                                            <div id="select-button">
-                                                <div id='selected_val_ItemAtr02'> Selecione a categoria </div>
-                                                <img src="../../assets/icons/seta.svg" onload="SVGInject(this)">
-                                            </div>
-                                        </div>
-                                        
-                                        <ul id="options">
-                                            <?php 
-                                                $query2 = $pdo->query("SELECT * FROM categorias ORDER BY id DESC");
-                                                $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-                                                for ($j=0; $j < count($dados2); $j++) {
-                                                    $nome_categ_atrelada = $dados2[$j]['nome'];
-                                                    echo "
-                                                    <li class='option_ItemAtr02'>
-                                                        <input type='radio' name='categ_Atreladas' value='$nome_categ_atrelada' data-label='$nome_categ_atrelada'>
-                                                        <span class='label'>$nome_categ_atrelada</span>
-                                                    </li>
-                                                    ";
-                                                }
-                                            ?>
-                                        </ul>
-                                    </div>
-    
-                                    <div class="Select_Produtos">
-                                        <div id="category-select">
-                                            <input type="checkbox" id="options_btn_ItemAtr03" onchange="OptionSelection('selected_val_ItemAtr03', 'options_btn_ItemAtr03', 'option_ItemAtr03');">
-    
-                                            <div id="select-button">
-                                                <div id='selected_val_ItemAtr03'> Selecione a categoria </div>
-                                                <img src="../../assets/icons/seta.svg" onload="SVGInject(this)">
-                                            </div>
-                                        </div>
-                                        
-                                        <ul id="options">
-                                            <?php 
-                                                $query2 = $pdo->query("SELECT * FROM categorias ORDER BY id DESC");
-                                                $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-                                                for ($j=0; $j < count($dados2); $j++) {
-                                                    $nome_categ_atrelada = $dados2[$j]['nome'];
-                                                    echo "
-                                                    <li class='option_ItemAtr03'>
-                                                        <input type='radio' name='categ_Atreladas' value='$nome_categ_atrelada' data-label='$nome_categ_atrelada'>
-                                                        <span class='label'>$nome_categ_atrelada</span>
-                                                    </li>
-                                                    ";
-                                                }
-                                            ?>
-                                        </ul>
-                                    </div>
-    
-                                    <div class="Select_Produtos">
-                                        <div id="category-select">
-                                            <input type="checkbox" id="options_btn_ItemAtr04" onchange="OptionSelection('selected_val_ItemAtr04', 'options_btn_ItemAtr04', 'option_ItemAtr04');">
-    
-                                            <div id="select-button">
-                                                <div id='selected_val_ItemAtr04'> Selecione a categoria </div>
-                                                <img src="../../assets/icons/seta.svg" onload="SVGInject(this)">
-                                            </div>
-                                        </div>
-                                        
-                                        <ul id="options">
-                                            <?php 
-                                                $query2 = $pdo->query("SELECT * FROM categorias ORDER BY id DESC");
-                                                $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-                                                for ($j=0; $j < count($dados2); $j++) {
-                                                    $nome_categ_atrelada = $dados2[$j]['nome'];
-                                                    echo "
-                                                    <li class='option_ItemAtr04'>
-                                                        <input type='radio' name='categ_Atreladas' value='$nome_categ_atrelada' data-label='$nome_categ_atrelada'>
-                                                        <span class='label'>$nome_categ_atrelada</span>
-                                                    </li>
-                                                    ";
-                                                }
-                                            ?>
-                                        </ul>
                                     </div>
     
                                     <div class="aviso">
                                         <img src="../../assets/icons/!.svg">
-                                        <p>Deixando essa aba vazia os 'itens relacionados' desse produto serão organizados por códigos similares cadastrados recentemente!</p>
+                                        <p>Deixando a aba de 'itens relacionados' vazia, fará com que os produtos recomendados na 'página do produto' sejam produtos com código igual ao do item atual!</p>
                                     </div>
     
                                     <span>Passo 2 de 2</span>
@@ -681,6 +579,31 @@
     <input type="hidden" id="categoria_lista_subCateg" name="categoria_lista_subCateg" value="">
 </form>
 
+<!-- produtos relacionados -->
+<form id="form_listagem_prodRelac" class="hide" method="POST">
+    <input type="hidden" id="codigo_lista_prodRelac" name="codigo_lista_prodRelac" value="">
+</form>
+
+<!-- Item01 -->
+<form id="form_listagem_itemAtr01" class="hide" method="POST">
+    <input type="hidden" id="item_atr01" name="item_atr01" value="">
+</form>
+
+<!-- Item02 -->
+<form id="form_listagem_itemAtr02" class="hide" method="POST">
+    <input type="hidden" id="item_atr02" name="item_atr02" value="">
+</form>
+
+<!-- Item03 -->
+<form id="form_listagem_itemAtr03" class="hide" method="POST">
+    <input type="hidden" id="item_atr03" name="item_atr03" value="">
+</form>
+
+<!-- Item04 -->
+<form id="form_listagem_itemAtr04" class="hide" method="POST">
+    <input type="hidden" id="item_atr04" name="item_atr04" value="">
+</form>
+
 
 <!-- FUNÇÕES PHP NA CHAMADA DE MODAL -->
 <?php
@@ -729,6 +652,54 @@
             $("#form_listagem_subCateg").click();
         });
     });
+
+    ////Produtos relacionados
+    document.querySelectorAll('.option_Codigos input').forEach(input => { 
+        input.addEventListener('click', event => {
+            $("#codigo_lista_prodRelac").val(input.dataset.label);
+            $("#form_listagem_prodRelac").click();
+        });
+    });
+
+    ////Itens atrelados
+    setInterval(
+        function () {
+            ////Item atrelado 01
+            document.querySelectorAll('.option_ItemAtr01 input').forEach(input => { 
+                input.addEventListener('click', event => {
+                    $("#select_item02").removeClass("Disabled");
+                    $("#item_atr01").val(input.dataset.label);
+                    $("#form_listagem_itemAtr01").click();
+                });
+            });
+
+            ////Item atrelado 02
+            document.querySelectorAll('.option_ItemAtr02 input').forEach(input => { 
+                input.addEventListener('click', event => {
+                    $("#select_item03").removeClass("Disabled");
+                    $("#item_atr02").val(input.dataset.label);
+                    $("#form_listagem_itemAtr02").click();
+                });
+            });
+
+            ////Item atrelado 03
+            document.querySelectorAll('.option_ItemAtr03 input').forEach(input => { 
+                input.addEventListener('click', event => {
+                    $("#select_item04").removeClass("Disabled");
+                    $("#item_atr03").val(input.dataset.label);
+                    $("#form_listagem_itemAtr03").click();
+                });
+            });
+
+            ////Item atrelado 04
+            document.querySelectorAll('.option_ItemAtr04 input').forEach(input => { 
+                input.addEventListener('click', event => {
+                    $("#item_atr04").val(input.dataset.label);
+                    $("#form_listagem_itemAtr04").click();
+                });
+            });
+      
+    }, 2000);
 
     //CHECKBOX'S
     function litrosCheck() {
@@ -889,6 +860,8 @@
         })
     });
 
+    //LISTAGENS DINAMICAS
+    //// Subcategorias
     $('#form_listagem_subCateg').click(function (e) {
         $('.listagem_subcat').remove();
         e.preventDefault();
@@ -902,4 +875,76 @@
             }
         })
     });
+
+    //// itens relacionados
+    $('#form_listagem_prodRelac').click(function (e) {
+        $('.SeletoresProds').remove();
+        e.preventDefault();
+        $.ajax({
+            url: "Produtos/produto/List_ProdRelac.php",
+            method: "post",
+            data: $('form').serialize(),
+            dataType: "text",
+            success: function (msg) {
+                $('.BoxSelect_Dinamico').append(msg);
+            }
+        })
+    });
+
+    $('#form_listagem_itemAtr01').click(function (e) {
+        $('.select_ItemAtr01').remove();
+        e.preventDefault();
+        $.ajax({
+            url: "Produtos/produto/ItemAtr01.php",
+            method: "post",
+            data: $('form').serialize(),
+            dataType: "text",
+            success: function (msg) {
+                $('.ItemAtr01_head').append(msg);
+            }
+        })
+    });
+
+    $('#form_listagem_itemAtr02').click(function (e) {
+        $('.select_ItemAtr02').remove();
+        e.preventDefault();
+        $.ajax({
+            url: "Produtos/produto/ItemAtr02.php",
+            method: "post",
+            data: $('form').serialize(),
+            dataType: "text",
+            success: function (msg) {
+                $('.ItemAtr02_head').append(msg);
+            }
+        })
+    });
+
+    $('#form_listagem_itemAtr03').click(function (e) {
+        $('.select_ItemAtr03').remove();
+        e.preventDefault();
+        $.ajax({
+            url: "Produtos/produto/ItemAtr03.php",
+            method: "post",
+            data: $('form').serialize(),
+            dataType: "text",
+            success: function (msg) {
+                $('.ItemAtr03_head').append(msg);
+            }
+        })
+    });
+
+    $('#form_listagem_itemAtr04').click(function (e) {
+        $('.select_ItemAtr04').remove();
+        e.preventDefault();
+        $.ajax({
+            url: "Produtos/produto/ItemAtr04.php",
+            method: "post",
+            data: $('form').serialize(),
+            dataType: "text",
+            success: function (msg) {
+                $('.ItemAtr04_head').append(msg);
+            }
+        })
+    });
+    
 </script>
