@@ -9,7 +9,7 @@ $item02 = $_POST['item_atr02_list'];
 $item03 = $_POST['item_atr03_list'];
 
 if($num == '02'){
-    echo '<ul id="options">';
+    echo '<ul class="List_Itens_02" id="options">';
         $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo' ");
         $dados = $query->fetchAll(PDO::FETCH_ASSOC);
         if(count($dados) == 0){
@@ -45,7 +45,7 @@ if($num == '02'){
     echo '</ul>';
 }
 if($num == '03'){
-    echo '<ul id="options">';
+    echo '<ul class="List_Itens_03" id="options">';
         $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo' ");
         $dados = $query->fetchAll(PDO::FETCH_ASSOC);
         if(count($dados) == 0){
@@ -81,7 +81,7 @@ if($num == '03'){
     echo '</ul>';
 }
 if($num == '04'){
-    echo '<ul id="options">';
+    echo '<ul class="List_Itens_04" id="options">';
         $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo' ");
         $dados = $query->fetchAll(PDO::FETCH_ASSOC);
         if(count($dados) == 0){

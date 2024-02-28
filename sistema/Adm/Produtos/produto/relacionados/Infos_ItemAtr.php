@@ -26,10 +26,12 @@ if($num == '01'){
     
         echo "
             <div id='select-button' class='select_ItemAtr01'>
-                <p>$codigo_prod</p>
-                $img_URL
-                <p id='selected_val_ItemAtr01'>$nome_prod</p>
-                <p>$valor_prod</p>
+                <div class='infos_Selected'>
+                    <p class='codigo_prod_infos'>$codigo_prod</p>
+                    $img_URL
+                    <p class='nome_prod_infos'>$nome_prod</p>
+                    <p class='valor_prod_infos'>$valor_prod</p>
+                </div>
             </div>
         ";
     }
@@ -52,10 +54,12 @@ if($num == '02'){
 
         echo "
             <div id='select-button' class='select_ItemAtr02'>
-                <p>$codigo_prod</p>
-                $img_URL
-                <p id='selected_val_ItemAtr02'>$nome_prod</p>
-                <p>$valor_prod</p>
+                <div class='infos_Selected'>
+                    <p class='codigo_prod_infos'>$codigo_prod</p>
+                    $img_URL
+                    <p class='nome_prod_infos'>$nome_prod</p>
+                    <p class='valor_prod_infos'>$valor_prod</p>
+                </div>
             </div>
         ";
     }
@@ -78,10 +82,12 @@ if($num == '03'){
 
         echo "
             <div id='select-button' class='select_ItemAtr03'>
-                <p>$codigo_prod</p>
-                $img_URL
-                <p id='selected_val_ItemAtr03'>$nome_prod</p>
-                <p>$valor_prod</p>
+                <div class='infos_Selected'>
+                    <p class='codigo_prod_infos'>$codigo_prod</p>
+                    $img_URL
+                    <p class='nome_prod_infos'>$nome_prod</p>
+                    <p class='valor_prod_infos'>$valor_prod</p>
+                </div>
             </div>
         ";
     }
@@ -104,10 +110,12 @@ if($num == '04'){
     
         echo "
             <div id='select-button' class='select_ItemAtr04'>
-                <p>$codigo_prod</p>
-                $img_URL
-                <p id='selected_val_ItemAtr04' >$nome_prod</p>
-                <p>$valor_prod</p>
+                <div class='infos_Selected'>
+                    <p class='codigo_prod_infos'>$codigo_prod</p>
+                    $img_URL
+                    <p class='nome_prod_infos'>$nome_prod</p>
+                    <p class='valor_prod_infos'>$valor_prod</p>
+                </div>
             </div>
         ";
     }
