@@ -74,7 +74,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="window.location='./index.php?pag=listagemProduto';">
+                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close">
                     <img src="../../assets/icons/close.svg">
                 </button>
 
@@ -124,11 +124,11 @@
                 <form id="form_Produtos" method="POST">
                     <div class="modal-body">
                         <div class="nav nav-pills Menu_produtos">
-                            <a id="DadosProduto_btn" data-toggle="pill" href="#DadosProduto"><?php echo $titulo_Produto ?></a>
-                            <a id="ItensRelac_btn" class="active" data-toggle="pill" href="#ItensRelac">Itens relacionados</a>
+                            <a id="DadosProduto_btn" class="active" data-toggle="pill" href="#DadosProduto"><?php echo $titulo_Produto ?></a>
+                            <a id="ItensRelac_btn" data-toggle="pill" href="#ItensRelac">Itens relacionados</a>
                         </div>
                         <div class="tab-content Tabs_produtos">
-                            <div class="tab-pane fade" id="DadosProduto">
+                            <div class="tab-pane fade show active" id="DadosProduto">
                                 <div class="tabBox">
                                     <div class="Base_checkbox">
                                         <div class="Img_Produto">
@@ -177,7 +177,7 @@
                                         <div class="BlockBox descricaoBox">
                                             <textarea type="text" name="descri_Produto" id="descri_Produto" maxlength="500" required><?php echo str_replace('<br />', PHP_EOL, @$descricao_Produto); ?></textarea>
                                             <span>Descrição:</span>
-                                            <p class="lengthInput descri_produto_Input"> 150 / 25</p>
+                                            <p class="lengthInput descri_produto_Input"></p>
                                         </div>
         
                                         <div class="Select_Produtos">
@@ -196,12 +196,23 @@
                                                     $dados = $query->fetchAll(PDO::FETCH_ASSOC);
                                                     for ($j=0; $j < count($dados); $j++) {
                                                         $nome_categorias = $dados[$j]['nome'];
-                                                        echo "
-                                                        <li class='option_Categorias'>
-                                                            <input type='radio' name='categoria_Produto' value='$nome_categorias' data-label='$nome_categorias'>
-                                                            <span class='label'>$nome_categorias</span>
-                                                        </li>
-                                                        ";
+
+                                                        if($nome_categorias == $categoria_Produto){
+                                                            echo "
+                                                            <li class='option_Categorias'>
+                                                                <input type='radio' name='categoria_Produto' value='$nome_categorias' data-label='$nome_categorias' checked>
+                                                                <span class='label'>$nome_categorias</span>
+                                                            </li>
+                                                            ";
+                                                        }
+                                                        else{
+                                                            echo "
+                                                            <li class='option_Categorias'>
+                                                                <input type='radio' name='categoria_Produto' value='$nome_categorias' data-label='$nome_categorias'>
+                                                                <span class='label'>$nome_categorias</span>
+                                                            </li>
+                                                            ";
+                                                        }
                                                     }
                                                 ?>
                                             </ul>
@@ -217,12 +228,7 @@
                                                 </div>
                                             </div>
 
-                                            <ul id='options' class='listagem_subcat'>
-                                                <li class='option_SubCategorias' style="pointer-events: none;">
-                                                    <input type='radio' name='SubCategoria_Produto' value='null' data-label='null'>
-                                                    <span class='label'>Selecione uma categoria antes</span>
-                                                </li>
-                                            </ul> 
+                                            <ul id='options' class='listagem_subcat'> </ul> 
                                         </div>
         
                                         <div class="Select_Produtos">
@@ -241,12 +247,23 @@
                                                     $dados = $query->fetchAll(PDO::FETCH_ASSOC);
                                                     for ($j=0; $j < count($dados); $j++) {
                                                         $nome_codigos = $dados[$j]['nome'];
-                                                        echo "
-                                                        <li class='option_Codigos'>
-                                                            <input type='radio' name='codigo_Produto' value='$nome_codigos' data-label='$nome_codigos'>
-                                                            <span class='label'>$nome_codigos</span>
-                                                        </li>
-                                                        ";
+                                                        if($nome_codigos === $codigo_Produto){
+                                                            echo "
+                                                                <li class='option_Codigos'>
+                                                                    <input type='radio' name='codigo_Produto' value='$nome_codigos' data-label='$nome_codigos' checked>
+                                                                    <span class='label'>$nome_codigos</span>
+                                                                </li>
+                                                                
+                                                            ";
+                                                        }
+                                                        else{
+                                                            echo "
+                                                                <li class='option_Codigos'>
+                                                                    <input type='radio' name='codigo_Produto' value='$nome_codigos' data-label='$nome_codigos'>
+                                                                    <span class='label'>$nome_codigos</span>
+                                                                </li>
+                                                            ";
+                                                        }
                                                     }
                                                 ?>
                                             </ul>
@@ -257,27 +274,31 @@
                                             <span>Marca:</span>
                                             <p class="lengthInput marca_produto_Input"></p>
                                         </div>
-        
-                                        <div class="BlockBox estoque_input">
-                                            <input type="number" value="<?php echo @$estoque_Produto ?>" name="estoque_Produto" id="estoque_Produto" required>
-                                            <span>Estoque:</span>
-                                        </div>
-    
+                                        
                                         <?php
                                             if($litros_Produto == "" || $litros_Produto == null){
-                                                echo "<div class='BlockBox hide litros_input'>";
-                                            }else { echo "<div class='BlockBox litros_input'>"; }
+                                                echo ' <div class="BlockBox estoque_input"> ';
+                                            }else{  echo ' <div class="BlockBox estoque_input metade"> '; }
                                         ?>
-                                            <input type="text" value="<?php echo @$litros_Produto ?>" name="litros_Produto" id="litros_Produto" maxlength="50" required>
+                                            <input type="number" value='<?php echo @$estoque_Produto ?>' name="estoque_Produto" id="estoque_Produto" required>
+                                            <span>Estoque:</span>
+                                        </div>
+
+                                        <?php
+                                            if($litros_Produto == "" || $litros_Produto == null){
+                                                echo ' <div class="BlockBox hide litros_input"> ';
+                                            }else{  echo ' <div class="BlockBox litros_input"> '; }
+                                        ?>
+                                            <input type="text" value='<?php echo @$litros_Produto ?>' name="litros_Produto" id="litros_Produto" maxlength="50">
                                             <span>Litros:</span>
                                         </div>
-        
+                                            
                                         <?php
                                             if($mercadoLivre_Produto == "" || $mercadoLivre_Produto == null){
                                                 echo "<div class='BlockBox hide mercadoLivre_input'>";
                                             }else { echo "<div class='BlockBox mercadoLivre_input'>"; }
                                         ?>
-                                            <input type="text" value="<?php echo @$mercadoLivre_Produto ?>" name="mercadoLivre_Produto" id="mercadoLivre_Produto" maxlength="500" required>
+                                            <input type="text" value="<?php echo @$mercadoLivre_Produto ?>" name="mercadoLivre_Produto" id="mercadoLivre_Produto" maxlength="500">
                                             <span>Link mercado livre:</span>
                                             <p class="lengthInput mercadoLivre_produto_Input"></p>
                                         </div>
@@ -287,7 +308,7 @@
                                     <button type="button" onclick="document.getElementById('ItensRelac_btn').click();">Ir para itens relacionados</button>
                                 </div>
                             </div>
-                            <div class="tab-pane fade show active" id="ItensRelac">
+                            <div class="tab-pane fade" id="ItensRelac">
                                 <div class="tabBox">
 
                                     <div class="BoxSelect_Dinamico">
@@ -301,11 +322,9 @@
                                         <p>Deixando a aba de 'itens relacionados' vazia, fará com que os produtos recomendados na 'página do produto' sejam produtos com código igual ao do item atual!</p>
                                     </div>
 
-
                                     <input type="hidden" id="id_produto_edit" name="id_produto_edit" value="<?php echo @$id_produto_edit ?>" required>
                                     <input type="hidden" id="date_criacao_Produto" name="date_criacao_Produto" value="<?php echo @$date_criacao_Produto ?>" required>
                                     <input type="hidden" id="date_atual_Produto" name="date_atual_Produto" value="<?php echo @$date_atual_Produto ?>" required>
-
 
                                     <span>Passo 2 de 2</span>
                                     <button type="button" onclick="document.getElementById('DadosProduto_btn').click();">Voltar</button>
@@ -328,7 +347,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back();">
+                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close">
                     <img src="../../assets/icons/close.svg">
                 </button>
 
@@ -339,7 +358,7 @@
                     <div class="modal-footer">
                         <input type="hidden" id="id_categ_delete" name="id_categ_delete" value="<?php echo @$_GET['id'] ?>" required>
 
-                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back();">Cancelar</button>
+                        <button class="CancelaBtnModal" type="button" data-dismiss="modal">Cancelar</button>
                         <button class="ExcluirBtnModal" type="submit">Excluir</button>
                     </div>
                 </form>
@@ -356,7 +375,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back();">
+                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close">
                     <img src="../../assets/icons/close.svg">
                 </button>
 
@@ -397,7 +416,7 @@
                         <input type="hidden" id="date_atual_categ_stats" name="date_atual_categ_stats" value="<?php echo @$date_atual_categ_stats ?>" required>
                         <input type="hidden" id="status_categ_stats" name="status_categ_stats" value="<?php echo @$status_categ_stats ?>" required>
 
-                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back();">Cancelar</button>
+                        <button class="CancelaBtnModal" type="button" data-dismiss="modal">Cancelar</button>
                         <?php echo $btnFinal ?>
                     </div>
                 </form>
@@ -415,26 +434,13 @@
     <div class="modal-block">
         <div class="modal-dialog">
             <div class="modal-content">
+                
+                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close">
+                    <img src="../../assets/icons/close.svg">
+                </button>
 
                 <?php 
-                    if(@$_GET['funcao'] == '' || @$_GET['funcao'] == null || @$_GET['funcao'] == 'novoCodigo'){
-                        if(@$_GET['funcao'] == 'novoCodigo'){ $closeReload = 'onclick="history.back();"';} else { $closeReload = ''; }
-                        
-                        echo '
-                            <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" '.$closeReload.'>
-                                <img src="../../assets/icons/close.svg">
-                            </button>
-                        ';
-
-                        $titulo_Codigo = "Novo código!"; 
-                        $btn_Codigo = "Adicionar";
-                    }
                     if (@$_GET['funcao'] == 'editCodigo') {
-                        echo '
-                            <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back();">
-                                <img src="../../assets/icons/close.svg">
-                            </button>
-                        ';
                         $titulo_Codigo = "Edição de código!";
                         $btn_Codigo = "Salvar edição";
 
@@ -447,6 +453,9 @@
                             $date_criacao_Codigo_edit = $dados[0]['data_criacao'];
                             $date_atual_Codigo_edit = $dados[0]['data_atual'];
                         }
+                    }else{
+                        $titulo_Codigo = "Novo código!"; 
+                        $btn_Codigo = "Adicionar";
                     }
                 ?>
 
@@ -462,10 +471,11 @@
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" id="id_Codigo_edit" name="id_Codigo_edit" value="<?php echo @$id_Codigo_edit ?>" required>
+                        <input type="hidden" id="nome_Codigo_edit" name="nome_Codigo_edit" value="<?php echo @$nome_Codigo_edit ?>" required>
                         <input type="hidden" id="date_criacao_Codigo_edit" name="date_criacao_Codigo_edit" value="<?php echo @$date_criacao_Codigo_edit ?>" required>
                         <input type="hidden" id="date_atual_Codigo_edit" name="date_atual_Codigo_edit" value="<?php echo @$date_atual_Codigo_edit ?>" required>
 
-                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back();">Cancelar</button>
+                        <button class="CancelaBtnModal" type="button" data-dismiss="modal">Cancelar</button>
                         <button class="SalvarBtnModal" type="submit"><?php echo $btn_Codigo ?></button>
                     </div>
                 </form>
@@ -556,7 +566,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back();">
+                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close">
                     <img src="../../assets/icons/close.svg">
                 </button>
 
@@ -567,7 +577,7 @@
                     <div class="modal-footer">
                         <input type="hidden" id="id_Codigo_delete" name="id_Codigo_delete" value="<?php echo @$_GET['id'] ?>" required>
 
-                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back();">Cancelar</button>
+                        <button class="CancelaBtnModal" type="button" data-dismiss="modal">Cancelar</button>
                         <button class="ExcluirBtnModal" type="submit">Excluir</button>
                     </div>
                 </form>
@@ -583,6 +593,7 @@
 <!-- LISTAGENS DINAMICAS -->
 <!-- subcategorias -->
 <form id="form_listagem_subCateg" class="hide" method="POST">
+    <input type="hidden" id="subcategoria_lista_edit" name="subcategoria_lista_edit" value="">
     <input type="hidden" id="categoria_lista_subCateg" name="categoria_lista_subCateg" value="">
 </form>
 
@@ -650,6 +661,9 @@
     document.querySelectorAll('.option_Categorias input').forEach(input => { 
         input.addEventListener('click', event => {
             $("#categoria_lista_subCateg").val(input.dataset.label);
+
+            $("#subcategoria_lista_edit").val($('#selected_val_SubCategorias').text());
+
             if($("#selected_val_SubCategorias").text() !== "Selecione a subcategoria"){
                 $("#selected_val_SubCategorias").html("Selecione a subcategoria");
             }
@@ -668,319 +682,122 @@
     });
 
     // //Itens atrelados + listagem dinamica
-    // function RunCodeItens(item) {
-    //     const valoresItens = {
-    //         "1": $('input[name="ItemAtr1_Produto"]:checked').val(),
-    //         "2": $('input[name="ItemAtr2_Produto"]:checked').val(),
-    //         "3": $('input[name="ItemAtr3_Produto"]:checked').val(),
-    //         "4": $('input[name="ItemAtr4_Produto"]:checked').val()
-    //     };
+    function RunCodeItens(item){
+        const valoresItens = {
+            "1": $('input[name="ItemAtr1_Produto"]:checked').val(),
+            "2": $('input[name="ItemAtr2_Produto"]:checked').val(),
+            "3": $('input[name="ItemAtr3_Produto"]:checked').val(),
+            "4": $('input[name="ItemAtr4_Produto"]:checked').val()
+        };
 
-    //     const numItem_list = parseInt(item) + 1;
-    //     const numItem_info = item;
+        const showError = (num) => {
+            $(`input[name="ItemAtr${num}_Produto"]:checked`).prop('checked', false);
+            $(`input[name="ItemAtr${num}_Produto"]`).each(function () {
+                if ($(this).val() === $(`#item_atr${num}_list`).val()) $(this).prop('checked', true);
+            });
+            $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
+        };
 
-    //     $("#numItem_list").val(numItem_list);
+        const buscaInfo = (num) => {
+            $("#numItem_info").val(num);
+            $(`#item_atr${num}_info`).val(valoresItens[num]);
+            $("#form_itemAtr_Infos").click();
+            $(`#options_btn_ItemAtr${num}`).click();
+        };
 
-    //     for (let i = 1; i <= numItem_list; i++) {
-    //         $(`#item_atr${i}_list`).val(valoresItens[i]);
-    //         $(`#select_item${i}`).removeClass("Disabled");
-    //     }
-
-    //     $("#form_itemAtr_Listagem").click();
-
-    //     $("#numItem_info").val(numItem_info);
-    //     $(`#item_atr${numItem_info}_info`).val(valoresItens[numItem_info]);
-    //     $("#form_itemAtr_Infos").click();
-    //     $(`#options_btn_ItemAtr${numItem_info}`).click();
-    // }
-
-
-    function RunCodeItens(item){ 
-        let valor_item1 = $('input[name="ItemAtr1_Produto"]:checked').val();
-        let valor_item2 = $('input[name="ItemAtr2_Produto"]:checked').val();
-        let valor_item3 = $('input[name="ItemAtr3_Produto"]:checked').val();
-        let valor_item4 = $('input[name="ItemAtr4_Produto"]:checked').val();
+        const list = (num) => {
+            $("#numItem_list").val(num);
+            for (let i = 1; i <= num; i++) {
+                $(`#item_atr${i}_list`).val(valoresItens[i]);
+            }
+            $("#form_itemAtr_Listagem").click();
+        };
 
         if(item == 1){
-            if(valor_item2 == undefined && valor_item3 == undefined && valor_item4 == undefined){
-                //list
-                $("#numItem_list").val('2');
-                $("#item_atr1_list").val(valor_item1);
-                $("#form_itemAtr_Listagem").click();
+            if(valoresItens[2] == undefined && valoresItens[3] == undefined && valoresItens[4] == undefined){
+                list(2);
                 $("#select_item2").removeClass("Disabled");
-                //infos
-                $("#numItem_info").val('1');
-                $("#item_atr1_info").val(valor_item1);
-                $("#form_itemAtr_Infos").click();
-                $("#options_btn_ItemAtr1").click();
+                buscaInfo(1);
             }
-            else if(valor_item2 != undefined && valor_item3 == undefined && valor_item4 == undefined){
-                if(valor_item1 != valor_item2){
-                    //list
-                    $("#numItem_list").val('2');
-                    $("#item_atr1_list").val(valor_item1);
-                    $("#item_atr2_list").val(valor_item2);
-                    $("#form_itemAtr_Listagem").click();
-                    //infos
-                    $("#numItem_info").val('1');
-                    $("#item_atr1_info").val(valor_item1);
-                    $("#form_itemAtr_Infos").click();
-                    $("#options_btn_ItemAtr1").click();
+            else if(valoresItens[2] != undefined && valoresItens[3] == undefined && valoresItens[4] == undefined){
+                if(valoresItens[1] != valoresItens[2]){
+                    list(2);
+                    buscaInfo(1);
                 }
-                else{
-                    $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
-                    $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
-                    $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
-                }
+                else{ showError(1) }
             }
-            else if(valor_item2 != undefined && valor_item3 != undefined && valor_item4 == undefined){
-                if(valor_item1 != valor_item2){
-                    if(valor_item1 != valor_item3){
-                        //list
-                        $("#numItem_list").val('2');
-                        $("#item_atr1_list").val(valor_item1);
-                        $("#item_atr2_list").val(valor_item2);
-                        $("#form_itemAtr_Listagem").click();
-                        
-                        setTimeout(() => {
-                            $("#numItem_list").val('3');
-                            $("#item_atr1_list").val(valor_item1);
-                            $("#item_atr2_list").val(valor_item2);
-                            $("#item_atr3_list").val(valor_item3);
-                            $("#form_itemAtr_Listagem").click();
-                        }, 500);
-    
-                        //infos
-                        $("#numItem_info").val('1');
-                        $("#item_atr1_info").val(valor_item1);
-                        $("#form_itemAtr_Infos").click();
-                        $("#options_btn_ItemAtr1").click();
+            else if(valoresItens[2] != undefined && valoresItens[3] != undefined && valoresItens[4] == undefined){
+                if(valoresItens[1] != valoresItens[2]){
+                    if(valoresItens[1] != valoresItens[3]){
+                        list(2);
+                        setTimeout(() => { list(3); }, 1000);
+                        buscaInfo(1);
                     }
-                    else{
-                        $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
-                        $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
-                        $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
-                    }
+                    else{ showError(1) }
                 }
-                else{
-                    $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
-                    $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
-                    $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
-                }
+                else{ showError(1) }
             }
-            else if(valor_item2 != undefined && valor_item3 != undefined && valor_item4 != undefined){
-                if(valor_item1 != valor_item2){
-                    if(valor_item1 != valor_item3){
-                        if(valor_item1 != valor_item4){
-                            //list
-                            $("#numItem_list").val('2');
-                            $("#item_atr1_list").val(valor_item1);
-                            $("#item_atr2_list").val(valor_item2);
-                            $("#form_itemAtr_Listagem").click();
-
-                            setTimeout(() => {
-                                $("#numItem_list").val('3');
-                                $("#item_atr1_list").val(valor_item1);
-                                $("#item_atr2_list").val(valor_item2);
-                                $("#item_atr3_list").val(valor_item3);
-                                $("#form_itemAtr_Listagem").click();
-                            }, 500);
-                            
-                            setTimeout(() => {
-                                $("#numItem_list").val('4');
-                                $("#item_atr1_list").val(valor_item1);
-                                $("#item_atr2_list").val(valor_item2);
-                                $("#item_atr3_list").val(valor_item3);
-                                $("#item_atr4_list").val(valor_item4);
-                                $("#form_itemAtr_Listagem").click();
-                            }, 1000);
-
-                            //infos
-                            $("#numItem_info").val('1');
-                            $("#item_atr1_info").val(valor_item1);
-                            $("#form_itemAtr_Infos").click();
-                            $("#options_btn_ItemAtr1").click();
+            else if(valoresItens[2] != undefined && valoresItens[3] != undefined && valoresItens[4] != undefined){
+                if(valoresItens[1] != valoresItens[2]){
+                    if(valoresItens[1] != valoresItens[3]){
+                        if(valoresItens[1] != valoresItens[4]){
+                            list(2);
+                            setTimeout(() => { list(3); }, 1000);
+                            setTimeout(() => { list(4); }, 2000);
+                            buscaInfo(1);
                         }
-                        else{
-                            $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
-                            $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
-                            $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
-                        }
+                        else{ showError(1) }
                     }
-                    else{
-                        $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
-                        $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
-                        $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
-                    }
+                    else{ showError(1) }
                 }
-                else{
-                    $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
-                    $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
-                    $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
-                }
+                else{ showError(1) }
             }
         }
         
         if(item == 2){
-            if(valor_item3 == undefined && valor_item4 == undefined){
-                //listagem
-                $("#numItem_list").val('3');
-                $("#item_atr1_list").val(valor_item1);
-                $("#item_atr2_list").val(valor_item2);
-                $("#form_itemAtr_Listagem").click();
+            if(valoresItens[3] == undefined && valoresItens[4] == undefined){
+                list(3);
                 $("#select_item3").removeClass("Disabled");
-                //infos
-                $("#numItem_info").val('2');
-                $("#item_atr2_info").val(valor_item2);
-                $("#form_itemAtr_Infos").click();
-                $("#options_btn_ItemAtr2").click();
+                buscaInfo(2);
             }
-            else if(valor_item1 != undefined && valor_item3 == undefined && valor_item4 == undefined){
-                if(valor_item2 != valor_item1){
-                    //list
-                    $("#numItem_list").val('1');
-                    $("#item_atr1_list").val(valor_item1);
-                    $("#item_atr2_list").val(valor_item2);
-                    $("#form_itemAtr_Listagem").click();
-                    //infos
-                    $("#numItem_info").val('1');
-                    $("#item_atr1_info").val(valor_item1);
-                    $("#form_itemAtr_Infos").click();
-                    $("#options_btn_ItemAtr1").click();
+            else if(valoresItens[3] != undefined && valoresItens[4] == undefined){
+                if(valoresItens[2] != valoresItens[3]){
+                    list(3);
+                    buscaInfo(2);
                 }
-                else{
-                    $('input[name="ItemAtr2_Produto"]:checked').prop('checked', false);
-                    $(`#${$('#item_atr2_list').val()}`).prop('checked', true);
-                    $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
-                }
+                else{ showError(2) }
             }
-            else if(valor_item1 != undefined && valor_item3 != undefined && valor_item4 == undefined){
-                if(valor_item1 != valor_item2){
-                    if(valor_item1 != valor_item3){
-                        //list
-                        $("#numItem_list").val('2');
-                        $("#item_atr1_list").val(valor_item1);
-                        $("#item_atr2_list").val(valor_item2);
-                        $("#form_itemAtr_Listagem").click();
-                        
-                        setTimeout(() => {
-                            $("#numItem_list").val('3');
-                            $("#item_atr1_list").val(valor_item1);
-                            $("#item_atr2_list").val(valor_item2);
-                            $("#item_atr3_list").val(valor_item3);
-                            $("#form_itemAtr_Listagem").click();
-                        }, 500);
-    
-                        //infos
-                        $("#numItem_info").val('1');
-                        $("#item_atr1_info").val(valor_item1);
-                        $("#form_itemAtr_Infos").click();
-                        $("#options_btn_ItemAtr1").click();
+            else if(valoresItens[3] != undefined && valoresItens[4] != undefined){
+                if(valoresItens[2] != valoresItens[3]){
+                    if(valoresItens[2] != valoresItens[4]){
+                        list(3);
+                        setTimeout(() => { list(4); }, 1000);
+                        buscaInfo(2);
                     }
-                    else{
-                        $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
-                        $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
-                        $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
-                    }
+                    else{ showError(2) }
                 }
-                else{
-                    $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
-                    $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
-                    $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
-                }
-            }
-            else if(valor_item1 != undefined && valor_item3 != undefined && valor_item4 != undefined){
-                if(valor_item1 != valor_item2){
-                    if(valor_item1 != valor_item3){
-                        if(valor_item1 != valor_item4){
-                            //list
-                            $("#numItem_list").val('2');
-                            $("#item_atr1_list").val(valor_item1);
-                            $("#item_atr2_list").val(valor_item2);
-                            $("#form_itemAtr_Listagem").click();
-
-                            setTimeout(() => {
-                                $("#numItem_list").val('3');
-                                $("#item_atr1_list").val(valor_item1);
-                                $("#item_atr2_list").val(valor_item2);
-                                $("#item_atr3_list").val(valor_item3);
-                                $("#form_itemAtr_Listagem").click();
-                            }, 500);
-                            
-                            setTimeout(() => {
-                                $("#numItem_list").val('4');
-                                $("#item_atr1_list").val(valor_item1);
-                                $("#item_atr2_list").val(valor_item2);
-                                $("#item_atr3_list").val(valor_item3);
-                                $("#item_atr4_list").val(valor_item4);
-                                $("#form_itemAtr_Listagem").click();
-                            }, 1000);
-
-                            //infos
-                            $("#numItem_info").val('1');
-                            $("#item_atr1_info").val(valor_item1);
-                            $("#form_itemAtr_Infos").click();
-                            $("#options_btn_ItemAtr1").click();
-                        }
-                        else{
-                            $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
-                            $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
-                            $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
-                        }
-                    }
-                    else{
-                        $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
-                        $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
-                        $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
-                    }
-                }
-                else{
-                    $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
-                    $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
-                    $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
-                }
+                else{ showError(2) }
             }
         }
 
-        if (item == 2) {
-            //listagem
-            $("#numItem_list").val('3');
-            $("#item_atr1_list").val(valor_item1);
-            $("#item_atr2_list").val(valor_item2);
-            $("#form_itemAtr_Listagem").click();
-            $("#select_item3").removeClass("Disabled");
-            //infos
-            $("#numItem_info").val('2');
-            $("#item_atr2_info").val(valor_item2);
-            $("#form_itemAtr_Infos").click();
-            $("#options_btn_ItemAtr2").click();
+        if(item == 3){
+            if(valoresItens[4] == undefined){
+                list(4);
+                $("#select_item4").removeClass("Disabled");
+                buscaInfo(3);
+            }
+            else if(valoresItens[4] != undefined){
+                if(valoresItens[3] != valoresItens[4]){
+                    list(4);
+                    buscaInfo(3);
+                }
+                else{ showError(3) }
+            }
         }
 
-        if (item == 3) {
-            //listagem
-            $("#numItem_list").val('4');
-            $("#item_atr1_list").val(valor_item1);
-            $("#item_atr2_list").val(valor_item2);
-            $("#item_atr3_list").val(valor_item3);
-            $("#form_itemAtr_Listagem").click();
-            $("#select_item4").removeClass("Disabled");
-            //infos
-            $("#numItem_info").val('3');
-            $("#item_atr3_info").val(valor_item3);
-            $("#form_itemAtr_Infos").click();
-            $("#options_btn_ItemAtr3").click();
-        }
-
-        if (item == 4) {
-            //infos
-            $("#numItem_info").val('4');
-            $("#item_atr4_info").val(valor_item4);
-            $("#form_itemAtr_Infos").click();
-            $("#options_btn_ItemAtr4").click();
-
-        }
+        if (item == 4) { buscaInfo(4); }
     }
-   
+
     //CHECKBOX'S
     function litrosCheck() {
         if($(".litros_input").hasClass("hide")){
@@ -1172,6 +989,7 @@
     });
 
     $('#form_itemAtr_Listagem').click(function (e) {
+        $('#msgErro_InsertEdit_Produto').text('');
         if($("#numItem_list").val() == '1'){ $(".List_Itens_1").remove(); }
         if($("#numItem_list").val() == '2'){ $(".List_Itens_2").remove(); }
         if($("#numItem_list").val() == '3'){ $(".List_Itens_3").remove(); }
@@ -1183,7 +1001,6 @@
             data: $('form').serialize(),
             dataType: "text",
             success: function (msg) {
-                $('#msgErro_InsertEdit_Produto').text(' ');
                 if($("#numItem_list").val() == '1'){
                     $('#select_item1').append(msg);
                 }

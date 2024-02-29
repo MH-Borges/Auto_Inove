@@ -6,9 +6,10 @@
     $nome_categ_edit = $_POST['nome_categ_edit'];
     $date_criacao_categ_edit = $_POST['date_criacao_categ_edit'];
     $date_atual_categ_edit = $_POST['date_atual_categ_edit'];
-    $status_categ_edit = $_POST['status_categ_edit'];
     $nome_categ = $_POST['nome_categ'];
 
+
+    $status_categ_edit = 'ativo';
 
     // ===== VERIFICAÇÃO DE INPUTS VAZIOS + VERIFICAÇÃO DE POSSIVEIS ERROS =====
     if($nome_categ == ""){
@@ -78,13 +79,6 @@
         $data_atual = date('d/m/Y');
     }
     
-    if($status_categ_edit == "" || $status_categ_edit == null || $status_categ_edit == "ativo"){
-        $status_categ_edit = 'ativo';
-    }else{
-        $status_categ_edit = 'desativado';
-    }
-
-
     // ===== INSERÇÃO DE DADOS NO BANCO =====
     if($nome_categ != $nome_categ_edit){
         $query = $pdo->query("SELECT * FROM sub_categorias WHERE categ_Atrelada = '$nome_categ_edit'");
@@ -96,6 +90,18 @@
             $res2 = $pdo->prepare("UPDATE sub_categorias SET categ_Atrelada = :categ_Atrelada WHERE id = :id");
             $res2->bindValue(":categ_Atrelada", $nome_categ);
             $res2->bindValue(":id", $id_subcateg);
+            $res2->execute();
+        }
+
+        $query2 = $pdo->query("SELECT * FROM produtos WHERE categoria = '$nome_categ_edit'");
+        $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+
+        for ($j=0; $j < count($dados2); $j++) { 
+            $id_Prod = $dados[$j]['id'];
+
+            $res2 = $pdo->prepare("UPDATE produtos SET categoria = :categoria WHERE id = :id");
+            $res2->bindValue(":categoria", $nome_categ);
+            $res2->bindValue(":id", $id_Prod);
             $res2->execute();
         }
     }

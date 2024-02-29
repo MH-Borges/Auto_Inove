@@ -107,7 +107,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back();">
+                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close">
                     <img src="../../assets/icons/close.svg">
                 </button>
 
@@ -126,7 +126,6 @@
                             $nome_categ_edit = $dados[0]['nome'];
                             $date_criacao_categ_edit = $dados[0]['data_criacao'];
                             $date_atual_categ_edit = $dados[0]['data_atual'];
-                            $status_categ_edit = $dados[0]['status_categ'];
                         }
 
                     } else { $titulo_categ = "Nova categoria!"; $btn_categ = "Adicionar";}
@@ -159,9 +158,8 @@
                         <input type="hidden" id="nome_categ_edit" name="nome_categ_edit" value="<?php echo @$nome_categ_edit ?>" required>
                         <input type="hidden" id="date_criacao_categ_edit" name="date_criacao_categ_edit" value="<?php echo @$date_criacao_categ_edit ?>" required>
                         <input type="hidden" id="date_atual_categ_edit" name="date_atual_categ_edit" value="<?php echo @$date_atual_categ_edit ?>" required>
-                        <input type="hidden" id="status_categ_edit" name="status_categ_edit" value="<?php echo @$status_categ_edit ?>" required>
 
-                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back();">Cancelar</button>
+                        <button class="CancelaBtnModal" type="button" data-dismiss="modal">Cancelar</button>
                         <button class="SalvarBtnModal" type="submit"><?php echo $btn_categ ?></button>
                     </div>
                 </form>
@@ -178,7 +176,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back();">
+                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close">
                     <img src="../../assets/icons/close.svg">
                 </button>
 
@@ -189,7 +187,7 @@
                     <div class="modal-footer">
                         <input type="hidden" id="id_categ_delete" name="id_categ_delete" value="<?php echo @$_GET['id'] ?>" required>
 
-                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back();">Cancelar</button>
+                        <button class="CancelaBtnModal" type="button" data-dismiss="modal">Cancelar</button>
                         <button class="ExcluirBtnModal" type="submit">Excluir</button>
                     </div>
                 </form>
@@ -206,7 +204,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back();">
+                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close">
                     <img src="../../assets/icons/close.svg">
                 </button>
 
@@ -247,7 +245,7 @@
                         <input type="hidden" id="date_atual_categ_stats" name="date_atual_categ_stats" value="<?php echo @$date_atual_categ_stats ?>" required>
                         <input type="hidden" id="status_categ_stats" name="status_categ_stats" value="<?php echo @$status_categ_stats ?>" required>
 
-                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back();">Cancelar</button>
+                        <button class="CancelaBtnModal" type="button" data-dismiss="modal">Cancelar</button>
                         <?php echo $btnFinal ?>
                     </div>
                 </form>
@@ -265,27 +263,13 @@
     <div class="modal-block">
         <div class="modal-dialog">
             <div class="modal-content">
+                
+                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close">
+                    <img src="../../assets/icons/close.svg">
+                </button>
 
                 <?php 
-                    if(@$_GET['funcao'] == '' || @$_GET['funcao'] == null || @$_GET['funcao'] == 'novaSubcateg'){
-                        if(@$_GET['funcao'] == 'novaSubcateg'){ $closeReload = 'onclick="history.back();"';} else { $closeReload = ''; }
-                        
-                        echo '
-                            <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" '.$closeReload.'>
-                                <img src="../../assets/icons/close.svg">
-                            </button>
-                        ';
-
-                        $titulo_Subcateg = "Nova sub-categoria!"; 
-                        $btn_Subcateg = "Adicionar";
-                        $selectBox = "Selecione a categoria";
-                    }
                     if (@$_GET['funcao'] == 'editSubcateg') {
-                        echo '
-                            <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back();">
-                                <img src="../../assets/icons/close.svg">
-                            </button>
-                        ';
                         $titulo_Subcateg = "Edição de sub-categoria!";
                         $btn_Subcateg = "Salvar edição";
 
@@ -301,6 +285,10 @@
                         }
 
                         $selectBox = "$categ_Atrelada";
+                    }else{
+                            $titulo_Subcateg = "Nova sub-categoria!"; 
+                            $btn_Subcateg = "Adicionar";
+                            $selectBox = "Selecione a categoria";
                     }
                 ?>
 
@@ -331,12 +319,22 @@
                                     $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
                                     for ($j=0; $j < count($dados2); $j++) {
                                         $nome_categ_atrelada = $dados2[$j]['nome'];
-                                        echo "
-                                        <li class='option_Subcat'>
-                                            <input type='radio' name='categ_Atreladas' value='$nome_categ_atrelada' data-label='$nome_categ_atrelada'>
-                                            <span class='label'>$nome_categ_atrelada</span>
-                                        </li>
-                                        ";
+
+                                        if($nome_categ_atrelada === $categ_Atrelada){
+                                            echo "
+                                                <li class='option_Subcat'>
+                                                    <input type='radio' name='categ_Atreladas' value='$nome_categ_atrelada' data-label='$nome_categ_atrelada' checked>
+                                                    <span class='label'>$nome_categ_atrelada</span>
+                                                </li>
+                                            ";
+                                        }else{
+                                            echo "
+                                                <li class='option_Subcat'>
+                                                    <input type='radio' name='categ_Atreladas' value='$nome_categ_atrelada' data-label='$nome_categ_atrelada'>
+                                                    <span class='label'>$nome_categ_atrelada</span>
+                                                </li>
+                                            ";
+                                        }
                                     }
                                 ?>
                             </ul>
@@ -345,12 +343,11 @@
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" id="id_Subcateg_edit" name="id_Subcateg_edit" value="<?php echo @$id_Subcateg_edit ?>" required>
+                        <input type="hidden" id="nome_Subcateg_edit" name="nome_Subcateg_edit" value="<?php echo @$nome_Subcateg_edit ?>" required>
                         <input type="hidden" id="date_criacao_Subcateg_edit" name="date_criacao_Subcateg_edit" value="<?php echo @$date_criacao_Subcateg_edit ?>" required>
                         <input type="hidden" id="date_atual_Subcateg_edit" name="date_atual_Subcateg_edit" value="<?php echo @$date_atual_Subcateg_edit ?>" required>
-                        <input type="hidden" id="categ_atrelada_edit" name="categ_atrelada_edit" value="<?php echo @$categ_Atrelada ?>" required>
 
-
-                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back();">Cancelar</button>
+                        <button class="CancelaBtnModal" type="button" data-dismiss="modal">Cancelar</button>
                         <button class="SalvarBtnModal" type="submit"><?php echo $btn_Subcateg ?></button>
                     </div>
                 </form>
@@ -441,7 +438,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" onclick="history.back();">
+                <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close" >
                     <img src="../../assets/icons/close.svg">
                 </button>
 
@@ -452,7 +449,7 @@
                     <div class="modal-footer">
                         <input type="hidden" id="id_Subcateg_delete" name="id_Subcateg_delete" value="<?php echo @$_GET['id'] ?>" required>
 
-                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" onclick="history.back();">Cancelar</button>
+                        <button class="CancelaBtnModal" type="button" data-dismiss="modal" >Cancelar</button>
                         <button class="ExcluirBtnModal" type="submit">Excluir</button>
                     </div>
                 </form>

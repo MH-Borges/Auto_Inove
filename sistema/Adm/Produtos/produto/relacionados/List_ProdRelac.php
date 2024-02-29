@@ -38,7 +38,7 @@ echo '<div class="SeletoresProds" >
 
                     echo "
                         <li class='option_ItemAtr1' onclick='RunCodeItens(`1`);'>
-                            <input id='$nome_prod' type='radio' name='ItemAtr1_Produto' value='$nome_prod' data-label='$nome_prod'>
+                            <input type='radio' name='ItemAtr1_Produto' value='$nome_prod' data-label='$nome_prod'>
                             $img_URL
                             <span class='label'>$nome_prod</span>
                         </li>

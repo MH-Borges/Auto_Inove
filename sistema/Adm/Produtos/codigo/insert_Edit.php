@@ -3,8 +3,10 @@
     require_once("../../../configs/conexao.php"); 
 
     $id_Codigo_edit = $_POST['id_Codigo_edit'];
+    $nome_Codigo_edit = $_POST['nome_Codigo_edit'];
     $date_criacao_Codigo_edit = $_POST['date_criacao_Codigo_edit'];
     $date_atual_Codigo_edit = $_POST['date_atual_Codigo_edit'];
+
     $nome_Codigo = $_POST['nome_Codigo'];
 
     // ===== VERIFICAÇÃO DE INPUTS VAZIOS + VERIFICAÇÃO DE POSSIVEIS ERROS =====
@@ -38,6 +40,21 @@
 
     
     // ===== INSERÇÃO DE DADOS NO BANCO =====
+    if($nome_Codigo != $nome_Codigo_edit){
+        $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$nome_Codigo_edit'");
+        $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        for ($j=0; $j < count($dados); $j++) { 
+            $id_prod = $dados[$j]['id'];
+
+            $res2 = $pdo->prepare("UPDATE produtos SET codigo = :codigo WHERE id = :id");
+            $res2->bindValue(":codigo", $nome_Codigo);
+            $res2->bindValue(":id", $id_prod);
+            $res2->execute();
+        }
+    }
+
+
     if($id_Codigo_edit == ""){
         $res = $pdo->prepare("INSERT INTO codigos (nome, data_criacao, data_atual) VALUES (:nome, :data_criacao, :data_atual)");
     }

@@ -4039,7 +4039,7 @@ body {
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox .BoxSelect_Dinamico .SeletoresProds .Select_Produtos_Relac #options .option_ItemAtr1 img, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox .BoxSelect_Dinamico .SeletoresProds .Select_Produtos_Relac #options .option_ItemAtr2 img, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox .BoxSelect_Dinamico .SeletoresProds .Select_Produtos_Relac #options .option_ItemAtr3 img, .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox .BoxSelect_Dinamico .SeletoresProds .Select_Produtos_Relac #options .option_ItemAtr4 img {
   width: 30%;
   height: 100%;
-  padding: 0.5vw;
+  padding: 0.25vw;
   -o-object-fit: contain;
      object-fit: contain;
 }
@@ -4060,6 +4060,7 @@ body {
   z-index: 5;
 }
 .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox .BoxSelect_Dinamico .SeletoresProds .Select_Produtos_Relac #options .option_ItemAtr1 input[type=radio], .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox .BoxSelect_Dinamico .SeletoresProds .Select_Produtos_Relac #options .option_ItemAtr2 input[type=radio], .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox .BoxSelect_Dinamico .SeletoresProds .Select_Produtos_Relac #options .option_ItemAtr3 input[type=radio], .TelaAdm main #ModalProduto .modal-block .modal-dialog .modal-content #form_Produtos .modal-body .Tabs_produtos #ItensRelac .tabBox .BoxSelect_Dinamico .SeletoresProds .Select_Produtos_Relac #options .option_ItemAtr4 input[type=radio] {
+  all: unset;
   position: absolute;
   inset: 0;
   z-index: 10;
@@ -4090,7 +4091,7 @@ body {
   position: absolute;
   bottom: 1vh;
   left: 1vw;
-  width: 80%;
+  width: 70%;
   height: 4vh;
   display: flex;
   flex-wrap: wrap;
@@ -4115,11 +4116,11 @@ body {
   all: unset;
   position: absolute;
   bottom: 0;
-  right: 11vw;
+  right: 15vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 10vw;
+  width: 14vw;
   height: 3.5vh;
   font-family: "Be Vietnam Pro", sans-serif;
   color: #131313;

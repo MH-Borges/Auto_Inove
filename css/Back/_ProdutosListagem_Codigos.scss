@@ -892,7 +892,7 @@
                                                         img{
                                                             width: 30%;
                                                             height: 100%;
-                                                            padding: 0.5vw;
+                                                            padding: 0.25vw;
                                                             object-fit: contain;
                                                         }
                                                         span{
@@ -912,7 +912,7 @@
                                                             z-index: 5;
                                                         }
                                                         input[type="radio"]{
-                                                            // all: unset;
+                                                            all: unset;
                                                             position: absolute;
                                                             inset: 0;
                                                             z-index: 10;
@@ -950,7 +950,7 @@
                                         position: absolute;
                                         bottom: 1vh;
                                         left: 1vw;
-                                        width: 80%;
+                                        width: 70%;
                                         height: 4vh;
                                         display: flex;
                                         flex-wrap: wrap;
@@ -975,11 +975,11 @@
                                         all: unset;
                                         position: absolute;
                                         bottom: 0;
-                                        right: 11vw;
+                                        right: 15vw;
                                         display: flex;
                                         align-items: center;
                                         justify-content: center;
-                                        width: 10vw;
+                                        width: 14vw;
                                         height: 3.5vh;
                                         font-family: $Second-font;
                                         color: $Preto;
