@@ -3,13 +3,13 @@
 require_once("../../../../configs/conexao.php"); 
 
 $num = $_POST['numItem_info'];
-$item01 = $_POST['item_atr01_info'];
-$item02 = $_POST['item_atr02_info'];
-$item03 = $_POST['item_atr03_info'];
-$item04 = $_POST['item_atr04_info'];
+$item1 = $_POST['item_atr1_info'];
+$item2 = $_POST['item_atr2_info'];
+$item3 = $_POST['item_atr3_info'];
+$item4 = $_POST['item_atr4_info'];
 
-if($num == '01'){
-    $query = $pdo->query("SELECT * FROM produtos Where nome = '$item01' LIMIT 1");
+if($num == '1'){
+    $query = $pdo->query("SELECT * FROM produtos Where nome = '$item1' LIMIT 1");
     $dados = $query->fetchAll(PDO::FETCH_ASSOC);
     
     if(@count($dados) > 0){
@@ -25,7 +25,7 @@ if($num == '01'){
         }
     
         echo "
-            <div id='select-button' class='select_ItemAtr01'>
+            <div id='select-button' class='select_ItemAtr1'>
                 <div class='infos_Selected'>
                     <p class='codigo_prod_infos'>$codigo_prod</p>
                     $img_URL
@@ -36,8 +36,8 @@ if($num == '01'){
         ";
     }
 }
-if($num == '02'){
-    $query = $pdo->query("SELECT * FROM produtos Where nome = '$item02' LIMIT 1");
+if($num == '2'){
+    $query = $pdo->query("SELECT * FROM produtos Where nome = '$item2' LIMIT 1");
     $dados = $query->fetchAll(PDO::FETCH_ASSOC);
 
     if(@count($dados) > 0){
@@ -53,7 +53,7 @@ if($num == '02'){
         }
 
         echo "
-            <div id='select-button' class='select_ItemAtr02'>
+            <div id='select-button' class='select_ItemAtr2'>
                 <div class='infos_Selected'>
                     <p class='codigo_prod_infos'>$codigo_prod</p>
                     $img_URL
@@ -64,8 +64,8 @@ if($num == '02'){
         ";
     }
 }
-if($num == '03'){
-    $query = $pdo->query("SELECT * FROM produtos Where nome = '$item03' LIMIT 1");
+if($num == '3'){
+    $query = $pdo->query("SELECT * FROM produtos Where nome = '$item3' LIMIT 1");
     $dados = $query->fetchAll(PDO::FETCH_ASSOC);
 
     if(@count($dados) > 0){
@@ -81,7 +81,7 @@ if($num == '03'){
         }
 
         echo "
-            <div id='select-button' class='select_ItemAtr03'>
+            <div id='select-button' class='select_ItemAtr3'>
                 <div class='infos_Selected'>
                     <p class='codigo_prod_infos'>$codigo_prod</p>
                     $img_URL
@@ -92,8 +92,8 @@ if($num == '03'){
         ";
     }
 }
-if($num == '04'){
-    $query = $pdo->query("SELECT * FROM produtos Where nome = '$item04' LIMIT 1");
+if($num == '4'){
+    $query = $pdo->query("SELECT * FROM produtos Where nome = '$item4' LIMIT 1");
     $dados = $query->fetchAll(PDO::FETCH_ASSOC);
     
     if(@count($dados) > 0){
@@ -109,7 +109,7 @@ if($num == '04'){
         }
     
         echo "
-            <div id='select-button' class='select_ItemAtr04'>
+            <div id='select-button' class='select_ItemAtr4'>
                 <div class='infos_Selected'>
                     <p class='codigo_prod_infos'>$codigo_prod</p>
                     $img_URL

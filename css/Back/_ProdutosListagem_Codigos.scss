@@ -750,7 +750,7 @@
                                                     height: 80%;
                                                     border: 0.5vw solid $Cinza;
                                                     border-style: dashed;
-                                                    #options_btn_ItemAtr01, #options_btn_ItemAtr02, #options_btn_ItemAtr03, #options_btn_ItemAtr04{
+                                                    #options_btn_ItemAtr1, #options_btn_ItemAtr2, #options_btn_ItemAtr3, #options_btn_ItemAtr4{
                                                         all: unset;
                                                         position: absolute;
                                                         inset: 0;
@@ -765,7 +765,7 @@
                                                         position: relative;
                                                         outline: none;
                                                         margin-top: -8vh;
-                                                        #selected_val_ItemAtr01, #selected_val_ItemAtr02, #selected_val_ItemAtr03, #selected_val_ItemAtr04{
+                                                        #selected_val_ItemAtr1, #selected_val_ItemAtr2, #selected_val_ItemAtr3, #selected_val_ItemAtr4{
                                                             font-family: $Second-font;
                                                             color: $Cinza;
                                                             font-size: 1.75vw;
@@ -881,7 +881,7 @@
                                                     display: none;
                                                     position: absolute;
                                                     padding: 0.5vw;
-                                                    .option_ItemAtr01, .option_ItemAtr02, .option_ItemAtr03, .option_ItemAtr04 {
+                                                    .option_ItemAtr1, .option_ItemAtr2, .option_ItemAtr3, .option_ItemAtr4 {
                                                         display: flex;
                                                         flex-direction: row;
                                                         align-items: center;
@@ -912,7 +912,7 @@
                                                             z-index: 5;
                                                         }
                                                         input[type="radio"]{
-                                                            all: unset;
+                                                            // all: unset;
                                                             position: absolute;
                                                             inset: 0;
                                                             z-index: 10;
@@ -932,10 +932,10 @@
                                                         }
                                                     }
                                                 }
-                                                #options_btn_ItemAtr01:checked + #select-button svg, #options_btn_ItemAtr02:checked + #select-button svg, #options_btn_ItemAtr03:checked + #select-button svg, #options_btn_ItemAtr04:checked + #select-button svg{
+                                                #options_btn_ItemAtr1:checked + #select-button svg, #options_btn_ItemAtr2:checked + #select-button svg, #options_btn_ItemAtr3:checked + #select-button svg, #options_btn_ItemAtr4:checked + #select-button svg{
                                                     transform: rotate(180deg);
                                                 }
-                                                #category-select:has(#options_btn_ItemAtr01:checked) + #options, #category-select:has(#options_btn_ItemAtr02:checked) + #options, #category-select:has(#options_btn_ItemAtr03:checked) + #options, #category-select:has(#options_btn_ItemAtr04:checked) + #options{
+                                                #category-select:has(#options_btn_ItemAtr1:checked) + #options, #category-select:has(#options_btn_ItemAtr2:checked) + #options, #category-select:has(#options_btn_ItemAtr3:checked) + #options, #category-select:has(#options_btn_ItemAtr4:checked) + #options{
                                                     display: block;
                                                 }
                                             }

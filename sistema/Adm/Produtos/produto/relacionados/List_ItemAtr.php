@@ -4,54 +4,54 @@ require_once("../../../../configs/conexao.php");
 
 $codigo = $_POST['codigo_Select'];
 $num = $_POST['numItem_list'];
-$item01 = $_POST['item_atr01_list'];
-$item02 = $_POST['item_atr02_list'];
-$item03 = $_POST['item_atr03_list'];
+$item1 = $_POST['item_atr1_list'];
+$item2 = $_POST['item_atr2_list'];
+$item3 = $_POST['item_atr3_list'];
+$item4 = $_POST['item_atr4_list'];
 
-if($num == '02'){
-    echo '<ul class="List_Itens_02" id="options">';
-        $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo' ");
-        $dados = $query->fetchAll(PDO::FETCH_ASSOC);
-        if(count($dados) == 0){
-            echo "
-                <li class='option_ItemAtr02' style='pointer-events: none;'>
-                    <input type='radio' name='ItemAtr02_Produto' value='null' data-label='null'>
-                    <span class='label'> Nenhum produto encontrado </span>
-                </li>
-            ";
-        }
-        else{
-            for ($j=0; $j < count($dados); $j++) {
-                $img_prod = $dados[$j]['img'];
-                $nome_prod = $dados[$j]['nome'];
-        
-                if($nome_prod != $item01){
+if($num == '1'){
+    echo '<ul class="List_Itens_1" id="options">';
+            $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo' ");
+            $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+            if(count($dados) == 0){
+                echo "
+                    <li class='option_ItemAtr1' style='pointer-events: none;'>
+                        <input type='radio' name='ItemAtr1_Produto' value='null' data-label='null'>
+                        <span class='label'> Nenhum produto encontrado </span>
+                    </li>
+                ";
+            }
+            else{
+                for ($j=0; $j < count($dados); $j++) {
+                    $img_prod = $dados[$j]['img'];
+                    $nome_prod = $dados[$j]['nome'];
+
                     if($img_prod == 'placeholder.jpg'){
                         $img_URL = '<img src="../../assets/produtos/placeholder.jpg">';
                     }else{
                         $img_URL = '<img src="../../assets/produtos/'.$img_prod.'">';
                     }
-        
+
                     echo "
-                        <li class='option_ItemAtr02' onclick='RunCodeItens(`02`);'>
-                            <input type='radio' name='ItemAtr02_Produto' value='$nome_prod' data-label='$nome_prod'>
+                        <li class='option_ItemAtr1' onclick='RunCodeItens(`1`);'>
+                            <input type='radio' name='ItemAtr1_Produto' value='$nome_prod' data-label='$nome_prod'>
                             $img_URL
                             <span class='label'>$nome_prod</span>
                         </li>
                     ";
                 }
             }
-        }
-    echo '</ul>';
+echo '</ul>';
 }
-if($num == '03'){
-    echo '<ul class="List_Itens_03" id="options">';
+
+if($num == '2'){
+    echo '<ul class="List_Itens_2" id="options">';
         $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo' ");
         $dados = $query->fetchAll(PDO::FETCH_ASSOC);
         if(count($dados) == 0){
             echo "
-                <li class='option_ItemAtr03' style='pointer-events: none;'>
-                    <input type='radio' name='ItemAtr03_Produto' value='null' data-label='null'>
+                <li class='option_ItemAtr2' style='pointer-events: none;'>
+                    <input type='radio' name='ItemAtr2_Produto' value='null' data-label='null'>
                     <span class='label'> Nenhum produto encontrado </span>
                 </li>
             ";
@@ -60,34 +60,136 @@ if($num == '03'){
             for ($j=0; $j < count($dados); $j++) {
                 $img_prod = $dados[$j]['img'];
                 $nome_prod = $dados[$j]['nome'];
-
-                if($nome_prod !== $item01 && $nome_prod !== $item02 ){
-                    if($img_prod == 'placeholder.jpg'){
-                        $img_URL = '<img src="../../assets/produtos/placeholder.jpg">';
-                    }else{
-                        $img_URL = '<img src="../../assets/produtos/'.$img_prod.'">';
+                if($item2 != ""){
+                    if($nome_prod == $item2){
+                        if($img_prod == 'placeholder.jpg'){
+                            $img_URL = '<img src="../../assets/produtos/placeholder.jpg">';
+                        }else{
+                            $img_URL = '<img src="../../assets/produtos/'.$img_prod.'">';
+                        }
+            
+                        echo "
+                            <li class='option_ItemAtr2' onclick='RunCodeItens(`2`);'>
+                                <input id='$nome_prod' type='radio' name='ItemAtr2_Produto' value='$nome_prod' data-label='$nome_prod' checked>
+                                $img_URL
+                                <span class='label'>$nome_prod</span>
+                            </li>
+                        ";
                     }
-        
-                    echo "
-                        <li class='option_ItemAtr03' onclick='RunCodeItens(`03`);'>
-                            <input type='radio' name='ItemAtr03_Produto' value='$nome_prod' data-label='$nome_prod'>
-                            $img_URL
-                            <span class='label'>$nome_prod</span>
-                        </li>
-                    ";
+                    else if($nome_prod != $item1 && $nome_prod != $item2){
+                        if($img_prod == 'placeholder.jpg'){
+                            $img_URL = '<img src="../../assets/produtos/placeholder.jpg">';
+                        }else{
+                            $img_URL = '<img src="../../assets/produtos/'.$img_prod.'">';
+                        }
+            
+                        echo "
+                            <li class='option_ItemAtr2' onclick='RunCodeItens(`2`);'>
+                                <input id='$nome_prod' type='radio' name='ItemAtr2_Produto' value='$nome_prod' data-label='$nome_prod'>
+                                $img_URL
+                                <span class='label'>$nome_prod</span>
+                            </li>
+                        ";
+                    }
+                }
+                else{
+                    if($nome_prod != $item1){
+                        if($img_prod == 'placeholder.jpg'){
+                            $img_URL = '<img src="../../assets/produtos/placeholder.jpg">';
+                        }else{
+                            $img_URL = '<img src="../../assets/produtos/'.$img_prod.'">';
+                        }
+            
+                        echo "
+                            <li class='option_ItemAtr2' onclick='RunCodeItens(`2`);'>
+                                <input id='$nome_prod' type='radio' name='ItemAtr2_Produto' value='$nome_prod' data-label='$nome_prod'>
+                                $img_URL
+                                <span class='label'>$nome_prod</span>
+                            </li>
+                        ";
+                    }
                 }
             }
         }
     echo '</ul>';
 }
-if($num == '04'){
-    echo '<ul class="List_Itens_04" id="options">';
+if($num == '3'){
+    echo '<ul class="List_Itens_3" id="options">';
         $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo' ");
         $dados = $query->fetchAll(PDO::FETCH_ASSOC);
         if(count($dados) == 0){
             echo "
-                <li class='option_ItemAtr04' style='pointer-events: none;'>
-                    <input type='radio' name='ItemAtr04_Produto' value='null' data-label='null'>
+                <li class='option_ItemAtr3' style='pointer-events: none;'>
+                    <input type='radio' name='ItemAtr3_Produto' value='null' data-label='null'>
+                    <span class='label'> Nenhum produto encontrado </span>
+                </li>
+            ";
+        }
+        else{
+            for ($j=0; $j < count($dados); $j++) {
+                $img_prod = $dados[$j]['img'];
+                $nome_prod = $dados[$j]['nome'];
+                if($item3 != ""){
+                    if($nome_prod === $item3){
+                        if($img_prod == 'placeholder.jpg'){
+                            $img_URL = '<img src="../../assets/produtos/placeholder.jpg">';
+                        }else{
+                            $img_URL = '<img src="../../assets/produtos/'.$img_prod.'">';
+                        }
+            
+                        echo "
+                            <li class='option_ItemAtr3' onclick='RunCodeItens(`3`);'>
+                                <input id='$nome_prod' type='radio' name='ItemAtr3_Produto' value='$nome_prod' data-label='$nome_prod' checked>
+                                $img_URL
+                                <span class='label'>$nome_prod</span>
+                            </li>
+                        ";
+                    }
+                    else if($nome_prod !== $item1 && $nome_prod !== $item2 && $nome_prod !== $item3){
+                        if($img_prod == 'placeholder.jpg'){
+                            $img_URL = '<img src="../../assets/produtos/placeholder.jpg">';
+                        }else{
+                            $img_URL = '<img src="../../assets/produtos/'.$img_prod.'">';
+                        }
+            
+                        echo "
+                            <li class='option_ItemAtr3' onclick='RunCodeItens(`3`);'>
+                                <input id='$nome_prod' type='radio' name='ItemAtr3_Produto' value='$nome_prod' data-label='$nome_prod'>
+                                $img_URL
+                                <span class='label'>$nome_prod</span>
+                            </li>
+                        ";
+                    }
+                }
+                else{
+                    if($nome_prod !== $item1 && $nome_prod !== $item2){
+                        if($img_prod == 'placeholder.jpg'){
+                            $img_URL = '<img src="../../assets/produtos/placeholder.jpg">';
+                        }else{
+                            $img_URL = '<img src="../../assets/produtos/'.$img_prod.'">';
+                        }
+            
+                        echo "
+                            <li class='option_ItemAtr3' onclick='RunCodeItens(`3`);'>
+                                <input id='$nome_prod' type='radio' name='ItemAtr3_Produto' value='$nome_prod' data-label='$nome_prod'>
+                                $img_URL
+                                <span class='label'>$nome_prod</span>
+                            </li>
+                        ";
+                    }
+                }
+            }
+        }
+    echo '</ul>';
+}
+if($num == '4'){
+    echo '<ul class="List_Itens_4" id="options">';
+        $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo' ");
+        $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+        if(count($dados) == 0){
+            echo "
+                <li class='option_ItemAtr4' style='pointer-events: none;'>
+                    <input type='radio' name='ItemAtr4_Produto' value='null' data-label='null'>
                     <span class='label'> Nenhum produto encontrado </span>
                 </li>
             ";
@@ -97,20 +199,54 @@ if($num == '04'){
                 $img_prod = $dados[$j]['img'];
                 $nome_prod = $dados[$j]['nome'];
 
-                if($nome_prod !== $item01 && $nome_prod !== $item02 && $nome_prod !== $item03 ){
-                    if($img_prod == 'placeholder.jpg'){
-                        $img_URL = '<img src="../../assets/produtos/placeholder.jpg">';
-                    }else{
-                        $img_URL = '<img src="../../assets/produtos/'.$img_prod.'">';
+                if($item4 != ""){
+                    if($nome_prod === $item4){
+                        if($img_prod == 'placeholder.jpg'){
+                            $img_URL = '<img src="../../assets/produtos/placeholder.jpg">';
+                        }else{
+                            $img_URL = '<img src="../../assets/produtos/'.$img_prod.'">';
+                        }
+            
+                        echo "
+                            <li class='option_ItemAtr4' onclick='RunCodeItens(`4`);'>
+                                <input id='$nome_prod' type='radio' name='ItemAtr4_Produto' value='$nome_prod' data-label='$nome_prod' checked>
+                                $img_URL
+                                <span class='label'>$nome_prod</span>
+                            </li>
+                        ";
                     }
-        
-                    echo "
-                        <li class='option_ItemAtr04' onclick='RunCodeItens(`04`);'>
-                            <input type='radio' name='ItemAtr04_Produto' value='$nome_prod' data-label='$nome_prod'>
-                            $img_URL
-                            <span class='label'>$nome_prod</span>
-                        </li>
-                    ";
+                    else if($nome_prod !== $item1 && $nome_prod !== $item2 && $nome_prod !== $item3 && $nome_prod !== $item4){
+                        if($img_prod == 'placeholder.jpg'){
+                            $img_URL = '<img src="../../assets/produtos/placeholder.jpg">';
+                        }else{
+                            $img_URL = '<img src="../../assets/produtos/'.$img_prod.'">';
+                        }
+            
+                        echo "
+                            <li class='option_ItemAtr4' onclick='RunCodeItens(`4`);'>
+                                <input id='$nome_prod' type='radio' name='ItemAtr4_Produto' value='$nome_prod' data-label='$nome_prod'>
+                                $img_URL
+                                <span class='label'>$nome_prod</span>
+                            </li>
+                        ";
+                    }
+                }
+                else{
+                    if($nome_prod !== $item1 && $nome_prod !== $item2 && $nome_prod !== $item3 ){
+                        if($img_prod == 'placeholder.jpg'){
+                            $img_URL = '<img src="../../assets/produtos/placeholder.jpg">';
+                        }else{
+                            $img_URL = '<img src="../../assets/produtos/'.$img_prod.'">';
+                        }
+            
+                        echo "
+                            <li class='option_ItemAtr4' onclick='RunCodeItens(`4`);'>
+                                <input id='$nome_prod' type='radio' name='ItemAtr4_Produto' value='$nome_prod' data-label='$nome_prod'>
+                                $img_URL
+                                <span class='label'>$nome_prod</span>
+                            </li>
+                        ";
+                    }
                 }
             }
         }

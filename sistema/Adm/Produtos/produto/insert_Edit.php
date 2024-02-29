@@ -3,11 +3,19 @@
     require_once("../../../configs/conexao.php"); 
 
     
+    $id_edit = $_POST['id_produto_edit'];
 
     $nome = $_POST['nome_Produto'];
+    $valor = $_POST['valor_Produto'];
+    $descricao = nl2br($_POST["descri_Produto"]);
 
 
-    
+
+
+
+    $date_criacao_Produto = $_POST['date_criacao_Produto'];
+    $date_atual_Produto = $_POST['date_atual_Produto'];
+
 
     // ===== SCRIPTS PARA SUBIR BANNER WEB E MOBILE PARA O BANCO =====
     function uploadImage($inputName, $targetDir, $defaultImage) {
@@ -30,10 +38,10 @@
         }
     }
     // Diretórios e imagens padrão
-    $img_categ_Diret = '../../../../assets/produtos/';
-    $default_img_categ = 'placeholder.jpg';
+    $img_prod_Diret = '../../../../assets/produtos/';
+    $default_img_prod = 'placeholder.jpg';
 
-    $img_categ = uploadImage('img_Produto_Input', $img_categ_Diret, $default_img_categ);
+    $img_prod = uploadImage('img_Produto_Input', $img_prod_Diret, $default_img_prod);
 
     
     // ===== VERIFICAÇÃO DE INPUTS VAZIOS + VERIFICAÇÃO DE POSSIVEIS ERROS =====
@@ -41,40 +49,21 @@
 
 
     //ATUALIZAÇÕES DE VARIAVEIS
-    if($date_criacao_categ_edit == "" && $date_atual_categ_edit == ""){
+    if($date_criacao_Produto == "" && $date_atual_Produto == ""){
         $data_criacao = date('d/m/Y');
         $data_atual = "";
     }
-    if($date_criacao_categ_edit !== "" && $date_atual_categ_edit == ""){
-        $data_criacao = $date_criacao_categ_edit;
+    if($date_criacao_Produto !== "" && $date_atual_Produto == ""){
+        $data_criacao = $date_criacao_Produto;
         $data_atual = date('d/m/Y');
     }
-    if($date_criacao_categ_edit !== "" && $date_atual_categ_edit !== ""){
-        $data_criacao = $date_criacao_categ_edit;
+    if($date_criacao_Produto !== "" && $date_atual_Produto !== ""){
+        $data_criacao = $date_criacao_Produto;
         $data_atual = date('d/m/Y');
-    }
-    
-    if($status_categ_edit == "" || $status_categ_edit == null || $status_categ_edit == "ativo"){
-        $status_categ_edit = 'ativo';
-    }else{
-        $status_categ_edit = 'desativado';
     }
 
 
     // ===== INSERÇÃO DE DADOS NO BANCO =====
-    if($nome_categ != $nome_categ_edit){
-        $query = $pdo->query("SELECT * FROM sub_categorias WHERE categ_Atrelada = '$nome_categ_edit'");
-        $dados = $query->fetchAll(PDO::FETCH_ASSOC);
-
-        for ($i=0; $i < count($dados); $i++) { 
-            $id_subcateg = $dados[$i]['id'];
-
-            $res2 = $pdo->prepare("UPDATE sub_categorias SET categ_Atrelada = :categ_Atrelada WHERE id = :id");
-            $res2->bindValue(":categ_Atrelada", $nome_categ);
-            $res2->bindValue(":id", $id_subcateg);
-            $res2->execute();
-        }
-    }
     if($id_categ_edit == ""){
         $res = $pdo->prepare("INSERT INTO categorias (img, nome, data_criacao, data_atual, status_categ) VALUES (:img, :nome, :data_criacao, :data_atual, :status_categ)");
         $res->bindValue(":img", $img_categ);

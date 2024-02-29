@@ -102,11 +102,10 @@
                             $mercadoLivre_Produto = $dados[0]['mercado_livre'];
                             $date_criacao_Produto = $dados[0]['data_criacao'];
                             $date_atual_Produto = $dados[0]['data_atual'];
-                            $status = $dados[0]['status'];
-                            $Item_Relac_01 = $dados[0]['Item_Relac_01'];
-                            $Item_Relac_02 = $dados[0]['Item_Relac_02'];
-                            $Item_Relac_03 = $dados[0]['Item_Relac_03'];
-                            $Item_Relac_04 = $dados[0]['Item_Relac_04'];
+                            $Item_Relac_1 = $dados[0]['Item_Relac_1'];
+                            $Item_Relac_2 = $dados[0]['Item_Relac_2'];
+                            $Item_Relac_3 = $dados[0]['Item_Relac_3'];
+                            $Item_Relac_4 = $dados[0]['Item_Relac_4'];
                         }
 
                     } else { 
@@ -595,17 +594,19 @@
 <form id="form_itemAtr_Listagem" class="hide" method="POST">
     <input type="hidden" id="codigo_Select" name="codigo_Select" value="">
     <input type="hidden" id="numItem_list" name="numItem_list" value="">
-    <input type="hidden" id="item_atr01_list" name="item_atr01_list" value="">
-    <input type="hidden" id="item_atr02_list" name="item_atr02_list" value="">
-    <input type="hidden" id="item_atr03_list" name="item_atr03_list" value="">
+    <input type="hidden" id="item_atr1_list" name="item_atr1_list" value="">
+    <input type="hidden" id="item_atr2_list" name="item_atr2_list" value="">
+    <input type="hidden" id="item_atr3_list" name="item_atr3_list" value="">
+    <input type="hidden" id="item_atr4_list" name="item_atr4_list" value="">
+
 </form>
 
 <form id="form_itemAtr_Infos" class="hide" method="POST">
     <input type="hidden" id="numItem_info" name="numItem_info" value="">
-    <input type="hidden" id="item_atr01_info" name="item_atr01_info" value="">
-    <input type="hidden" id="item_atr02_info" name="item_atr02_info" value="">
-    <input type="hidden" id="item_atr03_info" name="item_atr03_info" value="">
-    <input type="hidden" id="item_atr04_info" name="item_atr04_info" value="">
+    <input type="hidden" id="item_atr1_info" name="item_atr1_info" value="">
+    <input type="hidden" id="item_atr2_info" name="item_atr2_info" value="">
+    <input type="hidden" id="item_atr3_info" name="item_atr3_info" value="">
+    <input type="hidden" id="item_atr4_info" name="item_atr4_info" value="">
 </form>
 
 <!-- FUNÇÕES PHP NA CHAMADA DE MODAL -->
@@ -636,7 +637,7 @@
             verificaTamanhoInput('descri_Produto', 'descri_produto_Input', 500);
             verificaTamanhoInput('marca_Produto', 'marca_produto_Input', 150);
             verificaTamanhoInput('mercadoLivre_Produto', 'mercadoLivre_produto_Input', 500);
-    }, 50);
+    }, 1000);
 
     //CHAMADA DE FUNÇÃO PARA UPLOAD DE IMG BANCO DE DADOS
     function carregarImgProduto(){ carregarImagem('img_Produto_Input', 'target_imgProduto', "../../assets/icons/placeholder.svg", 'img_produto_modal'); }
@@ -666,65 +667,320 @@
         });
     });
 
-    ////Itens atrelados + listagem dinamica
+    // //Itens atrelados + listagem dinamica
+    // function RunCodeItens(item) {
+    //     const valoresItens = {
+    //         "1": $('input[name="ItemAtr1_Produto"]:checked').val(),
+    //         "2": $('input[name="ItemAtr2_Produto"]:checked').val(),
+    //         "3": $('input[name="ItemAtr3_Produto"]:checked').val(),
+    //         "4": $('input[name="ItemAtr4_Produto"]:checked').val()
+    //     };
+
+    //     const numItem_list = parseInt(item) + 1;
+    //     const numItem_info = item;
+
+    //     $("#numItem_list").val(numItem_list);
+
+    //     for (let i = 1; i <= numItem_list; i++) {
+    //         $(`#item_atr${i}_list`).val(valoresItens[i]);
+    //         $(`#select_item${i}`).removeClass("Disabled");
+    //     }
+
+    //     $("#form_itemAtr_Listagem").click();
+
+    //     $("#numItem_info").val(numItem_info);
+    //     $(`#item_atr${numItem_info}_info`).val(valoresItens[numItem_info]);
+    //     $("#form_itemAtr_Infos").click();
+    //     $(`#options_btn_ItemAtr${numItem_info}`).click();
+    // }
+
+
     function RunCodeItens(item){ 
-        ////Item atrelado 01
-        if(item == 01){
-            //listagem
-            $("#numItem_list").val('02');
-            $("#item_atr01_list").val($('input[name="ItemAtr01_Produto"]:checked').val());
-            $("#form_itemAtr_Listagem").click();
-            $("#select_item02").removeClass("Disabled");
-            
-            //infos
-            $("#numItem_info").val('01');
-            $("#item_atr01_info").val($('input[name=ItemAtr01_Produto]:checked').val());
-            $("#form_itemAtr_Infos").click();
-            $("#options_btn_ItemAtr01").click();
+        let valor_item1 = $('input[name="ItemAtr1_Produto"]:checked').val();
+        let valor_item2 = $('input[name="ItemAtr2_Produto"]:checked').val();
+        let valor_item3 = $('input[name="ItemAtr3_Produto"]:checked').val();
+        let valor_item4 = $('input[name="ItemAtr4_Produto"]:checked').val();
+
+        if(item == 1){
+            if(valor_item2 == undefined && valor_item3 == undefined && valor_item4 == undefined){
+                //list
+                $("#numItem_list").val('2');
+                $("#item_atr1_list").val(valor_item1);
+                $("#form_itemAtr_Listagem").click();
+                $("#select_item2").removeClass("Disabled");
+                //infos
+                $("#numItem_info").val('1');
+                $("#item_atr1_info").val(valor_item1);
+                $("#form_itemAtr_Infos").click();
+                $("#options_btn_ItemAtr1").click();
+            }
+            else if(valor_item2 != undefined && valor_item3 == undefined && valor_item4 == undefined){
+                if(valor_item1 != valor_item2){
+                    //list
+                    $("#numItem_list").val('2');
+                    $("#item_atr1_list").val(valor_item1);
+                    $("#item_atr2_list").val(valor_item2);
+                    $("#form_itemAtr_Listagem").click();
+                    //infos
+                    $("#numItem_info").val('1');
+                    $("#item_atr1_info").val(valor_item1);
+                    $("#form_itemAtr_Infos").click();
+                    $("#options_btn_ItemAtr1").click();
+                }
+                else{
+                    $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
+                    $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
+                    $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
+                }
+            }
+            else if(valor_item2 != undefined && valor_item3 != undefined && valor_item4 == undefined){
+                if(valor_item1 != valor_item2){
+                    if(valor_item1 != valor_item3){
+                        //list
+                        $("#numItem_list").val('2');
+                        $("#item_atr1_list").val(valor_item1);
+                        $("#item_atr2_list").val(valor_item2);
+                        $("#form_itemAtr_Listagem").click();
+                        
+                        setTimeout(() => {
+                            $("#numItem_list").val('3');
+                            $("#item_atr1_list").val(valor_item1);
+                            $("#item_atr2_list").val(valor_item2);
+                            $("#item_atr3_list").val(valor_item3);
+                            $("#form_itemAtr_Listagem").click();
+                        }, 500);
+    
+                        //infos
+                        $("#numItem_info").val('1');
+                        $("#item_atr1_info").val(valor_item1);
+                        $("#form_itemAtr_Infos").click();
+                        $("#options_btn_ItemAtr1").click();
+                    }
+                    else{
+                        $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
+                        $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
+                        $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
+                    }
+                }
+                else{
+                    $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
+                    $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
+                    $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
+                }
+            }
+            else if(valor_item2 != undefined && valor_item3 != undefined && valor_item4 != undefined){
+                if(valor_item1 != valor_item2){
+                    if(valor_item1 != valor_item3){
+                        if(valor_item1 != valor_item4){
+                            //list
+                            $("#numItem_list").val('2');
+                            $("#item_atr1_list").val(valor_item1);
+                            $("#item_atr2_list").val(valor_item2);
+                            $("#form_itemAtr_Listagem").click();
+
+                            setTimeout(() => {
+                                $("#numItem_list").val('3');
+                                $("#item_atr1_list").val(valor_item1);
+                                $("#item_atr2_list").val(valor_item2);
+                                $("#item_atr3_list").val(valor_item3);
+                                $("#form_itemAtr_Listagem").click();
+                            }, 500);
+                            
+                            setTimeout(() => {
+                                $("#numItem_list").val('4');
+                                $("#item_atr1_list").val(valor_item1);
+                                $("#item_atr2_list").val(valor_item2);
+                                $("#item_atr3_list").val(valor_item3);
+                                $("#item_atr4_list").val(valor_item4);
+                                $("#form_itemAtr_Listagem").click();
+                            }, 1000);
+
+                            //infos
+                            $("#numItem_info").val('1');
+                            $("#item_atr1_info").val(valor_item1);
+                            $("#form_itemAtr_Infos").click();
+                            $("#options_btn_ItemAtr1").click();
+                        }
+                        else{
+                            $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
+                            $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
+                            $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
+                        }
+                    }
+                    else{
+                        $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
+                        $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
+                        $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
+                    }
+                }
+                else{
+                    $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
+                    $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
+                    $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
+                }
+            }
+        }
+        
+        if(item == 2){
+            if(valor_item3 == undefined && valor_item4 == undefined){
+                //listagem
+                $("#numItem_list").val('3');
+                $("#item_atr1_list").val(valor_item1);
+                $("#item_atr2_list").val(valor_item2);
+                $("#form_itemAtr_Listagem").click();
+                $("#select_item3").removeClass("Disabled");
+                //infos
+                $("#numItem_info").val('2');
+                $("#item_atr2_info").val(valor_item2);
+                $("#form_itemAtr_Infos").click();
+                $("#options_btn_ItemAtr2").click();
+            }
+            else if(valor_item1 != undefined && valor_item3 == undefined && valor_item4 == undefined){
+                if(valor_item2 != valor_item1){
+                    //list
+                    $("#numItem_list").val('1');
+                    $("#item_atr1_list").val(valor_item1);
+                    $("#item_atr2_list").val(valor_item2);
+                    $("#form_itemAtr_Listagem").click();
+                    //infos
+                    $("#numItem_info").val('1');
+                    $("#item_atr1_info").val(valor_item1);
+                    $("#form_itemAtr_Infos").click();
+                    $("#options_btn_ItemAtr1").click();
+                }
+                else{
+                    $('input[name="ItemAtr2_Produto"]:checked').prop('checked', false);
+                    $(`#${$('#item_atr2_list').val()}`).prop('checked', true);
+                    $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
+                }
+            }
+            else if(valor_item1 != undefined && valor_item3 != undefined && valor_item4 == undefined){
+                if(valor_item1 != valor_item2){
+                    if(valor_item1 != valor_item3){
+                        //list
+                        $("#numItem_list").val('2');
+                        $("#item_atr1_list").val(valor_item1);
+                        $("#item_atr2_list").val(valor_item2);
+                        $("#form_itemAtr_Listagem").click();
+                        
+                        setTimeout(() => {
+                            $("#numItem_list").val('3');
+                            $("#item_atr1_list").val(valor_item1);
+                            $("#item_atr2_list").val(valor_item2);
+                            $("#item_atr3_list").val(valor_item3);
+                            $("#form_itemAtr_Listagem").click();
+                        }, 500);
+    
+                        //infos
+                        $("#numItem_info").val('1');
+                        $("#item_atr1_info").val(valor_item1);
+                        $("#form_itemAtr_Infos").click();
+                        $("#options_btn_ItemAtr1").click();
+                    }
+                    else{
+                        $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
+                        $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
+                        $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
+                    }
+                }
+                else{
+                    $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
+                    $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
+                    $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
+                }
+            }
+            else if(valor_item1 != undefined && valor_item3 != undefined && valor_item4 != undefined){
+                if(valor_item1 != valor_item2){
+                    if(valor_item1 != valor_item3){
+                        if(valor_item1 != valor_item4){
+                            //list
+                            $("#numItem_list").val('2');
+                            $("#item_atr1_list").val(valor_item1);
+                            $("#item_atr2_list").val(valor_item2);
+                            $("#form_itemAtr_Listagem").click();
+
+                            setTimeout(() => {
+                                $("#numItem_list").val('3');
+                                $("#item_atr1_list").val(valor_item1);
+                                $("#item_atr2_list").val(valor_item2);
+                                $("#item_atr3_list").val(valor_item3);
+                                $("#form_itemAtr_Listagem").click();
+                            }, 500);
+                            
+                            setTimeout(() => {
+                                $("#numItem_list").val('4');
+                                $("#item_atr1_list").val(valor_item1);
+                                $("#item_atr2_list").val(valor_item2);
+                                $("#item_atr3_list").val(valor_item3);
+                                $("#item_atr4_list").val(valor_item4);
+                                $("#form_itemAtr_Listagem").click();
+                            }, 1000);
+
+                            //infos
+                            $("#numItem_info").val('1');
+                            $("#item_atr1_info").val(valor_item1);
+                            $("#form_itemAtr_Infos").click();
+                            $("#options_btn_ItemAtr1").click();
+                        }
+                        else{
+                            $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
+                            $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
+                            $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
+                        }
+                    }
+                    else{
+                        $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
+                        $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
+                        $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
+                    }
+                }
+                else{
+                    $('input[name="ItemAtr1_Produto"]:checked').prop('checked', false);
+                    $(`#${$('#item_atr1_list').val()}`).prop('checked', true);
+                    $('#msgErro_InsertEdit_Produto').addClass('text-danger').text('Produto selecionado em outro campo!');
+                }
+            }
         }
 
-        ////Item atrelado 02
-        if(item == 02){
+        if (item == 2) {
             //listagem
-            $("#numItem_list").val('03');
-            $("#item_atr01_list").val($('input[name=ItemAtr01_Produto]:checked').val());
-            $("#item_atr02_list").val($('input[name=ItemAtr02_Produto]:checked').val());
+            $("#numItem_list").val('3');
+            $("#item_atr1_list").val(valor_item1);
+            $("#item_atr2_list").val(valor_item2);
             $("#form_itemAtr_Listagem").click();
-            $("#select_item03").removeClass("Disabled");
-
+            $("#select_item3").removeClass("Disabled");
             //infos
-            $("#numItem_info").val('02');
-            $("#item_atr02_info").val($('input[name=ItemAtr02_Produto]:checked').val());
+            $("#numItem_info").val('2');
+            $("#item_atr2_info").val(valor_item2);
             $("#form_itemAtr_Infos").click();
-            $("#options_btn_ItemAtr02").click();
+            $("#options_btn_ItemAtr2").click();
         }
 
-        ////Item atrelado 03
-        if(item == 03){
+        if (item == 3) {
             //listagem
-            $("#numItem_list").val('04');
-            $("#item_atr01_list").val($('input[name=ItemAtr01_Produto]:checked').val());
-            $("#item_atr02_list").val($('input[name=ItemAtr02_Produto]:checked').val());
-            $("#item_atr03_list").val($('input[name=ItemAtr03_Produto]:checked').val());
+            $("#numItem_list").val('4');
+            $("#item_atr1_list").val(valor_item1);
+            $("#item_atr2_list").val(valor_item2);
+            $("#item_atr3_list").val(valor_item3);
             $("#form_itemAtr_Listagem").click();
-            $("#select_item04").removeClass("Disabled");
+            $("#select_item4").removeClass("Disabled");
             //infos
-            $("#numItem_info").val('03');
-            $("#item_atr03_info").val($('input[name=ItemAtr03_Produto]:checked').val());
+            $("#numItem_info").val('3');
+            $("#item_atr3_info").val(valor_item3);
             $("#form_itemAtr_Infos").click();
-            $("#options_btn_ItemAtr03").click();
+            $("#options_btn_ItemAtr3").click();
         }
 
-        ////Item atrelado 04
-        if(item == 04){
+        if (item == 4) {
             //infos
-            $("#numItem_info").val('04');
-            $("#item_atr04_info").val($('input[name=ItemAtr04_Produto]:checked').val());
+            $("#numItem_info").val('4');
+            $("#item_atr4_info").val(valor_item4);
             $("#form_itemAtr_Infos").click();
-            $("#options_btn_ItemAtr04").click();
+            $("#options_btn_ItemAtr4").click();
+
         }
     }
-
+   
     //CHECKBOX'S
     function litrosCheck() {
         if($(".litros_input").hasClass("hide")){
@@ -916,9 +1172,10 @@
     });
 
     $('#form_itemAtr_Listagem').click(function (e) {
-        if($("#numItem_list").val() == '02'){ $(".List_Itens_02").remove(); }
-        if($("#numItem_list").val() == '03'){ $(".List_Itens_03").remove(); }
-        if($("#numItem_list").val() == '04'){ $(".List_Itens_04").remove(); }
+        if($("#numItem_list").val() == '1'){ $(".List_Itens_1").remove(); }
+        if($("#numItem_list").val() == '2'){ $(".List_Itens_2").remove(); }
+        if($("#numItem_list").val() == '3'){ $(".List_Itens_3").remove(); }
+        if($("#numItem_list").val() == '4'){ $(".List_Itens_4").remove(); }
         e.preventDefault();
         $.ajax({
             url: "Produtos/produto/relacionados/List_ItemAtr.php",
@@ -926,24 +1183,29 @@
             data: $('form').serialize(),
             dataType: "text",
             success: function (msg) {
-                if($("#numItem_list").val() == '02'){
-                    $('#select_item02').append(msg);
+                $('#msgErro_InsertEdit_Produto').text(' ');
+                if($("#numItem_list").val() == '1'){
+                    $('#select_item1').append(msg);
                 }
-                if($("#numItem_list").val() == '03'){
-                    $('#select_item03').append(msg);
+                if($("#numItem_list").val() == '2'){
+                    $('#select_item2').append(msg);
                 }
-                if($("#numItem_list").val() == '04'){
-                    $('#select_item04').append(msg);
+                if($("#numItem_list").val() == '3'){
+                    $('#select_item3').append(msg);
+                }
+                if($("#numItem_list").val() == '4'){
+                    $('#select_item4').append(msg);
                 }
             }
         });
     });
 
     $('#form_itemAtr_Infos').click(function (e) {
-        if($("#numItem_info").val() == '01'){ $(".select_ItemAtr01").remove(); }
-        if($("#numItem_info").val() == '02'){ $(".select_ItemAtr02").remove(); }
-        if($("#numItem_info").val() == '03'){ $(".select_ItemAtr03").remove(); }
-        if($("#numItem_info").val() == '04'){ $(".select_ItemAtr04").remove(); }
+        $('#msgErro_InsertEdit_Produto').text('');
+        if($("#numItem_info").val() == '1'){ $(".select_ItemAtr1").remove(); }
+        if($("#numItem_info").val() == '2'){ $(".select_ItemAtr2").remove(); }
+        if($("#numItem_info").val() == '3'){ $(".select_ItemAtr3").remove(); }
+        if($("#numItem_info").val() == '4'){ $(".select_ItemAtr4").remove(); }
 
         e.preventDefault();
         $.ajax({
@@ -952,17 +1214,17 @@
             data: $('form').serialize(),
             dataType: "text",
             success: function (msg) {
-                if($("#numItem_info").val() == '01'){ 
-                    $('.ItemAtr01_head').append(msg);
+                if($("#numItem_info").val() == '1'){ 
+                    $('.ItemAtr1_head').append(msg);
                 }
-                if($("#numItem_info").val() == '02'){ 
-                    $('.ItemAtr02_head').append(msg);
+                if($("#numItem_info").val() == '2'){ 
+                    $('.ItemAtr2_head').append(msg);
                 }
-                if($("#numItem_info").val() == '03'){ 
-                    $('.ItemAtr03_head').append(msg);
+                if($("#numItem_info").val() == '3'){ 
+                    $('.ItemAtr3_head').append(msg);
                 }
-                if($("#numItem_info").val() == '04'){ 
-                    $('.ItemAtr04_head').append(msg);
+                if($("#numItem_info").val() == '4'){ 
+                    $('.ItemAtr4_head').append(msg);
                 }
 
             }
