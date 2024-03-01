@@ -1,5 +1,4 @@
 <div class="blockContent produtosListagem">
-
     <a class="produtos_Btn_CriacaoProd" href="index.php?pag=listagemProduto&funcao=novoProd">
         <p>Novo Produto</p>
         <img src="../../assets/icons/add.svg">
@@ -19,44 +18,74 @@
         <thead>
             <tr>
                 <th>Imgs</th>
-                <th>Nome da categoria</th>
-                <th>Sub-Categorias atreladas</th>
-                <th>Data criação / Ultima alteração</th>
-                <th>Status</th>
-                <th>Ações</th>
+                <th>Nome de produto</th>
+                <th>ações</th>
+                <th>Código</th>
+                <th>Cat / subcat</th>
+                <th>Data</th>
             </tr>
         </thead>
         <tbody>
             <?php
-                $query = $pdo->query("SELECT * FROM usuarios ORDER BY id DESC");
+                $query = $pdo->query("SELECT * FROM produtos ORDER BY id DESC");
                 $dados = $query->fetchAll(PDO::FETCH_ASSOC);
 
                 for ($i=0; $i < count($dados); $i++) { 
-                    
-                    $nomeUser = $dados[$i]['nome_Completo'];
-                    $temaUser = $dados[$i]['tema'];
-                    $emailUser = $dados[$i]['email'];
-                    $telUser = $dados[$i]['telefone'];
+                    $id = $dados[$i]['id'];
+                    $img = $dados[$i]['img'];
+                    $nome = $dados[$i]['nome'];
+                    $status = $dados[$i]['status_prod'];
+                    $valor = $dados[$i]['valor'];
+                    $estoque = $dados[$i]['estoque'];
+                    $codigo = $dados[$i]['codigo'];
+                    $categoria = $dados[$i]['categoria'];
+                    $subcategoria = $dados[$i]['sub_categoria'];
+                    $data_criacao = $dados[$i]['data_criacao'];
+                    $data_atual = $dados[$i]['data_atual'];
+
+                    if($img == "placeholder.jpg" || $img == ""){
+                        $img_prod = "<img src='../../assets/produtos/placeholder.jpg'>";
+                    }else{
+                        $img_prod = "<img src='../../assets/produtos/$img'>";
+                    }
+
+                    if($data_atual == "" || $data_atual == null){
+                        $data = $data_criacao;
+                    }else{
+                        $data = $data_atual;
+                    }
 
                     echo "
-                        <tr>
-                            <td class='imgsCateg'>
-                                ".$nomeUser."
+                        <tr class='".$status."Block'>
+                            <td class='img_prod'>
+                                ".$img_prod."
                             </td>
-                            <td class='nomeCateg'>
-                                ".$temaUser."
+                            <td class='nome_prod'>
+                                <p>".$nome."</p>
                             </td>
-                            <td class='subCategsCateg'>
-                                ".$emailUser."
+                            <td class='acoes_prod'>
+                                <a href='index.php?pag=listagemProduto&funcao=editProd&id=".$id."'><img src='../../assets/icons/edit.svg'></a>
+                                <a href='index.php?pag=listagemProduto&funcao=deleteProd&id=".$id."'><img src='../../assets/icons/delet.svg'></a>
+                                <a class='".$status."' href='index.php?pag=listagemProduto&funcao=statusProd&id=".$id."'><span class='hide'>".$status."</span></a>
+
+                                <p><span>R$</span>".$valor."</p>
+
+                                <form class='estoque_prod' method='POST'>
+                                    <span>Estoque:</span>
+                                    <input id='".$id."' type='number' value=".$estoque." name='estoque_Prod' onchange='atualizaEstoque(".$id.")' min='0' max='999999'>
+                                </form>
                             </td>
-                            <td class='datasCateg'>
-                                ".$telUser."
+                            <td class='codigo_prod'>
+                                <p>Código:</p>
+                                <span>".$codigo."</span>
                             </td>
-                            <td class='statusCateg'>
-                                ".$telUser."
+                            <td class='status_prod'>
+                                <p>Categ / Subcat:</p>
+                                <span>".$categoria."</span><span> / ".$subcategoria."</span>
                             </td>
-                            <td class='acoesCateg'>
-                                ".$telUser."
+                            <td class='data_prod'>
+                                <p>Data:</p>
+                                <span>".$data."</span>
                             </td>
                         </tr>
                     ";
@@ -64,6 +93,8 @@
             ?>
         </tbody>
     </table>
+
+    <div class="msgErro" id="msgErro_edit_Estoque"></div>
 </div>
 
 
@@ -108,6 +139,35 @@
                             $Item_Relac_4 = $dados[0]['Item_Relac_4'];
                         }
 
+                        if($categoria_Produto !== "" && $categoria_Produto !== ""){
+                            echo "<script language='javascript'>
+
+                                document.addEventListener('DOMContentLoaded', function(){
+                                    console.log('rodei');
+        
+                                    document.getElementById('categoria_lista_subCateg').value = '$categoria_Produto';
+                                    document.getElementById('subcategoria_lista_edit').value = '$subcategoria_Produto';
+        
+                                    $('#form_listagem_subCateg').click();
+                                
+                                });
+
+                            </script>";
+                        }
+
+                        if($codigo_Produto !== ""){
+                            echo "<script language='javascript'>
+                                document.addEventListener('DOMContentLoaded', function(){
+        
+                                    $('#codigo_lista_prodRelac').val('".$codigo_Produto."');
+                                    $('#codigo_Select').val('".$codigo_Produto."');
+
+                                    $('#form_listagem_prodRelac').click();
+                                });
+
+                            </script>";
+                        }
+                        
                     } else { 
                         $titulo_Produto = "Cadastro de produto!"; 
                         $btn_Produto = "Cadastrar produto";
@@ -175,7 +235,7 @@
     
                                     <div class="Infos">
                                         <div class="BlockBox descricaoBox">
-                                            <textarea type="text" name="descri_Produto" id="descri_Produto" maxlength="500" required><?php echo str_replace('<br />', PHP_EOL, @$descricao_Produto); ?></textarea>
+                                            <textarea type="text" name="descri_Produto" id="descri_Produto" maxlength="2000" required><?php echo @$descricao_Produto ?></textarea>
                                             <span>Descrição:</span>
                                             <p class="lengthInput descri_produto_Input"></p>
                                         </div>
@@ -609,7 +669,6 @@
     <input type="hidden" id="item_atr2_list" name="item_atr2_list" value="">
     <input type="hidden" id="item_atr3_list" name="item_atr3_list" value="">
     <input type="hidden" id="item_atr4_list" name="item_atr4_list" value="">
-
 </form>
 
 <form id="form_itemAtr_Infos" class="hide" method="POST">
@@ -619,6 +678,13 @@
     <input type="hidden" id="item_atr3_info" name="item_atr3_info" value="">
     <input type="hidden" id="item_atr4_info" name="item_atr4_info" value="">
 </form>
+
+<!-- atualiza estoque -->
+<form id="form_Atualiza_Estoque" class="hide" method="POST">
+    <input type="hidden" id="id_Produto_estoque" name="id_Produto_estoque" value="">
+    <input type="hidden" id="estoque_Edit" name="estoque_Edit" value="">
+</form>
+
 
 <!-- FUNÇÕES PHP NA CHAMADA DE MODAL -->
 <?php
@@ -640,12 +706,20 @@
     }
 ?>
 
+
 <script>
+    //ATUALIZA ESTOQUE
+    function atualizaEstoque(id){
+        $('#id_Produto_estoque').val(id);
+        $('#estoque_Edit').val($(`#${id}`).val());
+        $('#form_Atualiza_Estoque').click();
+    }
+
     //VERIFICACAO GERAL DE TAMANHOS DE INPUT
     setInterval(
         function () {
             verificaTamanhoInput('nome_Produto', 'nome_produto_Input', 200);
-            verificaTamanhoInput('descri_Produto', 'descri_produto_Input', 500);
+            verificaTamanhoInput('descri_Produto', 'descri_produto_Input', 2000);
             verificaTamanhoInput('marca_Produto', 'marca_produto_Input', 150);
             verificaTamanhoInput('mercadoLivre_Produto', 'mercadoLivre_produto_Input', 500);
     }, 1000);
@@ -1044,6 +1118,22 @@
                     $('.ItemAtr4_head').append(msg);
                 }
 
+            }
+        })
+    });
+
+    //ATUALIZA ESTOQUE
+    $('#form_Atualiza_Estoque').click(function (e) {
+        $('#msgErro_edit_Estoque').text('');
+        e.preventDefault();
+        $.ajax({
+            url: "Produtos/produto/atualiza_estoque.php",
+            method: "post",
+            data: $('form').serialize(),
+            dataType: "text",
+            success: function (msg) {
+                $('#msgErro_edit_Estoque').append(msg);
+                window.location='./index.php?pag=listagemProduto';
             }
         })
     });

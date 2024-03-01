@@ -16,7 +16,7 @@
         margin: 0;
         padding: 0 0 0 2vw;
         top: 1vh;
-        left: 1.5vw;
+        left: 0;
         &::before{
             content: '';
             position: absolute;
@@ -32,7 +32,7 @@
     .dataTables_wrapper {
         width: 100%;
         height: 100%;
-        padding: 1vh 1.5vw;
+        padding: 1vh 0;
         //esconder div's não necessarias
         .row{
             margin: 0;
@@ -54,7 +54,6 @@
             align-items: center;
             justify-content: right;
             position: relative;
-            
             label{
                 margin: 0;
                 position: relative;
@@ -99,7 +98,7 @@
         #ProdutosTable{
             margin: 0 !important;
             padding: 0 !important;
-            width: 100%;
+            width: 100% !important;
             height: 62.5vh !important;
             border-collapse: collapse !important;
             thead{
@@ -109,33 +108,217 @@
             
             tbody{
                 height: 100%;
-                width: 100%;
+                width: 73.5vw;
                 display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
                 justify-content: space-between;
                 align-items: center;
-                margin-top: 1.5vh;
                 tr{
+                    all: unset;
                     margin: 0.5vh 0;
-                    width: 24%;
-                    height: 14.5vh;
+                    width: 24.25%;
+                    height: 15vh;
                     background: $Grafite;
                     border-radius: 0.75vw;
                     display: flex;
                     flex-wrap: wrap;
                     overflow: hidden;
                     td{
-                        margin: 0.5vw;
-                        position: relative;
-                        border: none;
+                        width: 33.3%;
+                    }
+                    .img_prod{
+                        height: 60%;
+                        width: 25%;
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        font-family: $Second-font;
-                        font-weight: 700;
-                        font-size: 0.75vw;
-                        color: $Preto;
+                        padding: 0.5vw;
+                        img{
+                            width: 100%;
+                            height: 100%;
+                            object-fit: contain;
+                        }
+                    }
+                    .nome_prod{
+                        height: 60%;
+                        width: 50%;
+                        p{
+                            display: block; 
+                            width: 100%;
+                            height: 100%;
+                            font-family: $Second-font;
+                            font-size: 0.7vw;
+                            font-weight: 400;
+                            color: $Preto;
+                            padding: 0.25vw;
+                            padding-top: 1.25vh;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 4;
+                            overflow: hidden;
+                        }
+                    }
+                    .acoes_prod{
+                        height: 60%;
+                        width: 25%;
+                        display: flex;
+                        flex-wrap: wrap;
+                        padding: 0.25vw;
+                        z-index: 99 !important;
+                        a{
+                            width: 29%;
+                            height: 2.5vh;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 0.25vw;
+                            border-radius: 0.15vw;
+                            img, svg{
+                                width: 100%;
+                                height: 100%;
+                            }
+                            &:nth-child(1){
+                                padding: 0.2vw;
+                            }
+                            &:nth-child(2){
+                                margin: 0 6%;
+                            }
+                            &:nth-child(3){
+                                width: 19.5%;
+                                border-radius: 10vw;
+                                height: 1.3vh;
+                                margin-top: 0.6vh;
+                                margin-left: 0.1vw;
+                            }
+                        }
+                        .ativo{
+                            background-color: $Verde;
+                        }
+                        .inativo{
+                            background-color: $Abobora;
+                        }
+                        .sem_estoque{
+                            background-color: $Cinza;
+                        }
+                        p{
+                            width: 100%;
+                            height: 2vh;
+                            font-family: $Second-font;
+                            color: $Verde;
+                            font-size: 0.65vw;
+                            font-weight: 800;
+                            display: flex;
+                            align-items: center;
+                            justify-content: right;
+                            margin-top: 0.75vh;
+                            span{
+                                color: $Branco;
+                                font-size: 0.4vw;
+                                height: 100%;
+                                display: flex;
+                                align-items: end;
+                                margin-right: 0.15vw;
+                                padding-bottom: 0.1vh;
+                            }
+                        }
+                        .estoque_prod{
+                            width: 100%;
+                            height: 3vh;
+                            position: relative;
+                            margin-top: 0.75vh;
+                            span{
+                                font-family: $Second-font;
+                                font-weight: 900;
+                                font-size: 0.5vw;
+                                color: $Preto;
+                                position: absolute;
+                                top: 0;
+                                right: 0;
+                            }
+                            input{
+                                all: unset;
+                                width: 100%;
+                                height: 100%;
+                                padding-top: 1.5vh;
+                                padding-right: 0.15vw;
+                                font-family: $Second-font;
+                                font-weight: 900;
+                                font-size: 0.65vw;
+                                color: $Branco;
+                                text-align: right;
+                            }
+                            input[type=number]::-webkit-inner-spin-button {
+                                -webkit-appearance: none;
+                            }
+                        }
+                    }
+                    .codigo_prod, .status_prod, .data_prod{
+                        height: 40%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 0.5vh 0.5vw;
+                        p{
+                            all: unset;
+                            width: 100%;
+                            height: 40%;
+                            font-family: $Second-font;
+                            font-weight: 900;
+                            font-size: 0.75vw;
+                            color: $Preto;
+                        }
+                        span{
+                            all: unset;
+                            width: 100%;
+                            height: 60%;
+                            font-family: $Second-font;
+                            font-weight: 500;
+                            font-size: 0.65vw;
+                            color: $Preto;
+                            white-space: nowrap;                  
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            padding-top: 0.65vh;
+                        }
+                    }
+                    .codigo_prod{
+                        width: 23%;
+                    }
+                    .status_prod{
+                        width: 45%;
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        span{
+                            width: 50%;
+                            height: 60%;
+                        }
+                    }
+                    .data_prod{
+                        width: 32%;
+                    }
+                    &:nth-child(1), &:nth-child(2), &:nth-child(3), &:nth-child(4){
+                        margin-top: 0;
+                    }
+                    &:nth-child(13), &:nth-child(14), &:nth-child(15), &:nth-child(16){
+                        margin-bottom: 0;
+                    }
+                }
+                .sem_estoqueBlock{
+                    position: relative;
+                    &::before{
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        z-index: 2;
+                        border-radius: 0.75vw;
+                        background: $Preto;
+                        opacity: 0.5;
                     }
                 }
             }
@@ -281,7 +464,16 @@
         left: 20.75vw;
         width: 11.75vw;
         background: $Violeta;
-        
+    }
+
+    #msgErro_edit_Estoque{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        font-family: $Second-font;
+        font-size: 1.5vw;
+        font-weight: 900;
+        color: $Branco;
     }
 }
 
@@ -557,6 +749,7 @@
                                             height: 40%;
                                             textarea{
                                                 height: 70%;
+                                                white-space: pre-wrap
                                             }
                                             span{
                                                 top: calc(25% - 1.5vh);
@@ -662,7 +855,7 @@
                                                         z-index: 5;
                                                     }
                                                     input[type="radio"]{
-                                                        all: unset;
+                                                        // all: unset;
                                                         position: absolute;
                                                         inset: 0;
                                                         z-index: 10;

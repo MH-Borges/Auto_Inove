@@ -6,7 +6,7 @@
 
     $nome = $_POST['nome_Produto'];
     $valor = $_POST['valor_Produto'];
-    $descricao = nl2br(htmlentities($_POST["descri_Produto"], ENT_QUOTES, 'UTF-8'));
+    $descricao = $_POST["descri_Produto"];
 
     $categoria = $_POST["categoria_Produto"];
     $subcategoria = $_POST["SubCategoria_Produto"];
@@ -125,7 +125,7 @@
         $data_atual = date('d/m/Y');
     }
     if($estoque <= 0){
-        $status = 'sem estoque';
+        $status = 'sem_estoque';
     }
 
     // ===== INSERÇÃO DE DADOS NO BANCO =====
