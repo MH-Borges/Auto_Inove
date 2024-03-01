@@ -13,7 +13,7 @@ echo "<ul id='options' class='listagem_subcat'>";
         echo "
             <li class='option_SubCategorias' style='pointer-events: none;'>
                 <input type='radio' name='SubCategoria_Produto' value='null' data-label='null'>
-                <span class='label'> Selecione uma categoria antes </span>
+                <span class='label'> Nenhuma sub categoria atrelada </span>
             </li>
         ";
     }

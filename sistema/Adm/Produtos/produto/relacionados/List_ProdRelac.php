@@ -21,7 +21,7 @@ echo '<div class="SeletoresProds" >
                 echo "
                     <li class='option_ItemAtr1' style='pointer-events: none;'>
                         <input type='radio' name='ItemAtr1_Produto' value='null' data-label='null'>
-                        <span class='label'> Nenhum produto encontrado </span>
+                        <span class='label null_prod'> Nenhum produto encontrado </span>
                     </li>
                 ";
             }

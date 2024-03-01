@@ -133,6 +133,8 @@
                             $mercadoLivre_Produto = $dados[0]['mercado_livre'];
                             $date_criacao_Produto = $dados[0]['data_criacao'];
                             $date_atual_Produto = $dados[0]['data_atual'];
+                            $status = $dados[0]['status_prod'];
+
                             $Item_Relac_1 = $dados[0]['Item_Relac_1'];
                             $Item_Relac_2 = $dados[0]['Item_Relac_2'];
                             $Item_Relac_3 = $dados[0]['Item_Relac_3'];
@@ -141,33 +143,115 @@
 
                         if($categoria_Produto !== "" && $categoria_Produto !== ""){
                             echo "<script language='javascript'>
-
                                 document.addEventListener('DOMContentLoaded', function(){
-                                    console.log('rodei');
-        
                                     document.getElementById('categoria_lista_subCateg').value = '$categoria_Produto';
                                     document.getElementById('subcategoria_lista_edit').value = '$subcategoria_Produto';
-        
                                     $('#form_listagem_subCateg').click();
-                                
                                 });
-
                             </script>";
                         }
 
                         if($codigo_Produto !== ""){
                             echo "<script language='javascript'>
                                 document.addEventListener('DOMContentLoaded', function(){
-        
                                     $('#codigo_lista_prodRelac').val('".$codigo_Produto."');
                                     $('#codigo_Select').val('".$codigo_Produto."');
-
                                     $('#form_listagem_prodRelac').click();
                                 });
-
                             </script>";
+
+                            if($Item_Relac_1 !== ""){
+                                echo "
+                                    <script defer language='javascript'>
+                                        document.addEventListener('DOMContentLoaded', function(){
+                                            setTimeout(() => { 
+                                                $('#id_edit_prod').val('".$id_Produto_edit."');
+                                                $('#numItem_list').val('1');
+                                                $('#item_atr1_list').val('".$Item_Relac_1."');
+                                                $('#form_itemAtr_Listagem').click();
+                                            }, 500);
+
+                                            setTimeout(() => { 
+                                                $('#numItem_info').val('1');
+                                                $('#item_atr1_info').val('".$Item_Relac_1."');
+                                                $('#form_itemAtr_Infos').click();
+                                            }, 1000);
+                                        });
+                                    </script>
+                                ";
+                            }
+                            if($Item_Relac_2 !== ""){
+                                echo "
+                                    <script defer language='javascript'>
+                                        document.addEventListener('DOMContentLoaded', function(){
+                                            setTimeout(() => { 
+                                                $('#id_edit_prod').val('".$id_Produto_edit."');
+                                                $('#numItem_list').val('2');
+                                                $('#item_atr1_list').val('".$Item_Relac_1."');
+                                                $('#item_atr2_list').val('".$Item_Relac_2."');
+                                                $('#form_itemAtr_Listagem').click();
+                                                $('#select_item2').removeClass('Disabled');
+                                            }, 1500);
+    
+                                            setTimeout(() => { 
+                                                $('#numItem_info').val('2');
+                                                $('#item_atr2_info').val('".$Item_Relac_2."');
+                                                $('#form_itemAtr_Infos').click();
+                                            }, 2000);
+                                        });
+                                    </script>
+                                ";
+                            }
+                            if($Item_Relac_3 !== ""){
+                                echo "
+                                    <script defer language='javascript'>
+                                        document.addEventListener('DOMContentLoaded', function(){
+                                            setTimeout(() => { 
+                                                $('#id_edit_prod').val('".$id_Produto_edit."');
+                                                $('#numItem_list').val('3');
+                                                $('#item_atr1_list').val('".$Item_Relac_1."');
+                                                $('#item_atr2_list').val('".$Item_Relac_2."');
+                                                $('#item_atr3_list').val('".$Item_Relac_3."');
+                                                $('#form_itemAtr_Listagem').click();
+                                                $('#select_item3').removeClass('Disabled');
+                                            }, 2500);
+    
+                                            setTimeout(() => { 
+                                                $('#numItem_info').val('3');
+                                                $('#item_atr3_info').val('".$Item_Relac_3."');
+                                                $('#form_itemAtr_Infos').click();
+                                            }, 3000);
+                                        });
+                                    </script>
+                                ";
+                            }
+                            if($Item_Relac_4 !== ""){
+                                echo "
+                                    <script defer language='javascript'>
+                                        document.addEventListener('DOMContentLoaded', function(){
+                                            setTimeout(() => { 
+                                                $('#id_edit_prod').val('".$id_Produto_edit."');
+                                                $('#numItem_list').val('4');
+                                                $('#item_atr1_list').val('".$Item_Relac_1."');
+                                                $('#item_atr2_list').val('".$Item_Relac_2."');
+                                                $('#item_atr3_list').val('".$Item_Relac_3."');
+                                                $('#item_atr4_list').val('".$Item_Relac_4."');
+                                                $('#form_itemAtr_Listagem').click();
+                                                $('#select_item4').removeClass('Disabled');
+                                            }, 3500);
+    
+                                            setTimeout(() => { 
+                                                $('#numItem_info').val('4');
+                                                $('#item_atr4_info').val('".$Item_Relac_4."');
+                                                $('#form_itemAtr_Infos').click();
+                                            }, 4000);
+                                        });
+                                    </script>
+                                ";
+                            }
                         }
-                        
+
+
                     } else { 
                         $titulo_Produto = "Cadastro de produto!"; 
                         $btn_Produto = "Cadastrar produto";
@@ -288,7 +372,12 @@
                                                 </div>
                                             </div>
 
-                                            <ul id='options' class='listagem_subcat'> </ul> 
+                                            <ul id='options' class='listagem_subcat'> 
+                                                <li class='option_SubCategorias' style='pointer-events: none;'>
+                                                    <input type='radio' name='SubCategoria_Produto' value='null' data-label='null'>
+                                                    <span class='label'> Selecione uma categoria antes </span>
+                                                </li>
+                                            </ul> 
                                         </div>
         
                                         <div class="Select_Produtos">
@@ -382,9 +471,11 @@
                                         <p>Deixando a aba de 'itens relacionados' vazia, fará com que os produtos recomendados na 'página do produto' sejam produtos com código igual ao do item atual!</p>
                                     </div>
 
-                                    <input type="hidden" id="id_produto_edit" name="id_produto_edit" value="<?php echo @$id_produto_edit ?>" required>
+                                    <input type="hidden" id="id_produto_edit" name="id_produto_edit" value="<?php echo @$id_Produto_edit ?>" required>
                                     <input type="hidden" id="date_criacao_Produto" name="date_criacao_Produto" value="<?php echo @$date_criacao_Produto ?>" required>
                                     <input type="hidden" id="date_atual_Produto" name="date_atual_Produto" value="<?php echo @$date_atual_Produto ?>" required>
+                                    <input type="hidden" id="status_Produto_edit" name="status_Produto_edit" value="<?php echo @$status ?>" required>
+
 
                                     <span>Passo 2 de 2</span>
                                     <button type="button" onclick="document.getElementById('DadosProduto_btn').click();">Voltar</button>
@@ -406,24 +497,23 @@
     <div class="modal-block">
         <div class="modal-dialog">
             <div class="modal-content">
-
                 <button type="button" class="CloseBtn" data-dismiss="modal" aria-label="Close">
                     <img src="../../assets/icons/close.svg">
                 </button>
 
-                <form id="form_delete_categorias" method="POST">
+                <form id="form_Delete_Produtos" method="POST">
                     <div class="modal-body">
-                        <h4>Gostaria mesmo de excluir esta categoria?</h4>
+                        <h4>Gostaria mesmo de excluir este produto?</h4>
                     </div>
                     <div class="modal-footer">
-                        <input type="hidden" id="id_categ_delete" name="id_categ_delete" value="<?php echo @$_GET['id'] ?>" required>
+                        <input type="hidden" id="id_prod_delete" name="id_prod_delete" value="<?php echo @$_GET['id'] ?>" required>
 
                         <button class="CancelaBtnModal" type="button" data-dismiss="modal">Cancelar</button>
                         <button class="ExcluirBtnModal" type="submit">Excluir</button>
                     </div>
                 </form>
 
-                <div class="msgErro" id="msgErro_delete_Categ"></div>
+                <div class="msgErro" id="msgErro_delete_Prod"></div>
             </div>
         </div>
     </div>
@@ -440,48 +530,76 @@
                 </button>
 
                 <?php 
-                    $id_categ_stats = $_GET['id'];
+                    $id_prod_stats = $_GET['id'];
 
-                    $query = $pdo->query("SELECT * FROM categorias WHERE id = '$id_categ_stats' LIMIT 1");
+                    $query = $pdo->query("SELECT * FROM produtos WHERE id = '$id_prod_stats' LIMIT 1");
                     $dados = $query->fetchAll(PDO::FETCH_ASSOC);
-
                     if(@count($dados) > 0){
-                        $date_criacao_categ_stats = $dados[0]['data_criacao'];
-                        $date_atual_categ_stats = $dados[0]['data_atual'];
-                        $status_categ_stats = $dados[0]['status_categ'];
+                        $status_date_criacao_prod = $dados[0]['data_criacao'];
+                        $status_date_atual_prod = $dados[0]['data_atual'];
+                        $status_prod = $dados[0]['status_prod'];
                     }
 
+                    if($status_prod === "ativo" || $status_prod == "" || $status_prod == null){
+                        $bodyStatus = "
+                            <div class='modal-body'>
+                                <h4>Gostaria mesmo de desativar este Produto?</h4>
+                            </div>
+                            <div class='modal-footer'>
+                                <input type='hidden' id='id_prod_stats' name='id_prod_stats' value='".@$id_prod_stats."' required>
+                                <input type='hidden' id='status_date_criacao_prod' name='status_date_criacao_prod' value='".@$status_date_criacao_prod."' required>
+                                <input type='hidden' id='status_date_atual_prod' name='status_date_atual_prod' value='".@$status_date_atual_prod."' required>
+                                <input type='hidden' id='status_prod' name='status_prod' value='".@$status_prod."' required>
 
-                    if($status_categ_stats == "" || $status_categ_stats == "ativo" || $status_categ_stats == null){
-                        $btnFinal = "<button class='ExcluirBtnModal' type='submit'>Desativar</button>";
-                        $titulo = "desativar";
-                        $aviso = "<span>*ATENÇÃO: Todas Subcategorias atreladas a essa categoria serão tambem desativadas!</span>";
+                                <button class='CancelaBtnModal' type='button' data-dismiss='modal'> Cancelar </button>
+                                <button class='ExcluirBtnModal' type='submit'> Desativar </button>
+                            </div>
+                        ";
                     }
-                    else{
-                        $btnFinal = "<button class='SalvarBtnModal' type='submit'>Ativar</button>";
-                        $titulo = "ativar";
-                        $aviso = '';
-                    }
+                    if($status_prod === "inativo"){
+                        $bodyStatus = "
+                            <div class='modal-body'>
+                                <h4>Gostaria mesmo de ativar este Produto?</h4>
+                            </div>
+                            <div class='modal-footer'>
+                                <input type='hidden' id='id_prod_stats' name='id_prod_stats' value='".@$id_prod_stats."' required>
+                                <input type='hidden' id='status_date_criacao_prod' name='status_date_criacao_prod' value='".@$status_date_criacao_prod."' required>
+                                <input type='hidden' id='status_date_atual_prod' name='status_date_atual_prod' value='".@$status_date_atual_prod."' required>
+                                <input type='hidden' id='status_prod' name='status_prod' value='".@$status_prod."' required>
 
+                                <button class='CancelaBtnModal' type='button' data-dismiss='modal'> Cancelar </button>
+                                <button class='SalvarBtnModal' type='submit'> Ativar </button>
+                            </div>
+                        ";
+                    }
+                    if($status_prod === "sem_estoque"){
+                        $ativa = 'ativa';
+                        $inativa = 'inativa';
+
+                        $bodyStatus = '
+                            <div class="modal-body">
+                                <h4>Este produto atualmente está sem estoque. gostaria de:</h4>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="hidden" id="id_prod_stats" name="id_prod_stats" value="'.$id_prod_stats.'" required>
+                                <input type="hidden" id="status_date_criacao_prod" name="status_date_criacao_prod" value="'.$status_date_criacao_prod.'" required>
+                                <input type="hidden" id="status_date_atual_prod" name="status_date_atual_prod" value="'.$status_date_atual_prod.'" required>
+                                <input type="hidden" id="status_prod" name="status_prod" value="" required>
+
+                                <button class="SalvarBtnModal" type="button" onclick="atualizaStatusProd(`'.$ativa.'`)"> Ativar </button>
+                                <button class="ExcluirBtnModal" type="button" onclick="atualizaStatusProd(`'.$inativa.'`)"> Desativar </button>
+
+                                <button class="hide submitStatusProd" type="submit"></button>
+                            </div>
+                        ';
+                    }
                 ?>
 
-                <form id="form_status_categorias" method="POST">
-                    <div class="modal-body">
-                        <h4>Gostaria mesmo de <?php echo $titulo ?> está categoria?</h4>
-                        <?php echo $aviso ?>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="hidden" id="id_categ_stats" name="id_categ_stats" value="<?php echo @$id_categ_stats ?>" required>
-                        <input type="hidden" id="date_criacao_categ_stats" name="date_criacao_categ_stats" value="<?php echo @$date_criacao_categ_stats ?>" required>
-                        <input type="hidden" id="date_atual_categ_stats" name="date_atual_categ_stats" value="<?php echo @$date_atual_categ_stats ?>" required>
-                        <input type="hidden" id="status_categ_stats" name="status_categ_stats" value="<?php echo @$status_categ_stats ?>" required>
-
-                        <button class="CancelaBtnModal" type="button" data-dismiss="modal">Cancelar</button>
-                        <?php echo $btnFinal ?>
-                    </div>
+                <form id="form_status_Produtos" method="POST">
+                    <?php echo @$bodyStatus ?>
                 </form>
 
-                <div class="msgErro" id="msgErro_status_Categ"></div>
+                <div class="msgErro" id="msgErro_status_Prod"></div>
             </div>
         </div>
     </div>
@@ -663,6 +781,7 @@
 </form>
 
 <form id="form_itemAtr_Listagem" class="hide" method="POST">
+    <input type="hidden" id="id_edit_prod" name="id_edit_prod" value="">
     <input type="hidden" id="codigo_Select" name="codigo_Select" value="">
     <input type="hidden" id="numItem_list" name="numItem_list" value="">
     <input type="hidden" id="item_atr1_list" name="item_atr1_list" value="">
@@ -708,11 +827,17 @@
 
 
 <script>
-    //ATUALIZA ESTOQUE
+    //ATUALIZA ESTOQUE PROD
     function atualizaEstoque(id){
         $('#id_Produto_estoque').val(id);
         $('#estoque_Edit').val($(`#${id}`).val());
         $('#form_Atualiza_Estoque').click();
+    }
+
+    //ATUALIZA STATUS PROD
+    function atualizaStatusProd(status){
+        $('#status_prod').val(status)
+        $('.submitStatusProd').click();
     }
 
     //VERIFICACAO GERAL DE TAMANHOS DE INPUT
@@ -931,55 +1056,55 @@
         });
     });
 
-    // $('#form_delete_categorias').submit(function (e) {
-    //     e.preventDefault();
-    //     $.ajax({
-    //         url: "Produtos/categoria/delete.php",
-    //         method: "post",
-    //         data: $('form').serialize(),
-    //         dataType: "text",
-    //         success: function (msg) {
-    //             if (msg.trim() === "Excluído com Sucesso!!") {
-    //                 $('#msgErro_delete_Categ').removeClass('text-warning');
-    //                 $('#msgErro_delete_Categ').removeClass('text-danger');
-    //                 $('#msgErro_delete_Categ').addClass('text-success');
-    //                 $('#msgErro_delete_Categ').text(msg);
-    //                 setTimeout(() => { window.location='./index.php?pag=categoriasProduto'; }, 1500);
-    //             }
-    //             else{
-    //                 $('#msgErro_delete_Categ').removeClass('text-success');
-    //                 $('#msgErro_delete_Categ').removeClass('text-warning');
-    //                 $('#msgErro_delete_Categ').addClass('text-danger');
-    //                 $('#msgErro_delete_Categ').text(msg)
-    //             }
-    //         }
-    //     })
-    // });
+    $('#form_Delete_Produtos').submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: "Produtos/produto/delete.php",
+            method: "post",
+            data: $('form').serialize(),
+            dataType: "text",
+            success: function (msg) {
+                if (msg.trim() === "Excluído com Sucesso!!") {
+                    $('#msgErro_delete_Prod').removeClass('text-warning');
+                    $('#msgErro_delete_Prod').removeClass('text-danger');
+                    $('#msgErro_delete_Prod').addClass('text-success');
+                    $('#msgErro_delete_Prod').text(msg);
+                    setTimeout(() => { window.location='./index.php?pag=listagemProduto'; }, 1500);
+                }
+                else{
+                    $('#msgErro_delete_Prod').removeClass('text-success');
+                    $('#msgErro_delete_Prod').removeClass('text-warning');
+                    $('#msgErro_delete_Prod').addClass('text-danger');
+                    $('#msgErro_delete_Prod').text(msg)
+                }
+            }
+        })
+    });
 
-    // $('#form_status_categorias').submit(function (e) {
-    //     e.preventDefault();
-    //     $.ajax({
-    //         url: "Produtos/categoria/update_status.php",
-    //         method: "post",
-    //         data: $('form').serialize(),
-    //         dataType: "text",
-    //         success: function (msg) {
-    //             if (msg.trim() === "Status atualizado com sucesso!!") {
-    //                 $('#msgErro_status_Categ').removeClass('text-warning');
-    //                 $('#msgErro_status_Categ').removeClass('text-danger');
-    //                 $('#msgErro_status_Categ').addClass('text-success');
-    //                 $('#msgErro_status_Categ').text(msg);
-    //                 setTimeout(() => { window.location='./index.php?pag=categoriasProduto'; }, 500);
-    //             }
-    //             else{
-    //                 $('#msgErro_status_Categ').removeClass('text-success');
-    //                 $('#msgErro_status_Categ').removeClass('text-warning');
-    //                 $('#msgErro_status_Categ').addClass('text-danger');
-    //                 $('#msgErro_status_Categ').text(msg)
-    //             }
-    //         }
-    //     })
-    // });
+    $('#form_status_Produtos').submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: "Produtos/produto/update_status.php",
+            method: "post",
+            data: $('form').serialize(),
+            dataType: "text",
+            success: function (msg) {
+                if (msg.trim() === "Status atualizado com sucesso!!") {
+                    $('#msgErro_status_Prod').removeClass('text-warning');
+                    $('#msgErro_status_Prod').removeClass('text-danger');
+                    $('#msgErro_status_Prod').addClass('text-success');
+                    $('#msgErro_status_Prod').text(msg);
+                    setTimeout(() => { window.location='./index.php?pag=listagemProduto'; }, 500);
+                }
+                else{
+                    $('#msgErro_status_Prod').removeClass('text-success');
+                    $('#msgErro_status_Prod').removeClass('text-warning');
+                    $('#msgErro_status_Prod').addClass('text-danger');
+                    $('#msgErro_status_Prod').text(msg)
+                }
+            }
+        })
+    });
 
     $('#form_Codigos').submit(function (e) {
         e.preventDefault();
@@ -1133,7 +1258,7 @@
             dataType: "text",
             success: function (msg) {
                 $('#msgErro_edit_Estoque').append(msg);
-                window.location='./index.php?pag=listagemProduto';
+                setTimeout(() => { window.location='./index.php?pag=listagemProduto'; }, 500);
             }
         })
     });

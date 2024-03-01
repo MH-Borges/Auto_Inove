@@ -26,8 +26,8 @@
 
     $date_criacao_Produto = $_POST['date_criacao_Produto'];
     $date_atual_Produto = $_POST['date_atual_Produto'];
-    $status = 'ativo';
 
+    $status = $_POST['status_Produto_edit'];
 
     // ===== SCRIPTS PARA SUBIR BANNER WEB E MOBILE PARA O BANCO =====
     function uploadImage($inputName, $targetDir, $defaultImage) {
@@ -57,7 +57,7 @@
 
     
     // ===== VERIFICAÇÃO DE INPUTS VAZIOS + VERIFICAÇÃO DE POSSIVEIS ERROS =====
-    if($id_edit != ""){
+    if($id_edit !== ""){
         $res = $pdo->query("SELECT * FROM produtos where id != '$id_edit'"); 
         $dados = $res->fetchAll(PDO::FETCH_ASSOC);
         for ($i=0; $i < count($dados); $i++) { 
@@ -127,19 +127,28 @@
     if($estoque <= 0){
         $status = 'sem_estoque';
     }
+    if($estoque > 0){
+        if($status === 'sem_estoque' || $status === 'ativo'){
+            $status = 'ativo';
+        }
+        else{
+            $status = 'inativo';
+        }
+    }
 
     // ===== INSERÇÃO DE DADOS NO BANCO =====
-    if($id_edit == ""){
+    if($id_edit === ""){
         $res = $pdo->prepare("INSERT INTO produtos (img, nome, valor, descricao, categoria, sub_categoria, codigo, marca, estoque, litros, mercado_livre, data_criacao, data_atual, status_prod, Item_Relac_1, Item_Relac_2, Item_Relac_3, Item_Relac_4) VALUES (:img, :nome, :valor, :descricao, :categoria, :sub_categoria, :codigo, :marca, :estoque, :litros, :mercado_livre, :data_criacao, :data_atual, :status_prod, :Item_Relac_1, :Item_Relac_2, :Item_Relac_3, :Item_Relac_4)");
         $res->bindValue(":img", $img_prod);
     }
+
     else{
-        if($img_categ === "placeholder.jpg"){
-            $res = $pdo->prepare("UPDATE categorias SET nome = :nome, data_criacao = :data_criacao, data_atual = :data_atual, status_categ = :status_categ WHERE id = :id");
+        if($img_prod === "placeholder.jpg"){
+            $res = $pdo->prepare("UPDATE produtos SET nome = :nome, valor = :valor, descricao = :descricao, categoria = :categoria, sub_categoria = :sub_categoria, codigo = :codigo, marca = :marca, estoque = :estoque, litros = :litros, mercado_livre = :mercado_livre, data_criacao = :data_criacao, data_atual = :data_atual, status_prod = :status_prod, Item_Relac_1 = :Item_Relac_1, Item_Relac_2 = :Item_Relac_2, Item_Relac_3 = :Item_Relac_3, Item_Relac_4 = :Item_Relac_4 WHERE id = :id");
         }
-        else if($img_categ !== "placeholder.jpg"){
-            $res = $pdo->prepare("UPDATE categorias SET img = :img, nome = :nome, data_criacao = :data_criacao, data_atual = :data_atual, status_categ = :status_categ WHERE id = :id");
-            $res->bindValue(":img", $img_categ);
+        else if($img_prod !== "placeholder.jpg"){
+            $res = $pdo->prepare("UPDATE produtos SET img = :img, nome = :nome, valor = :valor, descricao = :descricao, categoria = :categoria, sub_categoria = :sub_categoria, codigo = :codigo, marca = :marca, estoque = :estoque, litros = :litros, mercado_livre = :mercado_livre, data_criacao = :data_criacao, data_atual = :data_atual, status_prod = :status_prod, Item_Relac_1 = :Item_Relac_1, Item_Relac_2 = :Item_Relac_2, Item_Relac_3 = :Item_Relac_3, Item_Relac_4 = :Item_Relac_4 WHERE id = :id");
+            $res->bindValue(":img", $img_prod);
         }
         $res->bindValue(":id", $id_edit);
     }

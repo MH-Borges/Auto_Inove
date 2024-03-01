@@ -26,7 +26,12 @@
         $status = 'sem_estoque';
     }
     else if($estoque > 0){
-        $status = 'ativo';
+        if($status === 'sem_estoque' || $status === 'ativo'){
+            $status = 'ativo';
+        }
+        else{
+            $status = 'inativo';
+        }
     }
 
     // ===== INSERÇÃO DE DADOS NO BANCO =====
