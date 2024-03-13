@@ -34,22 +34,385 @@ p {
 }
 
 body {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
+  background: #131313;
   font-family: "Bricolage Grotesque", sans-serif;
   color: #F3F4F9;
-  width: 100%;
-  justify-content: center;
-  position: relative;
+  width: 99.5vw;
+  min-height: 100vh;
 }
-body main {
+body header {
+  border-top: 8px solid #F83810;
+  padding: 0 5%;
+  padding-top: 1vh;
+  position: fixed;
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  z-index: 99;
+}
+body header #LogoMenu {
+  width: 10vw;
+  height: 100%;
+}
+body header #LogoMenu img, body header #LogoMenu svg {
+  width: 100%;
+  height: 100%;
+  padding: 1vh 0;
+}
+body header .searchBar_Block {
+  width: 30vw;
+  height: 60%;
+  margin-left: auto;
+  margin-right: 4vw;
+  display: flex;
+  align-items: start;
+  border-bottom: 3px solid #BAF811;
+}
+body header .searchBar_Block .Select_Produtos {
+  width: 30%;
+  height: 85%;
+  position: relative;
+  margin: 0;
+}
+body header .searchBar_Block .Select_Produtos #category-select {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-left: 3px solid #BAF811;
+}
+body header .searchBar_Block .Select_Produtos #category-select #options_btn_Codigos {
+  all: unset;
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  font-size: 1vw;
+  z-index: 5;
+}
+body header .searchBar_Block .Select_Produtos #category-select #select-button {
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  position: relative;
+  outline: none;
 }
-body main section {
-  width: 75%;
-  height: 100vh;
+body header .searchBar_Block .Select_Produtos #category-select #select-button #selected_val_Codigos {
+  font-family: "Be Vietnam Pro", sans-serif;
+  color: #F3F4F9;
+  font-size: 1vw;
+  font-weight: 900;
+  width: 70%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 0.75vw;
+  padding-top: 0.25vh;
+}
+body header .searchBar_Block .Select_Produtos #category-select #select-button img, body header .searchBar_Block .Select_Produtos #category-select #select-button svg {
+  z-index: 99;
+  position: absolute;
+  right: 0.35vw;
+  width: 2vw;
+  height: 100%;
+  padding: 0.75vh;
+}
+body header .searchBar_Block .Select_Produtos #category-select #select-button img path, body header .searchBar_Block .Select_Produtos #category-select #select-button svg path {
+  fill: #F3F4F9;
+}
+body header .searchBar_Block .Select_Produtos #options {
+  z-index: 999;
+  width: 100%;
+  height: auto;
+  max-height: 30vh;
+  top: 5vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background: #BAF811;
+  display: none;
+  position: absolute;
+  padding: 0.5vw;
+}
+body header .searchBar_Block .Select_Produtos #options .option_Codigos {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 5vh;
+  border-bottom: 1px solid #131313;
+}
+body header .searchBar_Block .Select_Produtos #options .option_Codigos span {
+  all: unset;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 0.75vw;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 0.75vw;
+  font-weight: 800;
+  color: #131313;
   z-index: 5;
+}
+body header .searchBar_Block .Select_Produtos #options .option_Codigos input[type=radio] {
+  all: unset;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+body header .searchBar_Block .Select_Produtos #options .option_Codigos:hover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #BBBBBB;
+  opacity: 0.5;
+  z-index: -1;
+}
+body header .searchBar_Block .Select_Produtos #options .option_Codigos:last-child {
+  border: none;
+}
+body header .searchBar_Block .Select_Produtos #options_btn_Codigos:checked + #select-button svg {
+  transform: rotate(180deg);
+}
+body header .searchBar_Block .Select_Produtos #category-select:has(#options_btn_Codigos:checked) + #options {
+  display: block;
+}
+body header .searchBar_Block .searchBar {
+  width: 70%;
+  height: 85%;
+  position: relative;
+  border-left: 3px solid #BAF811;
+  border-right: 3px solid #BAF811;
+}
+body header .searchBar_Block .searchBar .search {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2.5vw;
+  height: 2.5vw;
+  transition: all 1s;
+  z-index: 5;
+}
+body header .searchBar_Block .searchBar .search::before {
+  content: "";
+  position: absolute;
+  margin: auto;
+  top: 1.25vh;
+  right: 0;
+  bottom: 0;
+  left: 0.75vw;
+  width: 0.75vw;
+  height: 0.25vh;
+  background: #F3F4F9;
+  transform: rotate(45deg);
+  transition: all 0.5s;
+}
+body header .searchBar_Block .searchBar .search::after {
+  content: "";
+  position: absolute;
+  margin: auto;
+  top: -1vh;
+  right: 0;
+  bottom: 0;
+  left: -0.5vw;
+  width: 1vw;
+  height: 1vw;
+  border-radius: 50%;
+  border: 0.3vh solid #F3F4F9;
+  transition: all 0.5s;
+}
+body header .searchBar_Block .searchBar input {
+  all: unset;
+  position: absolute;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 1vw;
+  font-weight: 400;
+  color: #F3F4F9;
+  padding-left: 1vw;
+  transition: all 1s;
+  z-index: 5;
+}
+body header .searchBar_Block .searchBar input:focus ~ .search {
+  z-index: 6;
+}
+body header .searchBar_Block .searchBar input:focus ~ .search::before {
+  top: 0;
+  left: 0;
+  width: 1.5vw;
+}
+body header .searchBar_Block .searchBar input:focus ~ .search::after {
+  top: 0;
+  left: 0;
+  width: 1.5vw;
+  height: 0.3vh;
+  border: none;
+  background: #F3F4F9;
+  border-radius: 0%;
+  transform: rotate(-45deg);
+}
+body header .searchBar_Block .searchBar input::-moz-placeholder {
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 800;
+  font-size: 1vw;
+  color: #F3F4F9;
+}
+body header .searchBar_Block .searchBar input::placeholder {
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 800;
+  font-size: 1vw;
+  color: #F3F4F9;
+}
+body header .cart, body header .menu {
+  height: 100%;
+  width: 3vw;
+  padding: 0.5vw;
+  margin: 0 0.5vw;
+}
+body header .side_menu {
+  height: 100vh;
+  width: 20vw;
+  background: #131313;
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  outline: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+body header .side_menu::before {
+  content: "";
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: #131313;
+  opacity: 0.5;
+  z-index: -1;
+  top: 0;
+  right: 0;
+}
+body header .side_menu img, body header .side_menu svg {
+  position: absolute;
+  top: 1vw;
+  left: 1vw;
+  width: 2vw;
+  height: 2vw;
+}
+body header .side_menu a {
+  width: 100%;
+  height: 5vh;
+  outline: 1px solid red;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 1.25vw;
+  color: #F3F4F9;
+  margin: 1vh 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body .Inicio {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+}
+body .Inicio .Banner {
+  outline: 1px solid red;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  padding: 0 5%;
+  padding-top: 10vh;
+}
+body .Inicio .Banner img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+body .Inicio .Banner h1 {
+  text-align: right;
+  width: 100%;
+  height: auto;
+  font-family: "Bricolage Grotesque", sans-serif;
+  color: #F3F4F9;
+  font-weight: 800;
+  font-size: 5vw;
+  margin-left: auto;
+  margin-top: 26vh;
+  padding-right: 1.25vw;
+  line-height: 10vh;
+}
+body .Inicio .Banner h1 span {
+  color: #F83810;
+}
+body .Inicio .Banner h3 {
+  text-align: right;
+  width: 100%;
+  height: auto;
+  font-family: "Be Vietnam Pro", sans-serif;
+  color: #F3F4F9;
+  font-weight: 700;
+  font-size: 1.55vw;
+  margin-left: auto;
+  padding-right: 1.25vw;
+}
+body .Inicio .Dobra_Categ {
+  padding: 0 5%;
+  width: 100%;
+  height: 100vh;
+  max-height: 200vh;
+  position: relative;
+}
+body .Inicio .Dobra_Categ #img_bg {
+  width: 100%;
+  height: 100vh;
+  background: url("../../assets/backgrounds/textura_home.webp");
+  background-size: cover;
+  background-attachment: fixed;
+  z-index: -1;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+body .Inicio .Dobra_Prods {
+  padding: 0 5%;
+  padding-bottom: 7vh;
+  width: 100%;
+  height: 107vh;
+  position: relative;
+}
+body footer {
+  margin: 0 5%;
+  position: absolute;
+  bottom: 0;
+  outline: 1px solid greenyellow;
+  width: 90%;
+  height: 7vh;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1.5vw;
+  font-weight: 800;
+  color: #F83810;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }/*# sourceMappingURL=style.css.map */

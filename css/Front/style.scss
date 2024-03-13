@@ -3,34 +3,385 @@
 
 
 body {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
+    background: $Preto;
     font-family: $Main-font;
     color: $Branco;
-    width: 100%;
-    justify-content: center;
-    position: relative;
-
+    width: 99.5vw;
+    min-height: 100vh;
     header {
-        
-    }
-
-    main{
+        border-top: 8px solid $Abobora;
+        padding: 0 5%;
+        padding-top: 1vh;
+        position: fixed;
         width: 100%;
-        height: 100%;
+        height: 10vh;
         display: flex;
-        flex-direction: column;
-
-        section {
-            width: 75%;
+        align-items: center;
+        z-index: 99;
+        #LogoMenu{
+            width: 10vw;
+            height: 100%;
+            img,svg{
+                width: 100%;
+                height: 100%;
+                padding: 1vh 0;
+            }
+        }
+        .searchBar_Block{
+            width: 30vw;
+            height: 60%;
+            margin-left: auto;
+            margin-right: 4vw;
+            display: flex;
+            align-items: start;
+            border-bottom: 3px solid $Verde;
+            .Select_Produtos{
+                width: 30%;
+                height: 85%;
+                position: relative;
+                margin: 0;
+                #category-select{
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    border-left: 3px solid $Verde;
+                    #options_btn_Codigos{
+                        all: unset;
+                        position: absolute;
+                        inset: 0;
+                        cursor: pointer;
+                        font-size: 1vw;
+                        z-index:5;
+                    }
+                    #select-button {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        position: relative;
+                        outline: none;
+                        #selected_val_Codigos{
+                            font-family: $Second-font;
+                            color: $Branco;
+                            font-size: 1vw;
+                            font-weight: 900;
+                            width: 70%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            white-space: nowrap;                  
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            padding: 0 0.75vw;
+                            padding-top: 0.25vh;
+                        }
+                        img, svg{
+                            z-index: 99;
+                            position: absolute;
+                            right: 0.35vw;
+                            width: 2vw;
+                            height: 100%;
+                            padding: 0.75vh;
+                            path{
+                                fill: $Branco;
+                            }
+                        }
+                    }
+                }
+                #options {
+                    z-index: 999;
+                    width: 100%;
+                    height: auto;
+                    max-height: 30vh;
+                    top: 5vh;
+                    overflow-x: hidden;
+                    overflow-y: scroll;
+                    background: $Verde;
+                    display: none;
+                    position: absolute;
+                    padding: 0.5vw;
+                    .option_Codigos {
+                        display: flex;
+                        align-items: center;
+                        position: relative;
+                        width: 100%;
+                        height: 5vh;
+                        border-bottom: 1px solid $Preto;
+                        span{
+                            all: unset;
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            white-space: nowrap;                  
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            padding-left: 0.75vw;
+                            font-family: $Second-font;
+                            font-size: 0.75vw;
+                            font-weight: 800;
+                            color: $Preto;
+                            z-index: 5;
+                        }
+                        input[type="radio"]{
+                            all: unset;
+                            position: absolute;
+                            inset: 0;
+                            z-index: 10;
+                        }
+                        &:hover{
+                            &::before{
+                                content: '';
+                                position: absolute;
+                                inset: 0;
+                                background: $Cinza;
+                                opacity: 0.5;
+                                z-index: -1;
+                            }
+                        }
+                        &:last-child{
+                            border: none;
+                        }
+                    }
+                }
+                #options_btn_Codigos:checked + #select-button svg{
+                    transform: rotate(180deg);
+                }
+                #category-select:has(#options_btn_Codigos:checked) + #options{
+                    display: block;
+                }
+            }
+            .searchBar {
+                width: 70%;
+                height: 85%;
+                position: relative;
+                border-left: 3px solid $Verde;
+                border-right: 3px solid $Verde;
+                .search {
+                    position: absolute;
+                    margin: auto;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    width: 2.5vw;
+                    height: 2.5vw;
+                    transition: all 1s;
+                    z-index: 5;
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        margin: auto;
+                        top: 1.25vh;
+                        right: 0;
+                        bottom: 0;
+                        left: 0.75vw;
+                        width: 0.75vw;
+                        height: 0.25vh;
+                        background: $Branco;
+                        transform: rotate(45deg);
+                        transition: all .5s;
+                    }
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        margin: auto;
+                        top: -1vh;
+                        right: 0;
+                        bottom: 0;
+                        left: -0.5vw;
+                        width: 1vw;
+                        height: 1vw;
+                        border-radius: 50%;
+                        border: 0.3vh solid $Branco;
+                        transition: all .5s;
+                    }
+                }
+                input {
+                    all: unset;
+                    position: absolute;
+                    margin: auto;
+                    width: 100%;
+                    height: 100%;
+                    outline: none;
+                    font-family: $Second-font;
+                    font-size: 1vw;
+                    font-weight: 400;
+                    color: $Branco;
+                    padding-left: 1vw;
+                    transition: all 1s;
+                    z-index: 5;
+                    &:focus~.search {
+                        z-index: 6;
+                        &::before {
+                            top: 0;
+                            left: 0;
+                            width: 1.5vw;
+                        }
+                        &::after {
+                            top: 0;
+                            left: 0;
+                            width: 1.5vw;
+                            height: 0.3vh;
+                            border: none;
+                            background: $Branco;
+                            border-radius: 0%;
+                            transform: rotate(-45deg);
+                        }
+                    }
+                    &::placeholder {
+                        font-family: $Second-font;
+                        font-weight: 800;
+                        font-size: 1vw;
+                        color: $Branco;
+                    }
+                }
+            }
+        }
+        .cart, .menu{
+            height: 100%;
+            width: 3vw;
+            padding: 0.5vw;
+            margin: 0 0.5vw;
+        }
+        .side_menu{
             height: 100vh;
-            z-index: 5;
+            width: 20vw;
+            background: $Preto;
+            position: absolute;
+            z-index: 999;
+            top: 0;
+            right: 0;
+            outline: 1px solid red;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            &::before{
+                content: '';
+                position: absolute;
+                width: 100vw;
+                height: 100vh;
+                background: $Preto;
+                opacity: 0.5;
+                z-index: -1;
+                top: 0;
+                right: 0;
+            }
+            img,svg{
+                position: absolute;
+                top: 1vw;
+                left: 1vw;
+                width: 2vw;
+                height: 2vw;
+            }
+            a{
+                width: 100%;
+                height: 5vh;
+                outline: 1px solid red;
+                font-family: $Second-font;
+                font-weight: 900;
+                font-size: 1.25vw;
+                color: $Branco;
+                margin: 1vh 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+    
+    .Inicio{
+        width: 100%;
+        min-height: 100vh;
+        height: auto;
+        .Banner{
+            outline: 1px solid red;
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            padding: 0 5%;
+            padding-top: 10vh;
+            img{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+            }
+            h1{
+                text-align: right;
+                width: 100%;
+                height: auto;
+                font-family: $Main-font;
+                color: $Branco;
+                font-weight: 800;
+                font-size: 5vw;
+                margin-left: auto;
+                margin-top: 26vh;
+                padding-right: 1.25vw;
+                line-height: 10vh;
+                span{
+                    color: $Abobora;
+                }
+            }
+            h3{
+                text-align: right;
+                width: 100%;
+                height: auto;
+                font-family: $Second-font;
+                color: $Branco;
+                font-weight: 700;
+                font-size: 1.55vw;
+                margin-left: auto;
+                padding-right: 1.25vw;
+            }
+        }
+        .Dobra_Categ{
+            padding: 0 5%;
+            width: 100%;
+            height: 100vh;
+            max-height: 200vh;
+            position: relative;
+            #img_bg{
+                width: 100%;
+                height: 100vh;
+                background: url('../../assets/backgrounds/textura_home.webp');
+                background-size: cover;
+                background-attachment: fixed;
+                z-index: -1;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+        }
+        .Dobra_Prods{
+            padding: 0 5%;
+            padding-bottom: 7vh;
+            width: 100%;
+            height: 107vh;
+            position: relative;
         }
     }
 
+    // @import 'Links';
+
     footer {
-        
+        margin: 0 5%;
+        position: absolute;
+        bottom: 0;
+        outline: 1px solid greenyellow;
+        width: 90%;
+        height: 7vh;
+        font-family: $Main-font;
+        font-size: 1.5vw;
+        font-weight: 800;
+        color: $Abobora;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
-
-// @import 'Links';
