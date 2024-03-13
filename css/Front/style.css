@@ -53,6 +53,7 @@ body header {
   display: flex;
   align-items: center;
   z-index: 99;
+  transition: ease-in-out all 0.5s;
 }
 body header #LogoMenu {
   width: 10vw;
@@ -277,6 +278,15 @@ body header .searchBar_Block .searchBar input::placeholder {
   font-size: 1vw;
   color: #F3F4F9;
 }
+body header .searchBar_Block .searchBar .Search_resultBox {
+  width: 100%;
+  height: 25vh;
+  max-height: 25vh;
+  overflow-y: scroll;
+  background: #131313;
+  position: absolute;
+  top: 5vh;
+}
 body header .cart, body header .menu {
   height: 100%;
   width: 3vw;
@@ -290,23 +300,12 @@ body header .side_menu {
   position: absolute;
   z-index: 999;
   top: 0;
-  right: 0;
-  outline: 1px solid red;
+  right: -20vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-body header .side_menu::before {
-  content: "";
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  background: #131313;
-  opacity: 0.5;
-  z-index: -1;
-  top: 0;
-  right: 0;
+  transition: all ease-in-out 0.5;
 }
 body header .side_menu img, body header .side_menu svg {
   position: absolute;
@@ -314,11 +313,11 @@ body header .side_menu img, body header .side_menu svg {
   left: 1vw;
   width: 2vw;
   height: 2vw;
+  z-index: 9999 !important;
 }
 body header .side_menu a {
   width: 100%;
   height: 5vh;
-  outline: 1px solid red;
   font-family: "Be Vietnam Pro", sans-serif;
   font-weight: 900;
   font-size: 1.25vw;
@@ -328,17 +327,31 @@ body header .side_menu a {
   align-items: center;
   justify-content: center;
 }
+body .back_dark {
+  background: #131313;
+}
 body .Inicio {
   width: 100%;
   min-height: 100vh;
   height: auto;
 }
+body .Inicio section {
+  padding: 0 5%;
+}
+body .Inicio section .btn {
+  background: #BAF811;
+  color: #131313;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 500;
+  font-size: 1.15vw;
+  box-shadow: 6px 6px #8000FF;
+  border-radius: 0;
+  padding: 0.5vh 1vw;
+}
 body .Inicio .Banner {
-  outline: 1px solid red;
   width: 100%;
   height: 100vh;
   position: relative;
-  padding: 0 5%;
   padding-top: 10vh;
 }
 body .Inicio .Banner img {
@@ -377,15 +390,17 @@ body .Inicio .Banner h3 {
   padding-right: 1.25vw;
 }
 body .Inicio .Dobra_Categ {
-  padding: 0 5%;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   max-height: 200vh;
   position: relative;
+  display: flex;
+  flex-wrap: wrap;
 }
-body .Inicio .Dobra_Categ #img_bg {
+body .Inicio .Dobra_Categ #img_bg_categ {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background: url("../../assets/backgrounds/textura_home.webp");
   background-size: cover;
   background-attachment: fixed;
@@ -394,25 +409,269 @@ body .Inicio .Dobra_Categ #img_bg {
   left: 0;
   top: 0;
 }
+body .Inicio .Dobra_Categ h2 {
+  width: 100%;
+  height: 13vh;
+  text-align: center;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 3vw;
+  color: #F3F4F9;
+  margin-top: 2vh;
+  margin-bottom: 5vh;
+}
+body .Inicio .Dobra_Categ h2 span {
+  color: #F83810;
+}
+body .Inicio .Dobra_Categ .underline {
+  position: absolute;
+  width: 16vw;
+  top: 14vh;
+  left: 52%;
+  stroke-dasharray: 1500;
+  stroke-dashoffset: 1500;
+  animation: underlineAnimation 5s infinite ease-in-out;
+}
+@keyframes underlineAnimation {
+  0% {
+    stroke-dashoffset: 1500;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+body .Inicio .Dobra_Categ .categoria {
+  width: 33.3%;
+  height: 42vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  padding: 0 3vw;
+  margin: 1.5vh 0;
+  position: relative;
+}
+body .Inicio .Dobra_Categ .categoria img {
+  width: 100%;
+  height: 80%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5vw;
+}
+body .Inicio .Dobra_Categ .categoria p {
+  width: 100%;
+  height: 15%;
+  text-align: center;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 800;
+  font-size: 1.15vw;
+  color: #F3F4F9;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 5%;
+}
+body .Inicio .Dobra_Categ .categoria::before {
+  content: "";
+  position: absolute;
+  width: 18vw;
+  height: 18vw;
+  border-radius: 50%;
+  background: #BBBBBB;
+  opacity: 0.1;
+  top: 0;
+}
+body .Inicio .Dobra_Categ::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30vh;
+  background: linear-gradient(180deg, rgba(19, 19, 19, 0) 0%, rgb(19, 19, 19) 100%);
+  z-index: 10;
+}
+body .Inicio .Dobra_Categ .btn_Categ {
+  position: absolute;
+  bottom: 3vh;
+  left: calc(50% - 5.5vw);
+  z-index: 11;
+}
 body .Inicio .Dobra_Prods {
-  padding: 0 5%;
   padding-bottom: 7vh;
   width: 100%;
   height: 107vh;
   position: relative;
+  outline: 1px solid blue;
+  background: #505050;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+}
+body .Inicio .Dobra_Prods::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 35vh;
+  background: linear-gradient(180deg, rgb(19, 19, 19) 0%, rgba(19, 19, 19, 0) 100%);
+  z-index: 10;
+}
+body .Inicio .Dobra_Prods #img_bg_prods {
+  width: 100%;
+  height: 100%;
+  background: url("../../assets/backgrounds/textura_adm.webp");
+  background-size: cover;
+  background-attachment: fixed;
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0.15;
+}
+body .Inicio .Dobra_Prods h2 {
+  z-index: 25;
+  position: relative;
+  width: 100%;
+  height: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 3vw;
+  color: #F3F4F9;
+  margin-top: 7vh;
+}
+body .Inicio .Dobra_Prods h2 span {
+  color: #F83810;
+}
+body .Inicio .Dobra_Prods .produtos_recentes {
+  z-index: 25;
+  width: 23.5%;
+  height: 65%;
+  margin: -8vh 0.75% 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.75vw;
+}
+body .Inicio .Dobra_Prods .produtos_recentes .code {
+  position: absolute;
+  top: 0.25vw;
+  left: 0.5vw;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 800;
+  font-size: 0.75vw;
+  color: #BAF811;
+  letter-spacing: 0.05vw;
+}
+body .Inicio .Dobra_Prods .produtos_recentes button {
+  position: absolute;
+  top: 0.75vw;
+  right: 0.75vw;
+  width: 1.75vw;
+  height: 1.75vw;
+  border: none;
+  border-radius: 0.25vw;
+  background: #F83810;
+}
+body .Inicio .Dobra_Prods .produtos_recentes button img, body .Inicio .Dobra_Prods .produtos_recentes button svg {
+  width: 100%;
+  height: 100%;
+  padding: 0.3vw;
+}
+body .Inicio .Dobra_Prods .produtos_recentes button img path, body .Inicio .Dobra_Prods .produtos_recentes button svg path {
+  fill: #131313;
+}
+body .Inicio .Dobra_Prods .produtos_recentes img {
+  width: 100%;
+  height: 65%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  padding: 1.5vw;
+}
+body .Inicio .Dobra_Prods .produtos_recentes h4 {
+  all: unset;
+  width: 100%;
+  height: 20%;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 700;
+  font-size: 1vw;
+  color: #F3F4F9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+body .Inicio .Dobra_Prods .produtos_recentes h4::before {
+  content: "";
+  position: absolute;
+  background: #BAF811;
+  opacity: 1;
+  width: 30%;
+  height: 3px;
+  bottom: 0;
+  left: 35%;
+}
+body .Inicio .Dobra_Prods .produtos_recentes p {
+  width: 100%;
+  height: 15%;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 1.25vw;
+  color: #BAF811;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body .Inicio .Dobra_Prods .produtos_recentes p span {
+  color: #F3F4F9;
+  font-size: 0.75vw;
+  margin-right: 0.25vw;
+  margin-bottom: -0.75vh;
+}
+body .Inicio .Dobra_Prods .produtos_recentes::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #BBBBBB;
+  opacity: 0.15;
+  z-index: -1;
+}
+body .Inicio .Dobra_Prods .btn_prods {
+  position: absolute;
+  bottom: 11vh;
+  left: calc(50% - 5vw);
+  z-index: 25;
 }
 body footer {
   margin: 0 5%;
   position: absolute;
   bottom: 0;
-  outline: 1px solid greenyellow;
   width: 90%;
   height: 7vh;
+  border-top: 3px solid #F83810;
   font-family: "Bricolage Grotesque", sans-serif;
-  font-size: 1.5vw;
+  font-size: 1.15vw;
   font-weight: 800;
-  color: #F83810;
+  color: #F3F4F9;
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding: 0 2vw;
+}
+body footer span {
+  font-size: 0.85vw;
+  margin-left: auto;
+  margin-right: 0.5vw;
 }/*# sourceMappingURL=style.css.map */

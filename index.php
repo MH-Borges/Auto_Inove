@@ -1,4 +1,4 @@
-<!-- <?php require_once("./sistema/configs/conexao.php"); ?>  -->
+<?php require_once("./sistema/configs/conexao.php"); ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -71,14 +71,15 @@
             <div class="searchBar">
                 <input type="text" id="filter" placeholder="Faça sua busca">
                 <div class="search"></div>
+                <div class="Search_resultBox hide"></div>
             </div>
         </div>
 
         <img class="cart" src="assets/icons/cart.svg" onload="SVGInject(this)">
         <span></span>
         <img class="menu" src="assets/icons/menu.svg" onload="SVGInject(this)" onclick="menuToggle()">
-        <div class="side_menu" onclick="menuToggle()">
-            <img class="close_menu" src="assets/icons/close.svg" onload="SVGInject(this)" onclick="menuToggle()">
+        <div class="side_menu hide">
+            <img class="close_menu" src="assets/icons/close.svg" onclick="menuToggle()">
             <a href="#">Produtos</a>
             <a href="#">Categorias</a>
             <a href="#">Contato</a>
@@ -86,26 +87,71 @@
         </div>
     </header>
 
-    <main class="Inicio">
+    <main class="Inicio" >
         <section class="Banner">
             <img src="assets/backgrounds/Home_Background.webp" alt="">
             <h1>Potência e alto desempenho <br> para o <span>SEU VEÍCULO!</span></h1>
             <h3>A excelência em peças de transmissão automática <br> para uma performance inigualável!</h3>
         </section>
         <section class="Dobra_Categ">
-            <div id='img_bg'></div>
-            <h2>A maior diversidade de peças para o seu carro!</h2>
-            <a class="categoria" href="">
-                <!-- <img src="" alt=""> -->
-                <p></p>
-            </a>
-            <a class="btn btn_Categ" href="">Conheça mais</a>
+            <div id='img_bg_categ'></div>
+            <h2>A maior diversidade <br> de peças para <span>o seu carro!<span></h2>
+            <img class="underline" src="assets/icons/Underline_highlight.svg" onload="SVGInject(this)">
+            <?php
+                $query = $pdo->query("SELECT * FROM categorias ORDER BY id ASC LIMIT 12");
+                $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                for ($i=0; $i < count($dados); $i++) { 
+                        
+                    $img_categoria = $dados[$i]['img'];
+                    $nome_categoria = $dados[$i]['nome'];
+
+                    if($img_categoria == "placeholder.svg" || $img_categoria == ""){
+                        $img_categoria = "<img class='img_categoria' src='assets/icons/placeholder.svg'>";
+                    }else{
+                        $img_categoria = "<img class='img_categoria' src='assets/categorias/$img_categoria'>";
+                    }
+                    echo "
+                        <a class='categoria' href='#'>
+                            ".$img_categoria."
+                            <p>".$nome_categoria."</p>
+                        </a>
+                    ";
+                }
+            ?>
+            <a class="btn btn_Categ" href="#">Conheça mais</a>
         </section>
         <section class="Dobra_Prods">
+            <div id='img_bg_prods'></div>
             <h2>Últimos produtos adicionados ao estoque</h2>
-            <a href="#">
-            </a>
-            <a class="btn btn_prods" href="">Veja mais</a>
+            <?php
+                $query = $pdo->query("SELECT * FROM produtos ORDER BY id DESC LIMIT 4");
+                $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                for ($i=0; $i < count($dados); $i++) { 
+                        
+                    $codigo = $dados[$i]['codigo'];
+                    $img = $dados[$i]['img'];
+                    $nome = $dados[$i]['nome'];
+                    $valor = $dados[$i]['valor'];
+
+
+                    if($img == "placeholder.jpg" || $img == ""){
+                        $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
+                    }else{
+                        $img_prod = "<img src='assets/produtos/$img'>";
+                    }
+
+                    echo "
+                        <a class='produtos_recentes' href='#'>
+                            <span class='code'>".$codigo."</span>
+                            <button><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
+                            ".$img_prod."
+                            <h4>".$nome."</h4>
+                            <p><span>R$</span>".$valor."</p>
+                        </a>
+                    ";
+                }
+            ?>
+            <a class="btn btn_prods" href="#">Veja mais</a>
         </section>
     </main>
     
@@ -116,25 +162,58 @@
     </footer>
 
     <div class="hide searchBar_List">
-        <div class="hidelist">
-            <p>nome_Teste</p>
-            <span>Categoria</span>
-        </div>
+        <?php
+            $query = $pdo->query("SELECT * FROM sub_categorias ORDER BY id DESC");
+            $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+            for ($i=0; $i < count($dados); $i++) { 
+                    
+                $nome = $dados[$i]['nome'];
 
-        <div class="hidelist">
-            <p>no</p>
-            <span>SubCategoria</span>
-        </div>
+                echo "
+                    <div class='hidelist'>
+                        <p>null</p>
+                        <p>".$nome."</p>
+                        <span>sub_categorias</span>
+                    </div>
+                ";
+            }
+        ?>
+        <?php
+            $query = $pdo->query("SELECT * FROM categorias ORDER BY id DESC");
+            $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+            for ($i=0; $i < count($dados); $i++) { 
+                    
+                $nome = $dados[$i]['nome'];
+                $img = $dados[$i]['img'];
 
-        <div class="hidelist">
-            <p>batatas</p>
-            <span>Produto</span>
-        </div>
+                echo "
+                    <div class='hidelist'>
+                        <p>".$img."</p>
+                        <p>".$nome."</p>
+                        <span>categorias</span>
+                    </div>
+                ";
+            }
+        ?>
+        <?php
+            $query = $pdo->query("SELECT * FROM produtos ORDER BY id DESC");
+            $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+            for ($i=0; $i < count($dados); $i++) { 
+                $nome = $dados[$i]['nome'];
+                $img = $dados[$i]['img'];
 
-        <div class="hidelist">
-            <p>felipe</p>
-            <span>Produto</span>
-        </div>
+                echo "
+                    <div class='hidelist'>
+                        <p>".$img."</p>
+                        <p>".$nome."</p>
+                        <span>produtos</span>
+                    </div>
+                ";
+            }
+        ?>
+
+       
+
     </div>
 
 </body>

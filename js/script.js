@@ -19,7 +19,7 @@ getData();
 filter.addEventListener('input', (e) => {
     filterData(e.target.value);
     document.querySelector('.search').addEventListener('click', () =>{
-        if (filter.value !="") {
+        if (filter.value != "") {
             filter.value = "";
             filterData(e.target.value);
         }
@@ -28,9 +28,12 @@ filter.addEventListener('input', (e) => {
 
 function getData() {
     document.querySelectorAll('.hidelist').forEach(e => {
-        const nome = e.children[0].innerHTML;
-        const tipo = e.children[1].innerHTML;
+        const img = e.children[0].innerHTML;
+        const nome = e.children[1].innerHTML;
+        const tipo = e.children[2].innerHTML;
+
         listItems.push({
+            img: img,
             nome: nome,
             tipo: tipo
         });
@@ -40,12 +43,40 @@ function getData() {
 function filterData(searchTerm) {
     listItems.forEach(item => {
         if(item.nome.toLowerCase().includes(searchTerm.toLowerCase())) {
-        }
-        else{
+            $('.Search_resultBox').removeClass('hide');
+            if(item.tipo === "sub_categorias"){
+                $(".Search_resultBox").append(`<a href='#'><p>${item.nome}</p><span>${item.tipo}</span></a>`);
+            }
+            if(item.tipo === "categorias"){
+                $(".Search_resultBox").append(`<a href='#'><img src='assets/categorias/${item.img}'><p>${item.nome}</p><span>${item.tipo}</span></a>`);
+            }
+            if(item.tipo === "produto"){
+                $(".Search_resultBox").append(`<a href='#'><img src='assets/produtos/${item.img}'><p>${item.nome}</p><span>${item.tipo}</span></a>`);
+            }
         }
     });
+    if(searchTerm === ""){
+        $('.Search_resultBox').addClass('hide');
+        $('.Search_resultBox').text(' ');
+    }
 }
 
 function menuToggle(){
-    console.log('chamou?');
+    if($('.side_menu').hasClass('hide')){
+        $('.side_menu').removeClass('hide');
+        $('.side_menu').animate({ right: "0"});
+    }
+    else{
+        $('.side_menu').animate({ right: "-20vw"});
+        setTimeout(() => { $('.side_menu').addClass('hide'); }, 500);
+    }
 }
+
+window.addEventListener('scroll', function() {
+    if(window.pageYOffset > 150){
+        $('header').addClass('back_dark');
+    }
+    else{
+        $('header').removeClass('back_dark');
+    }
+});
