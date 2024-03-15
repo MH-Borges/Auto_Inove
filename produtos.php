@@ -1,4 +1,9 @@
-<?php require_once("./sistema/configs/conexao.php"); ?>
+<?php 
+
+require_once("sistema/configs/conexao.php"); 
+//recuperar o nome do produto para filtrar os dados dele
+$produto_get = @$_GET['nome'];
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -6,7 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Inove | Inicio</title>
+    <title>Auto Inove | <?php echo $produto_get ?></title>
     <link rel="icon" href="assets/icon.svg" />
     <link rel="canonical" href="" />
 
@@ -88,71 +93,7 @@
     </header>
 
     <main class="Inicio" >
-        <section class="Banner">
-            <img src="assets/backgrounds/Home_Background.webp" alt="">
-            <h1>Potência e alto desempenho <br> para o <span>SEU VEÍCULO!</span></h1>
-            <h3>A excelência em peças de transmissão automática <br> para uma performance inigualável!</h3>
-        </section>
-        <section class="Dobra_Categ">
-            <div id='img_bg_categ'></div>
-            <h2>A maior diversidade <br> de peças para <span>o seu carro!<span></h2>
-            <img class="underline" src="assets/icons/Underline_highlight.svg" onload="SVGInject(this)">
-            <?php
-                $query = $pdo->query("SELECT * FROM categorias ORDER BY id ASC LIMIT 12");
-                $dados = $query->fetchAll(PDO::FETCH_ASSOC);
-                for ($i=0; $i < count($dados); $i++) { 
-                        
-                    $img_categoria = $dados[$i]['img'];
-                    $nome_categoria = $dados[$i]['nome'];
-
-                    if($img_categoria == "placeholder.svg" || $img_categoria == ""){
-                        $img_categoria = "<img class='img_categoria' src='assets/icons/placeholder.svg'>";
-                    }else{
-                        $img_categoria = "<img class='img_categoria' src='assets/categorias/$img_categoria'>";
-                    }
-                    echo "
-                        <a class='categoria' href='#'>
-                            ".$img_categoria."
-                            <p>".$nome_categoria."</p>
-                        </a>
-                    ";
-                }
-            ?>
-            <a class="btn btn_Categ" href="#">Conheça mais</a>
-        </section>
-        <section class="Dobra_Prods">
-            <div id='img_bg_prods'></div>
-            <h2>Últimos produtos adicionados ao estoque</h2>
-            <?php
-                $query = $pdo->query("SELECT * FROM produtos ORDER BY id DESC LIMIT 4");
-                $dados = $query->fetchAll(PDO::FETCH_ASSOC);
-                for ($i=0; $i < count($dados); $i++) { 
-                        
-                    $codigo = $dados[$i]['codigo'];
-                    $img = $dados[$i]['img'];
-                    $nome = $dados[$i]['nome'];
-                    $valor = $dados[$i]['valor'];
-
-
-                    if($img == "placeholder.jpg" || $img == ""){
-                        $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
-                    }else{
-                        $img_prod = "<img src='assets/produtos/$img'>";
-                    }
-
-                    echo "
-                        <a class='produtos_recentes' href='#'>
-                            <span class='code'>".$codigo."</span>
-                            <button><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
-                            ".$img_prod."
-                            <h4>".$nome."</h4>
-                            <p><span>R$</span>".$valor."</p>
-                        </a>
-                    ";
-                }
-            ?>
-            <a class="btn btn_prods" href="#">Veja mais</a>
-        </section>
+         teste <?php echo $produto_get ?>
     </main>
     
     <footer>
