@@ -59,7 +59,7 @@
                         for ($j=0; $j < count($dados); $j++) {
                             $nome_codigos = $dados[$j]['nome'];
                             echo "
-                                <li class='option_Codigos'>
+                                <li class='option_Codigos' onclick='codigoRedirect(`".$nome_codigos."`)'>
                                     <input type='radio' name='codigo_Produto' value='$nome_codigos' data-label='$nome_codigos'>
                                     <span class='label'>$nome_codigos</span>
                                 </li>
@@ -168,11 +168,16 @@
             for ($i=0; $i < count($dados); $i++) { 
                     
                 $nome = $dados[$i]['nome'];
+                $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "-", 
+                        strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                        "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                $nome_url = preg_replace('/[ -]+/' , '-' , $nome_novo);
+
 
                 echo "
                     <div class='hidelist'>
                         <p>null</p>
-                        <p>".$nome."</p>
+                        <p>".$nome_url."</p>
                         <span>sub_categorias</span>
                     </div>
                 ";
@@ -186,10 +191,15 @@
                 $nome = $dados[$i]['nome'];
                 $img = $dados[$i]['img'];
 
+                $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "-", 
+                        strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                        "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                $nome_url = preg_replace('/[ -]+/' , '-' , $nome_novo);
+
                 echo "
                     <div class='hidelist'>
                         <p>".$img."</p>
-                        <p>".$nome."</p>
+                        <p>".$nome_url."</p>
                         <span>categorias</span>
                     </div>
                 ";
@@ -202,10 +212,15 @@
                 $nome = $dados[$i]['nome'];
                 $img = $dados[$i]['img'];
 
+                $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "-", 
+                        strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                        "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                $nome_url = preg_replace('/[ -]+/' , '-' , $nome_novo);
+
                 echo "
                     <div class='hidelist'>
                         <p>".$img."</p>
-                        <p>".$nome."</p>
+                        <p>".$nome_url."</p>
                         <span>produtos</span>
                     </div>
                 ";
@@ -219,11 +234,4 @@
 </body>
 </html>
 
-<!-- 
-
-$nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "-", 
-        strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
-        "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
-$nome_url = preg_replace('/[ -]+/' , '-' , $nome_novo);
-
--->
+<!-- PENSAR COM CARINHO EM TODA A LOGICA DE CODIGOS E RESULTADO DE PESQUISA -->

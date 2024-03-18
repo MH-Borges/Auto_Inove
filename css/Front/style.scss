@@ -241,12 +241,85 @@ body {
                 }
                 .Search_resultBox{
                     width: 100%;
-                    height: 25vh;
+                    min-height: 5vh;
+                    height: auto;
                     max-height: 25vh;
-                    overflow-y: scroll;
+                    overflow-y: auto;
+                    overflow-x: hidden;
                     background: $Preto;
                     position: absolute;
                     top: 5vh;
+                    .searchResult{
+                        position: relative;
+                        width: 100%;
+                        height: 5vh;
+                        border-top: 0.01vh solid $Violeta;
+                        border-bottom: 0.01vh solid $Violeta;
+                        display: flex;
+                        flex-direction: row;
+                        margin: 0.5vh 0;
+                        p{
+                            width: 55%;
+                            color: $Branco;
+                            font-family: $Second-font;
+                            font-weight: 700;
+                            font-size: 0.75vw;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 2;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            padding: 0.3vw;
+                        }
+                        img, svg{
+                            width: 25%;
+                            height: 100%;
+                            object-fit: contain;
+                            padding: 0.15vw;
+                        }
+                        span{
+                            width: 20%;
+                            color: $Branco;
+                            font-family: $Second-font;
+                            font-weight: 200;
+                            font-size: 0.5vw;
+                            display: flex;
+                            align-items: start;
+                            justify-content: right;
+                            padding: 0.35vw;
+                        }
+                        &:first-child{
+                            margin-top: 0;
+                        }
+                        &:last-child{
+                            margin-bottom: 0;
+                        }
+                    }
+                    .SubcategResult{
+                        span{
+                            width: 45%;
+                        }
+                    }
+                    .categoriasResult, .produtoResult{
+                        p{
+                            margin-left: 25%;
+                        }
+                        img, svg{
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                        }
+                    }
+                    .nullResult{
+                        span{
+                            width: 100%;
+                            height: 100%;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 0.75vw;
+                            font-weight: 800;
+                        }
+                    }
                 }
             }
         }

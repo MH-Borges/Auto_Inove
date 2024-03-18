@@ -1,8 +1,9 @@
 <?php 
 
 require_once("sistema/configs/conexao.php"); 
-//recuperar o nome do produto para filtrar os dados dele
-$produto_get = @$_GET['nome'];
+$codigo_get = @$_GET['codigo'];
+$tipo_get = @$_GET['tipo'];
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -11,7 +12,7 @@ $produto_get = @$_GET['nome'];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Inove | <?php echo $produto_get ?></title>
+    <title>Auto Inove | <?php echo $tipo_get ?></title>
     <link rel="icon" href="assets/icon.svg" />
     <link rel="canonical" href="" />
 
@@ -93,7 +94,9 @@ $produto_get = @$_GET['nome'];
     </header>
 
     <main class="Inicio" >
-         teste <?php echo $produto_get ?>
+        <?php echo $codigo_get ?>
+
+        <?php echo $tipo_get ?>
     </main>
     
     <footer>
@@ -160,11 +163,3 @@ $produto_get = @$_GET['nome'];
 </body>
 </html>
 
-<!-- 
-
-$nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "-", 
-        strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
-        "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
-$nome_url = preg_replace('/[ -]+/' , '-' , $nome_novo);
-
--->

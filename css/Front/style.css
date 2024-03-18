@@ -280,12 +280,80 @@ body header .searchBar_Block .searchBar input::placeholder {
 }
 body header .searchBar_Block .searchBar .Search_resultBox {
   width: 100%;
-  height: 25vh;
+  min-height: 5vh;
+  height: auto;
   max-height: 25vh;
-  overflow-y: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
   background: #131313;
   position: absolute;
   top: 5vh;
+}
+body header .searchBar_Block .searchBar .Search_resultBox .searchResult {
+  position: relative;
+  width: 100%;
+  height: 5vh;
+  border-top: 0.01vh solid #8000FF;
+  border-bottom: 0.01vh solid #8000FF;
+  display: flex;
+  flex-direction: row;
+  margin: 0.5vh 0;
+}
+body header .searchBar_Block .searchBar .Search_resultBox .searchResult p {
+  width: 55%;
+  color: #F3F4F9;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 700;
+  font-size: 0.75vw;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0.3vw;
+}
+body header .searchBar_Block .searchBar .Search_resultBox .searchResult img, body header .searchBar_Block .searchBar .Search_resultBox .searchResult svg {
+  width: 25%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  padding: 0.15vw;
+}
+body header .searchBar_Block .searchBar .Search_resultBox .searchResult span {
+  width: 20%;
+  color: #F3F4F9;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 200;
+  font-size: 0.5vw;
+  display: flex;
+  align-items: start;
+  justify-content: right;
+  padding: 0.35vw;
+}
+body header .searchBar_Block .searchBar .Search_resultBox .searchResult:first-child {
+  margin-top: 0;
+}
+body header .searchBar_Block .searchBar .Search_resultBox .searchResult:last-child {
+  margin-bottom: 0;
+}
+body header .searchBar_Block .searchBar .Search_resultBox .SubcategResult span {
+  width: 45%;
+}
+body header .searchBar_Block .searchBar .Search_resultBox .categoriasResult p, body header .searchBar_Block .searchBar .Search_resultBox .produtoResult p {
+  margin-left: 25%;
+}
+body header .searchBar_Block .searchBar .Search_resultBox .categoriasResult img, body header .searchBar_Block .searchBar .Search_resultBox .categoriasResult svg, body header .searchBar_Block .searchBar .Search_resultBox .produtoResult img, body header .searchBar_Block .searchBar .Search_resultBox .produtoResult svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+body header .searchBar_Block .searchBar .Search_resultBox .nullResult span {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75vw;
+  font-weight: 800;
 }
 body header .cart, body header .menu {
   height: 100%;

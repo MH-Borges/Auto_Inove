@@ -12,6 +12,11 @@ function OptionSelection(selectedValueId, optionsButtonId, optionInputsClass) {
     });
 }
 
+//////// PENSAR COM CARINHO EM TODA A LOGICA DE CODIGOS E RESULTADO DE PESQUISA
+function codigoRedirect(codigo){
+    window.location.href = `./listagem-${codigo}`;
+}
+
 //BARRA DE PESQUISA
 const filter = document.getElementById('filter');
 const listItems = [];
@@ -41,26 +46,59 @@ function getData() {
 }
 
 function filterData(searchTerm) {
+    document.querySelectorAll('.searchResult').forEach(e => { e.remove(); });
+    
     listItems.forEach(item => {
         if(item.nome.toLowerCase().includes(searchTerm.toLowerCase())) {
             $('.Search_resultBox').removeClass('hide');
-            if(item.tipo === "sub_categorias"){
-                $(".Search_resultBox").append(`<a href='#'><p>${item.nome}</p><span>${item.tipo}</span></a>`);
-            }
-            if(item.tipo === "categorias"){
-                $(".Search_resultBox").append(`<a href='#'><img src='assets/categorias/${item.img}'><p>${item.nome}</p><span>${item.tipo}</span></a>`);
-            }
-            if(item.tipo === "produto"){
-                $(".Search_resultBox").append(`<a href='#'><img src='assets/produtos/${item.img}'><p>${item.nome}</p><span>${item.tipo}</span></a>`);
+
+            //////// PENSAR COM CARINHO EM TODA A LOGICA DE CODIGOS E RESULTADO DE PESQUISA
+            if($('#options_btn_Codigos').val() !== 'on'){
+                let codigo = $('#options_btn_Codigos').val();
+                if(item.tipo === "sub_categorias"){
+                    $(".Search_resultBox").append(`<a class='searchResult SubcategResult' href='listagem-${codigo}&${item.nome}'><p>${item.nome}</p><span>${item.tipo}</span></a>`);
+                }
+                if(item.tipo === "categorias"){
+                    if(item.img === 'placeholder.svg'){
+                        $(".Search_resultBox").append(`<a class='searchResult categoriasResult' href='listagem-${codigo}&${item.nome}'><p>${item.nome}</p><img src='assets/icons/${item.img}'><span>${item.tipo}</span></a>`);
+                    }
+                    else{
+                        $(".Search_resultBox").append(`<a class='searchResult categoriasResult' href='listagem-${codigo}&${item.nome}'><p>${item.nome}</p><img src='assets/categorias/${item.img}'><span>${item.tipo}</span></a>`);
+                    }
+                }
+                if(item.tipo === "produto"){
+                    $(".Search_resultBox").append(`<a class='searchResult produtoResult' href='produto-${item.nome}'><p>${item.nome}</p><img src='assets/produtos/${item.img}'><span>${item.tipo}</span></a>`);
+                }
+            }else{
+                if(item.tipo === "sub_categorias"){
+                    $(".Search_resultBox").append(`<a class='searchResult SubcategResult' href='listagem-${item.nome}'><p>${item.nome}</p><span>${item.tipo}</span></a>`);
+                }
+                if(item.tipo === "categorias"){
+                    if(item.img === 'placeholder.svg'){
+                        $(".Search_resultBox").append(`<a class='searchResult categoriasResult' href='listagem-${item.nome}'><p>${item.nome}</p><img src='assets/icons/${item.img}'><span>${item.tipo}</span></a>`);
+                    }
+                    else{
+                        $(".Search_resultBox").append(`<a class='searchResult categoriasResult' href='listagem-${item.nome}'><p>${item.nome}</p><img src='assets/categorias/${item.img}'><span>${item.tipo}</span></a>`);
+                    }
+                }
+                if(item.tipo === "produto"){
+                    $(".Search_resultBox").append(`<a class='searchResult produtoResult' href='produto-${item.nome}'><p>${item.nome}</p><img src='assets/produtos/${item.img}'><span>${item.tipo}</span></a>`);
+                }
             }
         }
     });
+
+    if( $(".Search_resultBox").html() === ""){
+        $(".Search_resultBox").append(`<a class='searchResult nullResult'><span>Nenhum resultado encontrado</span></a>`);
+    }
+
     if(searchTerm === ""){
         $('.Search_resultBox').addClass('hide');
         $('.Search_resultBox').text(' ');
     }
 }
 
+//MENU LATRERAL
 function menuToggle(){
     if($('.side_menu').hasClass('hide')){
         $('.side_menu').removeClass('hide');
@@ -72,6 +110,7 @@ function menuToggle(){
     }
 }
 
+//EFEITO MENU SCROLL
 window.addEventListener('scroll', function() {
     if(window.pageYOffset > 150){
         $('header').addClass('back_dark');
