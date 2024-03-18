@@ -14,7 +14,7 @@ function OptionSelection(selectedValueId, optionsButtonId, optionInputsClass) {
 
 //////// PENSAR COM CARINHO EM TODA A LOGICA DE CODIGOS E RESULTADO DE PESQUISA
 function codigoRedirect(codigo){
-    window.location.href = `./listagem-${codigo}`;
+    window.location.href = `./produtos-${codigo}`;
 }
 
 //BARRA DE PESQUISA
@@ -56,32 +56,32 @@ function filterData(searchTerm) {
             if($('#options_btn_Codigos').val() !== 'on'){
                 let codigo = $('#options_btn_Codigos').val();
                 if(item.tipo === "sub_categorias"){
-                    $(".Search_resultBox").append(`<a class='searchResult SubcategResult' href='listagem-${codigo}&${item.nome}'><p>${item.nome}</p><span>${item.tipo}</span></a>`);
+                    $(".Search_resultBox").append(`<a class='searchResult SubcategResult' href='produtos-${codigo}&${item.nome}'><p>${item.nome}</p><span>${item.tipo}</span></a>`);
                 }
                 if(item.tipo === "categorias"){
                     if(item.img === 'placeholder.svg'){
-                        $(".Search_resultBox").append(`<a class='searchResult categoriasResult' href='listagem-${codigo}&${item.nome}'><p>${item.nome}</p><img src='assets/icons/${item.img}'><span>${item.tipo}</span></a>`);
+                        $(".Search_resultBox").append(`<a class='searchResult categoriasResult' href='produtos-${codigo}&${item.nome}'><p>${item.nome}</p><img src='assets/icons/${item.img}'><span>${item.tipo}</span></a>`);
                     }
                     else{
-                        $(".Search_resultBox").append(`<a class='searchResult categoriasResult' href='listagem-${codigo}&${item.nome}'><p>${item.nome}</p><img src='assets/categorias/${item.img}'><span>${item.tipo}</span></a>`);
+                        $(".Search_resultBox").append(`<a class='searchResult categoriasResult' href='produtos-${codigo}&${item.nome}'><p>${item.nome}</p><img src='assets/categorias/${item.img}'><span>${item.tipo}</span></a>`);
                     }
                 }
-                if(item.tipo === "produto"){
+                if(item.tipo === "produtos"){
                     $(".Search_resultBox").append(`<a class='searchResult produtoResult' href='produto-${item.nome}'><p>${item.nome}</p><img src='assets/produtos/${item.img}'><span>${item.tipo}</span></a>`);
                 }
             }else{
                 if(item.tipo === "sub_categorias"){
-                    $(".Search_resultBox").append(`<a class='searchResult SubcategResult' href='listagem-${item.nome}'><p>${item.nome}</p><span>${item.tipo}</span></a>`);
+                    $(".Search_resultBox").append(`<a class='searchResult SubcategResult' href='produtos-${item.nome}'><p>${item.nome}</p><span>${item.tipo}</span></a>`);
                 }
                 if(item.tipo === "categorias"){
                     if(item.img === 'placeholder.svg'){
-                        $(".Search_resultBox").append(`<a class='searchResult categoriasResult' href='listagem-${item.nome}'><p>${item.nome}</p><img src='assets/icons/${item.img}'><span>${item.tipo}</span></a>`);
+                        $(".Search_resultBox").append(`<a class='searchResult categoriasResult' href='produtos-${item.nome}'><p>${item.nome}</p><img src='assets/icons/${item.img}'><span>${item.tipo}</span></a>`);
                     }
                     else{
-                        $(".Search_resultBox").append(`<a class='searchResult categoriasResult' href='listagem-${item.nome}'><p>${item.nome}</p><img src='assets/categorias/${item.img}'><span>${item.tipo}</span></a>`);
+                        $(".Search_resultBox").append(`<a class='searchResult categoriasResult' href='produtos-${item.nome}'><p>${item.nome}</p><img src='assets/categorias/${item.img}'><span>${item.tipo}</span></a>`);
                     }
                 }
-                if(item.tipo === "produto"){
+                if(item.tipo === "produtos"){
                     $(".Search_resultBox").append(`<a class='searchResult produtoResult' href='produto-${item.nome}'><p>${item.nome}</p><img src='assets/produtos/${item.img}'><span>${item.tipo}</span></a>`);
                 }
             }
