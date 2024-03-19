@@ -25,6 +25,9 @@
     <!-- jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     
+    <!-- Cookies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.5/js.cookie.min.js"></script>
+
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -80,10 +83,10 @@
         <img class="menu" src="assets/icons/menu.svg" onload="SVGInject(this)" onclick="menuToggle()">
         <div class="side_menu hide">
             <img class="close_menu" src="assets/icons/close.svg" onclick="menuToggle()">
-            <a href="produtos-batatas">Produtos</a>
-            <a href="#">Categorias</a>
-            <a href="#">Contato</a>
-            <a href="#">Meu carrinho</a>
+            <a href="./produtos ">Produtos</a>
+            <a href="./categorias ">Categorias</a>
+            <a target="_blank" href="https://wa.me/554198492024">Contato</a>
+            <a href="./carrinho ">Meu carrinho</a>
         </div>
     </header>
 
@@ -118,7 +121,7 @@
                     ";
                 }
             ?>
-            <a class="btn btn_Categ" href="#">Conheça mais</a>
+            <a class="btn btn_Categ" href="./categorias ">Conheça mais</a>
         </section>
         <section class="Dobra_Prods">
             <div id='img_bg_prods'></div>
@@ -168,16 +171,16 @@
             for ($i=0; $i < count($dados); $i++) { 
                     
                 $nome = $dados[$i]['nome'];
-                $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "-", 
+                $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
                         strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
                         "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
-                $nome_url = preg_replace('/[ -]+/' , '-' , $nome_novo);
-
+                $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
 
                 echo "
                     <div class='hidelist'>
                         <p>null</p>
-                        <p>".$nome_url."</p>
+                        <p>".$nome."</p>
+                        <p class='hide'>".$nome_url."</p>
                         <span>sub_categorias</span>
                     </div>
                 ";
@@ -191,15 +194,16 @@
                 $nome = $dados[$i]['nome'];
                 $img = $dados[$i]['img'];
 
-                $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "-", 
+                $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
                         strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
                         "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
-                $nome_url = preg_replace('/[ -]+/' , '-' , $nome_novo);
+                $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
 
                 echo "
                     <div class='hidelist'>
                         <p>".$img."</p>
-                        <p>".$nome_url."</p>
+                        <p>".$nome."</p>
+                        <p class='hide'>".$nome_url."</p>
                         <span>categorias</span>
                     </div>
                 ";
@@ -212,26 +216,22 @@
                 $nome = $dados[$i]['nome'];
                 $img = $dados[$i]['img'];
 
-                $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "-", 
+                $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
                         strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
                         "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
-                $nome_url = preg_replace('/[ -]+/' , '-' , $nome_novo);
+                $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
 
                 echo "
                     <div class='hidelist'>
                         <p>".$img."</p>
-                        <p>".$nome_url."</p>
+                        <p>".$nome."</p>
+                        <p class='hide'>".$nome_url."</p>
                         <span>produtos</span>
                     </div>
                 ";
             }
         ?>
-
-       
-
     </div>
 
 </body>
 </html>
-
-<!-- PENSAR COM CARINHO EM TODA A LOGICA DE CODIGOS E RESULTADO DE PESQUISA -->

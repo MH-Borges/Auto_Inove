@@ -1,3 +1,8 @@
+$(document).ready(function () {
+    let codigo = Cookies.get('Cookie_Codigo');
+    if(codigo !== ''){ $('#selected_val_Codigos').text(codigo); }
+});
+
 //FUNÇÃO DE SELETORES CUSTOMIZADOS
 function OptionSelection(selectedValueId, optionsButtonId, optionInputsClass) {
     let selectedValue = document.getElementById(selectedValueId),
@@ -14,7 +19,10 @@ function OptionSelection(selectedValueId, optionsButtonId, optionInputsClass) {
 
 //////// PENSAR COM CARINHO EM TODA A LOGICA DE CODIGOS E RESULTADO DE PESQUISA
 function codigoRedirect(codigo){
-    window.location.href = `./produtos-${codigo}`;
+    Cookies.set('Cookie_Codigo', codigo, {
+        expires: 1
+    });
+    window.location.href = `./produtos`;
 }
 
 //BARRA DE PESQUISA
@@ -35,11 +43,13 @@ function getData() {
     document.querySelectorAll('.hidelist').forEach(e => {
         const img = e.children[0].innerHTML;
         const nome = e.children[1].innerHTML;
-        const tipo = e.children[2].innerHTML;
+        const nome_url = e.children[2].innerHTML;
+        const tipo = e.children[3].innerHTML;
 
         listItems.push({
             img: img,
             nome: nome,
+            nome_url: nome_url,
             tipo: tipo
         });
     });
@@ -52,38 +62,19 @@ function filterData(searchTerm) {
         if(item.nome.toLowerCase().includes(searchTerm.toLowerCase())) {
             $('.Search_resultBox').removeClass('hide');
 
-            //////// PENSAR COM CARINHO EM TODA A LOGICA DE CODIGOS E RESULTADO DE PESQUISA
-            if($('#options_btn_Codigos').val() !== 'on'){
-                let codigo = $('#options_btn_Codigos').val();
-                if(item.tipo === "sub_categorias"){
-                    $(".Search_resultBox").append(`<a class='searchResult SubcategResult' href='produtos-${codigo}&${item.nome}'><p>${item.nome}</p><span>${item.tipo}</span></a>`);
+            if(item.tipo === "sub_categorias"){
+                $(".Search_resultBox").append(`<a class='searchResult SubcategResult' href='produtos_${item.nome_url}'><p>${item.nome}</p><span>${item.tipo}</span></a>`);
+            }
+            if(item.tipo === "categorias"){
+                if(item.img === 'placeholder.svg'){
+                    $(".Search_resultBox").append(`<a class='searchResult categoriasResult' href='produtos_${item.nome_url}'><p>${item.nome}</p><img src='assets/icons/${item.img}'><span>${item.tipo}</span></a>`);
                 }
-                if(item.tipo === "categorias"){
-                    if(item.img === 'placeholder.svg'){
-                        $(".Search_resultBox").append(`<a class='searchResult categoriasResult' href='produtos-${codigo}&${item.nome}'><p>${item.nome}</p><img src='assets/icons/${item.img}'><span>${item.tipo}</span></a>`);
-                    }
-                    else{
-                        $(".Search_resultBox").append(`<a class='searchResult categoriasResult' href='produtos-${codigo}&${item.nome}'><p>${item.nome}</p><img src='assets/categorias/${item.img}'><span>${item.tipo}</span></a>`);
-                    }
+                else{
+                    $(".Search_resultBox").append(`<a class='searchResult categoriasResult' href='produtos_${item.nome_url}'><p>${item.nome}</p><img src='assets/categorias/${item.img}'><span>${item.tipo}</span></a>`);
                 }
-                if(item.tipo === "produtos"){
-                    $(".Search_resultBox").append(`<a class='searchResult produtoResult' href='produto-${item.nome}'><p>${item.nome}</p><img src='assets/produtos/${item.img}'><span>${item.tipo}</span></a>`);
-                }
-            }else{
-                if(item.tipo === "sub_categorias"){
-                    $(".Search_resultBox").append(`<a class='searchResult SubcategResult' href='produtos-${item.nome}'><p>${item.nome}</p><span>${item.tipo}</span></a>`);
-                }
-                if(item.tipo === "categorias"){
-                    if(item.img === 'placeholder.svg'){
-                        $(".Search_resultBox").append(`<a class='searchResult categoriasResult' href='produtos-${item.nome}'><p>${item.nome}</p><img src='assets/icons/${item.img}'><span>${item.tipo}</span></a>`);
-                    }
-                    else{
-                        $(".Search_resultBox").append(`<a class='searchResult categoriasResult' href='produtos-${item.nome}'><p>${item.nome}</p><img src='assets/categorias/${item.img}'><span>${item.tipo}</span></a>`);
-                    }
-                }
-                if(item.tipo === "produtos"){
-                    $(".Search_resultBox").append(`<a class='searchResult produtoResult' href='produto-${item.nome}'><p>${item.nome}</p><img src='assets/produtos/${item.img}'><span>${item.tipo}</span></a>`);
-                }
+            }
+            if(item.tipo === "produtos"){
+                $(".Search_resultBox").append(`<a class='searchResult produtoResult' href='produto_${item.nome_url}'><p>${item.nome}</p><img src='assets/produtos/${item.img}'><span>${item.tipo}</span></a>`);
             }
         }
     });

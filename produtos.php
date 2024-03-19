@@ -1,8 +1,10 @@
 <?php 
-
 require_once("sistema/configs/conexao.php"); 
-$codigo_get = @$_GET['codigo'];
-$tipo_get = @$_GET['tipo'];
+
+$nome_get = @$_GET['nome'];
+$nome_clean = preg_replace('/_/', ' ', $nome_get);
+
+$codigo_get = $_COOKIE["Cookie_Codigo"];
 
 ?>
 <!DOCTYPE html>
@@ -12,7 +14,7 @@ $tipo_get = @$_GET['tipo'];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Inove | <?php echo $tipo_get ?></title>
+    <title>Auto Inove | <?php echo $titulo ?></title>
     <link rel="icon" href="assets/icon.svg" />
     <link rel="canonical" href="" />
 
@@ -27,6 +29,9 @@ $tipo_get = @$_GET['tipo'];
 
     <!-- SVG Inject -->
     <script src="js/svg-inject.min.js"></script>
+    
+    <!-- Cookies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.5/js.cookie.min.js"></script>
 
     <!-- jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -65,7 +70,7 @@ $tipo_get = @$_GET['tipo'];
                         for ($j=0; $j < count($dados); $j++) {
                             $nome_codigos = $dados[$j]['nome'];
                             echo "
-                                <li class='option_Codigos'>
+                                <li class='option_Codigos' onclick='codigoRedirect(`".$nome_codigos."`)'>
                                     <input type='radio' name='codigo_Produto' value='$nome_codigos' data-label='$nome_codigos'>
                                     <span class='label'>$nome_codigos</span>
                                 </li>
@@ -86,17 +91,75 @@ $tipo_get = @$_GET['tipo'];
         <img class="menu" src="assets/icons/menu.svg" onload="SVGInject(this)" onclick="menuToggle()">
         <div class="side_menu hide">
             <img class="close_menu" src="assets/icons/close.svg" onclick="menuToggle()">
-            <a href="produtos-batatas">Produtos</a>
-            <a href="#">Categorias</a>
-            <a href="#">Contato</a>
-            <a href="#">Meu carrinho</a>
+            <a href="./produtos">Produtos</a>
+            <a href="./categorias">Categorias</a>
+            <a target="_blank" href="https://wa.me/554198492024">Contato</a>
+            <a href="./carrinho">Meu carrinho</a>
         </div>
     </header>
 
-    <main class="Inicio" >
-        <?php echo $codigo_get ?>
+    <main class="Produtos">
+        <section class="Header_main">
 
-        <?php echo $tipo_get ?>
+
+            <?php 
+                $query = $pdo->query("SELECT * FROM categorias ORDER BY id asc LIMIT 7");
+                $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                for ($j=0; $j < count($dados); $j++) {
+                    $nome = $dados[$j]['nome'];
+
+                    $query2 = $pdo->query("SELECT * FROM sub_categorias WHERE categ_Atrelada = '$nome'");
+                    $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+
+                    if (@count($dados2)> 0){
+                        echo "
+                            <div class='list_Categs'>
+                                <button type='button' data-toggle='dropdown' aria-expanded='false'>
+                                    ".$nome."
+                                </button>
+                                <div class='dropdown-menu dropdown-menu-right dropdown-menu-lg-left'>
+                                ";
+                                for ($i=0; $i < count($dados2); $i++) {
+                                    $nome_subCateg = $dados2[$i]['nome'];
+                                    echo '
+                                        <a class="dropdown-item" href="#">'.$nome_subCateg.'</a>
+                                    ';
+                                } 
+                            echo "</div></div>";
+                    }
+                    else{
+                        echo"
+                        <div class='list_Categs'>
+                            ".$nome."
+                        </div>
+                        ";
+                    }
+
+                    
+                }
+
+                echo "
+                    <div class='list_Categs'>
+                        <button type='button' data-toggle='dropdown' aria-expanded='false'>
+                            +Categorias
+                        </button>
+                        <div class='dropdown-menu dropdown-menu-right dropdown-menu-lg-left'>";
+                            $query = $pdo->query("SELECT * FROM categorias ORDER BY id asc");
+                            $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                            for ($j=7; $j < count($dados); $j++) {
+                                $nome = $dados[$j]['nome'];
+                                echo '<a class="dropdown-item" href="#">'.$nome.'</a>';
+                            }
+
+                    echo "</div>
+                    </div>
+                ";
+            ?>
+            
+        </section>
+        <section class="SubHeader"></section>
+        <section class="Sub_menu"></section>
+        <section class="Produtos_list"></section>
     </main>
     
     <footer>
@@ -112,11 +175,16 @@ $tipo_get = @$_GET['tipo'];
             for ($i=0; $i < count($dados); $i++) { 
                     
                 $nome = $dados[$i]['nome'];
+                $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                        strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                        "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
 
                 echo "
                     <div class='hidelist'>
                         <p>null</p>
                         <p>".$nome."</p>
+                        <p class='hide'>".$nome_url."</p>
                         <span>sub_categorias</span>
                     </div>
                 ";
@@ -130,10 +198,16 @@ $tipo_get = @$_GET['tipo'];
                 $nome = $dados[$i]['nome'];
                 $img = $dados[$i]['img'];
 
+                $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                        strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                        "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+
                 echo "
                     <div class='hidelist'>
                         <p>".$img."</p>
                         <p>".$nome."</p>
+                        <p class='hide'>".$nome_url."</p>
                         <span>categorias</span>
                     </div>
                 ";
@@ -146,20 +220,22 @@ $tipo_get = @$_GET['tipo'];
                 $nome = $dados[$i]['nome'];
                 $img = $dados[$i]['img'];
 
+                $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                        strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                        "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+
                 echo "
                     <div class='hidelist'>
                         <p>".$img."</p>
                         <p>".$nome."</p>
+                        <p class='hide'>".$nome_url."</p>
                         <span>produtos</span>
                     </div>
                 ";
             }
         ?>
-
-       
-
     </div>
 
 </body>
 </html>
-

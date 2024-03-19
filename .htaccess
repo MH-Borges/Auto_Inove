@@ -2,7 +2,11 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-RewriteRule ^produtos-(.*)$ produtos.php?codigo=$1 [L]
-RewriteRule ^produtos-(.*?)&(.*?)$ listagem.php?codigo=$1&tipo=$2 [L]
+RewriteRule ^produto_(.*)$ produto.php?nome=$1 [L]
+RewriteRule ^produtos_(.*)$ produtos.php?nome=$1 [L]
+
+RewriteRule ^produtos(.*)$ produtos.php [L]
+RewriteRule ^categorias(.*)$ categorias.php [L]
+RewriteRule ^carrinho(.*)$ carrinho.php [L]
 
 AddHandler application/x-httpd-ea-php71 .php .php5 .phtml
