@@ -4,6 +4,13 @@ require_once("sistema/configs/conexao.php");
 $nome_get = @$_GET['nome'];
 $nome_clean = preg_replace('/_/', ' ', $nome_get);
 
+if($nome_get === '' || $nome_get === null){
+    $titulo_page = 'Produtos';
+}
+else{
+    $titulo_page = $nome_clean;
+}
+
 $codigo_get = $_COOKIE["Cookie_Codigo"];
 
 ?>
@@ -14,7 +21,7 @@ $codigo_get = $_COOKIE["Cookie_Codigo"];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Inove | <?php echo $titulo ?></title>
+    <title>Auto Inove | Produtos</title>
     <link rel="icon" href="assets/icon.svg" />
     <link rel="canonical" href="" />
 
@@ -100,39 +107,43 @@ $codigo_get = $_COOKIE["Cookie_Codigo"];
 
     <main class="Produtos">
         <section class="Header_main">
-
-
             <?php 
                 $query = $pdo->query("SELECT * FROM categorias ORDER BY id asc LIMIT 7");
                 $dados = $query->fetchAll(PDO::FETCH_ASSOC);
                 for ($j=0; $j < count($dados); $j++) {
                     $nome = $dados[$j]['nome'];
 
+                    $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                            strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                            "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                    $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+
                     $query2 = $pdo->query("SELECT * FROM sub_categorias WHERE categ_Atrelada = '$nome'");
                     $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-
                     if (@count($dados2)> 0){
                         echo "
                             <div class='list_Categs'>
                                 <button type='button' data-toggle='dropdown' aria-expanded='false'>
                                     ".$nome."
+                                    <img src='assets/icons/seta.svg' onload='SVGInject(this)'>
                                 </button>
-                                <div class='dropdown-menu dropdown-menu-right dropdown-menu-lg-left'>
+                                <div class='dropdown-menu'>
                                 ";
                                 for ($i=0; $i < count($dados2); $i++) {
                                     $nome_subCateg = $dados2[$i]['nome'];
+                                    $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                                            strtr(utf8_decode(trim($nome_subCateg)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                                            "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                                    $nome_url_sub = preg_replace('/[ -]+/' , '_' , $nome_novo);
+
                                     echo '
-                                        <a class="dropdown-item" href="#">'.$nome_subCateg.'</a>
+                                        <a class="dropdown-item" href="produtos_'.$nome_url_sub.'">'.$nome_subCateg.'</a>
                                     ';
                                 } 
                             echo "</div></div>";
                     }
                     else{
-                        echo"
-                        <div class='list_Categs'>
-                            ".$nome."
-                        </div>
-                        ";
+                        echo" <a class='list_Categs' href='produtos_".$nome_url."'>$nome</a> ";
                     }
 
                     
@@ -142,22 +153,31 @@ $codigo_get = $_COOKIE["Cookie_Codigo"];
                     <div class='list_Categs'>
                         <button type='button' data-toggle='dropdown' aria-expanded='false'>
                             +Categorias
+                            <img src='assets/icons/seta.svg' onload='SVGInject(this)'>
                         </button>
-                        <div class='dropdown-menu dropdown-menu-right dropdown-menu-lg-left'>";
+                        <div class='dropdown-menu'>";
                             $query = $pdo->query("SELECT * FROM categorias ORDER BY id asc");
                             $dados = $query->fetchAll(PDO::FETCH_ASSOC);
                             for ($j=7; $j < count($dados); $j++) {
                                 $nome = $dados[$j]['nome'];
-                                echo '<a class="dropdown-item" href="#">'.$nome.'</a>';
-                            }
 
+                                $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                                        strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                                        "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                                $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+
+                                echo" <a class='dropdown-item' href='produtos_".$nome_url."'>$nome</a> ";
+                            }
                     echo "</div>
                     </div>
                 ";
             ?>
             
         </section>
-        <section class="SubHeader"></section>
+        <section class="SubHeader">
+            <div class='breadcrumbs'></div>
+            <h1><?php echo $titulo_page ?></h1>
+        </section>
         <section class="Sub_menu"></section>
         <section class="Produtos_list"></section>
     </main>

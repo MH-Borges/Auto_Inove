@@ -40,8 +40,9 @@ body {
   background: #131313;
   font-family: "Bricolage Grotesque", sans-serif;
   color: #F3F4F9;
-  width: 99.5vw;
+  width: 100vw;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 body header {
   border-top: 8px solid #F83810;
@@ -63,6 +64,7 @@ body header #LogoMenu img, body header #LogoMenu svg {
   width: 100%;
   height: 100%;
   padding: 1vh 0;
+  margin-top: -0.5vh;
 }
 body header .searchBar_Block {
   width: 30vw;
@@ -724,7 +726,70 @@ body .Inicio .Dobra_Prods .btn_prods {
   z-index: 25;
 }
 body .Produtos {
-  padding-top: 12vh;
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+}
+body .Produtos .Header_main {
+  margin-top: 11vh;
+  width: 100%;
+  height: 6vh;
+  background: #BAF811;
+  display: flex;
+  flex-direction: row;
+  padding: 0.5vh 0;
+}
+body .Produtos .Header_main .list_Categs {
+  border-left: 1px solid #8000FF;
+  border-right: 1px solid #8000FF;
+  width: 12.5%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 1vw;
+  color: #131313;
+}
+body .Produtos .Header_main .list_Categs:first-child {
+  border-left: 0;
+}
+body .Produtos .Header_main .list_Categs:last-child {
+  border-right: 0;
+}
+body .Produtos .Header_main .list_Categs button {
+  all: unset;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body .Produtos .Header_main .list_Categs button img, body .Produtos .Header_main .list_Categs button svg {
+  position: absolute;
+  width: 1.6vw;
+  right: 1vw;
+}
+body .Produtos .Header_main .list_Categs button img path, body .Produtos .Header_main .list_Categs button svg path {
+  fill: #131313;
+}
+body .Produtos .Header_main .list_Categs .dropdown-menu {
+  width: 12.5%;
+  border-radius: 0;
+  background: #BAF811;
+  padding: 0.5vw;
+  outline: none;
+  border: none;
+}
+body .Produtos .Header_main .list_Categs .dropdown-menu .dropdown-item {
+  font-weight: 700;
+  padding-left: 0.5vw;
+  overflow: hidden;
+}
+body .Produtos .Header_main .list_Categs .dropdown-menu .dropdown-item:hover {
+  background: #BBBBBB;
 }
 body footer {
   margin: 0 5%;
