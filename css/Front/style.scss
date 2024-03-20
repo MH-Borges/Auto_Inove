@@ -331,6 +331,117 @@ body {
             padding: 0.5vw;
             margin: 0 0.5vw;
         }
+        .cart{
+            position: relative;
+            span{
+                position: absolute;
+                top: 18%;
+                right: 5%;
+                width: 1vw;
+                height: 1vw;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: $Second-font;
+                font-weight: 700;
+                font-size: 0.75vw;
+                color: $Branco;
+                background: $Abobora;
+                border-radius: 50%;
+            }
+            button{
+                all: unset;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                img, svg{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .dropdown-menu{
+                margin-top: 1vh;
+                margin-right: -0.5vw;
+                width: 20vw;
+                min-height: 10vh;
+                height: auto;
+                background: $Verde;
+                position: relative;
+                padding: 0.25vw;
+                padding-bottom: 3.5vh;
+                p{
+                    font-family: $Second-font;
+                    font-weight: 800;
+                    font-size: 1vw;
+                    color: $Preto;
+                    width: 100%;
+                    height: 10vh;
+                    text-align: center;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .itensCarrinho{
+                    width: 100%;
+                    height: 4.5vh;
+                    border-top: 1px solid $Preto;
+                    border-bottom: 1px solid $Preto;
+                    margin: 0.25vh 0;
+                    display: flex;
+                    position: relative;
+                    img, svg{
+                        width: 20%;
+                        height: 100%;
+                        object-fit: contain;
+                    }
+                    p{
+                        width: 60%;
+                        height: 100%;
+                        font-family: $Second-font;
+                        font-weight: 700;
+                        font-size: 0.75vw;
+                        color: $Preto;
+                        padding: 0.25vw; 
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        padding-right: 3vw;
+                    }
+                    span{
+                        all: unset;
+                        position: absolute;
+                        top: 0.25vh;
+                        right: 0.25vw;
+                        font-family: $Second-font;
+                        font-weight: 900;
+                        font-size: 0.5vw;
+                        color: $Preto;
+                    }
+                    &:first-child{ margin-top: 0; }
+                    &:last-child{ margin-bottom: 0; }
+
+                }
+                .btn-carrinho{
+                    position: absolute;
+                    bottom: 0.5vh;
+                    width: 95%;
+                    height: 2.5vh;
+                    font-family: $Second-font;
+                    font-weight: 900;
+                    color: $Branco;
+                    background: $Abobora;
+                    box-shadow: 3px 3px $Violeta;
+                    border-radius: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+        }
         .side_menu{
             height: 100vh;
             width: 20vw;
@@ -546,11 +657,11 @@ body {
             width: 100%;
             height: 107vh;
             position: relative;
-            outline: 1px solid blue;
             background: $Grafite;
             display: flex;
             flex-wrap: wrap;
             align-items: start;
+            z-index: 10;
             &::before{
                 content: '';
                 position: absolute;
@@ -601,6 +712,7 @@ body {
                 align-items: center;
                 justify-content: center;
                 padding: 1.75vw;
+                overflow: hidden;
                 .code{
                     position: absolute;
                     top: 0.25vw;
@@ -620,6 +732,8 @@ body {
                     border: none;
                     border-radius: 0.25vw;
                     background: $Abobora;
+                    z-index: 99 !important;
+                    transition: ease-in-out 0.1s all;
                     img, svg{
                         width: 100%;
                         height: 100%;
@@ -627,6 +741,12 @@ body {
                         path{
                             fill: $Preto;
                         }
+                    }
+                    &:hover{
+                        width: 2.25vw;
+                        height: 2.25vw;
+                        top: 0.5vw;
+                        right: 0.5vw;
                     }
                 }
                 img{
@@ -676,6 +796,29 @@ body {
                         margin-bottom: -0.75vh;
                     }
                 }
+                a{
+                    width: 7vw;
+                    height: 7vw;
+                    position: absolute;
+                    bottom: -3.5vw;
+                    right: -3.5vw;
+                    // bottom: 0;
+                    // right: 0;
+                    z-index: 15;
+                    transform: rotate(45deg);
+                    background: $Verde;
+
+                    img, svg{
+                        position: absolute;
+                        width: 20%;
+                        height: 20%;
+                        top: calc(40%);
+                        left: 0.7vw;
+                        path{
+                            fill: $Preto;
+                        }
+                    }
+                }
                 &::before{
                     content: '';
                     position: absolute;
@@ -684,6 +827,7 @@ body {
                     opacity: 0.15;
                     z-index: -1;
                 }
+               
             }
             .btn_prods{
                 position: absolute;
@@ -710,10 +854,69 @@ body {
         display: flex;
         align-items: center;
         padding: 0 2vw;
+        z-index: 99;
         span{
             font-size: 0.85vw;
             margin-left: auto;
             margin-right: 0.5vw;
+        }
+    }
+
+    .msg_Carrinho{
+        position: fixed;
+        // bottom: 2vh;
+        bottom: -25vh;
+        left: 1vw;
+        width: 25vw;
+        height: 20vh;
+        background: $Verde;
+        border-radius: 0.5vw;
+        z-index: 99999 !important;
+        transition: 0.2s ease-in-out all;
+        button{
+            all: unset;
+            position: absolute;
+            top: 0.15vw;
+            right: 0.15vw;
+            width: 1.5vw;
+            height: 1.5vw;
+            img, svg{
+                width: 100%;
+                height: 100%;
+                padding: 0.25vw;
+                path{
+                    fill: $Preto;
+                }
+            }
+        }
+        p{
+            width: 100%;
+            height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: $Second-font;
+            font-weight: 900;
+            font-size: 1.5vw;
+            text-align: center;
+            color: $Preto;
+        }
+        .progress {
+            width: 100%;
+            height: 3vh;
+        }
+        .progress-wrap {
+            height: 10%;
+            background: $Violeta;
+            overflow: hidden;
+            position: relative;
+            border-radius: 0;
+            .progress-bar {
+                background: $Cinza;
+                left: 0;
+                top: 0;
+                position: absolute;
+            }
         }
     }
 }

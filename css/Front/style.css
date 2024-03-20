@@ -363,6 +363,121 @@ body header .cart, body header .menu {
   padding: 0.5vw;
   margin: 0 0.5vw;
 }
+body header .cart {
+  position: relative;
+}
+body header .cart span {
+  position: absolute;
+  top: 18%;
+  right: 5%;
+  width: 1vw;
+  height: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 700;
+  font-size: 0.75vw;
+  color: #F3F4F9;
+  background: #F83810;
+  border-radius: 50%;
+}
+body header .cart button {
+  all: unset;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body header .cart button img, body header .cart button svg {
+  width: 100%;
+  height: 100%;
+}
+body header .cart .dropdown-menu {
+  margin-top: 1vh;
+  margin-right: -0.5vw;
+  width: 20vw;
+  min-height: 10vh;
+  height: auto;
+  background: #BAF811;
+  position: relative;
+  padding: 0.25vw;
+  padding-bottom: 3.5vh;
+}
+body header .cart .dropdown-menu p {
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 800;
+  font-size: 1vw;
+  color: #131313;
+  width: 100%;
+  height: 10vh;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body header .cart .dropdown-menu .itensCarrinho {
+  width: 100%;
+  height: 4.5vh;
+  border-top: 1px solid #131313;
+  border-bottom: 1px solid #131313;
+  margin: 0.25vh 0;
+  display: flex;
+  position: relative;
+}
+body header .cart .dropdown-menu .itensCarrinho img, body header .cart .dropdown-menu .itensCarrinho svg {
+  width: 20%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+body header .cart .dropdown-menu .itensCarrinho p {
+  width: 60%;
+  height: 100%;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 700;
+  font-size: 0.75vw;
+  color: #131313;
+  padding: 0.25vw;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 3vw;
+}
+body header .cart .dropdown-menu .itensCarrinho span {
+  all: unset;
+  position: absolute;
+  top: 0.25vh;
+  right: 0.25vw;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 0.5vw;
+  color: #131313;
+}
+body header .cart .dropdown-menu .itensCarrinho:first-child {
+  margin-top: 0;
+}
+body header .cart .dropdown-menu .itensCarrinho:last-child {
+  margin-bottom: 0;
+}
+body header .cart .dropdown-menu .btn-carrinho {
+  position: absolute;
+  bottom: 0.5vh;
+  width: 95%;
+  height: 2.5vh;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  color: #F3F4F9;
+  background: #F83810;
+  box-shadow: 3px 3px #8000FF;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 body header .side_menu {
   height: 100vh;
   width: 20vw;
@@ -578,11 +693,11 @@ body .Inicio .Dobra_Prods {
   width: 100%;
   height: 107vh;
   position: relative;
-  outline: 1px solid blue;
   background: #505050;
   display: flex;
   flex-wrap: wrap;
   align-items: start;
+  z-index: 10;
 }
 body .Inicio .Dobra_Prods::before {
   content: "";
@@ -634,6 +749,7 @@ body .Inicio .Dobra_Prods .produtos_recentes {
   align-items: center;
   justify-content: center;
   padding: 1.75vw;
+  overflow: hidden;
 }
 body .Inicio .Dobra_Prods .produtos_recentes .code {
   position: absolute;
@@ -654,6 +770,8 @@ body .Inicio .Dobra_Prods .produtos_recentes button {
   border: none;
   border-radius: 0.25vw;
   background: #F83810;
+  z-index: 99 !important;
+  transition: ease-in-out 0.1s all;
 }
 body .Inicio .Dobra_Prods .produtos_recentes button img, body .Inicio .Dobra_Prods .produtos_recentes button svg {
   width: 100%;
@@ -662,6 +780,12 @@ body .Inicio .Dobra_Prods .produtos_recentes button img, body .Inicio .Dobra_Pro
 }
 body .Inicio .Dobra_Prods .produtos_recentes button img path, body .Inicio .Dobra_Prods .produtos_recentes button svg path {
   fill: #131313;
+}
+body .Inicio .Dobra_Prods .produtos_recentes button:hover {
+  width: 2.25vw;
+  height: 2.25vw;
+  top: 0.5vw;
+  right: 0.5vw;
 }
 body .Inicio .Dobra_Prods .produtos_recentes img {
   width: 100%;
@@ -711,6 +835,26 @@ body .Inicio .Dobra_Prods .produtos_recentes p span {
   margin-right: 0.25vw;
   margin-bottom: -0.75vh;
 }
+body .Inicio .Dobra_Prods .produtos_recentes a {
+  width: 7vw;
+  height: 7vw;
+  position: absolute;
+  bottom: -3.5vw;
+  right: -3.5vw;
+  z-index: 15;
+  transform: rotate(45deg);
+  background: #BAF811;
+}
+body .Inicio .Dobra_Prods .produtos_recentes a img, body .Inicio .Dobra_Prods .produtos_recentes a svg {
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  top: 40%;
+  left: 0.7vw;
+}
+body .Inicio .Dobra_Prods .produtos_recentes a img path, body .Inicio .Dobra_Prods .produtos_recentes a svg path {
+  fill: #131313;
+}
 body .Inicio .Dobra_Prods .produtos_recentes::before {
   content: "";
   position: absolute;
@@ -751,6 +895,7 @@ body .Produtos .Header_main .list_Categs {
   font-weight: 900;
   font-size: 1vw;
   color: #131313;
+  position: relative;
 }
 body .Produtos .Header_main .list_Categs:first-child {
   border-left: 0;
@@ -758,7 +903,7 @@ body .Produtos .Header_main .list_Categs:first-child {
 body .Produtos .Header_main .list_Categs:last-child {
   border-right: 0;
 }
-body .Produtos .Header_main .list_Categs button {
+body .Produtos .Header_main .list_Categs .categ_Subcategs, body .Produtos .Header_main .list_Categs button {
   all: unset;
   width: 100%;
   height: 100%;
@@ -767,16 +912,16 @@ body .Produtos .Header_main .list_Categs button {
   align-items: center;
   justify-content: center;
 }
-body .Produtos .Header_main .list_Categs button img, body .Produtos .Header_main .list_Categs button svg {
+body .Produtos .Header_main .list_Categs .categ_Subcategs img, body .Produtos .Header_main .list_Categs .categ_Subcategs svg, body .Produtos .Header_main .list_Categs button img, body .Produtos .Header_main .list_Categs button svg {
   position: absolute;
-  width: 1.6vw;
+  width: 1.5vw;
   right: 1vw;
 }
-body .Produtos .Header_main .list_Categs button img path, body .Produtos .Header_main .list_Categs button svg path {
+body .Produtos .Header_main .list_Categs .categ_Subcategs img path, body .Produtos .Header_main .list_Categs .categ_Subcategs svg path, body .Produtos .Header_main .list_Categs button img path, body .Produtos .Header_main .list_Categs button svg path {
   fill: #131313;
 }
 body .Produtos .Header_main .list_Categs .dropdown-menu {
-  width: 12.5%;
+  width: 12vw;
   border-radius: 0;
   background: #BAF811;
   padding: 0.5vw;
@@ -790,6 +935,100 @@ body .Produtos .Header_main .list_Categs .dropdown-menu .dropdown-item {
 }
 body .Produtos .Header_main .list_Categs .dropdown-menu .dropdown-item:hover {
   background: #BBBBBB;
+}
+body .Produtos .Header_main .list_Categs .showDropdown {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 100%;
+  left: 0px;
+  will-change: transform;
+}
+body .Produtos .SubHeader {
+  width: 100%;
+  height: 15vh;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: right;
+  padding: 2vh 1.5vw;
+}
+body .Produtos .SubHeader nav {
+  all: unset;
+  position: absolute;
+  left: 1vw;
+  top: 1vh;
+  height: 4.5vh;
+}
+body .Produtos .SubHeader nav .breadcrumb {
+  background: none;
+}
+body .Produtos .SubHeader nav .breadcrumb .breadcrumb-item {
+  max-width: 8vw;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 400;
+  font-size: 0.75vw;
+  color: #BAF811 !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body .Produtos .SubHeader nav .breadcrumb .breadcrumb-item a {
+  font-family: "Be Vietnam Pro", sans-serif;
+  color: #F3F4F9;
+  font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body .Produtos .SubHeader nav .breadcrumb .breadcrumb-item a:hover {
+  color: #8000FF;
+}
+body .Produtos .SubHeader nav .breadcrumb .breadcrumb-item::before {
+  content: ">";
+}
+body .Produtos .SubHeader nav .breadcrumb .breadcrumb-item:first-child::before {
+  content: "";
+}
+body .Produtos .SubHeader h1 {
+  margin-top: 4vh;
+  width: 40vw;
+  height: 55%;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 3vw;
+  color: #F3F4F9;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body .Produtos .SubHeader h3 {
+  position: absolute;
+  right: 1.5vw;
+  top: 25%;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 500;
+  font-size: 0.75vw;
+  color: #F3F4F9;
+}
+body .Produtos .Produtos_Block {
+  display: flex;
+  flex-wrap: wrap;
+}
+body .Produtos .Produtos_Block .Sub_menu {
+  outline: 1px solid red;
+  width: 20%;
+  min-height: 68vh;
+  height: auto;
+  padding-bottom: 7vh;
+}
+body .Produtos .Produtos_Block .Produtos_list {
+  outline: 1px solid blue;
+  width: 80%;
+  min-height: 68vh;
+  height: auto;
+  padding-bottom: 7vh;
 }
 body footer {
   margin: 0 5%;
@@ -805,9 +1044,66 @@ body footer {
   display: flex;
   align-items: center;
   padding: 0 2vw;
+  z-index: 99;
 }
 body footer span {
   font-size: 0.85vw;
   margin-left: auto;
   margin-right: 0.5vw;
+}
+body .msg_Carrinho {
+  position: fixed;
+  bottom: -25vh;
+  left: 1vw;
+  width: 25vw;
+  height: 20vh;
+  background: #BAF811;
+  border-radius: 0.5vw;
+  z-index: 99999 !important;
+  transition: 0.2s ease-in-out all;
+}
+body .msg_Carrinho button {
+  all: unset;
+  position: absolute;
+  top: 0.15vw;
+  right: 0.15vw;
+  width: 1.5vw;
+  height: 1.5vw;
+}
+body .msg_Carrinho button img, body .msg_Carrinho button svg {
+  width: 100%;
+  height: 100%;
+  padding: 0.25vw;
+}
+body .msg_Carrinho button img path, body .msg_Carrinho button svg path {
+  fill: #131313;
+}
+body .msg_Carrinho p {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 1.5vw;
+  text-align: center;
+  color: #131313;
+}
+body .msg_Carrinho .progress {
+  width: 100%;
+  height: 3vh;
+}
+body .msg_Carrinho .progress-wrap {
+  height: 10%;
+  background: #8000FF;
+  overflow: hidden;
+  position: relative;
+  border-radius: 0;
+}
+body .msg_Carrinho .progress-wrap .progress-bar {
+  background: #BBBBBB;
+  left: 0;
+  top: 0;
+  position: absolute;
 }/*# sourceMappingURL=style.css.map */

@@ -286,9 +286,10 @@
 
                         $selectBox = "$categ_Atrelada";
                     }else{
-                            $titulo_Subcateg = "Nova sub-categoria!"; 
-                            $btn_Subcateg = "Adicionar";
-                            $selectBox = "Selecione a categoria";
+                        $categ_Atrelada = '';
+                        $titulo_Subcateg = "Nova sub-categoria!"; 
+                        $btn_Subcateg = "Adicionar";
+                        $selectBox = "Selecione a categoria";
                     }
                 ?>
 

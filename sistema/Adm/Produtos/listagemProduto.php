@@ -853,7 +853,7 @@
     function carregarImgProduto(){ carregarImagem('img_Produto_Input', 'target_imgProduto', "../../assets/icons/placeholder.svg", 'img_produto_modal'); }
     
     //MASCARA PARA INSERÇÃO DE VALOR
-    $('#valor_Produto').mask('000.000.000.000.000,00', {reverse: true});
+    $('#valor_Produto').mask('000.000.000.000.000.00', {reverse: true});
    
     //LISTAGENS DINAMICAS 
     //// Subcategorias

@@ -22,9 +22,10 @@
             font-weight: 900;
             font-size: 1vw;
             color: $Preto;
+            position: relative;
             &:first-child{ border-left: 0; }
             &:last-child{ border-right: 0; }
-            button{
+            .categ_Subcategs, button{
                 all: unset;
                 width: 100%;
                 height: 100%;
@@ -34,7 +35,7 @@
                 justify-content: center;
                 img, svg{
                     position: absolute;
-                    width: 1.6vw;
+                    width: 1.5vw;
                     right: 1vw;
                     path{
                         fill: $Preto;
@@ -42,7 +43,7 @@
                 }
             }
             .dropdown-menu{
-                width: 12.5%;
+                width: 12vw;
                 border-radius: 0;
                 background: $Verde;
                 padding: 0.5vw;
@@ -57,7 +58,103 @@
                     }
                 }
             }
+            .showDropdown{
+                width: 100%;
+                height: auto;
+                position: absolute; 
+                top: 100%; 
+                left: 0px; 
+                will-change: transform;
+            }
         }
-       
+    }
+    .SubHeader{
+        width: 100%;
+        height: 15vh;
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: right;
+        padding: 2vh 1.5vw;
+        nav{
+            all: unset;
+            position: absolute;
+            left: 1vw;
+            top: 1vh;
+            height: 4.5vh;
+            .breadcrumb{
+                background: none;
+                .breadcrumb-item{
+                    max-width: 8vw;
+                    font-family: $Second-font;
+                    font-weight: 400;
+                    font-size: 0.75vw;
+                    color: $Verde !important;
+                    white-space: nowrap;                  
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    a{
+                        font-family: $Second-font;
+                        color: $Branco;
+                        font-weight: 900;
+                        white-space: nowrap;                  
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        &:hover{
+                            color: $Violeta;
+                        }
+                    }
+                    &::before{
+                        content: '>';
+                    }
+                    &:first-child{
+                        &::before{
+                            content: '';
+                        }
+                    }
+                }
+            }
+        }
+        h1{
+            margin-top: 4vh;
+            width: 40vw;
+            height: 55%;
+            font-family: $Main-font;
+            font-weight: 800;
+            font-size: 3vw;
+            color: $Branco;
+            text-align: right;
+            white-space: nowrap;                  
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        h3{
+            position: absolute;
+            right: 1.5vw;
+            top: 25%;
+            font-family: $Second-font;
+            font-weight: 500;
+            font-size: 0.75vw;
+            color: $Branco;
+        }
+
+    }
+    .Produtos_Block{
+        display: flex;
+        flex-wrap: wrap;
+        .Sub_menu{
+            outline: 1px solid red;
+            width: 20%;
+            min-height: 68vh;
+            height: auto;
+            padding-bottom: 7vh;
+        }
+        .Produtos_list{
+            outline: 1px solid blue;
+            width: 80%;
+            min-height: 68vh;
+            height: auto;
+            padding-bottom: 7vh;
+        }
     }
 }

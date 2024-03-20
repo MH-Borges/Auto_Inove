@@ -37,6 +37,11 @@
         }
     }
 
+    if(str_contains($nome_categ, '_') || str_contains($nome_categ_edit, '_')) {
+        echo "O caractere '_' não pode ser utilizado";
+        exit();
+    }
+
 
     // ===== SCRIPTS PARA SUBIR BANNER WEB E MOBILE PARA O BANCO =====
     function uploadImage($inputName, $targetDir, $defaultImage) {

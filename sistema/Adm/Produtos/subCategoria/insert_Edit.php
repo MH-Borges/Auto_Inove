@@ -28,6 +28,11 @@
         exit();
     }
 
+    if(str_contains($nome_Subcateg, '_') || str_contains($nome_Subcateg_edit, '_')) {
+        echo "O caractere '_' não pode ser utilizado";
+        exit();
+    }
+
     //ATUALIZAÇÕES DE VARIAVEIS
     if($date_criacao_Subcateg_edit == "" && $date_atual_Subcateg_edit == ""){
         $data_criacao = date('d/m/Y');

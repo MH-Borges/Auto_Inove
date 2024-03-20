@@ -23,6 +23,11 @@
         }
     }
 
+    if(str_contains($nome_Codigo, '_') || str_contains($nome_Codigo_edit, '_')) {
+        echo "O caractere '_' não pode ser utilizado";
+        exit();
+    }
+
 
     //ATUALIZAÇÕES DE VARIAVEIS
     if($date_criacao_Codigo_edit == "" && $date_atual_Codigo_edit == ""){

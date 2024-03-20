@@ -102,6 +102,11 @@
         $ItemAtr4 = '';
     }
 
+    if(str_contains($nome, '_')) {
+        echo "O caractere '_' não pode ser utilizado";
+        exit();
+    }
+
     //ATUALIZAÇÕES DE VARIAVEIS
     if($mercado_livre !== "" && $mercado_livre !== null){
         if($mercado_livre[0] == 'h' && $mercado_livre[1] == 't' && $mercado_livre[2] == 't' && $mercado_livre[4] == 's' ){

@@ -78,8 +78,17 @@
             </div>
         </div>
 
-        <img class="cart" src="assets/icons/cart.svg" onload="SVGInject(this)">
-        <span></span>
+        <div class="cart">
+            <span class='CartNotf hide'></span>
+            <button type='button' data-toggle='dropdown' aria-expanded='false'>
+                <img  src="assets/icons/cart.svg" onload="SVGInject(this)">
+            </button>
+            <div class='dropdown-menu dropdown-menu-right dropdownCarrinho'>
+                <p>Carrinho Vazio</p>
+                <a class='btn-carrinho hide' href="./carrinho">Ver pagina de carrinho</a>
+            </div>
+        </div>
+
         <img class="menu" src="assets/icons/menu.svg" onload="SVGInject(this)" onclick="menuToggle()">
         <div class="side_menu hide">
             <img class="close_menu" src="assets/icons/close.svg" onclick="menuToggle()">
@@ -108,13 +117,18 @@
                     $img_categoria = $dados[$i]['img'];
                     $nome_categoria = $dados[$i]['nome'];
 
+                    $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                        strtr(utf8_decode(trim($nome_categoria)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                        "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                    $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+
                     if($img_categoria == "placeholder.svg" || $img_categoria == ""){
                         $img_categoria = "<img class='img_categoria' src='assets/icons/placeholder.svg'>";
                     }else{
                         $img_categoria = "<img class='img_categoria' src='assets/categorias/$img_categoria'>";
                     }
                     echo "
-                        <a class='categoria' href='#'>
+                        <a class='categoria' href='produtos_".$nome_url."'>
                             ".$img_categoria."
                             <p>".$nome_categoria."</p>
                         </a>
@@ -130,12 +144,11 @@
                 $query = $pdo->query("SELECT * FROM produtos ORDER BY id DESC LIMIT 4");
                 $dados = $query->fetchAll(PDO::FETCH_ASSOC);
                 for ($i=0; $i < count($dados); $i++) { 
-                        
+                    $id = $dados[$i]['id'];
                     $codigo = $dados[$i]['codigo'];
                     $img = $dados[$i]['img'];
                     $nome = $dados[$i]['nome'];
                     $valor = $dados[$i]['valor'];
-
 
                     if($img == "placeholder.jpg" || $img == ""){
                         $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
@@ -143,18 +156,24 @@
                         $img_prod = "<img src='assets/produtos/$img'>";
                     }
 
-                    echo "
-                        <a class='produtos_recentes' href='#'>
+                    $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                        strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                        "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                    $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+
+                    $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'"';
+
+                    echo "<div class='produtos_recentes'>
                             <span class='code'>".$codigo."</span>
-                            <button><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
+                            <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
                             ".$img_prod."
                             <h4>".$nome."</h4>
                             <p><span>R$</span>".$valor."</p>
-                        </a>
-                    ";
+                            <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
+                        </div>";
                 }
             ?>
-            <a class="btn btn_prods" href="#">Veja mais</a>
+            <a class="btn btn_prods" href="./produtos">Veja mais</a>
         </section>
     </main>
     
@@ -163,6 +182,14 @@
         <span>Desenvolvido por:</span>
         <a href="https://www.universofarol.com.br"><img src="assets/icons/Universo_Farol.svg" onload="SVGInject(this)"></a>
     </footer>
+
+    <div class='msg_Carrinho hide'>
+        <button type='button' onclick='document.querySelector(".msg_Carrinho").classList.add("hide")'><img src="assets/icons/close.svg" onload="SVGInject(this)"></button>
+        <p>1 item foi adicionado ao carrinho</p>
+        <div class="progress-wrap progress" data-progress-percent="100">
+            <div class="progress-bar progress"></div>
+        </div>
+    </div>
 
     <div class="hide searchBar_List">
         <?php
@@ -185,8 +212,7 @@
                     </div>
                 ";
             }
-        ?>
-        <?php
+        
             $query = $pdo->query("SELECT * FROM categorias ORDER BY id DESC");
             $dados = $query->fetchAll(PDO::FETCH_ASSOC);
             for ($i=0; $i < count($dados); $i++) { 
@@ -208,8 +234,7 @@
                     </div>
                 ";
             }
-        ?>
-        <?php
+        
             $query = $pdo->query("SELECT * FROM produtos ORDER BY id DESC");
             $dados = $query->fetchAll(PDO::FETCH_ASSOC);
             for ($i=0; $i < count($dados); $i++) { 

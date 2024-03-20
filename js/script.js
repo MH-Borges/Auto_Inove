@@ -1,6 +1,44 @@
 $(document).ready(function () {
     let codigo = Cookies.get('Cookie_Codigo');
     if(codigo !== ''){ $('#selected_val_Codigos').text(codigo); }
+
+    //atualiza valores carrinho
+    if(Cookies.get('Carrinho') !== undefined && Cookies.get('Carrinho') !== ''){
+        let CarrinhoCookie = Cookies.get('Carrinho');
+        
+        const CookieToArray = CarrinhoCookie.split("&").map(function(item) {
+            var obj = {};
+            item.split("_").forEach(function(pair) {
+                var parts = pair.split(":");
+                obj[parts[0]] = parts[1];
+            });
+            return obj;
+        });
+
+        var itensCarrinho = 0;
+        $('.dropdownCarrinho').text(' ');
+
+        CookieToArray.forEach(item => { 
+            itensCarrinho = itensCarrinho + Number(item.quant); 
+            
+            if(item.imgProd == "placeholder.jpg" || item.imgProd == ""){
+                var img = "<img src='assets/produtos/placeholder.jpg'>";
+            }else{
+                var img = `<img src='assets/produtos/${item.imgProd}'>`;
+            }
+
+            $('.dropdownCarrinho').append(`<a class='itensCarrinho' href='produto_${item.nomeProd}'>${img}<p>${item.nomeProd}</p><span>Quant:${item.quant}</span></a>`);
+
+        });
+
+        if(itensCarrinho !== 0){
+            $('.CartNotf').removeClass('hide');
+            $('.CartNotf').text(itensCarrinho);
+        }
+
+        $('.dropdownCarrinho').append(`<a class='btn-carrinho' href="./carrinho">Ver pagina de carrinho</a>`);
+
+    }
 });
 
 //FUNÇÃO DE SELETORES CUSTOMIZADOS
@@ -20,7 +58,7 @@ function OptionSelection(selectedValueId, optionsButtonId, optionInputsClass) {
 //////// PENSAR COM CARINHO EM TODA A LOGICA DE CODIGOS E RESULTADO DE PESQUISA
 function codigoRedirect(codigo){
     Cookies.set('Cookie_Codigo', codigo, {
-        expires: 1
+        expires: 0.01
     });
     window.location.href = `./produtos`;
 }
@@ -110,3 +148,132 @@ window.addEventListener('scroll', function() {
         $('header').removeClass('back_dark');
     }
 });
+
+//CARRINHO
+function moveProgressBar() {
+    var getPercent = ($('.progress-wrap').data('progress-percent') / 100);
+    var getProgressWrapWidth = $('.progress-wrap').width();
+    var progressTotal = getPercent * getProgressWrapWidth;
+    var animationLength = 3000;
+
+    $('.progress-bar').stop().animate({ left: progressTotal }, animationLength);
+    
+    setTimeout(() => {
+        $('.progress-bar').stop().animate({ left: 0 }, 0);
+    }, 3500);
+}
+
+function addCarrinho(idProd, imgProd, nomeProd){
+    if(Cookies.get('Carrinho') !== undefined && Cookies.get('Carrinho') !== ''){
+        let CarrinhoCookie = Cookies.get('Carrinho');
+        //string to array
+        const CookieToArray = CarrinhoCookie.split("&").map(function(item) {
+            var obj = {};
+            item.split("_").forEach(function(pair) {
+                var parts = pair.split(":");
+                obj[parts[0]] = parts[1];
+            });
+            return obj;
+        });
+
+        var updated = false;
+        CookieToArray.forEach(item => {
+            if(item.idProd === idProd.toString()) {
+                let newValue = Number(item.quant) + 1;
+                item.quant = newValue;
+                updated = true;
+            }
+        });
+
+        if(!updated){
+            CookieToArray.push({
+                idProd: `${idProd}`,
+                quant: '1',
+                imgProd: imgProd,
+                nomeProd: nomeProd
+            })
+        }
+
+        //array to string
+        var CarrinhoToString = CookieToArray.map(function(obj) {
+            return 'idProd:'+obj.idProd +'_quant:'+ obj.quant+'_imgProd:'+ obj.imgProd+'_nomeProd:'+obj.nomeProd;
+        }).join('&');
+
+        Cookies.set('Carrinho', CarrinhoToString, {
+            expires: 1
+        });
+
+        var itensCarrinho = 0;
+        $('.dropdownCarrinho').text(' ');
+
+        CookieToArray.forEach(item => { 
+            itensCarrinho = itensCarrinho + Number(item.quant); 
+
+            if(item.imgProd == "placeholder.jpg" || item.imgProd == ""){
+                var img = "<img src='assets/produtos/placeholder.jpg'>";
+            }else{
+                var img = `<img src='assets/produtos/${item.imgProd}'>`;
+            }
+
+            $('.dropdownCarrinho').append(`<a class='itensCarrinho' href='produto_${item.nomeProd}'>${img}<p>${item.nomeProd}</p><span>Quant:${item.quant}</span></a>`);
+
+        });
+
+        if(itensCarrinho !== 0){
+            $('.CartNotf').removeClass('hide');
+            $('.CartNotf').text(itensCarrinho);
+        }
+
+        $('.dropdownCarrinho').append(`<a class='btn-carrinho' href="./carrinho">Ver pagina de carrinho</a>`);
+    
+        //msg que foi adicionado item ao carrinho
+        $('.msg_Carrinho').removeClass('hide');
+        $(".msg_Carrinho").css("bottom", "2vh");
+        moveProgressBar();
+        setTimeout(() => {
+            $('.msg_Carrinho').addClass('hide');
+            $(".msg_Carrinho").css("bottom", "-25vh"); 
+        }, 3200);
+    }
+    else{
+        const carrinho = [];
+
+        carrinho.push({
+            idProd: idProd,
+            quant: 1,
+            imgProd: imgProd,
+            nomeProd: nomeProd
+        });
+
+        //array to string
+        var CarrinhoToString = carrinho.map(function(obj) {
+            return 'idProd:'+obj.idProd +'_quant:'+ obj.quant+'_imgProd:'+ obj.imgProd+'_nomeProd:'+obj.nomeProd;
+        }).join(';');
+
+        Cookies.set('Carrinho', CarrinhoToString, {
+            expires: 1
+        });
+
+        $('.CartNotf').removeClass('hide');
+        $('.CartNotf').text(1);
+
+        if(imgProd == "placeholder.jpg" || imgProd == ""){
+            var img = "<img src='assets/produtos/placeholder.jpg'>";
+        }else{
+            var img = `<img src='assets/produtos/${imgProd}'>`;
+        }
+
+        $('.dropdownCarrinho').text(' ');
+        $('.dropdownCarrinho').append(`<a class='itensCarrinho' href='produto_${nomeProd}'>${img}<p>${nomeProd}</p><span>Quant:1</span></a>`);
+        $('.dropdownCarrinho').append(`<a class='btn-carrinho' href="./carrinho">Ver pagina de carrinho</a>`);
+    
+        //msg que foi adicionado item ao carrinho
+        $('.msg_Carrinho').removeClass('hide');
+        $(".msg_Carrinho").css("bottom", "2vh");
+        moveProgressBar();
+        setTimeout(() => {
+            $('.msg_Carrinho').addClass('hide');
+            $(".msg_Carrinho").css("bottom", "-25vh"); 
+        }, 3200);
+    }
+}
