@@ -1,0 +1,186 @@
+.Carrinho{
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    .carrinho_Block{
+        width: 100%;
+        height: 83vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-top: 10vh;
+        margin-bottom: 7vh;
+        padding: 0 2vw;
+        //se o carrinho estiver vazio
+        h3{
+            font-family: $Main-font;
+            font-weight: 800;
+            font-size: 5vw;
+            color: $Branco;
+            padding: 1vh 0;
+            margin-top: -2vh;
+        }
+        .linkTelaVazia{
+            margin-top: 3vh;
+            font-family: $Second-font;
+            font-weight: 700;
+            font-size: 1vw;
+            color: $Verde;
+            padding: 0.5vh 0;
+            &:hover{
+                color: $Abobora;
+            }
+        }
+        //se o carrinho estiver cheio
+        .headerCarrinho{
+            width: 100%;
+            height: 8vh;
+            display: flex;
+            flex-direction: row;
+            border-bottom: 3px solid $Abobora;
+            h2{
+                height: 100%;
+                display: flex;
+                align-items: flex-end;
+                font-family: $Main-font;
+                font-weight: 800;
+                font-size: 2vw;
+                color: $Branco;
+                padding-bottom: 0.5vh;
+                &:nth-child(1){
+                    width: 50%;
+                    padding-left: 1vw;
+                }
+                &:nth-child(2){
+                    width: 20%;
+                    justify-content: center;
+                }
+                &:nth-child(3){
+                    width: 30%;
+                    justify-content: right;
+                    padding-right: 1vw;
+                }
+            }
+        }
+        .itens_block{
+            width: 100%;
+            height: 65vh;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            padding: 1vh 0;
+            display: flex;
+            flex-direction: column;
+            padding-right: 0.5vw;
+            .itenCarrinho{
+                width: 100%;
+                height: 10vh;
+                margin: 0.5vh 0;
+                border-top: 1px solid $Verde;
+                border-bottom: 1px solid $Verde;
+                position: relative;
+                display: flex;
+                flex-direction: row;
+                &::before{
+                    content: '';
+                    position: absolute;
+                    width: 7%;
+                    height: 100%;
+                    background: $Cinza;
+                    opacity: 0.05;
+                    top: 0;
+                    left: 0;
+                }
+                img{
+                    width: 7%;
+                    height: 100%;
+                    padding: 0.5vw;
+                    object-fit: contain;
+                    position: relative;
+                }
+                .nomeProd{
+                    width: 43.5%;
+                    height: 100%;
+                    padding-left: 1vw;
+                    padding-top: 1vh;
+                    font-family: $Second-font;
+                    font-weight: 900;
+                    font-size: 1vw;
+                    color: $Branco;
+                    -webkit-line-clamp: 3;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    &:hover{
+                        color: $Verde;
+                    }
+                }
+                h4{
+                    width: 20%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-family: $Second-font;
+                    font-weight: 700;
+                    font-size: 1.25vw;
+                    color: $Branco;
+                }
+                .AddRemove{
+                    width: 29.5%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: right;
+                    padding-right: 1.75vw;
+                    .remove{
+                        all: unset;
+                        width: 0; 
+                        height: 0; 
+                        border-left: 15px solid transparent;
+                        border-right: 15px solid transparent;
+                        border-top: 15px solid $Abobora;
+                    }
+                    .quant{
+                        width: 3vw;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-family: $Second-font;
+                        font-weight: 900;
+                        font-size: 1.25vw;
+                        color: $Branco;
+                    }
+                    .add{
+                        all: unset;
+                        width: 0; 
+                        height: 0; 
+                        border-left: 15px solid transparent;
+                        border-right: 15px solid transparent;
+                        border-bottom: 15px solid $Abobora;
+                    }
+                }
+            }
+        }
+        .linkfinal{
+            all: unset;
+            position: absolute;
+            bottom: 2.5vh;
+            right: 3vw;
+            height: 5vh;
+            width: 15vw;
+            background: $Abobora;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: $Second-font;
+            font-weight: 900;
+            font-size: 1vw;
+            color: $Branco;
+            border-radius: 0.5vw;
+            &:hover{
+                color: $Verde;
+            }
+        }
+    }
+}

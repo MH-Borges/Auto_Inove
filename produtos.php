@@ -22,7 +22,7 @@ if($nome_get !== '' && $nome_get !== NULL){
             $categAtrelada = $dados[0]['categ_Atrelada'];
             $tipo = 'Sub-Categoria';
             $breadcrumbs = '<li class="breadcrumb-item"><a href="./">Inicio</a></li>
-                            <li class="breadcrumb-item"><a href="./Categorias">'.$categAtrelada.'</a></li>
+                            <li class="breadcrumb-item"><a href="./categorias">'.$categAtrelada.'</a></li>
                             <li class="breadcrumb-item active" aria-current="page">'.$nome_clean.'</li>';
 
         }
@@ -63,7 +63,7 @@ if($nome_get === 'MaisVendidos' || str_contains($nome_get , 'C_MaisVendidos') ||
             $categAtrelada = $dados[0]['categ_Atrelada'];
             $tipo = 'Sub-Categoria';
             $breadcrumbs = '<li class="breadcrumb-item"><a href="./">Inicio</a></li>
-                            <li class="breadcrumb-item"><a href="./Categorias">'.$categAtrelada.'</a></li>
+                            <li class="breadcrumb-item"><a href="./categorias">'.$categAtrelada.'</a></li>
                             <li class="breadcrumb-item active" aria-current="page">'.$nome_clean.'</li>';
         }
 
@@ -98,7 +98,7 @@ if($nome_get === 'MenorPreco' || str_contains($nome_get , 'C_MenorPreco') || str
             $categAtrelada = $dados[0]['categ_Atrelada'];
             $tipo = 'Sub-Categoria';
             $breadcrumbs = '<li class="breadcrumb-item"><a href="./">Inicio</a></li>
-                            <li class="breadcrumb-item"><a href="./Categorias">'.$categAtrelada.'</a></li>
+                            <li class="breadcrumb-item"><a href="./categorias">'.$categAtrelada.'</a></li>
                             <li class="breadcrumb-item active" aria-current="page">'.$nome_clean.'</li>';
         }
 
@@ -135,7 +135,7 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
             $categAtrelada = $dados[0]['categ_Atrelada'];
             $tipo = 'Sub-Categoria';
             $breadcrumbs = '<li class="breadcrumb-item"><a href="./">Inicio</a></li>
-                            <li class="breadcrumb-item"><a href="./Categorias">'.$categAtrelada.'</a></li>
+                            <li class="breadcrumb-item"><a href="./categorias">'.$categAtrelada.'</a></li>
                             <li class="breadcrumb-item active" aria-current="page">'.$nome_clean.'</li>';
         }
 
@@ -205,14 +205,34 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
                     <?php 
                         $query = $pdo->query("SELECT * FROM codigos ORDER BY id DESC");
                         $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $k=0;
                         for ($j=0; $j < count($dados); $j++) {
                             $nome_codigos = $dados[$j]['nome'];
-                            echo "
-                                <li class='option_Codigos' onclick='codigoRedirect(`".$nome_codigos."`)'>
-                                    <input type='radio' name='codigo_Produto' value='$nome_codigos' data-label='$nome_codigos'>
-                                    <span class='label'>$nome_codigos</span>
-                                </li>
-                            ";
+                            $query2 = $pdo->query("SELECT * FROM produtos where codigo = '$nome_codigos'");
+                            $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                            for ($i=0; $i < count($dados2); $i++) {
+                                $statusProd = $dados2[$i]['status_prod'];
+                                $categ = $dados2[$i]['categoria'];
+                                $query3 = $pdo->query("SELECT * FROM categorias where nome = '$categ'");
+                                $dados3 = $query3->fetchAll(PDO::FETCH_ASSOC);
+                                $statusCateg = $dados3[0]['status_categ'];
+                                if($statusProd === 'ativo' && $statusCateg === 'ativo'){
+                                    $codigo = $dados2[$i]['codigo'];
+                                    if($codigo === $nome_codigos){
+                                        $k++;
+                                    }
+                                }
+                            }
+
+                            if($k != 0){
+                                echo "
+                                    <li class='option_Codigos' onclick='codigoRedirect(`".$nome_codigos."`)'>
+                                        <input type='radio' name='codigo_Produto' value='$nome_codigos' data-label='$nome_codigos'>
+                                        <span class='label'>$nome_codigos</span>
+                                    </li>
+                                ";
+                            }
+                            $k=0;
                         }
                     ?>
                 </ul>
@@ -332,7 +352,6 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
 
             <h1 id='titulo'><?php echo $nome_clean ?></h1>
             <h3 id='tipoBusca'><?php echo $tipo ?></h3>
-
         </section>
 
         <section class="Produtos_Block">
@@ -347,7 +366,7 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
                     
                     
                         if(str_contains($nome_get, 'C_MaisVendidos') || str_contains($nome_get, 'S_MaisVendidos')){ 
-                            echo "<button class='filtros'>"; 
+                            echo "<button class='filtros ativo'>"; 
                         }
                         else{
                             echo "<button class='filtros' onclick='Flitro(`MaisVendidos`)'>";
@@ -361,7 +380,7 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
     
                     <?php
                         if(str_contains($nome_get, 'C_MenorPreco') || str_contains($nome_get, 'S_MenorPreco')){ 
-                            echo "<button class='filtros'>"; 
+                            echo "<button class='filtros ativo'>"; 
                         }
                         else{
                             echo "<button class='filtros' onclick='Flitro(`MenorPreco`)'>";
@@ -374,7 +393,7 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
     
                     <?php
                         if(str_contains($nome_get, 'C_MaiorPreco') || str_contains($nome_get, 'S_MaiorPreco')){ 
-                            echo "<button class='filtros'>"; 
+                            echo "<button class='filtros ativo'>"; 
                         }
                         else{
                             echo "<button class='filtros' onclick='Flitro(`MaiorPreco`)'>";
@@ -399,16 +418,23 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
                                     $dados = $query->fetchAll(PDO::FETCH_ASSOC);
                                     for ($i=0; $i < count($dados); $i++) { 
                                         $nome_categoria = $dados[$i]['nome'];
-                                        $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
-                                            strtr(utf8_decode(trim($nome_categoria)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
-                                            "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
-                                        $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+                                        $categAtrelada = $dados[$i]['categ_Atrelada'];
 
-                                        echo "
-                                            <a href='produtos_".$nome_url."'>
-                                                <p>".$nome_categoria."</p>
-                                            </a>
-                                        ";
+                                        $query2 = $pdo->query("SELECT * FROM categorias where nome = '$categAtrelada'");
+                                        $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                                        $status = $dados2[0]['status_categ'];
+                                        if($status === 'ativo'){
+                                            $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                                                strtr(utf8_decode(trim($nome_categoria)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                                                "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                                            $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+    
+                                            echo "
+                                                <a href='produtos_".$nome_url."'>
+                                                    <p>".$nome_categoria."</p>
+                                                </a>
+                                            ";
+                                        }
                                     }
 
                         echo "</div>
@@ -450,16 +476,36 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
                         <img class='setaCodigo' src='assets/icons/seta.svg' onload='SVGInject(this)'>
                     </button>
                     <div class="collapse" id="Codigos_list">
-                        <?php
+                        <?php 
                             $query = $pdo->query("SELECT * FROM codigos ORDER BY id DESC");
                             $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                            $k=0;
                             for ($j=0; $j < count($dados); $j++) {
                                 $nome_codigos = $dados[$j]['nome'];
-                                echo "
-                                    <a onclick='codigoRedirect(`".$nome_codigos."`)'>
-                                        <p>$nome_codigos</p>
-                                    </a>
-                                ";
+                                $query2 = $pdo->query("SELECT * FROM produtos where codigo = '$nome_codigos'");
+                                $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                                for ($i=0; $i < count($dados2); $i++) {
+                                    $statusProd = $dados2[$i]['status_prod'];
+                                    $categ = $dados2[$i]['categoria'];
+                                    $query3 = $pdo->query("SELECT * FROM categorias where nome = '$categ'");
+                                    $dados3 = $query3->fetchAll(PDO::FETCH_ASSOC);
+                                    $statusCateg = $dados3[0]['status_categ'];
+                                    if($statusProd === 'ativo' && $statusCateg === 'ativo'){
+                                        $codigo = $dados2[$i]['codigo'];
+                                        if($codigo === $nome_codigos){
+                                            $k++;
+                                        }
+                                    }
+                                }
+
+                                if($k != 0){
+                                    echo "
+                                        <a onclick='codigoRedirect(`".$nome_codigos."`)'>
+                                            <p>$nome_codigos</p>
+                                        </a>
+                                    ";
+                                }
+                                $k=0;
                             }
                         ?>
                     </div>
@@ -476,9 +522,15 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
                     $dados = $query->fetchAll(PDO::FETCH_ASSOC);
                     for ($i=0; $i < count($dados); $i++) {
                         $codigo = $dados[$i]['codigo'];
-                        $status = $dados[$i]['status_prod'];
-                        if($status === 'ativo'){
-                            if($codigo_get !== NULL && $codigo_get !== ''){
+                        $statusProd = $dados[$i]['status_prod'];
+                        $Categ = $dados[$i]['categoria'];
+
+                        $query2 = $pdo->query("SELECT * FROM categorias where nome = '$Categ'");
+                        $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                        $statusCateg = $dados2[0]['status_categ'];
+
+                        if($statusProd === 'ativo' && $statusCateg === 'ativo'){
+                            if($codigo_get !== NULL && $codigo_get !== ' '){
                                 if($codigo_get === $codigo){
                                     $id = $dados[$i]['id'];
                                     $img = $dados[$i]['img'];
@@ -496,7 +548,7 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
                                         "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
                                     $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
                 
-                                    $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'"';
+                                    $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"' ;
                 
                                     echo "<div class='produtos'>
                                             <span class='code'>".$codigo."</span>
@@ -515,7 +567,6 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
                                 $valor = $dados[$i]['valor'];
                                 $vendas = $dados[$i]['Vendas'];
     
-            
                                 if($img == "placeholder.jpg" || $img == ""){
                                     $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
                                 }else{
@@ -527,7 +578,7 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
                                     "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
                                 $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
             
-                                $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'"';
+                                $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
             
                                 echo "<div class='produtos'>
                                         <span class='code'>".$codigo."</span>
@@ -565,21 +616,27 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
             $query = $pdo->query("SELECT * FROM sub_categorias ORDER BY id DESC");
             $dados = $query->fetchAll(PDO::FETCH_ASSOC);
             for ($i=0; $i < count($dados); $i++) { 
-                    
                 $nome = $dados[$i]['nome'];
-                $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
-                        strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
-                        "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
-                $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+                $categAtrelada = $dados[$i]['categ_Atrelada'];
 
-                echo "
-                    <div class='hidelist'>
-                        <p>null</p>
-                        <p>".$nome."</p>
-                        <p class='hide'>".$nome_url."</p>
-                        <span>sub_categorias</span>
-                    </div>
-                ";
+                $query2 = $pdo->query("SELECT * FROM categorias where nome = '$categAtrelada'");
+                $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                $status = $dados2[0]['status_categ'];
+                if($status === 'ativo'){
+                    $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                            strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                            "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                    $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+    
+                    echo "
+                        <div class='hidelist'>
+                            <p>null</p>
+                            <p>".$nome."</p>
+                            <p class='hide'>".$nome_url."</p>
+                            <span>sub_categorias</span>
+                        </div>
+                    ";
+                }                
             }
         
             $query = $pdo->query("SELECT * FROM categorias ORDER BY id DESC");

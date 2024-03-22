@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Inove | Inicio</title>
+    <title>Auto Inove | Categorias</title>
     <link rel="icon" href="assets/icon.svg" />
     <link rel="canonical" href="" />
 
@@ -119,25 +119,19 @@
         </div>
     </header>
 
-    <main class="Inicio" >
-        <section class="Banner">
-            <img src="assets/backgrounds/Home_Background.webp" alt="">
-            <h1>Potência e alto desempenho <br> para o <span>SEU VEÍCULO!</span></h1>
-            <h3>A excelência em peças de transmissão automática <br> para uma performance inigualável!</h3>
+    <main class="Categorias">
+        <section class='banner'>
+            <img src='assets/backgrounds/categorias_Background.webp'>
+            <h1>Conheça todas as nossas categorias!</h1>
         </section>
-        <section class="Dobra_Categ">
+        <section class="Categs">
             <div id='img_bg_categ'></div>
-            <h2>A maior diversidade <br> de peças para <span>o seu carro!<span></h2>
-            <img class="underline" src="assets/icons/Underline_highlight.svg" onload="SVGInject(this)">
             <?php
                 $query = $pdo->query("SELECT * FROM categorias ORDER BY id ASC");
                 $dados = $query->fetchAll(PDO::FETCH_ASSOC);
-                $k=0;
                 for ($i=0; $i < count($dados); $i++) { 
                     $status = $dados[$i]['status_categ'];
-
-                    if($status === 'ativo' && $k < 12){
-                        $k++;
+                    if($status === 'ativo'){
                         $img_categoria = $dados[$i]['img'];
                         $nome_categoria = $dados[$i]['nome'];
     
@@ -160,56 +154,6 @@
                     }
                 }
             ?>
-            <a class="btn btn_Categ" href="./categorias ">Conheça mais</a>
-        </section>
-        <section class="Dobra_Prods">
-            <div id='img_bg_prods'></div>
-            <h2>Últimos produtos adicionados ao estoque</h2>
-            <?php
-                $query = $pdo->query("SELECT * FROM produtos ORDER BY id DESC");
-                $dados = $query->fetchAll(PDO::FETCH_ASSOC);
-                $k=0;
-                for ($i=0; $i < count($dados); $i++) { 
-                    $statusProd = $dados[$i]['status_prod'];
-                    $Categ = $dados[$i]['categoria'];
-
-                    $query2 = $pdo->query("SELECT * FROM categorias where nome = '$Categ'");
-                    $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-                    $statusCateg = $dados2[0]['status_categ'];
-
-                    if($statusProd === 'ativo' && $statusCateg === 'ativo' && $k < 4){
-                        $k++;
-                        $id = $dados[$i]['id'];
-                        $codigo = $dados[$i]['codigo'];
-                        $img = $dados[$i]['img'];
-                        $nome = $dados[$i]['nome'];
-                        $valor = $dados[$i]['valor'];
-    
-                        if($img == "placeholder.jpg" || $img == ""){
-                            $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
-                        }else{
-                            $img_prod = "<img src='assets/produtos/$img'>";
-                        }
-    
-                        $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
-                            strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
-                            "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
-                        $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
-    
-                        $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
-    
-                        echo "<div class='produtos_recentes'>
-                                <span class='code'>".$codigo."</span>
-                                <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
-                                ".$img_prod."
-                                <h4>".$nome."</h4>
-                                <p><span>R$</span>".$valor."</p>
-                                <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
-                            </div>";
-                    }
-                }
-            ?>
-            <a class="btn btn_prods" href="./produtos">Veja mais</a>
         </section>
     </main>
     
@@ -218,14 +162,6 @@
         <span>Desenvolvido por:</span>
         <a href="https://www.universofarol.com.br"><img src="assets/icons/Universo_Farol.svg" onload="SVGInject(this)"></a>
     </footer>
-
-    <div class='msg_Carrinho hide'>
-        <button type='button' onclick='document.querySelector(".msg_Carrinho").classList.add("hide")'><img src="assets/icons/close.svg" onload="SVGInject(this)"></button>
-        <p>1 item foi adicionado ao carrinho</p>
-        <div class="progress-wrap progress" data-progress-percent="100">
-            <div class="progress-bar progress"></div>
-        </div>
-    </div>
 
     <div class="hide searchBar_List">
         <?php
@@ -304,6 +240,5 @@
             }
         ?>
     </div>
-
 </body>
 </html>

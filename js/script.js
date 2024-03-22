@@ -26,8 +26,10 @@ $(document).ready(function () {
             }else{
                 var img = `<img src='assets/produtos/${item.imgProd}'>`;
             }
+            
+            let nome_url = item.nomeProd.replaceAll(' ','_');
 
-            $('.dropdownCarrinho').append(`<a class='itensCarrinho' href='produto_${item.nomeProd}'>${img}<p>${item.nomeProd}</p><span>Quant:${item.quant}</span></a>`);
+            $('.dropdownCarrinho').append(`<a class='itensCarrinho' href='produto_${nome_url}'>${img}<p>${item.nomeProd}</p><span>Quant:${item.quant}</span></a>`);
 
         });
 
@@ -163,7 +165,7 @@ function moveProgressBar() {
     }, 3500);
 }
 
-function addCarrinho(idProd, imgProd, nomeProd){
+function addCarrinho(idProd, imgProd, nomeProd, codigo){
     if(Cookies.get('Carrinho') !== undefined && Cookies.get('Carrinho') !== ''){
         let CarrinhoCookie = Cookies.get('Carrinho');
         //string to array
@@ -190,13 +192,14 @@ function addCarrinho(idProd, imgProd, nomeProd){
                 idProd: `${idProd}`,
                 quant: '1',
                 imgProd: imgProd,
+                codigo: codigo,
                 nomeProd: nomeProd
             })
         }
 
         //array to string
         var CarrinhoToString = CookieToArray.map(function(obj) {
-            return 'idProd:'+obj.idProd +'_quant:'+ obj.quant+'_imgProd:'+ obj.imgProd+'_nomeProd:'+obj.nomeProd;
+            return 'idProd:'+obj.idProd+'_quant:'+obj.quant+'_imgProd:'+obj.imgProd+'_nomeProd:'+obj.nomeProd+'_codigo:'+obj.codigo;
         }).join('&');
 
         Cookies.set('Carrinho', CarrinhoToString, {
@@ -215,7 +218,9 @@ function addCarrinho(idProd, imgProd, nomeProd){
                 var img = `<img src='assets/produtos/${item.imgProd}'>`;
             }
 
-            $('.dropdownCarrinho').append(`<a class='itensCarrinho' href='produto_${item.nomeProd}'>${img}<p>${item.nomeProd}</p><span>Quant:${item.quant}</span></a>`);
+            let nome_url = item.nomeProd.replaceAll(' ','_');
+
+            $('.dropdownCarrinho').append(`<a class='itensCarrinho' href='produto_${nome_url}'>${img}<p>${item.nomeProd}</p><span>Quant:${item.quant}</span></a>`);
 
         });
 
@@ -242,12 +247,13 @@ function addCarrinho(idProd, imgProd, nomeProd){
             idProd: idProd,
             quant: 1,
             imgProd: imgProd,
+            codigo: codigo,
             nomeProd: nomeProd
         });
 
         //array to string
         var CarrinhoToString = carrinho.map(function(obj) {
-            return 'idProd:'+obj.idProd +'_quant:'+ obj.quant+'_imgProd:'+ obj.imgProd+'_nomeProd:'+obj.nomeProd;
+            return 'idProd:'+obj.idProd+'_quant:'+obj.quant+'_imgProd:'+obj.imgProd+'_nomeProd:'+obj.nomeProd+'_codigo:'+obj.codigo;
         }).join(';');
 
         Cookies.set('Carrinho', CarrinhoToString, {
