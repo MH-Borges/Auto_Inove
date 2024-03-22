@@ -9,8 +9,8 @@
     $descricao = $_POST["descri_Produto"];
 
     $categoria = $_POST["categoria_Produto"];
-    $subcategoria = $_POST["SubCategoria_Produto"];
-    $codigo = $_POST["codigo_Produto"];
+    @$subcategoria = $_POST["SubCategoria_Produto"];
+    @$codigo = $_POST["codigo_Produto"];
 
     $marca = $_POST["marca_Produto"];
     $estoque = $_POST["estoque_Produto"];
@@ -33,6 +33,8 @@
     function uploadImage($inputName, $targetDir, $defaultImage) {
         $uploadedFile = @$_FILES[$inputName];
         $imageName = preg_replace('/[ -]+/' , '-' , $uploadedFile['name']);
+        $imageName = preg_replace('/_/' , '-' , $uploadedFile['name']);
+
         $targetPath = $targetDir . $imageName;
 
         if (empty($uploadedFile['name'])) { return $defaultImage; }
@@ -82,7 +84,7 @@
         exit();
     }
     if($codigo == ""){
-        echo 'Selecione um codigo!';
+        echo 'Selecione um codigo para este produto!';
         exit();
     }
     if($estoque == ""){

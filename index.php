@@ -110,29 +110,32 @@
             <h2>A maior diversidade <br> de peças para <span>o seu carro!<span></h2>
             <img class="underline" src="assets/icons/Underline_highlight.svg" onload="SVGInject(this)">
             <?php
-                $query = $pdo->query("SELECT * FROM categorias ORDER BY id ASC LIMIT 12");
+                $query = $pdo->query("SELECT * FROM categorias ORDER BY id ASC");
                 $dados = $query->fetchAll(PDO::FETCH_ASSOC);
-                for ($i=0; $i < count($dados); $i++) { 
-                        
-                    $img_categoria = $dados[$i]['img'];
-                    $nome_categoria = $dados[$i]['nome'];
+                for ($i=0; $i < 13; $i++) { 
+                    $status = $dados[$i]['status_categ'];
 
-                    $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
-                        strtr(utf8_decode(trim($nome_categoria)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
-                        "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
-                    $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
-
-                    if($img_categoria == "placeholder.svg" || $img_categoria == ""){
-                        $img_categoria = "<img class='img_categoria' src='assets/icons/placeholder.svg'>";
-                    }else{
-                        $img_categoria = "<img class='img_categoria' src='assets/categorias/$img_categoria'>";
+                    if($status === 'ativo'){
+                        $img_categoria = $dados[$i]['img'];
+                        $nome_categoria = $dados[$i]['nome'];
+    
+                        $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                            strtr(utf8_decode(trim($nome_categoria)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                            "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                        $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+    
+                        if($img_categoria == "placeholder.svg" || $img_categoria == ""){
+                            $img_categoria = "<img class='img_categoria' src='assets/icons/placeholder.svg'>";
+                        }else{
+                            $img_categoria = "<img class='img_categoria' src='assets/categorias/$img_categoria'>";
+                        }
+                        echo "
+                            <a class='categoria' href='produtos_".$nome_url."'>
+                                ".$img_categoria."
+                                <p>".$nome_categoria."</p>
+                            </a>
+                        ";
                     }
-                    echo "
-                        <a class='categoria' href='produtos_".$nome_url."'>
-                            ".$img_categoria."
-                            <p>".$nome_categoria."</p>
-                        </a>
-                    ";
                 }
             ?>
             <a class="btn btn_Categ" href="./categorias ">Conheça mais</a>
@@ -141,36 +144,40 @@
             <div id='img_bg_prods'></div>
             <h2>Últimos produtos adicionados ao estoque</h2>
             <?php
-                $query = $pdo->query("SELECT * FROM produtos ORDER BY id DESC LIMIT 4");
+                $query = $pdo->query("SELECT * FROM produtos ORDER BY id DESC");
                 $dados = $query->fetchAll(PDO::FETCH_ASSOC);
-                for ($i=0; $i < count($dados); $i++) { 
-                    $id = $dados[$i]['id'];
-                    $codigo = $dados[$i]['codigo'];
-                    $img = $dados[$i]['img'];
-                    $nome = $dados[$i]['nome'];
-                    $valor = $dados[$i]['valor'];
+                for ($i=0; $i < 5; $i++) { 
+                    $status = $dados[$i]['status_prod'];
 
-                    if($img == "placeholder.jpg" || $img == ""){
-                        $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
-                    }else{
-                        $img_prod = "<img src='assets/produtos/$img'>";
+                    if($status === 'ativo'){
+                        $id = $dados[$i]['id'];
+                        $codigo = $dados[$i]['codigo'];
+                        $img = $dados[$i]['img'];
+                        $nome = $dados[$i]['nome'];
+                        $valor = $dados[$i]['valor'];
+    
+                        if($img == "placeholder.jpg" || $img == ""){
+                            $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
+                        }else{
+                            $img_prod = "<img src='assets/produtos/$img'>";
+                        }
+    
+                        $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                            strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                            "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                        $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+    
+                        $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'"';
+    
+                        echo "<div class='produtos_recentes'>
+                                <span class='code'>".$codigo."</span>
+                                <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
+                                ".$img_prod."
+                                <h4>".$nome."</h4>
+                                <p><span>R$</span>".$valor."</p>
+                                <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
+                            </div>";
                     }
-
-                    $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
-                        strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
-                        "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
-                    $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
-
-                    $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'"';
-
-                    echo "<div class='produtos_recentes'>
-                            <span class='code'>".$codigo."</span>
-                            <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
-                            ".$img_prod."
-                            <h4>".$nome."</h4>
-                            <p><span>R$</span>".$valor."</p>
-                            <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
-                        </div>";
                 }
             ?>
             <a class="btn btn_prods" href="./produtos">Veja mais</a>
@@ -215,45 +222,50 @@
         
             $query = $pdo->query("SELECT * FROM categorias ORDER BY id DESC");
             $dados = $query->fetchAll(PDO::FETCH_ASSOC);
-            for ($i=0; $i < count($dados); $i++) { 
-                    
-                $nome = $dados[$i]['nome'];
-                $img = $dados[$i]['img'];
-
-                $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
-                        strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
-                        "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
-                $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
-
-                echo "
-                    <div class='hidelist'>
-                        <p>".$img."</p>
-                        <p>".$nome."</p>
-                        <p class='hide'>".$nome_url."</p>
-                        <span>categorias</span>
-                    </div>
-                ";
+            for ($i=0; $i < count($dados); $i++) {
+                $status = $dados[$i]['status_categ'];
+                if($status === 'ativo'){
+                    $nome = $dados[$i]['nome'];
+                    $img = $dados[$i]['img'];
+    
+                    $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                            strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                            "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                    $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+    
+                    echo "
+                        <div class='hidelist'>
+                            <p>".$img."</p>
+                            <p>".$nome."</p>
+                            <p class='hide'>".$nome_url."</p>
+                            <span>categorias</span>
+                        </div>
+                    ";
+                }
             }
         
             $query = $pdo->query("SELECT * FROM produtos ORDER BY id DESC");
             $dados = $query->fetchAll(PDO::FETCH_ASSOC);
             for ($i=0; $i < count($dados); $i++) { 
-                $nome = $dados[$i]['nome'];
-                $img = $dados[$i]['img'];
-
-                $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
-                        strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
-                        "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
-                $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
-
-                echo "
-                    <div class='hidelist'>
-                        <p>".$img."</p>
-                        <p>".$nome."</p>
-                        <p class='hide'>".$nome_url."</p>
-                        <span>produtos</span>
-                    </div>
-                ";
+                $status = $dados[$i]['status_prod'];
+                if($status === 'ativo'){
+                    $nome = $dados[$i]['nome'];
+                    $img = $dados[$i]['img'];
+    
+                    $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                            strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                            "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                    $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+    
+                    echo "
+                        <div class='hidelist'>
+                            <p>".$img."</p>
+                            <p>".$nome."</p>
+                            <p class='hide'>".$nome_url."</p>
+                            <span>produtos</span>
+                        </div>
+                    ";
+                }
             }
         ?>
     </div>

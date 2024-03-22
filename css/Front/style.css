@@ -483,7 +483,7 @@ body header .side_menu {
   width: 20vw;
   background: #131313;
   position: absolute;
-  z-index: 999;
+  z-index: 999999 !important;
   top: 0;
   right: -20vw;
   display: flex;
@@ -581,6 +581,7 @@ body .Inicio .Dobra_Categ {
   max-height: 200vh;
   position: relative;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 }
 body .Inicio .Dobra_Categ #img_bg_categ {
@@ -890,7 +891,7 @@ body .Produtos .Header_main .list_Categs {
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   font-family: "Be Vietnam Pro", sans-serif;
   font-weight: 900;
   font-size: 1vw;
@@ -910,7 +911,17 @@ body .Produtos .Header_main .list_Categs .categ_Subcategs, body .Produtos .Heade
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
+}
+body .Produtos .Header_main .list_Categs .categ_Subcategs p, body .Produtos .Header_main .list_Categs button p {
+  width: 78%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 1vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 body .Produtos .Header_main .list_Categs .categ_Subcategs img, body .Produtos .Header_main .list_Categs .categ_Subcategs svg, body .Produtos .Header_main .list_Categs button img, body .Produtos .Header_main .list_Categs button svg {
   position: absolute;
@@ -943,6 +954,17 @@ body .Produtos .Header_main .list_Categs .showDropdown {
   top: 100%;
   left: 0px;
   will-change: transform;
+  z-index: 30 !important;
+}
+body .Produtos .Header_main .list_Categs p {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 1vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 body .Produtos .SubHeader {
   width: 100%;
@@ -1015,20 +1037,280 @@ body .Produtos .SubHeader h3 {
 body .Produtos .Produtos_Block {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 5vh;
 }
 body .Produtos .Produtos_Block .Sub_menu {
-  outline: 1px solid red;
   width: 20%;
   min-height: 68vh;
   height: auto;
   padding-bottom: 7vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+body .Produtos .Produtos_Block .Sub_menu::before {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 85%;
+  top: 2vh;
+  right: 0;
+  background: #F83810;
+}
+body .Produtos .Produtos_Block .Sub_menu .filtros_Block {
+  width: 100%;
+  height: 13vh;
+  margin-top: 2vh;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+}
+body .Produtos .Produtos_Block .Sub_menu .filtros_Block .LimpaFiltros {
+  all: unset;
+  position: absolute;
+  top: -3vh;
+  left: 0.75vw;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 0.75vw;
+  color: #F3F4F9;
+}
+body .Produtos .Produtos_Block .Sub_menu .filtros_Block .LimpaFiltros:hover {
+  color: #F83810;
+}
+body .Produtos .Produtos_Block .Sub_menu .filtros_Block .filtros {
+  all: unset;
+  width: 33.3%;
+  height: 100%;
+}
+body .Produtos .Produtos_Block .Sub_menu .filtros_Block .filtros img, body .Produtos .Produtos_Block .Sub_menu .filtros_Block .filtros svg {
+  width: 100%;
+  height: 65%;
+  padding: 0.85vw;
+}
+body .Produtos .Produtos_Block .Sub_menu .filtros_Block .filtros img path, body .Produtos .Produtos_Block .Sub_menu .filtros_Block .filtros svg path {
+  fill: #F83810;
+}
+body .Produtos .Produtos_Block .Sub_menu .filtros_Block .filtros p {
+  width: 100%;
+  height: 35%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 0.75vw;
+  color: #F3F4F9;
+  text-align: center;
+  padding: 0 1vw;
+}
+body .Produtos .Produtos_Block .Sub_menu .filtros_Block .filtros:first-child img path, body .Produtos .Produtos_Block .Sub_menu .filtros_Block .filtros:first-child svg path {
+  stroke: #F83810;
+  fill: none;
+}
+body .Produtos .Produtos_Block .Sub_menu .subCateg_list, body .Produtos .Produtos_Block .Sub_menu .Codigo_list {
+  margin-top: 1.5vh;
+  width: 100%;
+}
+body .Produtos .Produtos_Block .Sub_menu .subCateg_list button, body .Produtos .Produtos_Block .Sub_menu .Codigo_list button {
+  all: unset;
+  width: 100%;
+  height: 7vh;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 1vw;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 1.35vw;
+  color: #F3F4F9;
+  position: relative;
+}
+body .Produtos .Produtos_Block .Sub_menu .subCateg_list button img, body .Produtos .Produtos_Block .Sub_menu .subCateg_list button svg, body .Produtos .Produtos_Block .Sub_menu .Codigo_list button img, body .Produtos .Produtos_Block .Sub_menu .Codigo_list button svg {
+  position: absolute;
+  right: 2vw;
+  width: 2vw;
+  height: auto;
+  transition: all 0.2s ease-in-out;
+  transform: rotate(0);
+}
+body .Produtos .Produtos_Block .Sub_menu .subCateg_list button .setaSubCategs, body .Produtos .Produtos_Block .Sub_menu .Codigo_list button .setaSubCategs {
+  transform: rotate(180deg);
+}
+body .Produtos .Produtos_Block .Sub_menu .subCateg_list #Sub_Categs, body .Produtos .Produtos_Block .Sub_menu .subCateg_list #Codigos_list, body .Produtos .Produtos_Block .Sub_menu .Codigo_list #Sub_Categs, body .Produtos .Produtos_Block .Sub_menu .Codigo_list #Codigos_list {
+  padding: 1vh 1.5vw;
+}
+body .Produtos .Produtos_Block .Sub_menu .subCateg_list #Sub_Categs a, body .Produtos .Produtos_Block .Sub_menu .subCateg_list #Codigos_list a, body .Produtos .Produtos_Block .Sub_menu .Codigo_list #Sub_Categs a, body .Produtos .Produtos_Block .Sub_menu .Codigo_list #Codigos_list a {
+  width: 100%;
+  height: 4vh;
+  border-top: 1px solid #BAF811;
+  border-bottom: 1px solid #BAF811;
+  display: flex;
+  align-items: center;
+  padding-left: 0.5vw;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 700;
+  font-size: 0.75vw;
+  color: #F3F4F9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body .Produtos .Produtos_Block .Sub_menu .subCateg_list #Sub_Categs a:hover, body .Produtos .Produtos_Block .Sub_menu .subCateg_list #Codigos_list a:hover, body .Produtos .Produtos_Block .Sub_menu .Codigo_list #Sub_Categs a:hover, body .Produtos .Produtos_Block .Sub_menu .Codigo_list #Codigos_list a:hover {
+  color: #F83810;
 }
 body .Produtos .Produtos_Block .Produtos_list {
-  outline: 1px solid blue;
   width: 80%;
   min-height: 68vh;
   height: auto;
   padding-bottom: 7vh;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 2vw 7vh 0;
+  position: relative;
+}
+body .Produtos .Produtos_Block .Produtos_list .LimpaFiltroCodigo {
+  all: unset;
+  position: absolute;
+  top: -3vh;
+  left: 0.5vw;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 1vw;
+  color: #F3F4F9;
+}
+body .Produtos .Produtos_Block .Produtos_list .LimpaFiltroCodigo:hover {
+  color: #F83810;
+}
+body .Produtos .Produtos_Block .Produtos_list .produtos {
+  z-index: 25;
+  width: 23.5%;
+  height: 50vh;
+  margin: 2vh 0.75%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.75vw;
+  overflow: hidden;
+}
+body .Produtos .Produtos_Block .Produtos_list .produtos .code {
+  position: absolute;
+  top: 0.25vw;
+  left: 0.5vw;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 800;
+  font-size: 0.75vw;
+  color: #BAF811;
+  letter-spacing: 0.05vw;
+}
+body .Produtos .Produtos_Block .Produtos_list .produtos button {
+  position: absolute;
+  top: 0.75vw;
+  right: 0.75vw;
+  width: 1.75vw;
+  height: 1.75vw;
+  border: none;
+  border-radius: 0.25vw;
+  background: #F83810;
+  z-index: 99 !important;
+  transition: ease-in-out 0.1s all;
+}
+body .Produtos .Produtos_Block .Produtos_list .produtos button img, body .Produtos .Produtos_Block .Produtos_list .produtos button svg {
+  width: 100%;
+  height: 100%;
+  padding: 0.3vw;
+}
+body .Produtos .Produtos_Block .Produtos_list .produtos button img path, body .Produtos .Produtos_Block .Produtos_list .produtos button svg path {
+  fill: #131313;
+}
+body .Produtos .Produtos_Block .Produtos_list .produtos button:hover {
+  width: 2.25vw;
+  height: 2.25vw;
+  top: 0.5vw;
+  right: 0.5vw;
+}
+body .Produtos .Produtos_Block .Produtos_list .produtos img {
+  width: 100%;
+  height: 65%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  padding: 1.5vw;
+  z-index: 5 !important;
+}
+body .Produtos .Produtos_Block .Produtos_list .produtos h4 {
+  all: unset;
+  width: 100%;
+  height: 20%;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 700;
+  font-size: 1vw;
+  color: #F3F4F9;
+  overflow: hidden;
+  position: relative;
+  padding-top: 0.5vh;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body .Produtos .Produtos_Block .Produtos_list .produtos h4::before {
+  content: "";
+  position: absolute;
+  background: #BAF811;
+  opacity: 1;
+  width: 30%;
+  height: 3px;
+  bottom: 0;
+  left: 35%;
+}
+body .Produtos .Produtos_Block .Produtos_list .produtos p {
+  width: 100%;
+  height: 15%;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 1.25vw;
+  color: #BAF811;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body .Produtos .Produtos_Block .Produtos_list .produtos p span {
+  color: #F3F4F9;
+  font-size: 0.75vw;
+  margin-right: 0.25vw;
+  margin-bottom: -0.75vh;
+}
+body .Produtos .Produtos_Block .Produtos_list .produtos a {
+  width: 7vw;
+  height: 7vw;
+  position: absolute;
+  bottom: -3.5vw;
+  right: -3.5vw;
+  z-index: 15;
+  transform: rotate(45deg);
+  background: #BAF811;
+}
+body .Produtos .Produtos_Block .Produtos_list .produtos a img, body .Produtos .Produtos_Block .Produtos_list .produtos a svg {
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  top: 40%;
+  left: 0.7vw;
+}
+body .Produtos .Produtos_Block .Produtos_list .produtos a img path, body .Produtos .Produtos_Block .Produtos_list .produtos a svg path {
+  fill: #131313;
+}
+body .Produtos .Produtos_Block .Produtos_list .produtos::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #BBBBBB;
+  opacity: 0.15;
+  z-index: -1;
 }
 body footer {
   margin: 0 5%;

@@ -447,7 +447,7 @@ body {
             width: 20vw;
             background: $Preto;
             position: absolute;
-            z-index: 999;
+            z-index: 999999 !important;
             top: 0;
             right: -20vw;
             display: flex;
@@ -546,6 +546,7 @@ body {
             max-height: 200vh;
             position: relative;
             display: flex;
+            justify-content: center;
             flex-wrap: wrap;
             #img_bg_categ{
                 width: 100%;

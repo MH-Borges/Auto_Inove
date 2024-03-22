@@ -47,6 +47,7 @@
     function uploadImage($inputName, $targetDir, $defaultImage) {
         $uploadedFile = @$_FILES[$inputName];
         $imageName = preg_replace('/[ -]+/' , '-' , $uploadedFile['name']);
+        $imageName = preg_replace('/_/' , '-' , $uploadedFile['name']);
         $targetPath = $targetDir . $imageName;
 
         if (empty($uploadedFile['name'])) { return $defaultImage; }
