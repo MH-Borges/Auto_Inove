@@ -17,12 +17,10 @@
     $litros = $_POST["litros_Produto"];
     $mercado_livre = $_POST["mercadoLivre_Produto"];
 
-
     @$ItemAtr1 = $_POST["ItemAtr1_Produto"];
     @$ItemAtr2 = $_POST["ItemAtr2_Produto"];
     @$ItemAtr3 = $_POST["ItemAtr3_Produto"];
     @$ItemAtr4 = $_POST["ItemAtr4_Produto"];
-
 
     $date_criacao_Produto = $_POST['date_criacao_Produto'];
     $date_atual_Produto = $_POST['date_atual_Produto'];

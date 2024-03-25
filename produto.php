@@ -5,6 +5,62 @@ $nome_get = @$_GET['nome'];
 $nome_clean = preg_replace('/_/', ' ', $nome_get);
 $codigo_get = @$_COOKIE["Cookie_Codigo"];
 
+$query = $pdo->query("SELECT * FROM produtos where nome = '$nome_clean'");
+$dados = $query->fetchAll(PDO::FETCH_ASSOC);
+@$status = $dados[0]['status_prod'];
+
+if($status === 'ativo'){
+    $Visualizacoes = $dados[0]['Visualizacoes'];
+    $Visualizacoes++;
+    //atualiza Visualizações da página
+    $res = $pdo->prepare("UPDATE produtos SET Visualizacoes = :Visualizacoes WHERE nome = :nome");
+    $res->bindValue(":Visualizacoes", $Visualizacoes);
+    $res->bindValue(":nome", $nome_clean);
+    $res->execute();
+
+    $id = $dados[0]['id'];
+    $img = $dados[0]['img'];
+    $nome = $dados[0]['nome'];
+    $valor = $dados[0]['valor'];
+    $descricao = $dados[0]['descricao'];
+    $categoria = $dados[0]['categoria'];
+    $sub_categoria = $dados[0]['sub_categoria'];
+    $codigo = $dados[0]['codigo'];
+    $marca = $dados[0]['marca'];
+    $litros = $dados[0]['litros'];
+
+    $Item_Relac_1 = $dados[0]['Item_Relac_1'];
+    $Item_Relac_2 = $dados[0]['Item_Relac_2'];
+    $Item_Relac_3 = $dados[0]['Item_Relac_3'];
+    $Item_Relac_4 = $dados[0]['Item_Relac_4'];
+
+    if($sub_categoria !== NULL || $sub_categoria !== " "){
+        $nome_novo_Categ = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", strtr(utf8_decode(trim($categoria)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"), "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+        $Categ_url = preg_replace('/[ -]+/' , '_' , $nome_novo_Categ);
+
+        $nome_novo_subCateg = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", strtr(utf8_decode(trim($sub_categoria)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"), "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+        $subCateg_url = preg_replace('/[ -]+/' , '_' , $nome_novo_subCateg);
+
+        $breadcrumbs = '<li class="breadcrumb-item"><a href="./">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="./produtos_'.$Categ_url.'">'.$categoria.'</a></li>
+                        <li class="breadcrumb-item"><a href="./produtos_'.$subCateg_url.'">'.$sub_categoria.'</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">'.$nome.'</li>';
+    }
+    else{
+        $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", strtr(utf8_decode(trim($categoria)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"), "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+        $Categ_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+
+        $breadcrumbs = '<li class="breadcrumb-item"><a href="./">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="./produtos_'.$Categ_url.'">'.$categoria.'</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">'.$nome.'</li>';
+    }
+
+    if($img == "placeholder.jpg" || $img == ""){
+        $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
+    }else{
+        $img_prod = "<img src='assets/produtos/$img'>";
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -127,9 +183,618 @@ $codigo_get = @$_COOKIE["Cookie_Codigo"];
         </div>
     </header>
 
-    <main class="Produto">
-        TELA DE PRODUTO
-    </main>
+    <?php if($status === 'ativo'){ ?>
+
+        <main class="Produto">
+            <?php echo $breadcrumbs ?>
+            <div class='main_Block'>
+                <div class='infos'>
+                    <h1><?php echo $nome ?></h1>
+                    <h5>Código:<?php echo $nome ?></h5>
+                    <h5>Marca:<?php echo $marca ?></h5>
+                    <?php if($litros !== '' && $litros !== NULL){
+                        echo '<h5>Litros:'.$litros.'L</h5>';
+                    }?>
+                    <div class='valor'>
+                        <span>R$ <h3><?php echo $valor?><h3></span>
+                    </div>
+
+                    <div class='Ações'>
+                        <div class='AddRemove'>
+                            <button class='remove' type='button' onclick='SubtraiCarrinho()'></button>
+                            <span class='quant'>1</span>
+                            <button class='add' type='button' onclick='SomaCarrinho()'></button>
+                        </div>
+                        <button type='button' onclick='addCarrinho(<?php echo "`$id`, `$img`, `$nome`, `$codigo`, true"; ?>)'>Adicionar ao carrinho</button>
+                        <a href="#">Comprar agora</a>
+                    </div>
+                    
+
+                </div>
+                <div class='img'><?php echo $img_prod ?></div>
+            </div>
+            <div class='descrition_Block'>
+                <h2>Descrição</h2>
+                <?php echo $descricao ?>
+            </div>
+            <div class='ProdsRelacionados_Block'>
+                <h2>Produtos relacionados</h2>
+                <?php
+
+                    if($Item_Relac_1 !== '' && $Item_Relac_2 !== '' && $Item_Relac_3 !== '' && $Item_Relac_4 !== ''){
+                        //prod 01
+                        $query = $pdo->query("SELECT * FROM produtos WHERE nome = '$Item_Relac_1'");
+                        $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $statusProd = $dados[0]['status_prod'];
+                        $Categ = $dados[0]['categoria'];
+
+                        $query2 = $pdo->query("SELECT * FROM categorias where nome = '$Categ'");
+                        $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                        $statusCateg = $dados2[0]['status_categ'];
+                        if($statusProd === 'ativo' && $statusCateg === 'ativo'){
+                            $id = $dados[0]['id'];
+                            $codigo = $dados[0]['codigo'];
+                            $img = $dados[0]['img'];
+                            $nome = $dados[0]['nome'];
+                            $valor = $dados[0]['valor'];
+        
+                            if($img == "placeholder.jpg" || $img == ""){
+                                $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
+                            }else{
+                                $img_prod = "<img src='assets/produtos/$img'>";
+                            }
+        
+                            $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                                strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                                "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                            $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+        
+                            $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
+        
+                            echo "<div class='produtos_recentes'>
+                                    <span class='code'>".$codigo."</span>
+                                    <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
+                                    ".$img_prod."
+                                    <h4>".$nome."</h4>
+                                    <p><span>R$</span>".$valor."</p>
+                                    <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
+                                </div>";
+                        }
+
+                        //prod 02
+                        $query = $pdo->query("SELECT * FROM produtos WHERE nome = '$Item_Relac_2'");
+                        $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $statusProd = $dados[0]['status_prod'];
+                        $Categ = $dados[0]['categoria'];
+
+                        $query2 = $pdo->query("SELECT * FROM categorias where nome = '$Categ'");
+                        $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                        $statusCateg = $dados2[0]['status_categ'];
+                        if($statusProd === 'ativo' && $statusCateg === 'ativo'){
+                            $id = $dados[0]['id'];
+                            $codigo = $dados[0]['codigo'];
+                            $img = $dados[0]['img'];
+                            $nome = $dados[0]['nome'];
+                            $valor = $dados[0]['valor'];
+        
+                            if($img == "placeholder.jpg" || $img == ""){
+                                $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
+                            }else{
+                                $img_prod = "<img src='assets/produtos/$img'>";
+                            }
+        
+                            $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                                strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                                "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                            $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+        
+                            $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
+        
+                            echo "<div class='produtos_recentes'>
+                                    <span class='code'>".$codigo."</span>
+                                    <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
+                                    ".$img_prod."
+                                    <h4>".$nome."</h4>
+                                    <p><span>R$</span>".$valor."</p>
+                                    <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
+                                </div>";
+                        }
+
+                        //prod 03
+                        $query = $pdo->query("SELECT * FROM produtos WHERE nome = '$Item_Relac_3'");
+                        $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $statusProd = $dados[0]['status_prod'];
+                        $Categ = $dados[0]['categoria'];
+
+                        $query2 = $pdo->query("SELECT * FROM categorias where nome = '$Categ'");
+                        $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                        $statusCateg = $dados2[0]['status_categ'];
+                        if($statusProd === 'ativo' && $statusCateg === 'ativo'){
+                            $id = $dados[0]['id'];
+                            $codigo = $dados[0]['codigo'];
+                            $img = $dados[0]['img'];
+                            $nome = $dados[0]['nome'];
+                            $valor = $dados[0]['valor'];
+        
+                            if($img == "placeholder.jpg" || $img == ""){
+                                $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
+                            }else{
+                                $img_prod = "<img src='assets/produtos/$img'>";
+                            }
+        
+                            $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                                strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                                "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                            $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+        
+                            $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
+        
+                            echo "<div class='produtos_recentes'>
+                                    <span class='code'>".$codigo."</span>
+                                    <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
+                                    ".$img_prod."
+                                    <h4>".$nome."</h4>
+                                    <p><span>R$</span>".$valor."</p>
+                                    <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
+                                </div>";
+                        }
+
+                        //prod 04
+                        $query = $pdo->query("SELECT * FROM produtos WHERE nome = '$Item_Relac_4'");
+                        $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $statusProd = $dados[0]['status_prod'];
+                        $Categ = $dados[0]['categoria'];
+
+                        $query2 = $pdo->query("SELECT * FROM categorias where nome = '$Categ'");
+                        $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                        $statusCateg = $dados2[0]['status_categ'];
+                        if($statusProd === 'ativo' && $statusCateg === 'ativo'){
+                            $id = $dados[0]['id'];
+                            $codigo = $dados[0]['codigo'];
+                            $img = $dados[0]['img'];
+                            $nome = $dados[0]['nome'];
+                            $valor = $dados[0]['valor'];
+        
+                            if($img == "placeholder.jpg" || $img == ""){
+                                $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
+                            }else{
+                                $img_prod = "<img src='assets/produtos/$img'>";
+                            }
+        
+                            $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                                strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                                "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                            $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+        
+                            $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
+        
+                            echo "<div class='produtos_recentes'>
+                                    <span class='code'>".$codigo."</span>
+                                    <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
+                                    ".$img_prod."
+                                    <h4>".$nome."</h4>
+                                    <p><span>R$</span>".$valor."</p>
+                                    <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
+                                </div>";
+                        }
+                    }
+                    if($Item_Relac_1 !== '' && $Item_Relac_2 !== '' && $Item_Relac_3 !== '' && $Item_Relac_4 === ''){
+                        //prod 01
+                        $query = $pdo->query("SELECT * FROM produtos WHERE nome = '$Item_Relac_1'");
+                        $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $statusProd = $dados[0]['status_prod'];
+                        $Categ = $dados[0]['categoria'];
+
+                        $query2 = $pdo->query("SELECT * FROM categorias where nome = '$Categ'");
+                        $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                        $statusCateg = $dados2[0]['status_categ'];
+                        if($statusProd === 'ativo' && $statusCateg === 'ativo'){
+                            $id = $dados[0]['id'];
+                            $codigo = $dados[0]['codigo'];
+                            $img = $dados[0]['img'];
+                            $nome = $dados[0]['nome'];
+                            $valor = $dados[0]['valor'];
+        
+                            if($img == "placeholder.jpg" || $img == ""){
+                                $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
+                            }else{
+                                $img_prod = "<img src='assets/produtos/$img'>";
+                            }
+        
+                            $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                                strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                                "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                            $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+        
+                            $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
+        
+                            echo "<div class='produtos_recentes'>
+                                    <span class='code'>".$codigo."</span>
+                                    <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
+                                    ".$img_prod."
+                                    <h4>".$nome."</h4>
+                                    <p><span>R$</span>".$valor."</p>
+                                    <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
+                                </div>";
+                        }
+
+                        //prod 02
+                        $query = $pdo->query("SELECT * FROM produtos WHERE nome = '$Item_Relac_2'");
+                        $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $statusProd = $dados[0]['status_prod'];
+                        $Categ = $dados[0]['categoria'];
+
+                        $query2 = $pdo->query("SELECT * FROM categorias where nome = '$Categ'");
+                        $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                        $statusCateg = $dados2[0]['status_categ'];
+                        if($statusProd === 'ativo' && $statusCateg === 'ativo'){
+                            $id = $dados[0]['id'];
+                            $codigo = $dados[0]['codigo'];
+                            $img = $dados[0]['img'];
+                            $nome = $dados[0]['nome'];
+                            $valor = $dados[0]['valor'];
+        
+                            if($img == "placeholder.jpg" || $img == ""){
+                                $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
+                            }else{
+                                $img_prod = "<img src='assets/produtos/$img'>";
+                            }
+        
+                            $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                                strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                                "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                            $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+        
+                            $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
+        
+                            echo "<div class='produtos_recentes'>
+                                    <span class='code'>".$codigo."</span>
+                                    <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
+                                    ".$img_prod."
+                                    <h4>".$nome."</h4>
+                                    <p><span>R$</span>".$valor."</p>
+                                    <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
+                                </div>";
+                        }
+
+                        //prod 03
+                        $query = $pdo->query("SELECT * FROM produtos WHERE nome = '$Item_Relac_3'");
+                        $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $statusProd = $dados[0]['status_prod'];
+                        $Categ = $dados[0]['categoria'];
+
+                        $query2 = $pdo->query("SELECT * FROM categorias where nome = '$Categ'");
+                        $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                        $statusCateg = $dados2[0]['status_categ'];
+                        if($statusProd === 'ativo' && $statusCateg === 'ativo'){
+                            $id = $dados[0]['id'];
+                            $codigo = $dados[0]['codigo'];
+                            $img = $dados[0]['img'];
+                            $nome = $dados[0]['nome'];
+                            $valor = $dados[0]['valor'];
+        
+                            if($img == "placeholder.jpg" || $img == ""){
+                                $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
+                            }else{
+                                $img_prod = "<img src='assets/produtos/$img'>";
+                            }
+        
+                            $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                                strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                                "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                            $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+        
+                            $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
+        
+                            echo "<div class='produtos_recentes'>
+                                    <span class='code'>".$codigo."</span>
+                                    <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
+                                    ".$img_prod."
+                                    <h4>".$nome."</h4>
+                                    <p><span>R$</span>".$valor."</p>
+                                    <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
+                                </div>";
+                        }
+
+                        //prod 04
+                        $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo'");
+                        $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $statusProd = $dados[0]['status_prod'];
+                        $Categ = $dados[0]['categoria'];
+
+                        $query2 = $pdo->query("SELECT * FROM categorias where nome = '$Categ'");
+                        $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                        $statusCateg = $dados2[0]['status_categ'];
+                        if($statusProd === 'ativo' && $statusCateg === 'ativo'){
+                            $id = $dados[0]['id'];
+                            $codigo = $dados[0]['codigo'];
+                            $img = $dados[0]['img'];
+                            $nome = $dados[0]['nome'];
+                            $valor = $dados[0]['valor'];
+        
+                            if($img == "placeholder.jpg" || $img == ""){
+                                $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
+                            }else{
+                                $img_prod = "<img src='assets/produtos/$img'>";
+                            }
+        
+                            $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                                strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                                "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                            $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+        
+                            $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
+        
+                            echo "<div class='produtos_recentes'>
+                                    <span class='code'>".$codigo."</span>
+                                    <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
+                                    ".$img_prod."
+                                    <h4>".$nome."</h4>
+                                    <p><span>R$</span>".$valor."</p>
+                                    <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
+                                </div>";
+                        }
+                    }
+                    if($Item_Relac_1 !== '' && $Item_Relac_2 !== '' && $Item_Relac_3 === '' && $Item_Relac_4 === ''){
+                        //prod 01
+                        $query = $pdo->query("SELECT * FROM produtos WHERE nome = '$Item_Relac_1'");
+                        $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $statusProd = $dados[0]['status_prod'];
+                        $Categ = $dados[0]['categoria'];
+
+                        $query2 = $pdo->query("SELECT * FROM categorias where nome = '$Categ'");
+                        $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                        $statusCateg = $dados2[0]['status_categ'];
+                        if($statusProd === 'ativo' && $statusCateg === 'ativo'){
+                            $id = $dados[0]['id'];
+                            $codigo = $dados[0]['codigo'];
+                            $img = $dados[0]['img'];
+                            $nome = $dados[0]['nome'];
+                            $valor = $dados[0]['valor'];
+        
+                            if($img == "placeholder.jpg" || $img == ""){
+                                $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
+                            }else{
+                                $img_prod = "<img src='assets/produtos/$img'>";
+                            }
+        
+                            $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                                strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                                "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                            $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+        
+                            $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
+        
+                            echo "<div class='produtos_recentes'>
+                                    <span class='code'>".$codigo."</span>
+                                    <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
+                                    ".$img_prod."
+                                    <h4>".$nome."</h4>
+                                    <p><span>R$</span>".$valor."</p>
+                                    <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
+                                </div>";
+                        }
+
+                        //prod 02
+                        $query = $pdo->query("SELECT * FROM produtos WHERE nome = '$Item_Relac_2'");
+                        $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $statusProd = $dados[0]['status_prod'];
+                        $Categ = $dados[0]['categoria'];
+
+                        $query2 = $pdo->query("SELECT * FROM categorias where nome = '$Categ'");
+                        $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                        $statusCateg = $dados2[0]['status_categ'];
+                        if($statusProd === 'ativo' && $statusCateg === 'ativo'){
+                            $id = $dados[0]['id'];
+                            $codigo = $dados[0]['codigo'];
+                            $img = $dados[0]['img'];
+                            $nome = $dados[0]['nome'];
+                            $valor = $dados[0]['valor'];
+        
+                            if($img == "placeholder.jpg" || $img == ""){
+                                $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
+                            }else{
+                                $img_prod = "<img src='assets/produtos/$img'>";
+                            }
+        
+                            $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                                strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                                "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                            $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+        
+                            $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
+        
+                            echo "<div class='produtos_recentes'>
+                                    <span class='code'>".$codigo."</span>
+                                    <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
+                                    ".$img_prod."
+                                    <h4>".$nome."</h4>
+                                    <p><span>R$</span>".$valor."</p>
+                                    <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
+                                </div>";
+                        }
+
+                        //prod 03 & 04
+                        $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo'");
+                        $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $k=0;
+                        for ($i=0; $i < count($dados); $i++) { 
+                            $statusProd = $dados[$i]['status_prod'];
+                            $Categ = $dados[$i]['categoria'];
+                            $nome = $dados[$i]['nome'];
+
+                            $query2 = $pdo->query("SELECT * FROM categorias where nome = '$Categ'");
+                            $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                            $statusCateg = $dados2[0]['status_categ'];
+
+                            if($statusProd === 'ativo' && $statusCateg === 'ativo' && $k < 2 && $nome !== $Item_Relac_1 && $nome !== $Item_Relac_2){
+                                $k++;
+                                $id = $dados[$i]['id'];
+                                $codigo = $dados[$i]['codigo'];
+                                $img = $dados[$i]['img'];
+                                $valor = $dados[$i]['valor'];
+            
+                                if($img == "placeholder.jpg" || $img == ""){
+                                    $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
+                                }else{
+                                    $img_prod = "<img src='assets/produtos/$img'>";
+                                }
+            
+                                $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                                    strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                                    "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                                $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+            
+                                $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
+            
+                                echo "<div class='produtos_recentes'>
+                                        <span class='code'>".$codigo."</span>
+                                        <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
+                                        ".$img_prod."
+                                        <h4>".$nome."</h4>
+                                        <p><span>R$</span>".$valor."</p>
+                                        <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
+                                    </div>";
+                            }
+                        }
+                    }
+                    if($Item_Relac_1 !== '' && $Item_Relac_2 === '' && $Item_Relac_3 === '' && $Item_Relac_4 === ''){
+                        //prod 01
+                        var_dump('entrei');
+
+                        $query = $pdo->query("SELECT * FROM produtos WHERE nome = '$Item_Relac_1'");
+                        $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $statusProd = $dados[0]['status_prod'];
+                        $Categ = $dados[0]['categoria'];
+
+                        $query2 = $pdo->query("SELECT * FROM categorias where nome = '$Categ'");
+                        $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                        $statusCateg = $dados2[0]['status_categ'];
+                        if($statusProd === 'ativo' && $statusCateg === 'ativo'){
+                            $id = $dados[0]['id'];
+                            $codigo = $dados[0]['codigo'];
+                            $img = $dados[0]['img'];
+                            $nome = $dados[0]['nome'];
+                            $valor = $dados[0]['valor'];
+        
+                            if($img == "placeholder.jpg" || $img == ""){
+                                $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
+                            }else{
+                                $img_prod = "<img src='assets/produtos/$img'>";
+                            }
+        
+                            $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                                strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                                "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                            $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+        
+                            $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
+        
+                            echo "<div class='produtos_recentes'>
+                                    <span class='code'>".$codigo."</span>
+                                    <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
+                                    ".$img_prod."
+                                    <h4>".$nome."</h4>
+                                    <p><span>R$</span>".$valor."</p>
+                                    <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
+                                </div>";
+                        }
+
+                        //prod 02 & 03 & 04
+                        $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo'");
+                        $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $k=0;
+                        for ($i=0; $i < count($dados); $i++) { 
+                            $statusProd = $dados[$i]['status_prod'];
+                            $Categ = $dados[$i]['categoria'];
+                            $nome = $dados[$i]['nome'];
+
+                            $query2 = $pdo->query("SELECT * FROM categorias where nome = '$Categ'");
+                            $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                            $statusCateg = $dados2[0]['status_categ'];
+
+                            if($statusProd === 'ativo' && $statusCateg === 'ativo' && $k < 3 && $nome !== $Item_Relac_1){
+                                $k++;
+                                $id = $dados[$i]['id'];
+                                $codigo = $dados[$i]['codigo'];
+                                $img = $dados[$i]['img'];
+                                $valor = $dados[$i]['valor'];
+            
+                                if($img == "placeholder.jpg" || $img == ""){
+                                    $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
+                                }else{
+                                    $img_prod = "<img src='assets/produtos/$img'>";
+                                }
+            
+                                $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                                    strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                                    "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                                $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+            
+                                $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
+            
+                                echo "<div class='produtos_recentes'>
+                                        <span class='code'>".$codigo."</span>
+                                        <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
+                                        ".$img_prod."
+                                        <h4>".$nome."</h4>
+                                        <p><span>R$</span>".$valor."</p>
+                                        <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
+                                    </div>";
+                            }
+                        }
+
+                    }
+                    if($Item_Relac_1 === '' && $Item_Relac_2 === '' && $Item_Relac_3 === '' && $Item_Relac_4 === ''){
+                        //prod 01 & 02 & 03 & 04
+                        $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo'");
+                        $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+                        $k=0;
+                        for ($i=0; $i < count($dados); $i++) { 
+                            $statusProd = $dados[$i]['status_prod'];
+                            $Categ = $dados[$i]['categoria'];
+
+                            $query2 = $pdo->query("SELECT * FROM categorias where nome = '$Categ'");
+                            $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                            $statusCateg = $dados2[0]['status_categ'];
+
+                            if($statusProd === 'ativo' && $statusCateg === 'ativo' && $k < 4){
+                                $k++;
+                                $id = $dados[$i]['id'];
+                                $codigo = $dados[$i]['codigo'];
+                                $img = $dados[$i]['img'];
+                                $nome = $dados[$i]['nome'];
+                                $valor = $dados[$i]['valor'];
+            
+                                if($img == "placeholder.jpg" || $img == ""){
+                                    $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
+                                }else{
+                                    $img_prod = "<img src='assets/produtos/$img'>";
+                                }
+            
+                                $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
+                                    strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
+                                    "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
+                                $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
+            
+                                $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
+            
+                                echo "<div class='produtos_recentes'>
+                                        <span class='code'>".$codigo."</span>
+                                        <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
+                                        ".$img_prod."
+                                        <h4>".$nome."</h4>
+                                        <p><span>R$</span>".$valor."</p>
+                                        <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
+                                    </div>";
+                            }
+                        }
+                    }
+                ?>
+            </div>
+        </main>
+
+    <?php } else{ echo '<main class="Produto"><h4> Produto não encontrado </h4><a href="./produtos">Volte o catálogo de todos nossos produtos Clicando aqui!</a></main>'; }?>
     
     <footer>
         <p>&copy; <?php echo date('Y') ?> | Auto inove</p>
