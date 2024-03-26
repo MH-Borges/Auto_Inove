@@ -7,7 +7,16 @@ $codigo_get = @$_COOKIE["Cookie_Codigo"];
 
 $query = $pdo->query("SELECT * FROM produtos where nome = '$nome_clean'");
 $dados = $query->fetchAll(PDO::FETCH_ASSOC);
+@$estoque = $dados[0]['estoque'];
 @$status = $dados[0]['status_prod'];
+
+if($estoque === '0'){
+    $res = $pdo->prepare("UPDATE produtos SET status_prod = :status_prod WHERE nome = :nome");
+    $res->bindValue(":status_prod", 'sem_estoque');
+    $res->bindValue(":nome", $nome_clean);
+    $res->execute();
+    $status = 'sem_estoque';
+}
 
 if($status === 'ativo'){
     $Visualizacoes = $dados[0]['Visualizacoes'];
@@ -18,23 +27,23 @@ if($status === 'ativo'){
     $res->bindValue(":nome", $nome_clean);
     $res->execute();
 
-    $id = $dados[0]['id'];
+    $id_prod = $dados[0]['id'];
     $img = $dados[0]['img'];
     $nome = $dados[0]['nome'];
     $valor = $dados[0]['valor'];
     $descricao = $dados[0]['descricao'];
     $categoria = $dados[0]['categoria'];
     $sub_categoria = $dados[0]['sub_categoria'];
-    $codigo = $dados[0]['codigo'];
+    $codigo_prod = $dados[0]['codigo'];
     $marca = $dados[0]['marca'];
     $litros = $dados[0]['litros'];
-
+    
     $Item_Relac_1 = $dados[0]['Item_Relac_1'];
     $Item_Relac_2 = $dados[0]['Item_Relac_2'];
     $Item_Relac_3 = $dados[0]['Item_Relac_3'];
     $Item_Relac_4 = $dados[0]['Item_Relac_4'];
 
-    if($sub_categoria !== NULL || $sub_categoria !== " "){
+    if($sub_categoria !== NULL && $sub_categoria !== " "){
         $nome_novo_Categ = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", strtr(utf8_decode(trim($categoria)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"), "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
         $Categ_url = preg_replace('/[ -]+/' , '_' , $nome_novo_Categ);
 
@@ -184,43 +193,49 @@ if($status === 'ativo'){
     </header>
 
     <?php if($status === 'ativo'){ ?>
-
         <main class="Produto">
-            <?php echo $breadcrumbs ?>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <?php echo $breadcrumbs ?>
+                </ol>
+            </nav>
+            <?php 
+                if($estoque < 10){
+                    echo"<span class='estoque'> Poucas unidades no estoque!!</span>";
+                }  
+            ?>
             <div class='main_Block'>
                 <div class='infos'>
-                    <h1><?php echo $nome ?></h1>
-                    <h5>Código:<?php echo $nome ?></h5>
-                    <h5>Marca:<?php echo $marca ?></h5>
+                    <h1 class='nomeProd'><?php echo $nome ?></h1>
+                    <h5>Código: <span class='codigo_Show'><?php echo $codigo_prod ?></span></h5>
+                    <h5>Marca: <span><?php echo $marca ?></span></h5>
                     <?php if($litros !== '' && $litros !== NULL){
-                        echo '<h5>Litros:'.$litros.'L</h5>';
+                        echo '<h5>Litros: <span>'.$litros.' L</span></h5>';
                     }?>
                     <div class='valor'>
-                        <span>R$ <h3><?php echo $valor?><h3></span>
+                        <span>R$</span><h3><?php echo $valor?><h3>
                     </div>
 
-                    <div class='Ações'>
+                    <div class='Acoes'>
                         <div class='AddRemove'>
-                            <button class='remove' type='button' onclick='SubtraiCarrinho()'></button>
+                            <button class='remove' type='button' onclick='quantidade("subtrai")'></button>
                             <span class='quant'>1</span>
-                            <button class='add' type='button' onclick='SomaCarrinho()'></button>
+                            <button class='add' type='button' onclick='quantidade("soma")'></button>
+                            <button class='addCarrinho' type='button' onclick='addCarrinho(<?php echo "`$id_prod`, `$img`, `$nome`, `$codigo`, true"; ?>)'>Adicionar ao carrinho</button>
                         </div>
-                        <button type='button' onclick='addCarrinho(<?php echo "`$id`, `$img`, `$nome`, `$codigo`, true"; ?>)'>Adicionar ao carrinho</button>
-                        <a href="#">Comprar agora</a>
+                        <a target='_blank' class='linkcompra' onclick='linkCompra()'>Comprar agora</a>
                     </div>
-                    
 
                 </div>
                 <div class='img'><?php echo $img_prod ?></div>
             </div>
             <div class='descrition_Block'>
                 <h2>Descrição</h2>
-                <?php echo $descricao ?>
+                <p><?php echo $descricao ?></p>
             </div>
             <div class='ProdsRelacionados_Block'>
                 <h2>Produtos relacionados</h2>
                 <?php
-
                     if($Item_Relac_1 !== '' && $Item_Relac_2 !== '' && $Item_Relac_3 !== '' && $Item_Relac_4 !== ''){
                         //prod 01
                         $query = $pdo->query("SELECT * FROM produtos WHERE nome = '$Item_Relac_1'");
@@ -251,7 +266,7 @@ if($status === 'ativo'){
         
                             $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
         
-                            echo "<div class='produtos_recentes'>
+                            echo "<div class='produtos_atrelados'>
                                     <span class='code'>".$codigo."</span>
                                     <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
                                     ".$img_prod."
@@ -290,7 +305,7 @@ if($status === 'ativo'){
         
                             $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
         
-                            echo "<div class='produtos_recentes'>
+                            echo "<div class='produtos_atrelados'>
                                     <span class='code'>".$codigo."</span>
                                     <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
                                     ".$img_prod."
@@ -329,7 +344,7 @@ if($status === 'ativo'){
         
                             $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
         
-                            echo "<div class='produtos_recentes'>
+                            echo "<div class='produtos_atrelados'>
                                     <span class='code'>".$codigo."</span>
                                     <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
                                     ".$img_prod."
@@ -368,7 +383,7 @@ if($status === 'ativo'){
         
                             $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
         
-                            echo "<div class='produtos_recentes'>
+                            echo "<div class='produtos_atrelados'>
                                     <span class='code'>".$codigo."</span>
                                     <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
                                     ".$img_prod."
@@ -408,7 +423,7 @@ if($status === 'ativo'){
         
                             $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
         
-                            echo "<div class='produtos_recentes'>
+                            echo "<div class='produtos_atrelados'>
                                     <span class='code'>".$codigo."</span>
                                     <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
                                     ".$img_prod."
@@ -447,7 +462,7 @@ if($status === 'ativo'){
         
                             $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
         
-                            echo "<div class='produtos_recentes'>
+                            echo "<div class='produtos_atrelados'>
                                     <span class='code'>".$codigo."</span>
                                     <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
                                     ".$img_prod."
@@ -486,7 +501,7 @@ if($status === 'ativo'){
         
                             $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
         
-                            echo "<div class='produtos_recentes'>
+                            echo "<div class='produtos_atrelados'>
                                     <span class='code'>".$codigo."</span>
                                     <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
                                     ".$img_prod."
@@ -497,7 +512,7 @@ if($status === 'ativo'){
                         }
 
                         //prod 04
-                        $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo'");
+                        $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo_prod'");
                         $dados = $query->fetchAll(PDO::FETCH_ASSOC);
                         $statusProd = $dados[0]['status_prod'];
                         $Categ = $dados[0]['categoria'];
@@ -509,8 +524,8 @@ if($status === 'ativo'){
                             $id = $dados[0]['id'];
                             $codigo = $dados[0]['codigo'];
                             $img = $dados[0]['img'];
-                            $nome = $dados[0]['nome'];
                             $valor = $dados[0]['valor'];
+                            $nome = $dados[0]['nome'];
         
                             if($img == "placeholder.jpg" || $img == ""){
                                 $img_prod = "<img src='assets/produtos/placeholder.jpg'>";
@@ -525,7 +540,7 @@ if($status === 'ativo'){
         
                             $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
         
-                            echo "<div class='produtos_recentes'>
+                            echo "<div class='produtos_atrelados'>
                                     <span class='code'>".$codigo."</span>
                                     <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
                                     ".$img_prod."
@@ -565,7 +580,7 @@ if($status === 'ativo'){
         
                             $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
         
-                            echo "<div class='produtos_recentes'>
+                            echo "<div class='produtos_atrelados'>
                                     <span class='code'>".$codigo."</span>
                                     <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
                                     ".$img_prod."
@@ -604,7 +619,7 @@ if($status === 'ativo'){
         
                             $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
         
-                            echo "<div class='produtos_recentes'>
+                            echo "<div class='produtos_atrelados'>
                                     <span class='code'>".$codigo."</span>
                                     <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
                                     ".$img_prod."
@@ -615,19 +630,20 @@ if($status === 'ativo'){
                         }
 
                         //prod 03 & 04
-                        $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo'");
+                        $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo_prod'");
                         $dados = $query->fetchAll(PDO::FETCH_ASSOC);
                         $k=0;
                         for ($i=0; $i < count($dados); $i++) { 
                             $statusProd = $dados[$i]['status_prod'];
                             $Categ = $dados[$i]['categoria'];
                             $nome = $dados[$i]['nome'];
+                            $nome_lower = strtolower($nome);
 
                             $query2 = $pdo->query("SELECT * FROM categorias where nome = '$Categ'");
                             $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
                             $statusCateg = $dados2[0]['status_categ'];
 
-                            if($statusProd === 'ativo' && $statusCateg === 'ativo' && $k < 2 && $nome !== $Item_Relac_1 && $nome !== $Item_Relac_2){
+                            if($statusProd === 'ativo' && $statusCateg === 'ativo' && $k < 2 && $nome !== $Item_Relac_1 && $nome !== $Item_Relac_2 && $nome_lower !== $nome_clean){
                                 $k++;
                                 $id = $dados[$i]['id'];
                                 $codigo = $dados[$i]['codigo'];
@@ -647,7 +663,7 @@ if($status === 'ativo'){
             
                                 $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
             
-                                echo "<div class='produtos_recentes'>
+                                echo "<div class='produtos_atrelados'>
                                         <span class='code'>".$codigo."</span>
                                         <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
                                         ".$img_prod."
@@ -660,8 +676,6 @@ if($status === 'ativo'){
                     }
                     if($Item_Relac_1 !== '' && $Item_Relac_2 === '' && $Item_Relac_3 === '' && $Item_Relac_4 === ''){
                         //prod 01
-                        var_dump('entrei');
-
                         $query = $pdo->query("SELECT * FROM produtos WHERE nome = '$Item_Relac_1'");
                         $dados = $query->fetchAll(PDO::FETCH_ASSOC);
                         $statusProd = $dados[0]['status_prod'];
@@ -690,7 +704,7 @@ if($status === 'ativo'){
         
                             $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
         
-                            echo "<div class='produtos_recentes'>
+                            echo "<div class='produtos_atrelados'>
                                     <span class='code'>".$codigo."</span>
                                     <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
                                     ".$img_prod."
@@ -701,19 +715,20 @@ if($status === 'ativo'){
                         }
 
                         //prod 02 & 03 & 04
-                        $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo'");
+                        $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo_prod'");
                         $dados = $query->fetchAll(PDO::FETCH_ASSOC);
                         $k=0;
                         for ($i=0; $i < count($dados); $i++) { 
                             $statusProd = $dados[$i]['status_prod'];
                             $Categ = $dados[$i]['categoria'];
                             $nome = $dados[$i]['nome'];
+                            $nome_lower = strtolower($nome);
 
                             $query2 = $pdo->query("SELECT * FROM categorias where nome = '$Categ'");
                             $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
                             $statusCateg = $dados2[0]['status_categ'];
 
-                            if($statusProd === 'ativo' && $statusCateg === 'ativo' && $k < 3 && $nome !== $Item_Relac_1){
+                            if($statusProd === 'ativo' && $statusCateg === 'ativo' && $k < 3 && $nome !== $Item_Relac_1 && $nome_lower !== $nome_clean){
                                 $k++;
                                 $id = $dados[$i]['id'];
                                 $codigo = $dados[$i]['codigo'];
@@ -733,7 +748,7 @@ if($status === 'ativo'){
             
                                 $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
             
-                                echo "<div class='produtos_recentes'>
+                                echo "<div class='produtos_atrelados'>
                                         <span class='code'>".$codigo."</span>
                                         <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
                                         ".$img_prod."
@@ -743,27 +758,27 @@ if($status === 'ativo'){
                                     </div>";
                             }
                         }
-
                     }
                     if($Item_Relac_1 === '' && $Item_Relac_2 === '' && $Item_Relac_3 === '' && $Item_Relac_4 === ''){
                         //prod 01 & 02 & 03 & 04
-                        $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo'");
+                        $query = $pdo->query("SELECT * FROM produtos WHERE codigo = '$codigo_prod'");
                         $dados = $query->fetchAll(PDO::FETCH_ASSOC);
                         $k=0;
                         for ($i=0; $i < count($dados); $i++) { 
                             $statusProd = $dados[$i]['status_prod'];
                             $Categ = $dados[$i]['categoria'];
+                            $nome = $dados[$i]['nome'];
+                            $nome_lower = strtolower($nome);
 
                             $query2 = $pdo->query("SELECT * FROM categorias where nome = '$Categ'");
                             $dados2 = $query2->fetchAll(PDO::FETCH_ASSOC);
                             $statusCateg = $dados2[0]['status_categ'];
 
-                            if($statusProd === 'ativo' && $statusCateg === 'ativo' && $k < 4){
+                            if($statusProd === 'ativo' && $statusCateg === 'ativo' && $k < 4 && $nome_lower !== $nome_clean){
                                 $k++;
                                 $id = $dados[$i]['id'];
                                 $codigo = $dados[$i]['codigo'];
                                 $img = $dados[$i]['img'];
-                                $nome = $dados[$i]['nome'];
                                 $valor = $dados[$i]['valor'];
             
                                 if($img == "placeholder.jpg" || $img == ""){
@@ -779,7 +794,7 @@ if($status === 'ativo'){
             
                                 $Onclick = '"'.$id.'", "'.$img.'", "'.$nome.'", "'.$codigo.'"';
             
-                                echo "<div class='produtos_recentes'>
+                                echo "<div class='produtos_atrelados'>
                                         <span class='code'>".$codigo."</span>
                                         <button onclick='addCarrinho(".$Onclick.")'><img src='assets/icons/bag.svg' onload='SVGInject(this)'></button>
                                         ".$img_prod."
@@ -793,8 +808,13 @@ if($status === 'ativo'){
                 ?>
             </div>
         </main>
-
-    <?php } else{ echo '<main class="Produto"><h4> Produto não encontrado </h4><a href="./produtos">Volte o catálogo de todos nossos produtos Clicando aqui!</a></main>'; }?>
+    <?php } 
+        if($status === 'sem_estoque'){ 
+            echo '<main class="Produto prod_status"><h4> Este produto atualmente está sem estoque! <br/> Agradecemos sua paciencia. Iremos trabalhar o mais rápido possivel para repor nossos estoques!</h4><a href="./produtos">Enquanto isso, conheça os outros produtos do nosso catálogo Clicando aqui!</a></main>'; 
+        }if($status === 'inativo'){ 
+            echo '<main class="Produto prod_status"><h4> Produto não encontrado </h4><a href="./produtos">Volte o catálogo de todos nossos produtos Clicando aqui!</a></main>'; 
+        }
+    ?>
     
     <footer>
         <p>&copy; <?php echo date('Y') ?> | Auto inove</p>
@@ -876,10 +896,10 @@ if($status === 'ativo'){
                     $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
     
                     echo "
-                        <div class='hidelist'>
+                        <div class='hidelist list_prod_search'>
                             <p>".$img."</p>
                             <p>".$nome."</p>
-                            <p class='hide'>".$nome_url."</p>
+                            <p>".$nome_url."</p>
                             <span>produtos</span>
                         </div>
                     ";
@@ -888,8 +908,46 @@ if($status === 'ativo'){
         ?>
     </div>
 
+    <form id="form_vendaDireta" class="hide" method="POST">
+        <input type="hidden" id="id_prod" name="id_prod" value="<?php echo $id_prod ?>">
+        <input type="hidden" id="quant_prod" name="quant_prod" value="">
+    </form>
+
     <script>
-       
+        $('header').css('background', '#131313');
+
+        function quantidade(acao) { 
+            var valor = Number($('.quant').text());
+            if (acao === 'subtrai' && valor > 0) {
+                valor--;
+            } else if (acao === 'soma' && valor < <?php echo $estoque ?>) {
+                valor++;
+            }
+            $('.quant').text(valor);
+        }
+
+        $('#form_vendaDireta').click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "./vendas_Prod/update_Val.php",
+                method: "post",
+                data: $('form').serialize(),
+                dataType: "text",
+                success: function (msg) { }
+            })
+        });
+
+        function linkCompra() {
+            let quant = $('.quant').text();
+
+            $('#quant_prod').val(quant);
+            $('#form_vendaDireta').click();
+
+            $(".linkcompra").attr("href", `https://wa.me/<?php echo $numero_Whats ?>?text=Olá,%20Gostaria%20de%20comprar%20${quant}%20unidade(s)%20do%20produto: <?php echo $nome_clean ?>`);
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
+        }
     </script>
 </body>
 </html>

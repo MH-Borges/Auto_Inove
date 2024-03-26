@@ -1448,18 +1448,22 @@ body .Carrinho .carrinho_Block .itens_block .itenCarrinho .AddRemove {
   flex-direction: row;
   align-items: center;
   justify-content: right;
-  padding-right: 1.75vw;
+  padding-right: 3vw;
 }
-body .Carrinho .carrinho_Block .itens_block .itenCarrinho .AddRemove .remove {
+body .Carrinho .carrinho_Block .itens_block .itenCarrinho .AddRemove .subtrai {
   all: unset;
   width: 0;
   height: 0;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
   border-top: 15px solid #F83810;
+  transition: 0.2s ease-in-out all;
+}
+body .Carrinho .carrinho_Block .itens_block .itenCarrinho .AddRemove .subtrai:hover {
+  transform: translateY(3px);
 }
 body .Carrinho .carrinho_Block .itens_block .itenCarrinho .AddRemove .quant {
-  width: 3vw;
+  width: 4vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1468,13 +1472,31 @@ body .Carrinho .carrinho_Block .itens_block .itenCarrinho .AddRemove .quant {
   font-size: 1.25vw;
   color: #F3F4F9;
 }
-body .Carrinho .carrinho_Block .itens_block .itenCarrinho .AddRemove .add {
+body .Carrinho .carrinho_Block .itens_block .itenCarrinho .AddRemove .soma {
   all: unset;
   width: 0;
   height: 0;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
   border-bottom: 15px solid #F83810;
+  transition: 0.2s ease-in-out all;
+}
+body .Carrinho .carrinho_Block .itens_block .itenCarrinho .AddRemove .soma:hover {
+  transform: translateY(-3px);
+}
+body .Carrinho .carrinho_Block .itens_block .itenCarrinho .removeCarrinho {
+  all: unset;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2vw;
+  height: 2vw;
+  border: 1px solid #F83810;
+  border-radius: 0.25vw;
+}
+body .Carrinho .carrinho_Block .itens_block .itenCarrinho .removeCarrinho img {
+  width: 100%;
+  height: 100%;
 }
 body .Carrinho .carrinho_Block .linkfinal {
   all: unset;
@@ -1600,6 +1622,445 @@ body .Produto {
   height: auto;
   padding-top: 10vh;
   padding-bottom: 7vh;
+  position: relative;
+}
+body .Produto nav {
+  all: unset;
+  position: absolute;
+  left: 2vw;
+  top: 10.5vh;
+  height: 4.5vh;
+}
+body .Produto nav .breadcrumb {
+  background: none;
+}
+body .Produto nav .breadcrumb .breadcrumb-item {
+  max-width: 8vw;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 400;
+  font-size: 0.75vw;
+  color: #BAF811 !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body .Produto nav .breadcrumb .breadcrumb-item a {
+  font-family: "Be Vietnam Pro", sans-serif;
+  color: #F3F4F9;
+  font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body .Produto nav .breadcrumb .breadcrumb-item a:hover {
+  color: #8000FF;
+}
+body .Produto nav .breadcrumb .breadcrumb-item::before {
+  content: ">";
+}
+body .Produto nav .breadcrumb .breadcrumb-item:first-child::before {
+  content: "";
+}
+body .Produto .estoque {
+  position: absolute;
+  right: 3vw;
+  top: 13vh;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 1vw;
+  color: #F83810;
+}
+body .Produto .main_Block {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  padding: 6vh 3vw;
+}
+body .Produto .main_Block .infos {
+  width: 60%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-right: 2vw;
+}
+body .Produto .main_Block .infos h1 {
+  margin: 0;
+  width: 100%;
+  height: 15%;
+  padding: 0.25vw;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 2.5vw;
+  color: #F3F4F9;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2vh;
+}
+body .Produto .main_Block .infos h5 {
+  margin: 0;
+  width: 100%;
+  height: 5%;
+  display: flex;
+  align-items: center;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 800;
+  font-size: 1vw;
+}
+body .Produto .main_Block .infos h5 span {
+  margin-left: 0.5vw;
+  font-weight: 200;
+}
+body .Produto .main_Block .infos h5 .codigo_Show {
+  color: #F83810;
+}
+body .Produto .main_Block .infos .valor {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  padding-right: 1vw;
+}
+body .Produto .main_Block .infos .valor span {
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 600;
+  font-size: 1.5vw;
+  color: #F3F4F9;
+  margin-right: 0.5vw;
+}
+body .Produto .main_Block .infos .valor h3 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 3vw;
+  color: #BAF811;
+  font-weight: 900;
+}
+body .Produto .main_Block .infos .Acoes {
+  width: 100%;
+  height: 30%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 1vh 2vw;
+}
+body .Produto .main_Block .infos .Acoes .AddRemove {
+  width: 50%;
+  height: 40%;
+  margin-bottom: 2vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+body .Produto .main_Block .infos .Acoes .AddRemove .remove {
+  all: unset;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #F83810;
+}
+body .Produto .main_Block .infos .Acoes .AddRemove .quant {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 1.5vw;
+  color: #F3F4F9;
+}
+body .Produto .main_Block .infos .Acoes .AddRemove .add {
+  all: unset;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid #F83810;
+}
+body .Produto .main_Block .infos .Acoes .AddRemove .addCarrinho {
+  all: unset;
+  width: 55%;
+  height: 65%;
+  margin-left: 2vw;
+  border: solid 4px #F83810;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 800;
+  font-size: 1vw;
+  color: #F3F4F9;
+}
+body .Produto .main_Block .infos .Acoes a {
+  width: 50%;
+  height: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 800;
+  font-size: 1.25vw;
+  color: #131313;
+  background: #BAF811;
+  box-shadow: 6px 6px #8000FF;
+}
+body .Produto .main_Block .img {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5vw;
+  position: relative;
+}
+body .Produto .main_Block .img img, body .Produto .main_Block .img svg {
+  width: 100%;
+  height: auto;
+}
+body .Produto .main_Block .img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #F3F4F9;
+  opacity: 0.05;
+}
+body .Produto .descrition_Block {
+  width: 100%;
+  min-height: 50vh;
+  height: auto;
+  padding: 2vh 3vw;
+  position: relative;
+}
+body .Produto .descrition_Block h2 {
+  width: 100%;
+  height: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 2.25vw;
+  color: #F3F4F9;
+  position: relative;
+}
+body .Produto .descrition_Block h2::before {
+  content: "";
+  position: absolute;
+  bottom: 1vh;
+  left: 1.5vw;
+  width: 11%;
+  height: 2px;
+  background: #F83810;
+}
+body .Produto .descrition_Block p {
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 500;
+  font-size: 1vw;
+  color: #F3F4F9;
+  line-height: 3vh;
+  padding-bottom: 8vh;
+  padding-top: 2vh;
+}
+body .Produto .descrition_Block::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  background: #F3F4F9;
+}
+body .Produto .ProdsRelacionados_Block {
+  padding: 2vh 3vw;
+  padding-bottom: 7vh;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+}
+body .Produto .ProdsRelacionados_Block h2 {
+  margin-bottom: 3vh;
+  width: 100%;
+  height: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 2.25vw;
+  color: #F3F4F9;
+  position: relative;
+}
+body .Produto .ProdsRelacionados_Block h2::before {
+  content: "";
+  position: absolute;
+  bottom: 1vh;
+  left: 1.5vw;
+  width: 24%;
+  height: 2px;
+  background: #F83810;
+}
+body .Produto .ProdsRelacionados_Block .produtos_atrelados {
+  z-index: 25;
+  width: 23.5%;
+  height: 60vh;
+  margin: 0 0.75%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.75vw;
+  overflow: hidden;
+}
+body .Produto .ProdsRelacionados_Block .produtos_atrelados .code {
+  position: absolute;
+  top: 0.25vw;
+  left: 0.5vw;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 800;
+  font-size: 0.75vw;
+  color: #BAF811;
+  letter-spacing: 0.05vw;
+}
+body .Produto .ProdsRelacionados_Block .produtos_atrelados button {
+  position: absolute;
+  top: 0.75vw;
+  right: 0.75vw;
+  width: 1.75vw;
+  height: 1.75vw;
+  border: none;
+  border-radius: 0.25vw;
+  background: #F83810;
+  z-index: 99 !important;
+  transition: ease-in-out 0.1s all;
+}
+body .Produto .ProdsRelacionados_Block .produtos_atrelados button img, body .Produto .ProdsRelacionados_Block .produtos_atrelados button svg {
+  width: 100%;
+  height: 100%;
+  padding: 0.3vw;
+}
+body .Produto .ProdsRelacionados_Block .produtos_atrelados button img path, body .Produto .ProdsRelacionados_Block .produtos_atrelados button svg path {
+  fill: #131313;
+}
+body .Produto .ProdsRelacionados_Block .produtos_atrelados button:hover {
+  width: 2.25vw;
+  height: 2.25vw;
+  top: 0.5vw;
+  right: 0.5vw;
+}
+body .Produto .ProdsRelacionados_Block .produtos_atrelados img {
+  width: 100%;
+  height: 65%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  padding: 1.5vw;
+}
+body .Produto .ProdsRelacionados_Block .produtos_atrelados h4 {
+  all: unset;
+  width: 100%;
+  height: 20%;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 700;
+  font-size: 1vw;
+  color: #F3F4F9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+body .Produto .ProdsRelacionados_Block .produtos_atrelados h4::before {
+  content: "";
+  position: absolute;
+  background: #BAF811;
+  opacity: 1;
+  width: 30%;
+  height: 3px;
+  bottom: 0;
+  left: 35%;
+}
+body .Produto .ProdsRelacionados_Block .produtos_atrelados p {
+  width: 100%;
+  height: 15%;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 900;
+  font-size: 1.25vw;
+  color: #BAF811;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body .Produto .ProdsRelacionados_Block .produtos_atrelados p span {
+  color: #F3F4F9;
+  font-size: 0.75vw;
+  margin-right: 0.25vw;
+  margin-bottom: -0.75vh;
+}
+body .Produto .ProdsRelacionados_Block .produtos_atrelados a {
+  width: 7vw;
+  height: 7vw;
+  position: absolute;
+  bottom: -3.5vw;
+  right: -3.5vw;
+  z-index: 15;
+  transform: rotate(45deg);
+  background: #BAF811;
+}
+body .Produto .ProdsRelacionados_Block .produtos_atrelados a img, body .Produto .ProdsRelacionados_Block .produtos_atrelados a svg {
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  top: 40%;
+  left: 0.7vw;
+}
+body .Produto .ProdsRelacionados_Block .produtos_atrelados a img path, body .Produto .ProdsRelacionados_Block .produtos_atrelados a svg path {
+  fill: #131313;
+}
+body .Produto .ProdsRelacionados_Block .produtos_atrelados::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #BBBBBB;
+  opacity: 0.15;
+  z-index: -1;
+}
+body .prod_status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 10vw;
+}
+body .prod_status h4 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 800;
+  font-size: 2.5vw;
+  color: #F3F4F9;
+  text-align: center;
+}
+body .prod_status a {
+  margin-top: 5vh;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 700;
+  font-size: 1.5vw;
+  color: #BAF811;
+}
+body .prod_status a:hover {
+  color: #F83810;
 }
 body footer {
   margin: 0 5%;

@@ -139,6 +139,8 @@
                             $Item_Relac_2 = $dados[0]['Item_Relac_2'];
                             $Item_Relac_3 = $dados[0]['Item_Relac_3'];
                             $Item_Relac_4 = $dados[0]['Item_Relac_4'];
+
+                            $descricao_Produto = str_replace('<br />', " ", $descricao_Produto);
                         }
 
                         if($categoria_Produto !== "" && $categoria_Produto !== ""){
@@ -319,7 +321,7 @@
     
                                     <div class="Infos">
                                         <div class="BlockBox descricaoBox">
-                                            <textarea type="text" name="descri_Produto" id="descri_Produto" maxlength="2000" required><?php echo @$descricao_Produto ?></textarea>
+                                            <textarea type="text" name="descri_Produto" id="descri_Produto" maxlength="5000" required><?php echo @$descricao_Produto ?></textarea>
                                             <span>Descrição:</span>
                                             <p class="lengthInput descri_produto_Input"></p>
                                         </div>
@@ -844,7 +846,7 @@
     setInterval(
         function () {
             verificaTamanhoInput('nome_Produto', 'nome_produto_Input', 200);
-            verificaTamanhoInput('descri_Produto', 'descri_produto_Input', 2000);
+            verificaTamanhoInput('descri_Produto', 'descri_produto_Input', 5000);
             verificaTamanhoInput('marca_Produto', 'marca_produto_Input', 150);
             verificaTamanhoInput('mercadoLivre_Produto', 'mercadoLivre_produto_Input', 500);
     }, 1000);

@@ -1,6 +1,7 @@
 <?php
 
 $email_adm = strtolower('contato@autoinove.com.br');
+$numero_Whats = '554198492024';
 
 $servidor = 'localhost';
 $usuario = 'root';

@@ -141,6 +141,10 @@
         }
     }
 
+    if($descricao !== ''){
+        $descricao = nl2br(htmlentities($descricao, ENT_QUOTES, 'UTF-8'));
+    }
+
     // ===== INSERÇÃO DE DADOS NO BANCO =====
     if($id_edit === ""){
         $res = $pdo->prepare("INSERT INTO produtos (img, nome, valor, descricao, categoria, sub_categoria, codigo, marca, estoque, litros, mercado_livre, data_criacao, data_atual, status_prod, Item_Relac_1, Item_Relac_2, Item_Relac_3, Item_Relac_4) VALUES (:img, :nome, :valor, :descricao, :categoria, :sub_categoria, :codigo, :marca, :estoque, :litros, :mercado_livre, :data_criacao, :data_atual, :status_prod, :Item_Relac_1, :Item_Relac_2, :Item_Relac_3, :Item_Relac_4)");

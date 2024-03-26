@@ -1,6 +1,4 @@
-<?php 
-require_once("sistema/configs/conexao.php"); 
-?>
+<?php require_once("sistema/configs/conexao.php"); ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -121,7 +119,6 @@ require_once("sistema/configs/conexao.php");
         </div>
     </header>
 
-    <H1 STYLE='font-size: 3vw; margin-top: 15vh;'> FAZER LOGICA DE ADD E REMOVER QUANTIDADE E FINALIZAR LINK WHATS</H1>
     <main class="Carrinho">
         <section class='carrinho_Block'>
             <h3>Seu carrinho está vazio!!</h3>
@@ -224,7 +221,6 @@ require_once("sistema/configs/conexao.php");
     <script>
         $(document).ready(function () {
             if(Cookies.get('Carrinho') !== undefined && Cookies.get('Carrinho') !== ''){
-                
                 let CarrinhoCookie = Cookies.get('Carrinho');
                 
                 const CookieToArray = CarrinhoCookie.split("&").map(function(item) {
@@ -258,30 +254,151 @@ require_once("sistema/configs/conexao.php");
                             <a class='nomeProd' href='produto_${nome_url}'>${item.nomeProd}</a>
                             <h4>${item.codigo}</h4>
                             <div class='AddRemove'>
-                                <button class='remove' type='button' onclick='SubtraiCarrinho()'></button>
+                                <button class='subtrai' type='button'></button>
                                 <span class='quant'>${item.quant}</span>
-                                <button class='add' type='button' onclick='SomaCarrinho()'></button>
+                                <button class='soma' type='button'></button>
                             </div>
+                            <button type='button' class='removeCarrinho'><img src='assets/icons/delet.svg'></button>
                         </div>`);
                 });
 
                 $('.carrinho_Block').append(`<a class='linkfinal' href='#'>Finalizar Compra</a>`);
             }
+
+            document.querySelectorAll('.subtrai').forEach(e => {
+                e.addEventListener('click', event => {
+                    updateCart(event, false);
+                });
+            });
+
+            document.querySelectorAll('.soma').forEach(e => {
+                e.addEventListener('click', event => {
+                    updateCart(event, true);
+                });
+            });
+
+            document.querySelectorAll('.removeCarrinho').forEach(e => {
+                e.addEventListener('click', event => {
+                    let pai = event.target.parentNode.parentNode;
+                    let nome = pai.children[1].innerHTML;
+
+                    let CarrinhoCookie = Cookies.get('Carrinho');
+                    let CookieToArray = [];
+                    if (CarrinhoCookie) {
+                        CookieToArray = CarrinhoCookie.split("&").map(function (item) {
+                            let obj = {};
+                            item.split("_").forEach(function (pair) {
+                                let parts = pair.split(":");
+                                obj[parts[0]] = parts[1];
+                            });
+                            return obj;
+                        });
+                    }
+
+                    document.querySelectorAll('.itensCarrinho').forEach(e => {
+                        if (nome === e.children[1].innerHTML) {
+                            let valorCarrin = Number($('.CartNotf').text()) - Number(e.children[2].innerHTML.replaceAll('Quant: ',' '));
+                            if(valorCarrin === 0){
+                                $('.CartNotf').text(' ');
+                                $('.CartNotf').addClass('hide');
+                            } else { $('.CartNotf').text(valorCarrin); }
+                            e.remove();
+                        }
+                    });
+
+                    document.querySelectorAll('.itenCarrinho').forEach(e => {
+                        if (nome === e.children[1].innerHTML) {
+                            e.remove();
+                        }
+                    });
+
+                    let i=0;
+                    CookieToArray.every(item => {
+                        if (item.nomeProd === nome){
+                            return false;
+                        } 
+                        else{
+                            i++;
+                            return true;
+                        } 
+                    });
+
+                    CookieToArray.splice(i, 1);
+
+                    let CarrinhoToString = CookieToArray.map(function (obj) {
+                        return 'idProd:' + obj.idProd + '_quant:' + obj.quant + '_imgProd:' + obj.imgProd + '_nomeProd:' + obj.nomeProd + '_codigo:' + obj.codigo;
+                    }).join('&');
+
+                    Cookies.set('Carrinho', CarrinhoToString, {
+                        expires: 1
+                    });
+
+                });
+            });
         });
 
-        function SubtraiCarrinho() {
-            console.log('remove');
-        }
+        function updateCart(event, increment) {
+            let CarrinhoCookie = Cookies.get('Carrinho');
+            let CookieToArray = [];
+            if (CarrinhoCookie) {
+                CookieToArray = CarrinhoCookie.split("&").map(function (item) {
+                    let obj = {};
+                    item.split("_").forEach(function (pair) {
+                        let parts = pair.split(":");
+                        obj[parts[0]] = parts[1];
+                    });
+                    return obj;
+                });
+            }
 
-        function SomaCarrinho() {
-            console.log('addCarrinho');
+            let pai = event.target.parentNode;
+            let avo = pai.parentNode;
+            let valor = Number(pai.children[1].innerHTML);
+            let nome = avo.children[1].innerHTML;
+
+            if (increment) {
+                valor++;
+            } else {
+                if (valor > 0) {
+                    valor--;
+                }
+            }
+
+            pai.children[1].innerHTML = valor;
+
+            CookieToArray.forEach(item => {
+                if (nome === item.nomeProd) {
+                    item.quant = valor;
+                    document.querySelectorAll('.itensCarrinho').forEach(e => {
+                        if (nome === e.children[1].innerHTML) {
+                            e.children[2].innerHTML = "Quant: " + valor;
+                        }
+                    });
+                }
+            });
+
+            let spanCarrin = $('.CartNotf').text();
+            if (increment) {
+                spanCarrin++;
+            } else {
+                if (spanCarrin > 0) {
+                    spanCarrin--;
+                }
+            }
+            $('.CartNotf').text(spanCarrin);
+
+            let CarrinhoToString = CookieToArray.map(function (obj) {
+                return 'idProd:' + obj.idProd + '_quant:' + obj.quant + '_imgProd:' + obj.imgProd + '_nomeProd:' + obj.nomeProd + '_codigo:' + obj.codigo;
+            }).join('&');
+
+            Cookies.set('Carrinho', CarrinhoToString, {
+                expires: 1
+            });
         }
-        
     </script>
 </body>
 </html>
 
 <!-- %20 = espaço em branco -->
-<!-- ///// = divisoria -->
 
 <!-- https://wa.me/5541998431084?text=teste%20de%20mensagem%20quantidade:2%20/////%20testedeaaaaa%20quantidade:5%20///// -->
