@@ -174,6 +174,14 @@ function moveProgressBar() {
 }
 
 function addCarrinho(idProd, imgProd, nomeProd, codigo, PG_Prod){
+    $('#form_Notificacao').append(`
+        <input type="hidden" id="item_notf" name="item_notf" value="${nomeProd}">
+        <input type="hidden" id="tipo_notf" name="tipo_notf" value="produto_carrinho">
+    `);
+    $('#form_Notificacao').click();
+
+    $('#form_Notificacao').text(' ');
+
     if(Cookies.get('Carrinho') !== undefined && Cookies.get('Carrinho') !== ''){
         let CarrinhoCookie = Cookies.get('Carrinho');
         //string to array
@@ -306,5 +314,31 @@ function addCarrinho(idProd, imgProd, nomeProd, codigo, PG_Prod){
             $('.msg_Carrinho').addClass('hide');
             $(".msg_Carrinho").css("bottom", "-25vh"); 
         }, 3200);
+    }
+}
+
+//NOTIFICAÇÃO
+$('#form_Notificacao').click(function (e) {
+    e.preventDefault();
+    $.ajax({
+        url: "notificacao/Update_Infos.php",
+        method: "post",
+        data: $('form').serialize(),
+        dataType: "text",
+        success: function(msg){ }
+    })
+});
+
+function notif(item, tipo, url) {
+    $('#form_Notificacao').append(`
+        <input type="hidden" id="item_notf" name="item_notf" value="${item}">
+        <input type="hidden" id="tipo_notf" name="tipo_notf" value="${tipo}">
+    `);
+    $('#form_Notificacao').click();
+
+    if(tipo === 'categoria' || tipo === 'sub-categoria'){
+        $(`.${url}`).attr("href", `produtos_${url}`);
+    }if(tipo === 'produto'){
+        $(`.${url}`).attr("href", `produto_${url}`);
     }
 }

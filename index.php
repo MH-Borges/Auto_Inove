@@ -119,7 +119,7 @@
         </div>
     </header>
 
-    <main class="Inicio" >
+    <main class="Inicio">
         <section class="Banner">
             <img src="assets/backgrounds/Home_Background.webp" alt="">
             <h1>Potência e alto desempenho <br> para o <span>SEU VEÍCULO!</span></h1>
@@ -152,7 +152,7 @@
                             $img_categoria = "<img class='img_categoria' src='assets/categorias/$img_categoria'>";
                         }
                         echo "
-                            <a class='categoria' href='produtos_".$nome_url."'>
+                            <a onclick='notif(`".$nome_categoria."`, `categoria`, `".$nome_url."`)' class='categoria ".$nome_url."'>
                                 ".$img_categoria."
                                 <p>".$nome_categoria."</p>
                             </a>
@@ -160,7 +160,7 @@
                     }
                 }
             ?>
-            <a class="btn btn_Categ" href="./categorias ">Conheça mais</a>
+            <a class="btn btn_Categ" href="./categorias">Conheça mais</a>
         </section>
         <section class="Dobra_Prods">
             <div id='img_bg_prods'></div>
@@ -204,10 +204,11 @@
                                 ".$img_prod."
                                 <h4>".$nome."</h4>
                                 <p><span>R$</span>".$valor."</p>
-                                <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
+                                <a onclick='notif(`".$nome."`, `produto`, `".$nome_url."`)' class='".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
                             </div>";
                     }
                 }
+
             ?>
             <a class="btn btn_prods" href="./produtos">Veja mais</a>
         </section>
@@ -305,5 +306,6 @@
         ?>
     </div>
 
+    <form id="form_Notificacao" class="hide" method="POST"></form>
 </body>
 </html>

@@ -287,7 +287,7 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
                         if (@count($dados2)> 0){
                             echo "
                                 <div class='list_Categs'>
-                                    <a class='categ_Subcategs' href='produtos_".$nome_url."'>
+                                    <a onclick='notif(`".$nome."`, `categoria`, `".$nome_url."`)' class='categ_Subcategs ".$nome_url."'>
                                         <p>".$nome."</p>
                                         <img src='assets/icons/seta.svg' onload='SVGInject(this)'>
                                     </a>
@@ -300,14 +300,14 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
                                                 "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
                                         $nome_url_sub = preg_replace('/[ -]+/' , '_' , $nome_novo);
     
-                                        echo '
-                                            <a class="dropdown-item" href="produtos_'.$nome_url_sub.'">'.$nome_subCateg.'</a>
-                                        ';
+                                        echo "
+                                            <a onclick='notif(`".$nome_subCateg."`, `sub-categoria`, `".$nome_url_sub."`)' class='dropdown-item ".$nome_url_sub."'>".$nome_subCateg."</a>
+                                        ";
                                     } 
                                 echo "</div></div>";
                         }
                         else{
-                            echo" <a class='list_Categs' href='produtos_".$nome_url."'><p>".$nome."</p></a> ";
+                            echo" <a onclick='notif(`".$nome."`, `categoria`, `".$nome_url."`)' class='list_Categs ".$nome_url."'><p>".$nome."</p></a> ";
                         }
                         $m=$j;
                     }
@@ -325,7 +325,6 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
                             $m++;
                             for ($m; $m < count($dados); $m++) {
                                 $status = $dados[$m]['status_categ'];       
-
                                 if($status === 'ativo'){
                                     $nome = $dados[$m]['nome'];
     
@@ -334,7 +333,7 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
                                             "aaaaeeiooouuncAAAAEEIOOOUUNC-")) );
                                     $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
     
-                                    echo" <a class='dropdown-item' href='produtos_".$nome_url."'>$nome</a> ";
+                                    echo" <a onclick='notif(`".$nome."`, `categoria`, `".$nome_url."`)' class='dropdown-item ".$nome_url."'>$nome</a> ";
                                 }
                             }
                     echo "</div>
@@ -430,7 +429,7 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
                                             $nome_url = preg_replace('/[ -]+/' , '_' , $nome_novo);
     
                                             echo "
-                                                <a href='produtos_".$nome_url."'>
+                                                <a onclick='notif(`".$nome_categoria."`, `sub-categoria`, `".$nome_url."`)' class='".$nome_url."'>
                                                     <p>".$nome_categoria."</p>
                                                 </a>
                                             ";
@@ -556,7 +555,7 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
                                             ".$img_prod."
                                             <h4>".$nome."</h4>
                                             <p><span>R$</span>".$valor."</p>
-                                            <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
+                                            <a onclick='notif(`".$nome."`, `produto`, `".$nome_url."`)' class='".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
                                         </div>";
                                 }
                             }
@@ -586,7 +585,7 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
                                         ".$img_prod."
                                         <h4>".$nome."</h4>
                                         <p><span>R$</span>".$valor."</p>
-                                        <a href='produto_".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
+                                        <a onclick='notif(`".$nome."`, `produto`, `".$nome_url."`)' class='".$nome_url."'><img src='assets/icons/close.svg' onload='SVGInject(this)'></a>
                                     </div>";
                             }
                         }
@@ -688,6 +687,8 @@ if($nome_get === 'MaiorPreco' || str_contains($nome_get , 'C_MaiorPreco') || str
             }
         ?>
     </div>
+
+    <form id="form_Notificacao" class="hide" method="POST"></form>
 
     <script>
         $('header').css('background', '#131313');

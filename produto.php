@@ -27,9 +27,22 @@ if($status === 'ativo'){
     $res->bindValue(":nome", $nome_clean);
     $res->execute();
 
+    $nome = $dados[0]['nome'];
+
+    if($Visualizacoes === 5 || $Visualizacoes === 25 || $Visualizacoes === 50 || $Visualizacoes === 100 || $Visualizacoes === 250 || $Visualizacoes === 500 || $Visualizacoes === 750 || $Visualizacoes === 1000){
+        $mensagem = 'O produto '.$nome.' recebeu um total de '.$Visualizacoes.' visualizações, Parabens!!';
+        $data = date('d/m/Y');
+        
+        $res = $pdo->prepare("INSERT INTO notificacoes (acao, mensagem, data_, status_notif) VALUES (:acao, :mensagem, :data_, :status_notif)");
+        $res->bindValue(":acao", 'visualizacao');
+        $res->bindValue(":mensagem", $mensagem);
+        $res->bindValue(":data_", $data);
+        $res->bindValue(":status_notif", 'ativa');
+        $res->execute();
+    }
+
     $id_prod = $dados[0]['id'];
     $img = $dados[0]['img'];
-    $nome = $dados[0]['nome'];
     $valor = $dados[0]['valor'];
     $descricao = $dados[0]['descricao'];
     $categoria = $dados[0]['categoria'];
@@ -913,6 +926,8 @@ if($status === 'ativo'){
         <input type="hidden" id="quant_prod" name="quant_prod" value="">
     </form>
 
+    <form id="form_Notificacao" class="hide" method="POST"></form>
+
     <script>
         $('header').css('background', '#131313');
 
@@ -933,7 +948,9 @@ if($status === 'ativo'){
                 method: "post",
                 data: $('form').serialize(),
                 dataType: "text",
-                success: function (msg) { }
+                success: function (msg) { 
+                    $('#msgErro_InsertEdit_Categ').text(msg);
+                }
             })
         });
 

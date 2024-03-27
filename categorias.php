@@ -146,7 +146,7 @@
                             $img_categoria = "<img class='img_categoria' src='assets/categorias/$img_categoria'>";
                         }
                         echo "
-                            <a class='categoria' href='produtos_".$nome_url."'>
+                            <a onclick='notif(`".$nome_categoria."`, `categoria`, `".$nome_url."`)' class='categoria ".$nome_url."'>
                                 ".$img_categoria."
                                 <p>".$nome_categoria."</p>
                             </a>
@@ -240,5 +240,7 @@
             }
         ?>
     </div>
+
+    <form id="form_Notificacao" class="hide" method="POST"></form>
 </body>
 </html>

@@ -201,6 +201,8 @@
                 if($status === 'ativo'){
                     $nome = $dados[$i]['nome'];
                     $img = $dados[$i]['img'];
+                    $estoque = $dados[$i]['estoque'];
+
     
                     $nome_novo = strtolower( preg_replace("[^a-zA-Z0-9-]", "_", 
                             strtr(utf8_decode(trim($nome)), utf8_decode("áàãâéêíóôõúüñçÁÀÃÂÉÊÍÓÔÕÚÜÑÇ"),
@@ -213,6 +215,7 @@
                             <p>".$nome."</p>
                             <p class='hide'>".$nome_url."</p>
                             <span>produtos</span>
+                            <span class='hide'>".$estoque."</span>
                         </div>
                     ";
                 }
@@ -220,19 +223,24 @@
         ?>
     </div>
 
+    <form id="form_vendaCarrinho" class="hide" method="POST"></form>
+    <form id="form_Notificacao" class="hide" method="POST"></form>
+
     <script>
         $(document).ready(function () {
             if(Cookies.get('Carrinho') !== undefined && Cookies.get('Carrinho') !== ''){
                 let CarrinhoCookie = Cookies.get('Carrinho');
-                
-                const CookieToArray = CarrinhoCookie.split("&").map(function(item) {
-                    var obj = {};
-                    item.split("_").forEach(function(pair) {
-                        var parts = pair.split(":");
-                        obj[parts[0]] = parts[1];
+                let CookieToArray = [];
+                if (CarrinhoCookie) {
+                    CookieToArray = CarrinhoCookie.split("&").map(function (item) {
+                        let obj = {};
+                        item.split("_").forEach(function (pair) {
+                            let parts = pair.split(":");
+                            obj[parts[0]] = parts[1];
+                        });
+                        return obj;
                     });
-                    return obj;
-                });
+                }
 
                 var itensCarrinho = 0;
                 $('.carrinho_Block').text(' ');
@@ -250,21 +258,30 @@
 
                     let nome_url = item.nomeProd.replaceAll(' ','_');
 
-                    $('.itens_block').append(`
-                        <div class='itenCarrinho'>
-                            ${img}
-                            <a class='nomeProd' href='produto_${nome_url}'>${item.nomeProd}</a>
-                            <h4>${item.codigo}</h4>
-                            <div class='AddRemove'>
-                                <button class='subtrai' type='button'></button>
-                                <span class='quant'>${item.quant}</span>
-                                <button class='soma' type='button'></button>
-                            </div>
-                            <button type='button' class='removeCarrinho'><img src='assets/icons/delet.svg'></button>
-                        </div>`);
+                    var estoque = '';
+                    document.querySelectorAll('.hidelist').forEach(e => {
+                        if(e.children[1].innerHTML === item.nomeProd){
+                            estoque = Number(e.children[4].innerHTML);
+                        }
+                    });
+
+                    if(estoque !== 0){
+                        $('.itens_block').append(`
+                            <div class='itenCarrinho'>
+                                ${img}
+                                <a class='nomeProd' href='produto_${nome_url}'>${item.nomeProd}</a>
+                                <h4>${item.codigo}</h4>
+                                <div class='AddRemove'>
+                                    <button class='subtrai' type='button'></button>
+                                    <span class='quant'>${item.quant}</span>
+                                    <button class='soma' type='button'></button>
+                                </div>
+                                <button type='button' class='removeCarrinho'><img src='assets/icons/delet.svg'></button>
+                            </div>`);
+                    }
                 });
 
-                $('.carrinho_Block').append(`<a class='linkfinal' href='#'>Finalizar Compra</a>`);
+                $('.carrinho_Block').append(`<a class='linkfinal' target='_blank' onclick='linkCompra()'>Finalizar Compra</a>`);
             }
 
             document.querySelectorAll('.subtrai').forEach(e => {
@@ -317,6 +334,12 @@
                     let i=0;
                     CookieToArray.every(item => {
                         if (item.nomeProd === nome){
+                            $('#form_Notificacao').append(`
+                                <input type="hidden" id="item_notf" name="item_notf" value="${item.nomeProd}">
+                                <input type="hidden" id="tipo_notf" name="tipo_notf" value="Remove_carrinho">
+                            `);
+                            $('#form_Notificacao').click();
+                            $('#form_Notificacao').text(' ');
                             return false;
                         } 
                         else{
@@ -334,7 +357,6 @@
                     Cookies.set('Carrinho', CarrinhoToString, {
                         expires: 1
                     });
-
                 });
             });
         });
@@ -358,7 +380,14 @@
             let valor = Number(pai.children[1].innerHTML);
             let nome = avo.children[1].innerHTML;
 
-            if (increment) {
+            var estoque = '';
+            document.querySelectorAll('.hidelist').forEach(e => {
+                if(e.children[1].innerHTML === nome){
+                    estoque = Number(e.children[4].innerHTML);
+                }
+            });
+
+            if (increment && valor < estoque) {
                 valor++;
             } else {
                 if (valor > 0) {
@@ -397,11 +426,57 @@
                 expires: 1
             });
         }
+
+        $('#form_vendaCarrinho').click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "./vendas_Prod/Update_Infos_Prod.php",
+                method: "post",
+                data: $('form').serialize(),
+                dataType: "text",
+                success: function (msg) {  }
+            })
+        });
+
+        function linkCompra() {
+            var mensagem = ''; 
+            if(Cookies.get('Carrinho') !== undefined && Cookies.get('Carrinho') !== ''){
+                let CarrinhoCookie = Cookies.get('Carrinho');
+                let CookieToArray = [];
+                if (CarrinhoCookie) {
+                    CookieToArray = CarrinhoCookie.split("&").map(function (item) {
+                        let obj = {};
+                        item.split("_").forEach(function (pair) {
+                            let parts = pair.split(":");
+                            obj[parts[0]] = parts[1];
+                        });
+                        return obj;
+                    });
+                }
+                let i=0;
+                CookieToArray.forEach(item => {
+                    i++;
+                    $('#form_vendaCarrinho').append(` 
+                        <input type="hidden" id="id_prod_${i}" name="id_prod_${i}" value="${item.idProd}">
+                        <input type="hidden" id="quant_prod_${i}" name="quant_prod_${i}" value="${item.quant}">
+                    `);
+
+                    if(mensagem !== ''){
+                        mensagem = mensagem + '%20%20/////%20%20' + `E%20${item.quant}%20unidade(s)%20do%20produto:%20${item.nomeProd}`;
+                    }
+                    else{
+                        mensagem = `Olá,%20Gostaria%20de%20comprar%20${item.quant}%20unidade(s)%20do%20produto:%20${item.nomeProd}`;
+                    }
+                });
+            }
+
+            $('#form_vendaCarrinho').click();
+            $(".linkfinal").attr("href", `https://wa.me/<?php echo $numero_Whats ?>?text=${mensagem}`);
+            setTimeout(() => { 
+                Cookies.remove('Carrinho');
+                location.reload(); 
+            }, 1000);
+        }
     </script>
 </body>
 </html>
-
-<!-- %20 = espaço em branco -->
-<!-- ///// = divisoria -->
-
-<!-- https://wa.me/5541998431084?text=teste%20de%20mensagem%20quantidade:2%20/////%20testedeaaaaa%20quantidade:5%20///// -->
